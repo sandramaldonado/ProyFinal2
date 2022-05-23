@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+.bg {
+    background-size: cover ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  @media (min-height: 1400px) {
+    .bg{
+      height: 85vh;
+    }
+  }

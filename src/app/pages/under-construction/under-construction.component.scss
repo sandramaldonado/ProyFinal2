@@ -1,0 +1,10 @@
+.bg {
+    background-image: url(~src/assets/images/pages/under-construction/fondo.jpg);
+  }
+  
+  @media (max-width: 1200px){
+    .bg {
+      background-image: url(~src/assets/images/pages/under-construction/fondo-mobile.jpg);
+    }
+  }
+  
