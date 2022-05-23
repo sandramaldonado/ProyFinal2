@@ -6,6 +6,10 @@ const routes : Routes = [
   {
     path: 'en-construccion',
     loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   }
 
 ]
