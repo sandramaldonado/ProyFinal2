@@ -9,6 +9,7 @@ import { ProductService } from "../../shared/services/product.service";
 })
 export class SalesComponent implements OnInit {
   productList: Product[] = [];
+  showFiller = false;
 
   constructor(
     private productService : ProductService 

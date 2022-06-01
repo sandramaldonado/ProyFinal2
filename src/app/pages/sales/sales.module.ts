@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { SalesComponent } from './sales.component';
   ],
   imports: [
     CommonModule,
-    SalesRoutingModule
+    SalesRoutingModule,
+    MatSliderModule,
+    MatSidenavModule
   ]
 })
 export class SalesModule { }

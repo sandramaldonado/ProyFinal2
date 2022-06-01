@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

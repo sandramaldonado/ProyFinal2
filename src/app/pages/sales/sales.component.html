@@ -2,6 +2,23 @@
 <div class="container py-3">
     <h1>Lista de Productos</h1>
     <h5>Lorem ipsum dolor sit amet, vivendum molestiae ex eos, sit quaeque nostrum apeirian ea, ullum persecuti adipiscing ut eam. Est recteque signiferumque id, ius ea docendi principes adolescens, wisi magna homero ei vel. An sed essent minimum. Eu mea ferri primis necessitatibus, per ne habeo interpretaris, no vis solet efficiantur. Ut lobortis qualisque scribentur sea.</h5>
+    <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+          <p>Auto-resizing sidenav</p>
+          <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+          <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+          </button>
+        </mat-drawer>
+      
+        <div class="example-sidenav-content">
+          <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+          </button>
+        </div>
+      
+      </mat-drawer-container>
     <div class="row">
         <div class="col-sm-4 mb-2" *ngFor="let product of productList">
             <div class="item">
