@@ -1,0 +1,24 @@
+
+<div class="container py-3">
+    <h1>Lista de Productos</h1>
+    <h5>Lorem ipsum dolor sit amet, vivendum molestiae ex eos, sit quaeque nostrum apeirian ea, ullum persecuti adipiscing ut eam. Est recteque signiferumque id, ius ea docendi principes adolescens, wisi magna homero ei vel. An sed essent minimum. Eu mea ferri primis necessitatibus, per ne habeo interpretaris, no vis solet efficiantur. Ut lobortis qualisque scribentur sea.</h5>
+    <div class="row">
+        <div class="col-sm-4 mb-2" *ngFor="let product of productList">
+            <div class="item">
+                <div class="card" style="width:18rem;">
+                  <img 
+                  src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" 
+                  width="360px"
+                  height="640px"
+                  class="card-img-top img-fluid" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
+                    <p class="card-text">{{product.body}}</p>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
