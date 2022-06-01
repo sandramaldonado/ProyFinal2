@@ -1,25 +1,68 @@
 
+
+
 <div class="container py-3">
-    <h1>Lista de Productos</h1>
-    <h5>Lorem ipsum dolor sit amet, vivendum molestiae ex eos, sit quaeque nostrum apeirian ea, ullum persecuti adipiscing ut eam. Est recteque signiferumque id, ius ea docendi principes adolescens, wisi magna homero ei vel. An sed essent minimum. Eu mea ferri primis necessitatibus, per ne habeo interpretaris, no vis solet efficiantur. Ut lobortis qualisque scribentur sea.</h5>
-    <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
-    <mat-drawer-container class="example-container" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="side">
-          <p>Auto-resizing sidenav</p>
-          <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-          <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-          </button>
-        </mat-drawer>
-      
-        <div class="example-sidenav-content">
-          <button type="button" mat-button (click)="drawer.toggle()">
-            Toggle sidenav
-          </button>
-        </div>
-      
-      </mat-drawer-container>
     <div class="row">
+        <div class="col-12">
+            <mat-toolbar>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                  <mat-icon>menu</mat-icon>
+                </button>
+                <span>My App</span>
+                <span class="example-spacer"></span>
+                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                  <mat-icon>favorite</mat-icon>
+                </button>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                  <mat-icon>share</mat-icon>
+                </button>
+              </mat-toolbar>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 border border-primary">
+            <h5>Mat Slider</h5>
+            <mat-slider min="1" max="100" step="1" value="50" class="w-100"></mat-slider>
+
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col-12">
+            <h1>Lista de Productos</h1>
+            <h5>Lorem ipsum dolor sit amet, vivendum c primis necessitatibus, per ne habeo interpretaris, no vis solet efficiantur. Ut lobortis qualisque scribentur sea.</h5>
+
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-12">
+            <!--
+            <mat-drawer-container class="example-container" autosize>
+                <mat-drawer #drawer class="example-sidenav" mode="side">
+                  <p>Auto-resizing sidenav</p>
+                  <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+                  <button (click)="showFiller = !showFiller" mat-raised-button>
+                    Toggle extra text
+                  </button>
+                </mat-drawer>
+              
+                <div class="example-sidenav-content">
+                  <button type="button" mat-button (click)="drawer.toggle()">
+                    Toggle sidenav
+                  </button>
+                </div>
+              
+              </mat-drawer-container>
+
+            -->
+
+        </div>
+    </div>
+    
+   
+   
+    <div class="row py-3">
         <div class="col-sm-4 mb-2" *ngFor="let product of productList">
             <div class="item">
                 <div class="card" style="width:18rem;">
