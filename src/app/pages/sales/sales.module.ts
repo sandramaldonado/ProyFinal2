@@ -5,8 +5,10 @@ import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSliderModule,
     MatSidenavModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule
   ]
 })
 export class SalesModule { }
