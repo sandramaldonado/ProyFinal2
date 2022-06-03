@@ -15,109 +15,26 @@
 </mat-toolbar>
 <div class="container px-3 py-3">
   <div class="row row-cols-2 d-flex flex-column justify-content-center align-items-start flex-md-row ">
-    <div class="col-12 border border-primary">
+    <div class="col-12 border border-primary p-2">
       <h5>Material Design Slider</h5>
       <mat-slider min="1" max="100" step="1" value="50" class="w-100"></mat-slider>
+    </div>
+    <mat-card class="mat-elevation-z4 m-2 m-md-4" style="width: 20rem; " *ngFor="let product of productList">
+      <mat-card-header>
+        <mat-card-title class="text-center">Producto: {{product.id}}</mat-card-title>
+      </mat-card-header >
+      <img mat-card-image src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
+      <mat-card-content>
+        <p>
+          {{product.body}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="d-flex flex-column justify-content-center align-items-center border-top">
+        <button mat-raised-button color="primary" class="w-100 my-2">COTIZAR</button>
+        <button mat-stroked-button color="primary" class="w-100">COMPRAR</button>
+      </mat-card-actions>
+    </mat-card>
 
   </div>
-        <mat-card class="mat-elevation-z4 m-2 m-md-4" style="width: 20rem; " *ngFor="let product of productList">
-          <mat-card-header>
-            <mat-card-title class="text-center">Producto: {{product.id}}</mat-card-title>
-          </mat-card-header >
-          <img mat-card-image src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
-          <mat-card-content>
-            <p>
-              {{product.body}}
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="d-flex flex-column justify-content-center align-items-center border-top">
-            <button mat-raised-button color="primary" class="w-100 my-2">COTIZAR</button>
-            <button mat-stroked-button color="primary" class="w-100">COMPRAR</button>
-          </mat-card-actions>
-        </mat-card>
 
-  </div>
-
-</div>
-
-<div class="container py-3 d-none">
-    <div class="row">
-        <div class="col-12">
-            <mat-toolbar>
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-                  <mat-icon>menu</mat-icon>
-                </button>
-                <span>Ventas</span>
-                <span class="example-spacer"></span>
-                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                  <mat-icon>favorite</mat-icon>
-                </button>
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                  <mat-icon>share</mat-icon>
-                </button>
-              </mat-toolbar>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 border border-primary">
-            <h5>Mat Slider</h5>
-            <mat-slider min="1" max="100" step="1" value="50" class="w-100"></mat-slider>
-
-        </div>
-    </div>
-    <div class="row py-3">
-        <div class="col-12">
-            <h1>Lista de Productos</h1>
-            <h5>Lorem ipsum dolor sit amet, vivendum c primis necessitatibus, per ne habeo interpretaris, no vis solet efficiantur. Ut lobortis qualisque scribentur sea.</h5>
-
-        </div>
-    </div>
-   
-    <div class="row">
-        <div class="col-12">
-            <!--
-            <mat-drawer-container class="example-container" autosize>
-                <mat-drawer #drawer class="example-sidenav" mode="side">
-                  <p>Auto-resizing sidenav</p>
-                  <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-                  <button (click)="showFiller = !showFiller" mat-raised-button>
-                    Toggle extra text
-                  </button>
-                </mat-drawer>
-              
-                <div class="example-sidenav-content">
-                  <button type="button" mat-button (click)="drawer.toggle()">
-                    Toggle sidenav
-                  </button>
-                </div>
-              
-              </mat-drawer-container>
-
-            -->
-
-        </div>
-    </div>
-    
-   
-   
-    <div class="row py-3">
-        <div class="col-sm-4 mb-2" *ngFor="let product of productList">
-            <div class="item">
-                <div class="card" style="width:18rem;">
-                  <img 
-                  src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" 
-                  width="360px"
-                  height="640px"
-                  class="card-img-top img-fluid" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">{{product.title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                    <p class="card-text">{{product.body}}</p>
-                  </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </div>
