@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CheckCoverageRoutingModule } from './check-coverage-routing.module';
 import { CheckCoverageComponent } from './check-coverage.component';
+import { GoogleMapsModule } from "@angular/google-maps";
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { CheckCoverageComponent } from './check-coverage.component';
   imports: [
     CommonModule,
     CheckCoverageRoutingModule,
+    GoogleMapsModule
   ]
 })
 export class CheckCoverageModule { }
