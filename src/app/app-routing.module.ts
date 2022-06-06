@@ -14,6 +14,10 @@ const routes : Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterModule)
+  },
+  {
+    path: 'cobertura',
+    loadChildren: () => import('./pages/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   }
 
 ]
