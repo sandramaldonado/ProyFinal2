@@ -18,6 +18,10 @@ const routes : Routes = [
   {
     path: 'cobertura',
     loadChildren: () => import('./pages/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
+  },
+  {
+    path : 'tomar-foto',
+    loadChildren : () => import('./pages/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
   }
 
 ]

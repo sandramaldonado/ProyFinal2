@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "local": "ng serve"
+    "local": "ng serve -o"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "@angular/router": "^14.0.0",
     "bootstrap": "^5.1.3",
     "ngx-bootstrap": "^8.0.0",
+    "ngx-webcam": "^0.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
