@@ -15,10 +15,20 @@
                 [trigger]="triggerObservable"></webcam>
             </mat-card-content>
             <mat-card-actions class="text-center">
-                <a style="cursor:pointer" class="fasquare" [routerLink]="" (click)="triggerSnapshot();"   ><mat-icon >camera_enhance</mat-icon></a>
+                <button mat-fab color="primary" (click)="triggerSnapshot();" >
+                    <mat-icon>camera_enhance</mat-icon>
+                  </button>
                 
             </mat-card-actions>
-            <mat-card-footer>
+            <mat-card-footer class="p-2">
+                <div class="d-flex flex-column justify-content-center align-items-center border rounded mt-2 mt-lg-0 p-2" style="background-color: white;">
+                    <div class="snapshot-title text-center " >Vista Previa</div>
+                    <img [src]="webcamImage?.imageAsDataUrl" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
+                    <div class="row text-center col-12 col-md-6 pt-2">
+                        <button  class="w-100" mat-raised-button color="primary" >Guardar</button>
+                      </div>
+                  </div>
+                
             </mat-card-footer>
         </mat-card>
        

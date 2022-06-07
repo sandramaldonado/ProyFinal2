@@ -1,6 +1,6 @@
 <mat-toolbar>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+      <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
       
     </button>
     <img class="toolbar-logo" src="../../../assets/images/pages/header/logo-viva.png" alt="">
@@ -15,3 +15,20 @@
       <mat-icon>account_circle</mat-icon>
       </button>
   </mat-toolbar>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink = "/ventas">
+      <span>Ventas</span>
+    </button>
+    <button mat-menu-item routerLink = "/registro">
+      <span>Registro</span>
+    </button>
+    <button mat-menu-item routerLink = "/cobertura">
+      <span>Cobertura</span>
+    </button>
+    <button mat-menu-item routerLink = "/tomar-foto">
+    <span>Tomar foto</span>
+    </button>
+    <button mat-menu-item routerLink = "/en-construccion">
+    <span>En Construccion</span>
+    </button>
+  </mat-menu>
