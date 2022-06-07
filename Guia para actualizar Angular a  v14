@@ -1,0 +1,27 @@
+Angular Update Guide | 13.0 -> 14.0 for Basic Apps
+
+info extraida de :
+
+https://update.angular.io/?v=13.0-14.0
+
+
+Requisitos:
+1. Instalar NodeJs Version 14.15.0 o superior
+    - nvm install 14.15.0
+    - nvm use 14.15.0
+2. Solo para efectos de revision durante el desarrollo de la aplicacion, se tiene que Angular v.14 usa TypeScript 4.6 los cambios potenciales se listan en: https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/
+
+Pasos para la actualizacion
+1.- Actualizar la version de Angular
+    - ng update @angular/core@14 @angular/cli@14
+
+2.- Actualizar la version de Material Design for Angular
+    - ng update @angular/material@14
+
+3.- ejecutar npm i para instalar todas las dependencias
+
+
+
+
+
+
