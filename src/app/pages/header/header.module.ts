@@ -1,31 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { SalesRoutingModule } from './sales-routing.module';
-import { SalesComponent } from './sales.component';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { HeaderComponent } from './header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderModule } from "../header/header.module";
-
 
 @NgModule({
   declarations: [
-    SalesComponent
+    HeaderComponent
   ],
   imports: [
     CommonModule,
-    SalesRoutingModule,
-    MatSliderModule,
-    MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule,
-    HeaderModule
-  ]
+    MatButtonModule
+  ],
+  exports:[HeaderComponent]
 })
-export class SalesModule { }
+export class HeaderModule { }

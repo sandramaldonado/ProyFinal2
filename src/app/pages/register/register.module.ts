@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { HeaderModule } from "../header/header.module";
 
 
 @NgModule({
@@ -16,9 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     RegisterRoutingModule,
     MatIconModule,
-    MatToolbarModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    HeaderModule
   ]
 })
 export class RegisterModule { }

@@ -12,7 +12,7 @@ export class CheckCoverageComponent implements OnInit {
   options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: true,
-    scrollwheel: false,
+    scrollwheel: true,
     disableDoubleClickZoom: true,
     maxZoom: 18,
     minZoom: 8,
@@ -24,10 +24,14 @@ export class CheckCoverageComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((position) => {
       console.log (position)
       this.center = {
-        lat: -17.393847, // position.coords.latitude,
-        lng: -66.157328 //position.coords.longitude,
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       }
     })
+  }
+
+  verificarCobertura(): void {
+
   }
 
 }
