@@ -8,16 +8,16 @@
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>shopping_cart</mat-icon>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink = "/compras">
+    <mat-icon matBadge="0" matBadgeColor="warn">shopping_cart</mat-icon>
     </button>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>account_circle</mat-icon>
       </button>
   </mat-toolbar>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink = "/ventas">
-      <span>Ventas</span>
+    <button mat-menu-item routerLink = "/oferta">
+      <span>Oferta</span>
     </button>
     <button mat-menu-item routerLink = "/registro">
       <span>Registro</span>
@@ -27,6 +27,9 @@
     </button>
     <button mat-menu-item routerLink = "/tomar-foto">
     <span>Tomar foto</span>
+    </button>
+    <button mat-menu-item routerLink = "/compras">
+    <span>Carro de Compras</span>
     </button>
     <button mat-menu-item routerLink = "/en-construccion">
     <span>En Construccion</span>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/Product';
 import { ProductService } from "../../shared/services/product.service";
+import { CartService } from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-sales',
@@ -12,7 +13,10 @@ export class SalesComponent implements OnInit {
   showFiller = false;
 
   constructor(
-    private productService : ProductService 
+    private productService : ProductService,
+    private cartService : CartService
+
+
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,9 @@ export class SalesComponent implements OnInit {
       console.log( this.productList);
 
     })
+  }
+  addToCart(product : Product){
+    this.cartService.addToCart(product);
   }
 
 }

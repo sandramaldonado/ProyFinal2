@@ -1,0 +1,43 @@
+
+<app-header></app-header>
+<div class="container">
+  
+    <div class="row">
+        <div class="col-12">
+            <div class="title py-3">
+                <h2 class="text-center">Resumen de Compra</h2>
+            </div>
+            <div class="row d-flex flex-column justify-content-center align-items-center py-2 " *ngFor="let product of products">
+                <div class="col-12 col-md-6" >
+                    <mat-card>
+                        <mat-card-header>
+                            <h4 class="text-center"> Producto: {{product.id}}</h4>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col-6"> 
+                                     <span>{{product.title}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <img src="../../../assets/images/pages/sales/product_1.jpeg" class="w-100" style="height: auto" alt="">
+                                </div>
+                            </div>
+                            
+                          
+
+                        </mat-card-content>
+                        <mat-card-actions align="end">
+                            <button mat-raised-button color="primary">Terminar Compra</button>
+                            
+                        </mat-card-actions>
+                      
+                    </mat-card>
+                </div>
+              
+           
+            </div>
+       
+        </div>
+        
+    </div>
+</div>

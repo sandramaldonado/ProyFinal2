@@ -8,7 +8,7 @@ const routes : Routes = [
     loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },
   {
-    path: 'ventas',
+    path: 'oferta',
     loadChildren: () => import('./pages/sales/sales.module').then( m => m.SalesModule)
   },
   {
@@ -22,6 +22,10 @@ const routes : Routes = [
   {
     path : 'tomar-foto',
     loadChildren : () => import('./pages/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
+  },
+  {
+    path : 'compras',
+    loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
   }
 
 ]
