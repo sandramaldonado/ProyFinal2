@@ -9,7 +9,7 @@
     <mat-icon>favorite</mat-icon>
     </button>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink = "/compras">
-    <mat-icon matBadge="0" matBadgeColor="warn">shopping_cart</mat-icon>
+    <mat-icon [matBadge]="totalItems$ | async" matBadgeColor="warn">shopping_cart</mat-icon>
     </button>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>account_circle</mat-icon>

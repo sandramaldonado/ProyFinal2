@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { CartService } from "../../shared/services/cart.service";
 
 @Component({
@@ -9,9 +10,16 @@ import { CartService } from "../../shared/services/cart.service";
 export class CartComponent implements OnInit {
 
   products = this.cartService.getItems();
-  constructor(private cartService : CartService) { }
+  listItems = this.cartService.getSize();
+  constructor(private router: Router,
+    private cartService : CartService) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event =>{
+      if (event instanceof NavigationStart){
+        console.log("load");
+      }
+   })
   }
 
 }
