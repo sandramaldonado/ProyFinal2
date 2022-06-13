@@ -42,5 +42,8 @@ export class SalesComponent implements OnInit {
   addToCart(product : Product){
     this.cartService.addToCart(product);
   }
+  showDetail(product : Product){
+    
+  }
 
 }
