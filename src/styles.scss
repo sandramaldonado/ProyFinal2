@@ -22,8 +22,46 @@
   }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: MUSEO300-REGULAR;
+}
+
+mat-card{
+  font-family: MUSEO300-REGULAR;
+}
+
+mat-card .mat-card-header{
+  min-height: 4rem;
+}
+
 
 .toolbar-spacer {
   flex: 1 1 auto;
+}
+
+@font-face {
+  font-family: MUSEO300-REGULAR;
+  src: url(./assets/font/Museo-300.otf);
+}
+
+@font-face {
+  font-family: MUSEO700-REGULAR;
+  src: url(./assets/font/Museo-700.otf);
+}
+
+@font-face {
+  font-family: MUSEO900-REGULAR;
+  src: url(./assets/font/Museo-900.otf);
+}
+
+
+@font-face {
+  font-family: MUSEO500-REGULAR;
+  src: url(./assets/font/Museo-500.otf);
+}
+
+@font-face {
+  font-family: MUSEO100-REGULAR;
+  src: url(./assets/font/Museo-100.otf);
 }

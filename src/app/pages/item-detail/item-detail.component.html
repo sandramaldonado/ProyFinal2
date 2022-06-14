@@ -1,21 +1,39 @@
 <app-header></app-header>
-<div class="container px-3 py-3">
+<div class="container px-3 py-1">
   <div class="row flex-column justify-content-center align-items-center ">
  
 
-    <mat-card class="mat-elevation-z4 my-3 mx-2 m-md-4" style="width: 20rem; ">
+    <mat-card class="mat-elevation-z4 py-4 mb-3 mx-2 m-md-4" style="width: 20rem; ">
         <mat-card-header class="border-bottom mb-3">
           <mat-card-title class="w-100 text-center"><div>{{product.name}}</div></mat-card-title>
         </mat-card-header >
-        <img mat-card-image src="../../../assets/images/pages/sales/product_1.jpeg">
+        <img mat-card-image src="../../../assets/images/no-image.jpeg">
         <mat-card-content>
-          <p>
+          <p class="fw-bold text-primary text-center">
             Precio: {{product.price}}
           </p>
-          <p>Descripcion: {{product.description}}</p>
+
+          <div class="accordion" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                 Descripcion
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body text-muted">{{product.description}}</div>
+              </div>
+            </div>
+            
+          </div>
         </mat-card-content>
-        <mat-card-actions class="d-flex flex-column justify-content-center align-items-end border-top" *ngIf="isValid">
-            <button mat-raised-button color="primary" class="my-2" (click)="addToCart(product)">Añadir al carrito</button>
+        <mat-card-actions class="d-flex flex-row justify-content-around align-items-center border-top" *ngIf="isValid">
+          <button mat-fab color="primary" aria-label="Verificar Cobertura" routerLink="/cobertura">
+            <mat-icon>satellite</mat-icon>
+          </button>
+          <button mat-fab color="warn" aria-label="Verificar Cobertura" (click)="addToCart(product)">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
 
