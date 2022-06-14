@@ -1,0 +1,53 @@
+.post-footer p {
+    font-family:'Museo';
+    text-align: center;
+}
+
+.tittleFont {
+    font-family:'Museo';
+    color: #5c349e;
+}
+
+.footer-toolbar {
+    background-color: #5c349e;
+    color: white;
+    height:auto;
+    min-height:80px;
+}
+
+.toolbar-logo {
+    max-height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lista ul {
+   padding-right: 0px;
+   padding-left: 0px;
+   padding-bottom: 0px;
+   padding-top: 0px;
+   margin: 0px;
+}
+
+.lista li {
+   list-style-type: none;
+   display: inline;
+   padding-right: 15px;
+}
+
+.lista a {
+    color: white;
+    font-family:'Museo';
+    text-decoration: none;
+}
+
+.lista-align {
+    color: white;
+    font-family:'Museo';
+    text-decoration: none;
+    text-align: right;
+}
+
+.lista .socialMedia_item {
+    color: white;
+}
