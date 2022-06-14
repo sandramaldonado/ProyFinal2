@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="container px-3 py-3">
+  <div class="row flex-column justify-content-center align-items-center ">
+ 
+
+    <mat-card class="mat-elevation-z4 my-3 mx-2 m-md-4" style="width: 20rem; ">
+        <mat-card-header class="border-bottom mb-3">
+          <mat-card-title class="w-100 text-center"><div>{{product.name}}</div></mat-card-title>
+        </mat-card-header >
+        <img mat-card-image src="../../../assets/images/pages/sales/product_1.jpeg">
+        <mat-card-content>
+          <p>
+            Precio: {{product.price}}
+          </p>
+          <p>Descripcion: {{product.description}}</p>
+        </mat-card-content>
+        <mat-card-actions class="d-flex flex-column justify-content-center align-items-end border-top" *ngIf="isValid">
+            <button mat-raised-button color="primary" class="my-2" (click)="addToCart(product)">Añadir al carrito</button>
+        </mat-card-actions>
+      </mat-card>
+
+  </div>
+
+</div>
+
+<!-- https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60-->
