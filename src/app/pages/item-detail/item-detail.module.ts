@@ -6,6 +6,7 @@ import { ItemDetailComponent } from './item-detail.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { HeaderModule } from "../header/header.module";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    HeaderModule
   ]
 })
 export class ItemDetailModule { }

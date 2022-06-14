@@ -38,6 +38,9 @@ const routes : Routes = [
   {
     path : 'compras',
     loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
+  },
+  { path : 'oferta/detalle/:id',
+    loadChildren : () => import ('./pages/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   }
 
 ]

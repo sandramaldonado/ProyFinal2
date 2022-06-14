@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/Product';
 import { ProductService } from "../../shared/services/product.service";
 import { CartService } from "../../shared/services/cart.service";
+import { Route, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-sales',
@@ -43,7 +44,7 @@ export class SalesComponent implements OnInit {
     this.cartService.addToCart(product);
   }
   showDetail(product : Product){
-    
+ 
   }
 
 }
