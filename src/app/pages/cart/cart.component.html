@@ -4,7 +4,7 @@
   
     <div class="row">
         <div class="col-12">
-            <div class="title py-3">
+            <div class="title py-1">
                 <h2 class="text-center">Resumen de Compra</h2>
             </div>
             <div class="row d-flex flex-column justify-content-center align-items-center py-2 " *ngFor="let product of products">
@@ -16,10 +16,14 @@
                         <mat-card-content>
                             <div class="row">
                                 <div class="col-6"> 
-                                     <span class="">{{product.price}}</span>
+                                     <p class=""><span class="fw-bold">Unitario: </span> {{product.price}}</p>
+                                     <p class=""><span class="fw-bold">Cantidad:</span>1</p>
+                                     <p><span class="fw-bold">Detalles Adicionales:</span> </p>
+
+
                                 </div>
                                 <div class="col-6">
-                                    <img src="../../../assets/images/no-image.jpeg" class="w-100" style="height: auto" alt="">
+                                    <img src="../../../assets/images/no-image.jpeg" class="w-100 border" style="height: auto" alt="">
                                 </div>
                             </div>
                             
@@ -28,7 +32,8 @@
                         </mat-card-content>
                         <mat-card-actions align="end">
 
-                            <button mat-raised-button color="primary">Terminar Compra</button>
+                            <button mat-raised-button color="primary">Verificar Cobertura</button>
+                            <button mat-raised-button color="warn">Terminar Compra</button>
                             
                         </mat-card-actions>
                       

@@ -1,5 +1,8 @@
 <app-header></app-header>
-<div class="container px-3 py-3">
+<div class="container px-3 pt-1">
+  <div class="row">
+    <img src="../../../assets/images/pages/sales/banner.jpeg" alt="" class="img-fluid">
+  </div>
   <div class="row row-cols-2 d-flex flex-column justify-content-center align-items-center flex-md-row align-items-md-start">
     <!---
     <div class="col-12 border border-primary p-2">
@@ -11,7 +14,10 @@
       <mat-card-header class="border-bottom mb-3">
         <mat-card-title class="d-flex flex-row justify-content-center text-secondary fw-bold"><span>{{product.name}}</span></mat-card-title>
       </mat-card-header >
-      <img mat-card-image src="../../../assets/images/no-image.jpeg">
+      <div class="text-center">
+        <img src="../../../assets/images/no-image.jpeg" class="border img-fluid">
+      </div>
+     
       <mat-card-content class="text-center">
         <p class="text-primary">
           Precio: {{product.price}}
