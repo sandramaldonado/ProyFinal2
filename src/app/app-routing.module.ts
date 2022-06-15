@@ -43,6 +43,10 @@ const routes : Routes = [
     loadChildren : () => import ('./pages/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
   {
+    path : 'escanear-documento',
+    loadChildren : () => import ('./pages/scan-image/scan-image.module').then(m=> m.ScanImageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   }
