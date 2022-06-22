@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ValidationService {
-  apiUrl: string = 'http://10.47.17.36:3000/client';
+  apiUrl: string = 'http://localhost:3000/client';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private httpClient: HttpClient) { }
 
