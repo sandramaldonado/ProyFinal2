@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieStorage, LocalStorage, SessionStorage, SessionStorageService } from 'ngx-store';
+//import { CookieStorage, LocalStorage, SessionStorage, SessionStorageService } from 'ngx-store';
 import { Client } from '../../models/Client';
 import { Photo } from '../../models/Photo';
 
@@ -9,28 +9,29 @@ import { Photo } from '../../models/Photo';
 
 // this variables will be stored in Session
 export class StorageService {
+  /*
   @SessionStorage({key: 'facePhoto'}) facePhoto = { } as Photo;
   @SessionStorage({key: 'documentPhotoFront'}) documentPhotoFront = { } as Photo;
   @SessionStorage({key: 'documentPhotoBack'}) documentPhotoBack = { } as Photo;
   @SessionStorage({key: 'clientInformation'}) clientInformation = { } as Client;
   @SessionStorage ({key: 'authenticateInformation'}) authentichateInformation : any ; 
-
+*/
   constructor( 
-    private sessionStorageService : SessionStorageService
+    //private sessionStorageService : SessionStorageService
   ) { 
 
   }
 
   setAuthenticateInformation (data : any) : void{
-    this.sessionStorageService.set ("authenticateInformation", data);
+    //this.sessionStorageService.set ("authenticateInformation", data);
   }
 
   getAuthenticateInformation () : any {
-    return this.authentichateInformation;
+    return null; //this.authentichateInformation;
   }
 
   savePhotoFace (name : string, imageBase64 : string): void{
-    this.sessionStorageService.set("photoFace", {name : name, image : imageBase64} );
+    //this.sessionStorageService.set("photoFace", {name : name, image : imageBase64} );
 
   }
 

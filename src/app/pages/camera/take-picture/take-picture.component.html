@@ -25,7 +25,7 @@
                     <div class="snapshot-title text-center " >Vista Previa</div>
                     <img [src]="webcamImage?.imageAsDataUrl" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
                     <div class="row text-center col-12 col-md-6 pt-2">
-                        <button  class="w-100" mat-raised-button color="primary" >Guardar</button>
+                        <button  class="w-100" mat-raised-button color="primary" (click)="savePicture()"  >Guardar</button>
                       </div>
                   </div>
                 

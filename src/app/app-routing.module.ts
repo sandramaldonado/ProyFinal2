@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule,Routes } from '@angular/router';
+import { LoadPictureComponent } from './pages/test/load-picture/load-picture.component';
 
 const routes : Routes = [
   {
@@ -45,6 +46,10 @@ const routes : Routes = [
   {
     path : 'escanear-documento',
     loadChildren : () => import ('./pages/scan-image/scan-image.module').then(m=> m.ScanImageModule)
+  },
+  {
+    path : 'load-picture',
+    component : LoadPictureComponent
   },
   {
     path: '**',

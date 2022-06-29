@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from "./pages/header/header.module";
+import { NgxWebstorageModule } from "ngx-webstorage";
+import { LoadPictureComponent } from './pages/test/load-picture/load-picture.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadPictureComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,8 @@ import { HeaderModule } from "./pages/header/header.module";
     ModalModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    NgxWebstorageModule.forRoot({ prefix: 'nvt', separator: ';', caseSensitive:true })
     
     
   ],
