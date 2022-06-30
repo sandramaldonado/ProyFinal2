@@ -20,8 +20,6 @@ import { ClientModule } from './pages/client/client.module';
     HttpClientModule,
     HeaderModule,
     ClientModule
-    
-    
   ],
   providers: [],
   bootstrap: [AppComponent],
