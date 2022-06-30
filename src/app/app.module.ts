@@ -12,6 +12,7 @@ import { LoadPictureComponent } from './pages/test/load-picture/load-picture.com
 import { SmsModalComponent } from './pages/modals/sms-modal/sms-modal.component';
 
 
+import { ClientModule } from './pages/client/client.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SmsModalComponent } from './pages/modals/sms-modal/sms-modal.component'
     AppRoutingModule,
     HttpClientModule,
     HeaderModule,
-    NgxWebstorageModule.forRoot({ prefix: 'nvt', separator: ';', caseSensitive:true })
+    NgxWebstorageModule.forRoot({ prefix: 'nvt', separator: ';', caseSensitive:true }),
+    ClientModule
     
     
   ],

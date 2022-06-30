@@ -5,6 +5,7 @@ import { ValidationComponent } from './validation.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ValidationRoutingModule,
     MatCardModule, 
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ValidationModule { }
