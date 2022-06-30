@@ -1,0 +1,94 @@
+
+
+        <div class="modal-header" >
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+              </button>
+        </div>
+        <div class="modal-body" >
+            <form [formGroup]="formSms" class="form" #myform="ngForm" >
+                <div class="d-fle flex-column justify-content-around align-items-center">
+                    <div class="col-6 mx-auto">
+                        <img mat-card-image src="assets/images/icon-sms.png" class="img-fluid text-center">
+                    </div>
+                    <div class="text-title pt-1 pb-1">
+                        <span>Valida tus Datos</span>
+                    </div>
+                    <div class= "text-body">
+                        <p class="pt-1" >Ingresa el código que se te envi&oacute; por SMS.</p>
+                    {{smscode}}
+                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-control-label label" for="input">C&oacute;digo SMS</label>
+                        <input type="number"  class="form-control form-control-sms " formControlName="code" >
+                        <!--<input type="number"  class="form-control form-control-sms " formControlName="code" [ngClass]="(code.invalid && (code.touched || myform.submitted)) ? 'is-invalid' :'' ">-->
+                        
+                        <!--<div class="required-value" *ngIf="code.errors?.required && (code.touched || myform.submitted)">
+                            *Campo requerido
+                        </div>
+                        <div class="required-value" *ngIf="(code.errors?.minlength || code.errors?.maxlength || code.errors?.pattern) && (code.touched || myform.submitted)">
+                            *Ingrese un n&uacute;mero valido
+                        </div>
+                        <div class="required-value" *ngIf="!code.errors && errMessage">{{errMessage}}</div>
+                        -->
+                        
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary " (click)="onSubmit()">Enviar </button>
+                        
+                        </div>
+                    
+                </div>
+            </form>
+            
+        </div>
+
+
+        <!--
+    <div class="modal-header" >
+            <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" >
+                <form [formGroup]="formSms" class="form" #myform="ngForm" >
+                    <div class="d-fle flex-column justify-content-around align-items-center">
+                        <div class="col-6 mx-auto">
+                            <img mat-card-image src="assets/images/icon-sms.png" class="img-fluid text-center">
+                        </div>
+                        <div class="text-title pt-1 pb-1">
+                            <span>Valida tus Datos</span>
+                        </div>
+                        <div class= "text-body">
+                            <p class="pt-1" >Ingresa el código que se te envi&oacute; por SMS.</p>
+                        {{smscode}}
+                            
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-control-label label" for="input">C&oacute;digo SMS</label>
+                            <input type="number"  class="form-control form-control-sms " formControlName="code" >
+                            <input type="number"  class="form-control form-control-sms " formControlName="code" [ngClass]="(code.invalid && (code.touched || myform.submitted)) ? 'is-invalid' :'' ">
+                            
+                            <div class="required-value" *ngIf="code.errors?.required && (code.touched || myform.submitted)">
+                                *Campo requerido
+                            </div>
+                            <div class="required-value" *ngIf="(code.errors?.minlength || code.errors?.maxlength || code.errors?.pattern) && (code.touched || myform.submitted)">
+                                *Ingrese un n&uacute;mero valido
+                            </div>
+                            <div class="required-value" *ngIf="!code.errors && errMessage">{{errMessage}}</div>
+                           
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn-form " (click)="onSubmit()">Enviar </button>
+                            
+                          </div>
+                        
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+
+        -->

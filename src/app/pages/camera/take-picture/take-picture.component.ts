@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import {Subject, Observable} from 'rxjs';
-import { WebstorageService } from "../../../shared/services/webstorage/webstorage.service";
+import { WebstoreService } from "../../../shared/services/webstore/webstore.service";
 import * as moment from "moment";
 
 @Component({
@@ -15,7 +15,7 @@ export class TakePictureComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
 
   constructor(
-    private webstorageService : WebstorageService
+    private webstore : WebstoreService
   ) { }
 
   ngOnInit(): void {
@@ -44,11 +44,11 @@ export class TakePictureComponent implements OnInit {
 
   public savePicture (){
     let name = moment().valueOf() + ".jpg";
-    this.webstorageService.saveClientInformation(name);
+    this.webstore.saveClientInformation(name);
 
-    this.webstorageService.saveSelfie({
+    this.webstore.saveSelfie({
       name : name,
-      imagen : this.webcamImage?.imageAsDataUrl
+      image : this.webcamImage?.imageAsDataUrl
     });
 
 

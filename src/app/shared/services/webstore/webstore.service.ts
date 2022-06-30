@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import { Photo } from '../../models/Photo';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebstorageService {
+export class WebstoreService {
 
   constructor(
     private sessionStorageService : SessionStorageService
@@ -32,10 +33,9 @@ export class WebstorageService {
     this.sessionStorageService.store("photoFace",photo);
   }
 
-  getSelfie (){
-    return this.sessionStorageService.retrieve("photoFace");
+  getSelfie () : Photo {
+    console.log(this.sessionStorageService.retrieve('photoFace'));
+    return this.sessionStorageService.retrieve('photoFace');
   }
-
-  
 
 }

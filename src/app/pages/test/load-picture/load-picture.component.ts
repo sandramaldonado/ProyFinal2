@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WebstorageService } from "../../../shared/services/webstorage/webstorage.service";
+import { Observable } from 'rxjs';
+import { Photo } from 'src/app/shared/models/Photo';
+import { WebstoreService } from "../../../shared/services/webstore/webstore.service";
 @Component({
   selector: 'app-load-picture',
   templateUrl: './load-picture.component.html',
@@ -7,11 +9,19 @@ import { WebstorageService } from "../../../shared/services/webstorage/webstorag
 })
 export class LoadPictureComponent implements OnInit {
 
-  imageFromSession :string = "";
-  constructor( private webStorage : WebstorageService) { }
+  photoFromSession : Photo = {};
+  constructor( private webstore : WebstoreService) { 
+  }
 
   ngOnInit(): void {
     
+    this.photoFromSession = this.webstore.getSelfie();
+
+    this.loadImage();
+  }
+
+  loadImage() {
+    console.log(typeof this.photoFromSession.image);
   }
 
 }
