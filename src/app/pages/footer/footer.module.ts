@@ -19,10 +19,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FooterRoutingModule,
+    MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule,
     MatMenuModule,
     MatBadgeModule,
     RouterModule,

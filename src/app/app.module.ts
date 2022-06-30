@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from "./pages/header/header.module";
-
-
+import { ClientModule } from './pages/client/client.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,8 @@ import { HeaderModule } from "./pages/header/header.module";
     ModalModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    ClientModule
     
     
   ],

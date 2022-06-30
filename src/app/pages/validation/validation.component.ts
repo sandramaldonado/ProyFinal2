@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../shared/services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -83,23 +83,6 @@ export class ValidationComponent implements OnInit, OnChanges {
   saveForm(): void {
     let dni:string = this.gropuForm.controls.dniNumber.value!;
     let phone:string = this.gropuForm.controls.phoneNumber.value!;
-/*
-this.resultDni = this.validationDni(dni);
-    this.resultPhone = this.validationPhone(phone);
-    console.log(this.resultDni);
-    console.log(this.resultPhone);
-    if (this.resultDni || this.resultPhone) {
-      this.router.navigate([`/oferta`]);
-    } else {
-      if (confirm("¿Desea efectuar el registro de un usuario en el portal?")) {
-        this.router.navigate([`/registro`]);
-      } else {
-        this.router.navigate([`/home`]);
-      }
-    }
-    console.log(this.resultDni);
-    
-*/
     if(this.validationNumbers(phone) && dni.length > 3) {
       this.validationService.getClient(dni, phone)
       .subscribe(
