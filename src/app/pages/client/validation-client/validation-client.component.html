@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row d-flex flex-column justify-content-center align-items-center pt-5 px-1">
+        <mat-card style="width : 26rem">
+            <mat-card-title>{{ title }}!!</mat-card-title>
+            <mat-card-subtitle>{{ messagge }}</mat-card-subtitle>
+            <form [formGroup]="validationForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="form-group col-12">
+                    <label for="subscriberId" class="center-block">N&uacute;mero Telef&oacute;nico:</label>
+                    <input type="text" class="form-control" formControlName="subscriberId" id="subscriberId" name="subscriberId" placeholder="Ingresa tu N&uacute;mero Celular" />
+                    <small *ngIf="subscriberId?.invalid && subscriberId?.touched" class="text-danger">El N&uacute;mero de Tel&eacute;fono es Requerido (Solo acepta N&uacute;meros con Longitud de 8 Digitos) </small>
+                </div>
+                <div class="form-group col-12">
+                    <label for="dni" class="center-block">Cedula de Identidad:</label>
+                    <input type="text" class="form-control" formControlName="dni" id="dni" name="dni" placeholder="Ingresa tu N&uacute;mero CI" />
+                    <small *ngIf="dni?.invalid && dni?.touched" class="form-control" class="text-danger">El Carnet de Identidad es Requerido (Acepta Numeros y Letras entre 4 y 10 Caracteres)</small>
+                </div> 
+                <div class="form-group col-12">
+                    <br>
+                    <button mat-raised-button color="primary" class="w-100" [disabled]="validationForm.invalid">
+                        Ingresar
+                    </button>
+                </div>
+            </form><br>
+            <div class="col-md-12 col-12">
+                <div class="link-back">
+                    <a href="/home" alt="regresa a pagina de Inicio">Volver Atras</a>
+                </div>
+                <div class="link-new" >
+                    <a href="/registro" alt="Ingresa tus datos para poder acceder al sistema.">Registra tus Datos</a>
+                </div>
+            </div>
+        </mat-card>
+
+        
+        <!--
+            <p>Form value: {{ validationForm.value | json }}</p>
+        <p>Form status: {{ validationForm.status | json }}</p>
+        -->
+    </div>
+</div>

@@ -31,8 +31,6 @@ import { ClientModule } from './pages/client/client.module';
     HeaderModule,
     NgxWebstorageModule.forRoot({ prefix: 'nvt', separator: ';', caseSensitive:true }),
     ClientModule
-    
-    
   ],
   providers: [],
   bootstrap: [AppComponent],
