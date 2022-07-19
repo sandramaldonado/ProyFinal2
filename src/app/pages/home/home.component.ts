@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SystemService } from "../../shared/services/system/system.service";
+import { SystemService } from "@services/system/system.service";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { SmsModalComponent } from '../modals/sms-modal/sms-modal.component';
+import { SmsModalComponent } from '@app/modals/sms-modal/sms-modal.component';
 
 @Component({
   selector: 'app-home',

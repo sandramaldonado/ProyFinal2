@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/services/validation.service';
+import { ValidationService } from '@services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
-import { Photo } from '../../models/Photo';
+import { Photo } from '@models/Photo';
 
 @Injectable({
   providedIn: 'root'

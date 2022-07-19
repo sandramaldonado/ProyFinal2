@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { retry, catchError, Observable, throwError } from 'rxjs';
-import { Autenticar } from '../models/Autenticar';
+import { Autenticar } from '@models/Autenticar';
 
 @Injectable({
   providedIn: 'root'

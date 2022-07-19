@@ -65,3 +65,14 @@ mat-card .mat-card-header{
   font-family: MUSEO100-REGULAR;
   src: url(./assets/font/Museo-100.otf);
 }
+
+.mat-card{
+  background: #FFFFFF;
+  border-radius: 20px !important;
+}
+
+.form-control{
+  border: 1px solid #8466B6 !important;
+  border-radius: 10px !important;
+  color: #8466B6 !important;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { ClientService } from 'src/app/shared/services/client.service';
-import { TokenService } from 'src/app/shared/services/token.service';
+import { ClientService } from '@app/services/client.service';
+import { TokenService } from '@app/services/token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

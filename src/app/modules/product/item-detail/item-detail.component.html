@@ -30,13 +30,10 @@
             
           </div>
         </mat-card-content>
-        <mat-card-actions class="d-flex flex-row justify-content-around align-items-center border-top" *ngIf="isValid">
-          <button mat-fab color="primary" aria-label="Verificar Cobertura" routerLink="/cobertura">
-            <mat-icon>satellite</mat-icon>
-          </button>
-          <button mat-fab color="warn" aria-label="Verificar Cobertura" (click)="addToCart(product)">
-            <mat-icon>add_shopping_cart</mat-icon>
-          </button>
+        <mat-card-actions class="d-flex flex-column justify-content-center align-items-center border-top" *ngIf="isValid">
+          <app-button  [content]="'Comprar'" (click)="onSubmit()"></app-button>
+          <app-button-outline  [content]="'Tomar Fotografia'" (click)="onSubmit()"></app-button-outline>
+          <app-button-secondary  [content]="'Cancelar'" (click)="onSubmit()"></app-button-secondary>
         </mat-card-actions>
       </mat-card>
 

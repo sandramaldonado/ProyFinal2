@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderModule } from "../header/header.module";
+import { HeaderModule } from "@layout/header/header.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 

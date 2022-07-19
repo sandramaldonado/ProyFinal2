@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/Product';
+import { Product } from '@models/Product';
 import { Route, ActivatedRoute } from "@angular/router";
-import { ProductService } from 'src/app/shared/services/product.service';
-import { CartService } from 'src/app/shared/services/cart.service';
+import { ProductService } from '@app/services/product.service';
+import { CartService } from '@app/services/cart.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -52,6 +52,10 @@ export class ItemDetailComponent implements OnInit {
 
   addToCart(product : Product){
     this.cartService.addToCart(product);
+  }
+
+  onSubmit (){
+    
   }
 
 }

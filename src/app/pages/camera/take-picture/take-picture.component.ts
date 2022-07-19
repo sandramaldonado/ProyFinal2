@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import {Subject, Observable} from 'rxjs';
-import { WebstoreService } from "../../../shared/services/webstore/webstore.service";
+import { WebstoreService } from "@services/webstore/webstore.service";
 import * as moment from "moment";
 
 @Component({

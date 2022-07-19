@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Photo } from 'src/app/shared/models/Photo';
-import { WebstoreService } from "../../../shared/services/webstore/webstore.service";
+import { Photo } from '@models/Photo';
+import { WebstoreService } from "@services/webstore/webstore.service";
 @Component({
   selector: 'app-load-picture',
   templateUrl: './load-picture.component.html',

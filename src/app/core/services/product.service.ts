@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
-import { Product } from '../models/Product';
+import { Product } from '@models/Product';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import * as cts  from "../utils/constants";
+import * as cts  from "../../shared/utils/constants";
 
 @Injectable({
   providedIn: 'root'

@@ -18,7 +18,7 @@ const routes : Routes = [
   },
   {
     path: 'en-construccion',
-    loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
+    loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },
   {
     path: 'oferta',
@@ -34,7 +34,7 @@ const routes : Routes = [
   },
   {
     path: 'cobertura',
-    loadChildren: () => import('./pages/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
+    loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   },
   {
     path : 'tomar-foto',
@@ -45,7 +45,7 @@ const routes : Routes = [
     loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
   },
   { path : 'oferta/detalle/:id',
-    loadChildren : () => import ('./pages/item-detail/item-detail.module').then (m => m.ItemDetailModule)
+    loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
   {
     path : 'escanear-documento',
@@ -57,7 +57,7 @@ const routes : Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
+    loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   }
 
 ]
