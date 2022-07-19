@@ -31,7 +31,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions class="d-flex flex-column justify-content-center align-items-center border-top" *ngIf="isValid">
-          <app-button  [content]="'Comprar'" (click)="onSubmit()"></app-button>
+          <app-button  [content]="'Comprar'" routerLink = "/cobertura"></app-button>
           <app-button-outline  [content]="'Tomar Fotografia'" (click)="onSubmit()"></app-button-outline>
           <app-button-secondary  [content]="'Cancelar'" (click)="onSubmit()"></app-button-secondary>
         </mat-card-actions>
