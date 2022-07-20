@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row pb-3 ">
+        
+        <section class="detail col-12 col-md-5 d-none d-md-block border border-primary border-end-0 rounded-start">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+                <h2>Plan Triple Play</h2>
+            </div>
+
+        </section>
+        <section class="coverage col-12 col-md-7 py-3 border border-primary border-start-0 rounded-end">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+                <form  novalidate class="">
+                    <h3>Validación de email</h3>
+                    <p>Es necesario validar tu correo electrónico para el envío de facturas electrónicas  y otras notificaciones.</p>
+                   
+                </form>
+             
+                
+                <mat-card class="my-3">
+                    <mat-card-content class="text-center">
+                        <img src="/src/assets/images/iconos/email.png" alt="">
+
+                        <p class="m-0">No olvides que será utilizado como método de contacto oficial </p>
+                       
+                        <app-button  [content]="'Validar correo electronico'" (click)="validateEmail()"></app-button>
+                
+                    </mat-card-content>
+                  
+                </mat-card>
+
+                <mat-card class="map-details py-3">
+                    <mat-card-content class="py-2 text-center">
+                
+                    </mat-card-content>
+                        
+                </mat-card>
+                <app-button  [content]="'Siguiente'" routerLink = "/cobertura"></app-button>
+            </div>
+        </section>
+      
+       
+    </div>
+</div>
+
