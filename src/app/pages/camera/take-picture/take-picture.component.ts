@@ -14,9 +14,7 @@ export class TakePictureComponent implements OnInit {
   public webcamImage: WebcamImage | undefined ;
   private trigger: Subject<void> = new Subject<void>();
 
-  constructor(
-    private webstore : WebstoreService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -40,18 +38,6 @@ export class TakePictureComponent implements OnInit {
 
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
-  }
-
-  public savePicture (){
-    let name = moment().valueOf() + ".jpg";
-    this.webstore.saveClientInformation(name);
-
-    this.webstore.saveSelfie({
-      name : name,
-      image : this.webcamImage?.imageAsDataUrl
-    });
-
-
   }
 
 }

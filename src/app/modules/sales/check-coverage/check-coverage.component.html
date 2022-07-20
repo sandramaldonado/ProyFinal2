@@ -1,53 +1,56 @@
 <app-header></app-header>
 <div class="container">
-    <div class="row d-flex flex-row justify-content-center align-items-center py-3">
-        <section></section>
-        <section class=" d-flex flex-column justify-content-around align-items-center">
-            <form  novalidate class="py-3">
-                <h3>Cobertura</h3>
-                <p>Verificaremos si tienes cobertura en la zona de instalación del servicio.</p>
-                <div class="input-group mb-3">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Selecciona tu ciudad</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </form>
-            <app-button  [content]="'Detectar ubicacion'" routerLink = "/cobertura"></app-button>
-               
-            <mat-card class="my-4">
-                <mat-card-content>
-                    <google-map
-                        height="400px"
-                        width="100%"
-                        [zoom]="zoom"
-                        [center]="center"
-                        [options]="options"
-                        (mapClick)="addMarker($event)">
-                        <map-marker *ngFor="let markerPosition of markerPositions"
-                        [position]="markerPosition"
-                        [options]="markerOptions"></map-marker>
-                    
-                    </google-map>
-               
-                </mat-card-content>
-                <mat-card-actions align="start">
-                    
-                </mat-card-actions>
-                <mat-card-footer>
-                </mat-card-footer>
-            </mat-card>
+    <div class="row pb-3 ">
+        
+        <section class="detail col-12 col-md-5 d-none d-md-block border border-primary border-end-0 rounded-start"></section>
+        <section class="coverage col-12 col-md-7 py-3 border border-primary border-start-0 rounded-end">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+                <form  novalidate class="">
+                    <h3>Cobertura</h3>
+                    <p>Verificaremos si tienes cobertura en la zona de instalación del servicio.</p>
+                    <div class="input-group mb-3">
+                        <select class="form-select" id="inputSelectCity" 
+                        (change)="changeCity($event)">
+                            <option disabled [value]="null" style="font-family: 'Trebuchet MS';" selected>Selecciona tu ciudad.</option>
+                            <option *ngFor="let department of cities" [value]="department.valueField" style="font-family: 'Trebuchet MS';">{{ department.displayValue }}</option>
+                        </select>
+                    </div>
+                </form>
+                <app-button  [content]="'Detectar ubicacion'" (click)="locateCurrentLocation()"></app-button>
+                
+                <mat-card class="my-3">
+                    <mat-card-content>
+                        <google-map
+                            height="400px"
+                            width="100%"
+                            [zoom]="zoom"
+                            [center]="center"
+                            [options]="options"
+                            (mapClick)="addMarker($event)">
+                            <map-marker *ngFor="let markerPosition of markerPositions"
+                            [position]="markerPosition"
+                            [options]="markerOptions"></map-marker>
+                        
+                        </google-map>
+                        <div class="coverage-status p-2">
+                            <span class="m-1 fw-bold">Cobertura Media</span>
+                            <p class="m-0">El servicio puede tener dificultades de conexión.</p>
 
-            <mat-card class="map-details py-3">
-                <mat-card-content>
-               
-               
-                </mat-card-content>
-                    
-            </mat-card>
-            <app-button  [content]="'Siguiente'" routerLink = "/cobertura"></app-button>
+                        </div>
+                
+                    </mat-card-content>
+                  
+                </mat-card>
+
+                <mat-card class="map-details py-3">
+                    <mat-card-content class="py-2 text-center">
+                        {{markerPositions[0] | json}}
+                
+                    </mat-card-content>
+                        
+                </mat-card>
+                <app-button  [content]="'Siguiente'" routerLink = "/cobertura"></app-button>
+            </div>
         </section>
       
        
