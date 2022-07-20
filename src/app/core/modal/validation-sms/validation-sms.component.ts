@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Client } from '../../../shared/models/Client';
+import { Client } from '@models/Client';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TranslogSmsService } from '../../services/translog-sms.service';
+import { TranslogSmsService } from '../../../shared/services/translog-sms.service'; 
 import { TranslogSMS } from '../../../shared/models/translogSMS';
 
 @Component({

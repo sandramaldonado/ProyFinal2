@@ -1,0 +1,4 @@
+<div class="button-wrap">
+    <div *ngIf="message" class="button-message">{{message}}</div>
+    <button class="button-active" [ngClass]=" disabled ? 'button-disactived':'button-active'"  [disabled]="disabled" >{{content}}</button>
+</div>

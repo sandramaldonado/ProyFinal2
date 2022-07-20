@@ -45,4 +45,8 @@ export class CheckCoverageComponent implements OnInit {
     }
   }
 
+  onSubmit(){
+    
+  }
+
 }

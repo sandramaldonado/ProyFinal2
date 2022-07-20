@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxCaptchaService } from '@binssoft/ngx-captcha';
-import { ValidationSmsComponent } from 'src/app/shared/modal/validation-sms/validation-sms.component';
-import { ClientService } from 'src/app/shared/services/client.service';
-import { TokenService } from 'src/app/shared/services/token.service';
+import { ValidationSmsComponent } from '@app/modal/validation-sms/validation-sms.component';
+import { ClientService } from '@services/client.service';
+import { TokenService } from '@services/token.service';
 import { TranslogSmsService } from 'src/app/shared/services/translog-sms.service';
 
 @Component({

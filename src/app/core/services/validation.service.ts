@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { retry, catchError } from 'rxjs/operators';
-import { Client } from '../models/Client';
+import { Client } from '@models/Client';
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({

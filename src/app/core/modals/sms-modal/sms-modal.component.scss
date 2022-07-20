@@ -1,0 +1,80 @@
+
+.modal-viva .modal-content {
+    border-radius: 30px !important;
+    background-color: #f0f0f0 !important;
+    box-shadow: 0 3px 6px rgba(103, 49, 162, 0.5);
+
+}
+
+
+/*
+.modal-header {
+    background-color: #f0f0f0; 
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 25px;
+
+
+}
+*/
+.text-title {
+    color: #C0E83E;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+
+} 
+.text-body {
+    font-size: 0.8em;
+    text-align: center;
+    //text-align: center;
+
+} 
+
+.label {
+    font-size: 0.8em;
+}
+
+.button-outline {
+    background: #6731A2;
+    //margin-bottom: 5px;
+    //padding: 1.1px 0;
+    font-size: 1em;
+    //font-weight: bold;
+    border-radius: 20px;
+    position: relative;
+    color: #FFFFFF;
+    margin-top: 1.5vh;
+    //width: 300px;
+    height: 40px;
+    //border: 2px solid #a5dd1d;
+    border: 2px solid #8260A5;
+    font-family: MUSEO300-REGULAR;
+ 
+    //line-height: 80px; /* <- changed this */
+    box-sizing: border-box; /* <- added this */
+}
+
+.is-invalid {
+    border: 1px solid red;
+}
+
+.required-value {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 60%;
+  color: #dc3545;
+}
+.form-control-sms {
+    width: 90%;
+}
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+    /* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}

@@ -7,7 +7,8 @@ import { GoogleMapsModule } from "@angular/google-maps";
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderModule } from "../header/header.module";
+import { HeaderModule } from "@layout/header/header.module";
+import { SharedModule } from "@shared/shared.module";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HeaderModule } from "../header/header.module";
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    HeaderModule
+    HeaderModule,
+    SharedModule
   ]
 })
 export class CheckCoverageModule { }

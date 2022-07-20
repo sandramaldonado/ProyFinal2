@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ValidationClientRoutingModule } from './validation-client-routing.module';
 import { ValidationClientComponent } from './validation-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderModule } from '../../header/header.module';
+import { HeaderModule } from '@layout/header/header.module';
 import { CaptchaModule } from '../../captcha/captcha.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { ValidationSmsComponent } from '../../../shared/modal/validation-sms/validation-sms.component';
+import { ValidationSmsComponent } from '@app/modal/validation-sms/validation-sms.component';
 
 @NgModule({
   declarations: [ValidationClientComponent,
