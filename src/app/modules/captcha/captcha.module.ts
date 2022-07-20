@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CaptchaRoutingModule } from './captcha-routing.module';
 import { CaptchaComponent } from './captcha.component';
+import { CaptchaService } from 'src/app/core/services/captcha.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,16 @@ import { CaptchaComponent } from './captcha.component';
   ],
   imports: [
     CommonModule,
-    CaptchaRoutingModule
-  ]
+    CaptchaRoutingModule,
+    FormsModule
+  ],
+  exports:[CaptchaComponent]
 })
-export class CaptchaModule { }
+export class CaptchaModule {
+  static forRoot(): ModuleWithProviders <CaptchaModule> {
+    return {
+      ngModule: CaptchaModule,
+      providers: [ CaptchaService ]
+    };
+  }
+}
