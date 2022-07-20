@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as cts from "@shared/utils/constants";
 
 @Component({
   selector: 'app-check-coverage',
@@ -20,12 +21,13 @@ export class CheckCoverageComponent implements OnInit {
 
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
+  cities = cts.cities;
 
   constructor() { }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log (position)
+      console.log (typeof position.coords.latitude)
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -47,6 +49,31 @@ export class CheckCoverageComponent implements OnInit {
 
   onSubmit(){
     
+  }
+
+  changeCity(event: any ): void{
+
+    console.log(event.target.value);
+    let citySelected = this.cities.find(e=>e.valueField==event.target.value);
+    if(citySelected?.longitude && citySelected?.latitude){
+      this.center = {
+        lat: citySelected?.latitude,
+        lng: citySelected?.longitude,
+      }
+    }
+  
+   
+  }
+  locateCurrentLocation(){
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log (position)
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
+      
   }
 
 }
