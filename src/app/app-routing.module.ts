@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule,Routes } from '@angular/router';
-import { LoadPictureComponent } from './pages/test/load-picture/load-picture.component';
 
 const routes : Routes = [
   {
@@ -23,6 +21,10 @@ const routes : Routes = [
   {
     path: 'oferta',
     loadChildren: () => import('./pages/sales/sales.module').then( m => m.SalesModule)
+  },
+  {
+    path: 'captcha',
+    loadChildren: () => import('./pages/captcha/captcha.module').then( m => m.CaptchaModule)
   },
   {
     path: 'validacion',
@@ -48,23 +50,10 @@ const routes : Routes = [
     loadChildren : () => import ('./pages/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
   {
-    path : 'escanear-documento',
-    loadChildren : () => import ('./pages/scan-image/scan-image.module').then(m=> m.ScanImageModule)
-  },
-  {
-    path : 'load-picture',
-    component : LoadPictureComponent
-  },
-  {
     path: '**',
     loadChildren: () => import('./pages/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   }
-
 ]
-
-
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

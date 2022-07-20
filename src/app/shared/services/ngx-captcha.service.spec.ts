@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SystemService } from './system.service';
+import { NgxCaptchaService } from './ngx-captcha.service';
 
-describe('SystemService', () => {
-  let service: SystemService;
+describe('NgxCaptchaService', () => {
+  let service: NgxCaptchaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SystemService);
+    service = TestBed.inject(NgxCaptchaService);
   });
 
   it('should be created', () => {

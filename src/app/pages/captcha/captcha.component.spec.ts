@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScanImageComponent } from './scan-image.component';
+import { CaptchaComponent } from './captcha.component';
 
-describe('ScanImageComponent', () => {
-  let component: ScanImageComponent;
-  let fixture: ComponentFixture<ScanImageComponent>;
+describe('CaptchaComponent', () => {
+  let component: CaptchaComponent;
+  let fixture: ComponentFixture<CaptchaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScanImageComponent ]
+      declarations: [ CaptchaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ScanImageComponent);
+    fixture = TestBed.createComponent(CaptchaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

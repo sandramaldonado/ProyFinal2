@@ -10,10 +10,6 @@ const routes: Routes = [
   {
     path : 'validationClient',
     loadChildren: () => import('./validation-client/validation-client.module').then(m => m.ValidationClientModule)
-  },
-  {
-    path : 'newClient',
-    loadChildren: () => import('./new-client/new-client.module').then(m => m.NewClientModule)
   }
 ];
 
