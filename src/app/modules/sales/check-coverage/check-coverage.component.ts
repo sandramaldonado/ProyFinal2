@@ -42,7 +42,9 @@ export class CheckCoverageComponent implements OnInit {
 
   addMarker(event: google.maps.MapMouseEvent) {
     console.log("click en el mapa", event.latLng?.toJSON());
+
     if(event.latLng != null){
+      this.markerPositions = [];
       this.markerPositions.push(event.latLng.toJSON());
     }
   }
@@ -56,6 +58,7 @@ export class CheckCoverageComponent implements OnInit {
     console.log(event.target.value);
     let citySelected = this.cities.find(e=>e.valueField==event.target.value);
     if(citySelected?.longitude && citySelected?.latitude){
+      this.markerPositions =[];
       this.center = {
         lat: citySelected?.latitude,
         lng: citySelected?.longitude,
@@ -65,9 +68,10 @@ export class CheckCoverageComponent implements OnInit {
    
   }
   locateCurrentLocation(){
-
+   
     navigator.geolocation.getCurrentPosition((position) => {
       console.log (position)
+      this.markerPositions = []
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
