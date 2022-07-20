@@ -9,7 +9,7 @@ export class CaptchaService {
   captchStatus = this.captchSource.asObservable(); 
   constructor() { }
 
-  setCaptchaStatus(code) {
+  setCaptchaStatus(code:any) {
     this.captchSource.next(code);
   }
   
