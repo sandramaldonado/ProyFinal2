@@ -42,9 +42,16 @@
                   
                 </mat-card>
 
-                <mat-card class="map-details py-3">
+                <mat-card class="address py-3">
                     <mat-card-content class="py-2 text-center">
-                        {{markerPositions[0] | json}}
+                       
+                            
+                           <ax-lazy-element *axLazyElementDynamic="'address-microfront-app', 
+                           url: 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';"
+                           [microfrontParamIn]="microfrontParamIn"
+                           [paramClass]="addressParamClass"
+                           >
+                       </ax-lazy-element>
                 
                     </mat-card-content>
                         

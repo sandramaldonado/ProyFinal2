@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CheckCoverageRoutingModule } from './check-coverage-routing.module';
@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderModule } from "@layout/header/header.module";
 import { SharedModule } from "@shared/shared.module";
+import { LazyElementsModule } from '@angular-extensions/elements';
+
 
 
 @NgModule({
@@ -23,7 +25,10 @@ import { SharedModule } from "@shared/shared.module";
     MatCardModule,
     MatButtonModule,
     HeaderModule,
-    SharedModule
-  ]
+    SharedModule,
+    LazyElementsModule
+    
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CheckCoverageModule { }
