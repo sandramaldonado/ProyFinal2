@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="parent d-flex flex-column justify-content-center">
+    <div class="contenedor-flexible d-flex flex-column align-items-center flex-md-row align-items-md-center justify-content-center ">
+        <section class="mr-lg-5"></section>
+        <section style="width: 2.5vw;"></section>
+        <section class="mr-lg-5">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div class="title-1"><span>{{ title }}!!!</span></div>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <div class="title-2">{{ messagge }}</div>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="validationForm" (ngSubmit)="onSubmit()" class="form" novalidate>
+                        <div class="form-group col-12">
+                            <label for="name" class="center-block bold"><b>Nombre Completo:</b></label>
+                            <input type="text" class="form-control" formControlName="name" id="name"
+                                name="name" placeholder="Ingresa tu N&uacute;mero Celular" />
+                            <small *ngIf="name?.invalid && name?.touched" class="text-danger">El
+                                Nombre es Requerido (Solo acepta texto sin caracteres especiales entre 10 y 50 Caracteres) </small>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="subscriberId" class="center-block bold"><b>N&uacute;mero Telef&oacute;nico:</b></label>
+                            <input type="text" class="form-control" formControlName="subscriberId" id="subscriberId"
+                                name="subscriberId" placeholder="Ingresa tu N&uacute;mero Celular" />
+                            <small *ngIf="subscriberId?.invalid && subscriberId?.touched" class="text-danger">El
+                                N&uacute;mero de Tel&eacute;fono es Requerido (Solo acepta N&uacute;meros con
+                                Longitud de 8 Digitos) </small>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="dni" class="center-block bold"><b>Cedula de Identidad:</b></label>
+                            <input type="text" class="form-control" formControlName="dni" id="dni" name="dni"
+                                placeholder="Ingresa tu N&uacute;mero CI" />
+                            <small *ngIf="dni?.invalid && dni?.touched" class="form-control" class="text-danger">El
+                                Carnet de Identidad es Requerido (Acepta Numeros y Letras entre 4 y 10
+                                Caracteres)</small>
+                        </div>
+                        <div class="form-group col-12">
+                            <br>
+                            <app-captcha [config]="captchaConfig" class="form-control"></app-captcha>
+                        </div>
+                        <div class="form-group col-12">
+                            <br>
+                            <button mat-raised-button color="primary" class="w-100" [disabled]="validationForm.invalid">
+                                Ingresar
+                            </button>
+                        </div>
+                    </form>
+                    <div class="link-back col-md-12 col-12 form">
+                        <div class="col-md-6 col-12">
+                            <a href="/home" alt="regresa a pagina de Inicio">Inicio</a>
+                        </div>
+                        <div class="link-new col-md-6 col-12">
+                            <a href="/registro" alt="Ingresa tus datos para poder acceder al sistema.">Registrate Aqui</a>
+                        </div>
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </section>
+    </div>
+</div>
