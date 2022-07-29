@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckCoverageComponent } from "@modules/sales/check-coverage/check-coverage.component";
 
 @Component({
   selector: 'app-order',

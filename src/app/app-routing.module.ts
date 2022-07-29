@@ -4,11 +4,11 @@ import { RouterModule,Routes } from '@angular/router';
 const routes : Routes = [
   {
     path : '',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   },
   {
     path : 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   },
   {
     path : 'client',
@@ -44,11 +44,11 @@ const routes : Routes = [
   },
   {
     path : 'tomar-foto',
-    loadChildren : () => import('./pages/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
+    loadChildren : () => import('./shared/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
   },
   {
     path : 'compras',
-    loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
+    loadChildren: () => import('./modules/sales/cart/cart.module').then(m => m.CartModule)
   },
   { path : 'oferta/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
