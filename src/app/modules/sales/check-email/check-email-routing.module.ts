@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ValidationClientComponent } from './validation-client.component';
+import { CheckEmailComponent } from './check-email.component';
 
 const routes: Routes = [
-  {
-    path: '', 
-    component: ValidationClientComponent
-  }
+  { path : '', component : CheckEmailComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ValidationClientRoutingModule { }
+export class CheckEmailRoutingModule { }
