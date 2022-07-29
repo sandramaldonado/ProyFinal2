@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as cts from "@shared/utils/constants";
 import { environment } from 'src/environments/environment';
+import { WebstoreService } from "@services/webstore/webstore.service";
 
 @Component({
   selector: 'app-check-coverage',
@@ -83,9 +84,12 @@ export class CheckCoverageComponent implements OnInit {
 
   public environment : any;
 
-  constructor() { }
+  constructor(
+    private webstoreService : WebstoreService
+  ) { }
 
   ngOnInit(): void {
+    this.webstoreService.saveToken();
     const env : any = {};
     const browserWindow : any = window || {};
    

@@ -26,12 +26,13 @@ import { AuthInterceptor } from "@app/interceptors/auth-interceptor";
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     HeaderModule
   ],
   providers: [
-   // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+   //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   schemas :[CUSTOM_ELEMENTS_SCHEMA]

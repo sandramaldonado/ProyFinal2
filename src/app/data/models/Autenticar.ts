@@ -1,9 +1,9 @@
 export class Autenticar{
-    responseCode?: String;
-    responseMessage?: String;
+    responseCode?: string;
+    responseMessage?: string;
     data?: {
-        token?: String;
-        refreshToken?: String;
+        token?: string;
+        refreshToken?: string;
         userId?: number
     }
 }
