@@ -39,6 +39,10 @@ const routes : Routes = [
     loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   },
   {
+    path: 'verificar-email',
+    loadChildren: () => import('./modules/sales/check-email/check-email.module').then( m => m.CheckEmailModule)
+  },
+  {
     path : 'tomar-foto',
     loadChildren : () => import('./pages/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
   },
@@ -49,6 +53,7 @@ const routes : Routes = [
   { path : 'oferta/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
+
   {
     path: '**',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
