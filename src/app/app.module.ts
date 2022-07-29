@@ -11,9 +11,6 @@ import { NgxWebstorageModule } from "ngx-webstorage";
 import { SmsModalComponent } from '@app/modals/sms-modal/sms-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-import { ClientModule } from './pages/client/client.module';
-
 @NgModule({
   declarations: [
     AppComponent,
