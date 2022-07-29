@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlanSelectedComponent } from '@app/modal/plan-selected/plan-selected.component';
+import { InfoClientService } from '@app/services/info-client.service';
+import { PlanListService } from '@app/services/plan-list.service';
+import { ScoringValidationService } from '@app/services/scoring-validation.service';
 import { NgxCaptchaService } from '@binssoft/ngx-captcha';
-import { ValidationSmsComponent } from 'src/app/core/modal/validation-sms/validation-sms.component';
 import { CaptchaService } from 'src/app/core/services/captcha.service';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
@@ -14,6 +17,7 @@ import { TokenService } from 'src/app/core/services/token.service';
   styleUrls: ['./validation-client.component.scss']
 })
 export class ValidationClientComponent implements OnInit {
+  //@Output() disparadorInfoClient: EventEmitter<any> = new EventEmitter(); 
   title = "Autenticación";
   messagge = "Ingresa tu Nombre Completo, Número Teléfonico y CI para acceder a nuestras Ofertas";
   today;
@@ -28,8 +32,10 @@ export class ValidationClientComponent implements OnInit {
   // definicion de valoracion de campos de formulario
   validationForm = new FormGroup({
     'dni': new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
-    'name': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
-    'subscriberId': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)])
+    'name': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
+    'lastname': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
+    'subscriberId': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
+    'captcha_status': new FormControl(null, [Validators.required])
   });
   
   // Variables captcha
@@ -49,16 +55,23 @@ export class ValidationClientComponent implements OnInit {
   };
   captch_input: any;
   resultCode: any;
+  scoringValid: any;
+  planesList: any;
+
   constructor(private captchaService:NgxCaptchaService,
               private clientService: ClientService, 
               private  tokenService: TokenService, 
               private router: Router, 
-              private route: ActivatedRoute, 
+              private activeRoute: ActivatedRoute, 
               public dialog: MatDialog,
-              private captchService: CaptchaService) {
+              private captchService: CaptchaService,
+              private scoringValidationService: ScoringValidationService,
+              private planListService: PlanListService) {
     
     this.autentication = {};
     this.infoClient = {};
+    this.scoringValid = {};
+    this.planesList = {};
     this.today = new Date();
     this.validationCaptcha();
   }
@@ -72,8 +85,10 @@ export class ValidationClientComponent implements OnInit {
       this.captchaStatus = status;
       if (status == false) {
           alert("Opps!\nEl Captcha es incorrecto, intente de nuevo");
+          this.validationForm.patchValue({"captcha_status": status});
       } else if (status == true)  {
-          alert("Felicidades!!!\nCaptcha Valido");
+        this.validationForm.patchValue({"captcha_status": status});
+          //alert("Felicidades!!!\nCaptcha Valido");
       }
     });
   }
@@ -93,6 +108,8 @@ export class ValidationClientComponent implements OnInit {
         });
   }
 
+  
+
   getCode() {
     var counter = 0;
     var code;
@@ -108,7 +125,7 @@ export class ValidationClientComponent implements OnInit {
   /**
    * Metodo de ejecucion desde interface tras validacion de campos
    */
-   onSubmit() {
+  onSubmit() {
     // defniri variables obtencion dato formulario
     let phone:string= "";
     let dni:string= "";
@@ -116,18 +133,20 @@ export class ValidationClientComponent implements OnInit {
       // asignacion de datos rescatados en formulario
       phone = this.validationForm.value.subscriberId!;
       if (this.autentication["responseCode"] == "OK") {
+        sessionStorage.setItem("key", this.autentication["data"]["token"]);
         this.clientService.getClientByMovil(phone, this.autentication["data"]["token"])
         .subscribe(
           response => {
             this.infoClient = response;
-            //console.log(this.infoClient["data"]["data"]["0"]["clientId"]);
             if (this.infoClient["data"]["data"].length == 1) {
               if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
-                //this.sendSMS(phone);
-                this.abrirDialogo(phone);
-              } else {
-
-              }
+                this.getPlansList();
+                console.log(this.planesList);
+                this.scoringValidated(this.infoClient["data"]["data"]["0"]["clientId"], phone);
+                console.log(this.infoClient["data"]["data"]);
+                //
+                ///this.abrirDialogo();
+              } 
             } else {
               dni = this.validationForm.value.dni!;
               this.getClientByDni(dni, this.autentication["data"]["token"]);
@@ -150,6 +169,82 @@ export class ValidationClientComponent implements OnInit {
   /**
    * Metodo de obtencion de invocacion a Servicios search tocken
    */
+   getPlansList() {
+    this.planListService.getPlanList(this.autentication["data"]["token"])
+    .subscribe(
+      response => {
+        this.planesList = response;
+        //console.log(this.planesList);
+        const planDataList = this.planesList["data"]["data"];
+        for (let index = 0; index < planDataList.length; index++) {
+          //console.log(indiceDeTres[index]["planCompositionCode"]);
+          if (planDataList[index]["planCompositionCode"] == "PMBAP") {
+            const planCode = planDataList[index]["planCompositionCode"];
+            const planValue = planDataList[index]["planList"];
+            const planPrice = planDataList[index]["tariff"];
+            const qServices = planDataList[index]["numberOfEntities"];
+            const productTypeCode = [];
+            console.log(planValue);
+            for (let index = 0; index < planValue.length; index++) {
+              productTypeCode.push(planValue[index]["consumptionEntityType"]);
+            }
+            console.log(planDataList[index]);
+            console.log(planValue);
+
+            const jsontext = JSON.stringify({
+              "client": {
+                  "clientId": this.infoClient["data"]["data"]["0"]["clientId"]
+                },
+                "commercialOffer": {
+                  "productTypeCode": productTypeCode,
+                  "groupPlan": planCode
+                },
+                "saleOrder": {
+                  "planCode": "1",
+                  "processTypeCode": "PTFSALE",
+                  "channelCode": "CAASES",
+                  "cityCode": "CBA",
+                  "price": planPrice,
+                  "creationDate": "28-07-2022",
+                  "serviceQuantity": qServices,
+                  "hasSubsidyOfEquipmentInSale": "NO"
+                },
+                "userId": 21
+              });
+
+            console.log(jsontext);
+          }
+          
+        }
+
+      },
+      error => {
+        console.log(error);
+      });
+    
+  }
+
+  scoringValidated(clientId: string, phone:string){
+    this.scoringValidationService.getValidationClientScoring(clientId, this.autentication["data"]["token"]).subscribe(
+        response => {
+          this.scoringValid = response;
+          if (this.scoringValid["data"]["flowType"] == "NORMAL") {
+            this.abrirDialogo(phone);
+          } else {
+            this.router.navigate([`client/adminClient`, phone]);
+          }
+          console.log(this.scoringValid);
+          console.log(this.scoringValid["data"]["flowType"]);
+          //this.abrirDialogo();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  /**
+   * Metodo de obtencion de invocacion a Servicios search tocken
+   */
    getClientByDni(dni:String, token:String) {
     this.clientService.getClientByDNI(dni, token)
       .subscribe(
@@ -157,9 +252,21 @@ export class ValidationClientComponent implements OnInit {
           this.infoClient = response;
           //console.log(this.infoClient);
           if (this.infoClient["data"]["data"].length == 1) {
-            this.router.navigate([`/oferta`]);
+            if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
+              console.log(this.infoClient["data"]["data"]);
+
+
+              this.router.navigate([`/adminClient`]);
+              ///this.abrirDialogo();
+            } else {
+              alert("Usted no puede efectuar Compra Directa \n"
+                    +"Lo invitamos a pasar por la tienda mas cercana para efectuar la compra del Plan");
+            }
+            //this.router.navigate([`/adminClient`]);
           } else {
-            this.getClientByDni(dni, this.autentication["data"]["token"]);
+            alert("Usted no puede efectuar Compra Directa \n"
+                +"Lo invitamos a pasar por la tienda mas cercana para efectuar la compra del Plan");
+            //this.getClientByDni(dni, this.autentication["data"]["token"]);
           }
         },
         error => {
@@ -189,11 +296,10 @@ export class ValidationClientComponent implements OnInit {
   /*
    * Metodo de apertura de ventana emergente
   */
-  abrirDialogo(phone: string) {
+  abrirDialogo(phone: String) {
     //const dialogRef = this.dialog.open(ValidationSmsComponent, {width: '180px', {data: phone},});
-    const dialogRef = this.dialog.open(ValidationSmsComponent, {
-      width: '450px',
-      data: {data: phone},
+    const dialogRef = this.dialog.open(PlanSelectedComponent, {
+      width: '450px', data: phone
     });
 
     dialogRef.afterClosed().toPromise()
@@ -210,5 +316,14 @@ export class ValidationClientComponent implements OnInit {
   get name() {
     return this.validationForm.get('name');
   }
+
+  get lastname() {
+    return this.validationForm.get('lastname');
+  }
+
+  get captcha_status() {
+    return this.validationForm.get('captcha_status');
+  }
+
   
 }

@@ -96,13 +96,9 @@ export class CaptchaComponent implements OnChanges {
   }
 
   checkCaptcha() {
-    console.log(this.captch_input);
-    console.log(this.resultCode);
     if (this.captch_input != this.resultCode) {
-      console.log("Entra");
       this.captchService.setCaptchaStatus(false);
     } else {
-      console.log("Entra2");
       this.captchService.setCaptchaStatus(true);
     }
   }

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ValidationClientComponent } from './validation-client.component';
+import { AdminClientComponent } from './admin-client.component';
 
 const routes: Routes = [
   {
     path: '', 
-    component: ValidationClientComponent
+    component: AdminClientComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ValidationClientRoutingModule { }
+export class AdminClientRoutingModule { }
