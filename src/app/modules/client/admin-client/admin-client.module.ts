@@ -40,6 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
-  ]
+  ],
+  exports : [AdminClientComponent]
 })
 export class AdminClientModule { }
