@@ -29,6 +29,7 @@ import { LazyElementsModule } from '@angular-extensions/elements';
     LazyElementsModule
     
   ],
-  schemas : [CUSTOM_ELEMENTS_SCHEMA]
+  schemas : [CUSTOM_ELEMENTS_SCHEMA],
+  exports : [CheckCoverageComponent]
 })
 export class CheckCoverageModule { }

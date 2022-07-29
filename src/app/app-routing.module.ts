@@ -53,6 +53,9 @@ const routes : Routes = [
   { path : 'oferta/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
+  { path : 'oferta/orden-compra',
+    loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
+  },
 
   {
     path: '**',
