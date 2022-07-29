@@ -4,7 +4,7 @@ import { Product } from '@models/Product';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import * as cts  from "../../shared/utils/constants";
+import * as cts  from "@shared/utils/constants";
 
 @Injectable({
   providedIn: 'root'
