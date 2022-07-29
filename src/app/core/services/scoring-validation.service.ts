@@ -20,7 +20,7 @@ export class ScoringValidationService {
   }
 
   /**
-   * Metodo de consulta de existencia de cliente por DNI
+   * Metodo de consulta de validacion de factibilidd
    */
    getValidationClientScoring(clientId: String, token:String): Observable<ScoringValidation> {
     var headers = {
@@ -33,7 +33,8 @@ export class ScoringValidationService {
     };
 
     const jsontext = JSON.stringify({"client":{"clientId": clientId},"commercialOffer": {"productTypeCode": ["MOVIL", "IFIXED"],"groupPlan": "TRIPLE_PLAY"},"saleOrder": {"planCode": "1","processTypeCode": "PTFSALE","channelCode": "CAASES","cityCode": "CBA","price": 400,"creationDate": "28-07-2022","serviceQuantity": "3","hasSubsidyOfEquipmentInSale": "SI"},"userId": 21});
-    const jsontext2 = JSON.stringify({
+    /**
+     const jsontext2 = JSON.stringify({
                           "client": {
                               "clientId": clientId
                             },
@@ -55,6 +56,7 @@ export class ScoringValidationService {
                             },
                             "userId": 21
                           });
+     */
 
     return this.httpClient.post<ScoringValidation>(`${this.apiUrl}`, jsontext, httpOptions).pipe(retry(1), catchError(this.handleError));
 

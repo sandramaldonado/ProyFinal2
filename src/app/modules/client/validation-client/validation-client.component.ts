@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanSelectedComponent } from '@app/modal/plan-selected/plan-selected.component';
 import { InfoClientService } from '@app/services/info-client.service';
+import { PlanListService } from '@app/services/plan-list.service';
 import { ScoringValidationService } from '@app/services/scoring-validation.service';
 import { NgxCaptchaService } from '@binssoft/ngx-captcha';
 import { CaptchaService } from 'src/app/core/services/captcha.service';
@@ -31,7 +32,8 @@ export class ValidationClientComponent implements OnInit {
   // definicion de valoracion de campos de formulario
   validationForm = new FormGroup({
     'dni': new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
-    'name': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
+    'name': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
+    'lastname': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
     'subscriberId': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
     'captcha_status': new FormControl(null, [Validators.required])
   });
@@ -54,6 +56,7 @@ export class ValidationClientComponent implements OnInit {
   captch_input: any;
   resultCode: any;
   scoringValid: any;
+  planesList: any;
 
   constructor(private captchaService:NgxCaptchaService,
               private clientService: ClientService, 
@@ -62,11 +65,13 @@ export class ValidationClientComponent implements OnInit {
               private activeRoute: ActivatedRoute, 
               public dialog: MatDialog,
               private captchService: CaptchaService,
-              private scoringValidationService: ScoringValidationService) {
+              private scoringValidationService: ScoringValidationService,
+              private planListService: PlanListService) {
     
     this.autentication = {};
     this.infoClient = {};
     this.scoringValid = {};
+    this.planesList = {};
     this.today = new Date();
     this.validationCaptcha();
   }
@@ -103,6 +108,8 @@ export class ValidationClientComponent implements OnInit {
         });
   }
 
+  
+
   getCode() {
     var counter = 0;
     var code;
@@ -118,7 +125,7 @@ export class ValidationClientComponent implements OnInit {
   /**
    * Metodo de ejecucion desde interface tras validacion de campos
    */
-   onSubmit() {
+  onSubmit() {
     // defniri variables obtencion dato formulario
     let phone:string= "";
     let dni:string= "";
@@ -133,6 +140,8 @@ export class ValidationClientComponent implements OnInit {
             this.infoClient = response;
             if (this.infoClient["data"]["data"].length == 1) {
               if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
+                this.getPlansList();
+                console.log(this.planesList);
                 this.scoringValidated(this.infoClient["data"]["data"]["0"]["clientId"], phone);
                 console.log(this.infoClient["data"]["data"]);
                 //
@@ -155,6 +164,64 @@ export class ValidationClientComponent implements OnInit {
             +"¡Autentique nuevamente sus datos! \n"
             +"Y/o Valide nuevamente el Captcha si es necesario");
     }
+  }
+
+  /**
+   * Metodo de obtencion de invocacion a Servicios search tocken
+   */
+   getPlansList() {
+    this.planListService.getPlanList(this.autentication["data"]["token"])
+    .subscribe(
+      response => {
+        this.planesList = response;
+        //console.log(this.planesList);
+        const planDataList = this.planesList["data"]["data"];
+        for (let index = 0; index < planDataList.length; index++) {
+          //console.log(indiceDeTres[index]["planCompositionCode"]);
+          if (planDataList[index]["planCompositionCode"] == "PMBAP") {
+            const planCode = planDataList[index]["planCompositionCode"];
+            const planValue = planDataList[index]["planList"];
+            const planPrice = planDataList[index]["tariff"];
+            const qServices = planDataList[index]["numberOfEntities"];
+            const productTypeCode = [];
+            console.log(planValue);
+            for (let index = 0; index < planValue.length; index++) {
+              productTypeCode.push(planValue[index]["consumptionEntityType"]);
+            }
+            console.log(planDataList[index]);
+            console.log(planValue);
+
+            const jsontext = JSON.stringify({
+              "client": {
+                  "clientId": this.infoClient["data"]["data"]["0"]["clientId"]
+                },
+                "commercialOffer": {
+                  "productTypeCode": productTypeCode,
+                  "groupPlan": planCode
+                },
+                "saleOrder": {
+                  "planCode": "1",
+                  "processTypeCode": "PTFSALE",
+                  "channelCode": "CAASES",
+                  "cityCode": "CBA",
+                  "price": planPrice,
+                  "creationDate": "28-07-2022",
+                  "serviceQuantity": qServices,
+                  "hasSubsidyOfEquipmentInSale": "NO"
+                },
+                "userId": 21
+              });
+
+            console.log(jsontext);
+          }
+          
+        }
+
+      },
+      error => {
+        console.log(error);
+      });
+    
   }
 
   scoringValidated(clientId: string, phone:string){
@@ -248,6 +315,10 @@ export class ValidationClientComponent implements OnInit {
 
   get name() {
     return this.validationForm.get('name');
+  }
+
+  get lastname() {
+    return this.validationForm.get('lastname');
   }
 
   get captcha_status() {

@@ -18,9 +18,14 @@
                     <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()" class="form" novalidate
                         id="validationForm">
                         <div class="form-group col-12">
-                            <label for="name" class="center-block bold"><b>Nombre y Apellido:</b></label>
+                            <label for="name" class="center-block bold"><b>Nombre:</b></label>
                             <input type="text" class="form-control" formControlName="name" id="name" name="name"
-                                placeholder="Ingresa tu Nombre y Apellido" />
+                                placeholder="Ingresa Primer Nombre" />
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="lastname" class="center-block bold"><b>Apellido:</b></label>
+                            <input type="text" class="form-control" formControlName="lastname" id="lastname" name="lastname"
+                                placeholder="Ingresa Primer Apellido" />
                         </div>
                         <div class="row">
                             <div class="form-group col-6 col-md-6">
@@ -44,7 +49,10 @@
                         <div class="form-group col-12">
                             <br>
                             <small *ngIf="name?.invalid && name?.touched" class="text-danger">El
-                                Nombre es Requerido (Solo acepta texto sin caracteres especiales entre 10 y 50
+                                Nombre es Requerido (Solo acepta texto sin caracteres especiales entre 3 y 35
+                                Caracteres) </small>
+                            <small *ngIf="name?.invalid && name?.touched" class="text-danger"><br>El
+                                Apellido es Requerido (Solo acepta texto sin caracteres especiales entre 3 y 35
                                 Caracteres) </small>
                             <small *ngIf="subscriberId?.invalid && subscriberId?.touched" class="text-danger"><br>El
                                 N&uacute;mero de Tel&eacute;fono es Requerido (Solo acepta N&uacute;meros con
