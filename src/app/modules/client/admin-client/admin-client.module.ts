@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { SharedModule } from "@shared/shared.module";
 
 @NgModule({
   declarations: [AdminClientComponent],
@@ -36,7 +37,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatRadioModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

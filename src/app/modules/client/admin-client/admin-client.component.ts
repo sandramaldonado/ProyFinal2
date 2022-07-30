@@ -12,8 +12,8 @@ import { DocumentType } from '@models/DocumentType';
 export class AdminClientComponent implements OnInit {
   subscriberId: any;
   key: any;
-  title = "Hola, ¿Como estas?";
-  messagge = "Porfavor Ingresa tus datos personales, estos datos nos servirán para brindarte un buen servicio.";
+  title = "Tus datos de registro";
+  message = "Por favor ingresa tus datos personales, estos datos nos servirán para brindarte un buen servicio.";
   // definicion de tipos Dock
   tipoDoc: DocumentType[] = [{value: 'CI', description: 'CI'}, {value: 'NIT', description: 'NIT'}, {value: 'LIBRETA', description: 'LIB. MILITAR'}];
   expedido: DocumentType[] = [{value: 'CBEN', description: 'Beni'}, {value: 'CCBA', description: 'Cochabamba'}, {value: 'CLPZ', description: 'La Paz'}, {value: 'CORU', description: 'Oruro'}, {value: 'CPAN', description: 'Pando'}, {value: 'CPOT', description: 'Potosi'}, {value: 'CSCR', description: 'Sucre'}, {value: 'CSCZ', description: 'Santa Cruz'}, {value: 'CTRJ', description: 'Tarija'}];
@@ -23,7 +23,7 @@ export class AdminClientComponent implements OnInit {
   nameClient = /^[A-Za-z]+$/;
   surNameClient = /^[A-Za-z\s]+$/;
   mobilNumPattern = /^[0-9]+$/;
-  emailtext = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";  
+  emailtext = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
   panelOpenState = false;
   clientInfo: any;
   validationForm = new FormGroup({
@@ -39,9 +39,9 @@ export class AdminClientComponent implements OnInit {
   });
   infoClient: any;
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
-            private clientService: ClientService,) { 
+            private clientService: ClientService,) {
     this.key = sessionStorage.getItem("key");
     //this.infoClientService.disparadorInfoClient.subscribe(data => {console.log(data); this.clientInfo.push(data);});
   }
@@ -51,7 +51,7 @@ export class AdminClientComponent implements OnInit {
     //console.log(this.subscriberId);
     this.loadcontents();
     //console.log(this.key);
-    
+
   }
 
   loadcontents() {
@@ -75,7 +75,7 @@ export class AdminClientComponent implements OnInit {
     const docNumber = this.infoClient["data"]["data"]["0"]["documentNumber"];
     const docCity = this.infoClient["data"]["data"]["0"]["documentCity"];
     const email = this.infoClient["data"]["data"]["0"]["email"];
-    
+
     this.validationForm.setValue(
       {
         firstName: name1,
@@ -93,9 +93,9 @@ export class AdminClientComponent implements OnInit {
         onlySelf: true
       }
     );
-    
-    
-    
+
+
+
   }
 
   onSubmit() {}
@@ -114,15 +114,15 @@ export class AdminClientComponent implements OnInit {
     get firstName() {
       return this.validationForm.get('firstName');
     }
-  
+
     get sureName() {
       return this.validationForm.get('sureName');
     }
-  
+
     get tipo() {
       return this.validationForm.get('tipo');
     }
-  
+
     get nroDoc() {
       return this.validationForm.get('nroDoc');
     }
