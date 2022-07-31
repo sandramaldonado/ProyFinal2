@@ -1,11 +1,33 @@
 <app-header></app-header>
 <div class="container">
   <div class="row">
-    <div class="d-none d-md-block col-5">
+    <div class="d-none d-md-block col-5 bg bg-light bg-gradient  border py-5 px-5">
+      <div class="sticky-top ">
+        <div class="text-center">
+
+          <h2>TRIPLE PLAY</h2>
+          <hr>
+          <h4 class="text-left">Movil</h4>
+          <p>60 min + 50 sms + 4Gb</p>
+          <hr>
+          <h4>TV Cable</h4>
+          <p>150 Canales</p>
+          <hr>
+          <h4>Wifi</h4>
+          <p>200 Mbps</p>
+        </div>
+      </div>
 
     </div>
     <div class="col-12 col-md-7">
-      <app-check-coverage></app-check-coverage>
+      <div *ngIf="showCoverage">
+        <app-check-coverage></app-check-coverage>
+      </div>
+
+      <div *ngIf="showScoring">
+        <app-result-scoring></app-result-scoring>
+      </div>
+
       <app-admin-client ></app-admin-client>
       <app-check-email></app-check-email>
       <app-documents></app-documents>

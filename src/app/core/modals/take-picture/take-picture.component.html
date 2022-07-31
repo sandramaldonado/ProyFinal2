@@ -22,10 +22,8 @@
                 <div class="d-flex flex-column justify-content-center align-items-center border rounded mt-2 mt-lg-0 p-2" style="background-color: white;">
                     <div class="snapshot-title text-center " >Vista Previa</div>
                     <img [src]="webcamImage?.imageAsDataUrl" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
-                    <div class="row text-center col-12 col-md-6 pt-2">
-                      <app-button-outline  [content]="'Eliminar Fotografia'" (click)="removePicture()"></app-button-outline>
+                    <app-button-outline  [content]="'Eliminar Fotografia'" (click)="removePicture()"></app-button-outline>
                       <app-button  [content]="'Siguiente'" (click)="savePicture()"></app-button>
-                    </div>
                   </div>
 
             </mat-card-footer>

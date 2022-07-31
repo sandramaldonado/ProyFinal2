@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
+  showCoverage : boolean = true;
+  showScoring : boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {

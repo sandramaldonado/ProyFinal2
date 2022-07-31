@@ -6,7 +6,8 @@ import { OrderComponent } from './order.component';
 import { CheckCoverageModule } from '@modules/sales/check-coverage/check-coverage.module';
 import { AdminClientModule } from "@modules/client/admin-client/admin-client.module";
 import { CheckEmailModule } from "@modules/sales/check-email/check-email.module";
-import { DocumentsModule } from '../documents/documents.module';
+import { DocumentsModule } from '@modules/sales/documents/documents.module';
+import { ResultScoringModule } from '../scoring/result/result-scoring.module';
 import { HeaderModule } from "@layout/header/header.module";
 
 
@@ -22,6 +23,7 @@ import { HeaderModule } from "@layout/header/header.module";
     AdminClientModule,
     CheckEmailModule,
     DocumentsModule,
+    ResultScoringModule,
     HeaderModule
   ]
 })

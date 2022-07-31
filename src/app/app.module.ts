@@ -22,7 +22,7 @@ import { AuthInterceptor } from "@app/interceptors/auth-interceptor";
 @NgModule({
   declarations: [
     AppComponent,
-    SmsModalComponent
+    SmsModalComponent,
   ],
   imports: [
     BrowserModule,
