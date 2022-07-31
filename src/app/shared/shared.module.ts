@@ -7,9 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 
-
-
-
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -20,8 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     FormsModule,
     MatButtonModule
-    
-    
+
+
   ],
   exports: [
     ButtonComponent,

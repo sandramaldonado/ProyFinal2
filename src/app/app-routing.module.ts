@@ -44,7 +44,7 @@ const routes : Routes = [
   },
   {
     path : 'tomar-foto',
-    loadChildren : () => import('./shared/camera/take-picture/take-picture.module').then(m => m.TakePictureModule)
+    loadChildren : () => import('./core/modals/take-picture/take-picture.module').then(m => m.TakePictureModule)
   },
   {
     path : 'compras',

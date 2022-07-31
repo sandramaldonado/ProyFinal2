@@ -1,6 +1,6 @@
 # LandingMasterSalesFrontend  
 
-Angular CLI: 14.0.0
+Angular CLI: 14.0.0 (npm i -g  @angular/cli@14.0.0)
 Node: 14.15.0
 Package Manager: npm 6.14.8 
 OS: darwin x64
