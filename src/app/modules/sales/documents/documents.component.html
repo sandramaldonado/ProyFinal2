@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row pb-3 ">
+      <section class="section-body col-12 py-3">
+          <div class=" d-flex flex-column justify-content-around align-items-center">
+            <h3>Documentos de identidad</h3>
+            <p>Necesitamos verificar tu identidad con tus documentos legales.</p>
+            <mat-card class="my-3 border">
+                <mat-card-content class="text-center">
+                        <div class="d-flex flex-column justify-content-between align-items-center py-5">
+                            <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                            <p>Sube la fotografía de CI (anverso) </p>
+                            <app-button  [content]="'Subir imagen'" (click)="uploadFirstDocument()"></app-button>
+                            <app-button-outline  [content]="'Tomar fotografia'" (click)="takePictureFirstDocument()"></app-button-outline>
+                        </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="my-3 border">
+              <mat-card-content class="text-center">
+                      <div class="d-flex flex-column justify-content-between align-items-center py-5">
+                          <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                          <p>Sube la fotografía de CI (reverso)</p>
+                          <app-button  [content]="'Subir imagen'" (click)="uploadSecondDocument()"></app-button>
+                          <app-button-outline  [content]="'Tomar fotografia'" (click)="takePictureSecondDocument()"></app-button-outline>
+                      </div>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="my-3 border">
+              <mat-card-content class="text-center">
+                      <div class="d-flex flex-column justify-content-between align-items-center py-5">
+                          <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                          <p>Sube la fotografía de ti sin gorra o algo q tape tu rostro</p>
+                          <app-button  [content]="'Subir imagen'" (click)="uploadFacePicture()"></app-button>
+                          <app-button-outline  [content]="'Tomar fotografia'" (click)="takeFacePicture()"></app-button-outline>
+                      </div>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+      </section>
+  </div>
+</div>

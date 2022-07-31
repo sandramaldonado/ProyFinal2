@@ -1,0 +1,20 @@
+.main {
+    height: 50vh;
+    background-image: url(https://novedades.viva.com.bo/wp-content/uploads/2022/03/Fondo-min.png?id=5391) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    width: 100%;
+}
+.main div {
+    height: 100%;
+    color: white;
+}
+
+.main div a {
+    text-decoration: none;
+    font-family: 'Museo';
+    font-size: large;
+    font-weight: bold;
+    color:chartreuse;
+}

@@ -1,13 +1,18 @@
 <app-header></app-header>
-<div class="container px-3 py-3">
-  <div class="row row-cols-2 d-flex flex-column justify-content-center align-items-center flex-md-row align-items-md-start">
+<div class="container px-3 pt-1">
+  <div class="row">
+    <img src="../../../assets/images/pages/sales/banner.jpeg" alt="" class="img-fluid">
+  </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex flex-column justify-content-center align-items-center flex-md-row align-items-md-start ">
     <!---
+"
+
     <div class="col-12 border border-primary p-2">
       <h5>Material Design Slider</h5>
       <mat-slider min="1" max="100" step="1" value="50" class="w-100"></mat-slider>
     </div>
     -->
-    <mat-card class="mat-elevation-z4 my-3 mx-2 m-md-4" style="width: 20rem; " *ngFor="let product of productList">
+    <mat-card class="mat-elevation-z4 my-3 mx-2 m-md-4"  *ngFor="let product of productList">
       <mat-card-header class="border-bottom mb-3">
         <mat-card-title class="d-flex flex-row justify-content-center text-secondary fw-bold"><span>{{product.name}}</span></mat-card-title>
       </mat-card-header >

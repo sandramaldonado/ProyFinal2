@@ -4,8 +4,10 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderModule } from "../header/header.module";
+import { HeaderModule } from "@layout/header/header.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,8 +19,11 @@ import { HeaderModule } from "../header/header.module";
     RegisterRoutingModule,
     MatIconModule,
     MatCardModule,
+    MatDialogModule,
     MatButtonModule,
-    HeaderModule
+    HeaderModule,
+    FormsModule, 
+    ReactiveFormsModule
   ]
 })
 export class RegisterModule { }

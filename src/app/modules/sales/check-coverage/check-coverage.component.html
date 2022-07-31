@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row pb-3 ">
+
+        <!--<section class="detail col-12 col-md-5 d-none d-md-block border border-primary border-end-0 rounded-start"></section>-->
+        <section class="section-body col-12 py-3">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+                <form  novalidate class="">
+                    <h3>Cobertura</h3>
+                    <p>Verificaremos si tienes cobertura en la zona de instalación del servicio.</p>
+                    <div class="input-group mb-3">
+                        <select class="form-select" id="inputSelectCity"
+                        (change)="changeCity($event)">
+                            <option disabled [value]="null" style="font-family: 'Trebuchet MS';" selected>Selecciona tu ciudad.</option>
+                            <option *ngFor="let department of cities" [value]="department.valueField" style="font-family: 'Trebuchet MS';">{{ department.displayValue }}</option>
+                        </select>
+                    </div>
+                </form>
+                <app-button  [content]="'Detectar ubicacion'" (click)="locateCurrentLocation()"></app-button>
+
+                <mat-card class="my-3">
+                    <mat-card-content>
+                        <google-map
+                            height="400px"
+                            width="100%"
+                            [zoom]="zoom"
+                            [center]="center"
+                            [options]="options"
+                            (mapClick)="addMarker($event)">
+                            <map-marker *ngFor="let markerPosition of markerPositions"
+                            [position]="markerPosition"
+                            [options]="markerOptions"></map-marker>
+
+                        </google-map>
+                        <div class="coverage-status p-2">
+                            <span class="m-1 fw-bold">Cobertura Media</span>
+                            <p class="m-0">El servicio puede tener dificultades de conexión.</p>
+
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+
+                <mat-card class="address py-3">
+                    <mat-card-content class="py-2 text-center p-2">
+
+
+                           <ax-lazy-element *axLazyElementDynamic="'address-microfront-app',
+                           url: 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';"
+                           [microfrontParamIn]="microfrontParamIn"
+                           [paramClass]="addressParamClass"
+                           >
+                       </ax-lazy-element>
+
+                    </mat-card-content>
+
+                </mat-card>
+                <app-button  [content]="'Siguiente'" routerLink = "/cobertura"></app-button>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+.example-radio-button {
+    margin: 5px;
+  }
+
+.title-1{
+    font-size: 3vh; // 2.5vh;
+    text-align: left;
+    color: purple;
+    font-family: MUSEO900-REGULAR;
+    //font-family:'Museo';
+    margin: 0;
+
+}
+
+.title-2{
+    font-size: 2.2vh;
+    text-align: justify;
+    color: black;
+    //font-family:'Museo';
+    font-family: MUSEO600-REGULAR;
+}

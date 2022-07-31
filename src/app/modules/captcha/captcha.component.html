@@ -1,0 +1,9 @@
+<div class="col-12 captcha-container {{ config.cssClass} align-items-center">
+    <canvas id="captcahCanvas" width="316" height="80"></canvas>
+    <div class="captcha-actions">
+        <input class="form-group" type="text" [(ngModel)]="captch_input" />
+        <input type="button" value="Check" (click)="checkCaptcha()" />
+        <a href="javascript:void(0)" class="cpt-btn" (click)="playCaptcha()">🔈</a>
+        <a href="javascript:void(0)" class="cpt-btn reload" (click)="createCaptcha()">&#x21bb;</a>
+    </div>
+</div>
