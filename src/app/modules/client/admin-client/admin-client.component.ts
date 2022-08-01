@@ -28,6 +28,7 @@ export class AdminClientComponent implements OnInit {
   panelOpenState = false;
   clientInfo: any;
   keyClient: any;
+  stateScorin: String;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -47,6 +48,7 @@ export class AdminClientComponent implements OnInit {
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
     this.clientInfo = this.webstoreservice.getClientInformation();
+    this.stateScorin = this.webstoreservice.getStatusScoring();
 
     //this.infoClientService.disparadorInfoClient.subscribe(data => {console.log(data); this.clientInfo.push(data);});
   }
@@ -59,8 +61,7 @@ export class AdminClientComponent implements OnInit {
     //console.log(this.key);
     
     //this.clientInfo = this.webstoreservice.getClientInformation();
-    console.log(this.clientInfo);
-    console.log(this.clientInfo["documentNumber"]);
+    //console.log(this.stateScorin);
     this.loadForm();
   }
 

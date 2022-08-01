@@ -196,7 +196,8 @@ export class ValidationClientComponent implements OnInit {
                   //sessionStorage.setItem("infoClientStorage", this.infoClient["data"]["data"][0]);
                   //this.webstoreservice.saveClientInformation(this.infoClient["data"]["data"]["0"]);
                   this.webstoreservice.saveClientInformation(this.dataClient);
-                  sessionStorage.setItem("flowType", "NORMAL");
+                  //sessionStorage.setItem("flowType", "NORMAL");
+                  this.webstoreservice.saveStatusScoring("NORMAL");
                   this.router.navigate(['/oferta/orden-compra']);
                   //alert("Usted no puede efectuar Compra Directa \n" + "Lo invitamos a pasar por la tienda mas cercana para efectuar la compra del Plan");
                 }
@@ -248,7 +249,8 @@ export class ValidationClientComponent implements OnInit {
 
                 //sessionStorage.setItem("infoClientStorage", datosClient);
                 this.webstoreservice.saveClientInformation(datosClient2);
-                sessionStorage.setItem("flowType", "NORMAL");
+                //sessionStorage.setItem("flowType", "NORMAL");
+                this.webstoreservice.saveStatusScoring("NORMAL");
                 this.router.navigate(['/oferta/orden-compra']);
 
                 //alert("Usted no puede efectuar Compra Directa \n"+ "Lo invitamos a pasar por la tienda mas cercana para efectuar la compra del Plan");
@@ -391,10 +393,8 @@ export class ValidationClientComponent implements OnInit {
     this.scoringValidationService.getValidationClientScoring(planService, this.autentication["data"]["token"]).subscribe(
       response => {
         this.scoringValid = response;
-        console.log(this.scoringValid);
-        console.log(this.scoringValid["data"]["flowType"]);
-
-        sessionStorage.setItem("flowType", this.scoringValid["data"]["flowType"]);
+        //sessionStorage.setItem("flowType", this.scoringValid["data"]["flowType"]);
+        this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
         this.router.navigate(['/oferta/orden-compra']);
         /*
         if (this.scoringValid["data"]["flowType"] == "NORMAL") {
