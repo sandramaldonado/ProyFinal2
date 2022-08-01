@@ -25,20 +25,13 @@ export class DocumentsComponent implements OnInit {
 
   takePictureFirstDocument(){
     const initialState: ModalOptions = {
-      /*
       initialState: {
-        list: [
-          'Open a modal with component',
-          'Pass your data',
-          'Do something else',
-          '...'
-        ],
-        title: 'Modal with component'
+
+        source: 'firstDocument'
 
       }
-      */
     };
-    this.bsModalRef = this.modalService.show(TakePictureComponent);
+    this.bsModalRef = this.modalService.show(TakePictureComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
 
   }
@@ -48,6 +41,15 @@ export class DocumentsComponent implements OnInit {
   }
 
   takePictureSecondDocument() : void {
+    const initialState: ModalOptions = {
+      initialState: {
+
+        source: 'secondDocument'
+
+      }
+    };
+    this.bsModalRef = this.modalService.show(TakePictureComponent, initialState);
+    this.bsModalRef.content.closeBtnName = 'Close';
 
   }
 
@@ -56,6 +58,15 @@ export class DocumentsComponent implements OnInit {
   }
 
   takeFacePicture() : void {
+    const initialState: ModalOptions = {
+      initialState: {
+
+        source: 'facePicture'
+
+      }
+    };
+    this.bsModalRef = this.modalService.show(TakePictureComponent, initialState);
+    this.bsModalRef.content.closeBtnName = 'Close';
 
   }
 

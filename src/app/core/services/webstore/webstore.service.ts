@@ -23,7 +23,7 @@ export class WebstoreService {
 
 
  saveToken() : void{
-  const token = this.httpClient.post<Autenticar>(`${this.urToken}`, 
+  const token = this.httpClient.post<Autenticar>(`${this.urToken}`,
   JSON.stringify({"username":"atcpru1","password":"V1tZKv0LyinCFc3QPaH7Iw=="}),  this.httpPostOptions)
 
   .subscribe(
@@ -31,7 +31,7 @@ export class WebstoreService {
       if(response.data?.token){
         localStorage.setItem("TOKEN",response.data.token);
       }
-     
+
       this.localStorageService.store("TOKEN",response.data?.token);
     }
   )
@@ -60,9 +60,19 @@ export class WebstoreService {
     this.sessionStorageService.store("photoFace",photo);
   }
 
+
+
   getSelfie () : Photo {
     console.log(this.sessionStorageService.retrieve('photoFace'));
     return this.sessionStorageService.retrieve('photoFace');
+  }
+
+  saveDocument (key : string, document : any): void{
+    this.sessionStorageService.store(key,document);
+  }
+
+  getDocument (key : string): any{
+    return this.sessionStorageService.retrieve(key);
   }
 
 }

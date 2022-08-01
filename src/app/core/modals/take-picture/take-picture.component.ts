@@ -15,12 +15,22 @@ export class TakePictureComponent implements OnInit {
   public webcamImage: WebcamImage | undefined ;
   private trigger: Subject<void> = new Subject<void>();
   source ? : string;
+  previewImage? : string;
+  webstoreImage? : string;
 
 
-  constructor(  public bsModalRef: BsModalRef) { }
+  constructor(
+     public bsModalRef: BsModalRef,
+     public webstore : WebstoreService
+    ) { }
 
   ngOnInit(): void {
     console.log("fuente :", this.source);
+    if(this.source){
+      this.webstoreImage = this.webstore.getDocument(this.source);
+      if(this.webstoreImage)
+      this.previewImage = this.webstoreImage;
+    }
   }
 
   public handleInitError(error: WebcamInitError): void {
@@ -33,6 +43,8 @@ export class TakePictureComponent implements OnInit {
     console.info('received webcam image', webcamImage);
 
     this.webcamImage = webcamImage;
+    this.previewImage = webcamImage.imageAsDataUrl;
+
   }
 
   public triggerSnapshot(): void {
@@ -45,11 +57,21 @@ export class TakePictureComponent implements OnInit {
   }
 
   savePicture(){
+    if(this.source){
+      this.webstoreImage= this.webcamImage?.imageAsDataUrl;
+      this.webstore.saveDocument(this.source, this.webstoreImage);
+    }
+
+    this.bsModalRef.hide();
 
   }
 
   removePicture(){
-
+    if(this.source){
+      this.webstoreImage= "";
+      this.previewImage = ""
+      this.webstore.saveDocument(this.source, this.webstoreImage);
+    }
   }
 
 }
