@@ -1,41 +1,40 @@
 <app-header></app-header>
-<div class="parent d-flex flex-column justify-content-center">
-    <div
-        class="contenedor-flexible d-flex flex-column align-items-center flex-md-row align-items-md-center justify-content-center ">
-        <section class="mr-lg-5"></section>
-        <section style="width: 1.4vw;"></section>
-        <section class="mr-lg-5">
-            <mat-card>
+<div style="background: linear-gradient(180deg, #D6F084 0%, rgba(214, 240, 132, 0) 100%);">
+    <div class="parent d-flex flex-column justify-content-center container">
+        <div class="contenedor-flexible d-flex flex-column align-items-center flex-md-row align-items-md-center justify-content-center ">
+            <mat-card style="margin-top: 40px">
                 <mat-card-header>
+                    <img class="toolbar-logo" src="../../../assets/images/pages/header/logo-viva.png" alt="">
+                    <!--
                     <mat-card-title>
-                        <div class="title-1"><span>{{ title }}!!!</span></div>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                        <div class="title-2">{{ messagge }}</div>
-                    </mat-card-subtitle>
+                    <div class="title-1"><span>{{ title }}!!!</span></div>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <div class="title-2">{{ messagge }}</div>
+                </mat-card-subtitle>    
+                -->
                 </mat-card-header>
                 <mat-card-content>
-                    <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()" class="form" novalidate
-                        id="validationForm">
+                    <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()"
+                        class="form" novalidate id="validationForm">
                         <div class="form-group col-12">
-                            <label for="name" class="center-block bold"><b>Nombre:</b></label>
+                            <label for="name" class="center-block bold"></label>
                             <input type="text" class="form-control" formControlName="name" id="name" name="name"
                                 placeholder="Ingresa Primer Nombre" />
                         </div>
                         <div class="form-group col-12">
-                            <label for="lastname" class="center-block bold"><b>Apellido:</b></label>
-                            <input type="text" class="form-control" formControlName="lastname" id="lastname" name="lastname"
-                                placeholder="Ingresa Primer Apellido" />
+                            <label for="lastname" class="center-block bold"></label>
+                            <input type="text" class="form-control" formControlName="lastname" id="lastname"
+                                name="lastname" placeholder="Ingresa Primer Apellido" />
                         </div>
                         <div class="row">
                             <div class="form-group col-6 col-md-6">
-                                <label for="subscriberId" class="bold"><b>N&uacute;mero
-                                        Telef&oacute;nico:</b></label>
-                                <input type="text" class="form-control" formControlName="subscriberId" id="subscriberId" name="subscriberId"
-                                    placeholder="Ingresa tu Celular" />
+                                <label for="subscriberId" class="bold"></label>
+                                <input type="text" class="form-control" formControlName="subscriberId" id="subscriberId"
+                                    name="subscriberId" placeholder="Ingresa tu Celular" />
                             </div>
                             <div class="form-group col-6 col-md-6">
-                                <label for="dni" class="bold"><b>Cedula de Identidad:</b></label>
+                                <label for="dni" class="bold"></label>
                                 <input type="text" class="form-control" formControlName="dni" id="dni" name="dni"
                                     placeholder="Ingresa tu CI" />
                             </div>
@@ -58,21 +57,28 @@
                                 N&uacute;mero de Tel&eacute;fono es Requerido (Solo acepta N&uacute;meros con
                                 Longitud de 8 Digitos) </small>
                             <small *ngIf="dni?.invalid && dni?.touched" class="text-danger"><br>El
-                                    Carnet de Identidad es Requerido (Acepta Numeros y Letras entre 4 y 10
-                                    Caracteres)</small>
-                            <button mat-raised-button color="primary" class="w-100" [disabled]="validationForm.invalid">
-                                Ingresar
-                            </button>
+                                Carnet de Identidad es Requerido (Acepta Numeros y Letras entre 4 y 10
+                                Caracteres)</small>
+
+                        </div>
+                        <div class="text-center">
+                            <app-button [disabled]="validationForm.invalid" [content]="'Identificarme'"></app-button>
                         </div>
                     </form>
-                    <div class="link-back col-md-12 col-12 form">
-                        <div class="col-md-6 col-12">
-                            <a href="/home" alt="regresa a pagina de Inicio"><b>Inicio</b></a>
-                        </div>
-                    </div>
-                </mat-card-content>
 
+                    <!--
+                 <div class="link-back col-md-12 col-12 form">
+                    <div class="col-md-6 col-12">
+                        <a href="/home" alt="regresa a pagina de Inicio"><b>Inicio</b></a>
+                    </div>
+                </div>
+               -->
+                    
+                </mat-card-content>
+                <mat-card-footer class="mat-card-footer">
+                    
+                </mat-card-footer>
             </mat-card>
-        </section>
+        </div>
     </div>
 </div>

@@ -15,6 +15,8 @@ import { PlanSelectedComponent } from '@app/modal/plan-selected/plan-selected.co
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LazyElementsModule } from '@angular-extensions/elements';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTableModule,
     MatInputModule,
     MatRadioModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    SharedModule,
+    LazyElementsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

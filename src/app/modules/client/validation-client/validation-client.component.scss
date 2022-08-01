@@ -6,13 +6,22 @@ p {
     border-radius: 25px;
     padding: 0;
     font-family: MUSEO300-REGULAR;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
+.containerGound{
+    background: linear-gradient(180deg, #D6F084 0%, rgba(214, 240, 132, 0) 100%);
+    color: #5C339D;
+  }
+
+.mi-input::placeholder { color: purple; font-weight: bold; }
+
 mat-card-header {
-    background: #e9f7da;
-    padding: 1.5vh 3vh;
-    justify-content: left;
-    border-radius: 20px 20px 0 0 ;
+    background: white;
+    //padding: 1.5vh 3vh;
+    justify-content: center;
+    border-radius: 25px 25px 0 0 ;
 
    .title-1{
        font-size: 2.5vh; // 2.5vh;
@@ -30,7 +39,24 @@ mat-card-header {
        //font-family:'Museo';
        font-family: MUSEO600-REGULAR;
    }
+
+   .toolbar-logo{
+    margin-top: 80px;
+    height: 40px;
+    width: 180px;
   }
+  }
+
+  mat-card-title{
+    margin-bottom: .5vh;
+  }
+
+  .mat-icon-button{
+    width: 4vh!important;
+    height: auto!important;
+    margin-top: -6px;
+    margin-right: -3px;
+}
 
   mat-card-title{
     margin-bottom: .5vh;
@@ -46,11 +72,19 @@ mat-card-header {
 mat-card-content {
     background: #F0F0F0;
     border-radius: 0 0 25px 25px ;
+    margin-top: 15px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 mat-card-footer{
+    background: white;
     margin: 0;
     border-radius:  0 0 25px 25px ;
+    text-align: left;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(179, 2, 167) ;
 }
 
 .form {
