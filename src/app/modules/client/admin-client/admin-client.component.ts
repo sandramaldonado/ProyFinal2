@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
+import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
 
 @Component({
@@ -26,6 +27,8 @@ export class AdminClientComponent implements OnInit {
   emailtext = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
   panelOpenState = false;
   clientInfo: any;
+  keyClient: any;
+  stateScorin: String;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -41,17 +44,25 @@ export class AdminClientComponent implements OnInit {
 
   constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
-            private clientService: ClientService,) {
+            private clientService: ClientService,
+            private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
+    this.clientInfo = this.webstoreservice.getClientInformation();
+    this.stateScorin = this.webstoreservice.getStatusScoring();
+
     //this.infoClientService.disparadorInfoClient.subscribe(data => {console.log(data); this.clientInfo.push(data);});
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
-    //console.log(this.subscriberId);
-    this.loadcontents();
-    //console.log(this.key);
 
+    //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
+    //console.log(this.subscriberId);
+    //this.loadcontents();
+    //console.log(this.key);
+    
+    //this.clientInfo = this.webstoreservice.getClientInformation();
+    //console.log(this.stateScorin);
+    this.loadForm();
   }
 
   loadcontents() {
@@ -67,14 +78,14 @@ export class AdminClientComponent implements OnInit {
   }
 
   loadForm() {
-    const name1 = this.infoClient["data"]["data"]["0"]["name"];
-    const name2 = this.infoClient["data"]["data"]["0"]["middleName"];
-    const lastname1 = this.infoClient["data"]["data"]["0"]["lastName1"];
-    const lastname2 = this.infoClient["data"]["data"]["0"]["lastName2"];
-    const docType = this.infoClient["data"]["data"]["0"]["documentType"];
-    const docNumber = this.infoClient["data"]["data"]["0"]["documentNumber"];
-    const docCity = this.infoClient["data"]["data"]["0"]["documentCity"];
-    const email = this.infoClient["data"]["data"]["0"]["email"];
+    const name1 = this.clientInfo["name"];
+    const name2 = this.clientInfo["middleName"];
+    const lastname1 = this.clientInfo["lastName1"];
+    const lastname2 = this.clientInfo["lastName2"];
+    const docType = this.clientInfo["documentType"];
+    const docNumber = this.clientInfo["documentNumber"];
+    const docCity = this.clientInfo["documentCity"];
+    const email = this.clientInfo["email"];
 
     this.validationForm.setValue(
       {

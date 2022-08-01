@@ -96,7 +96,13 @@ export class WebstoreService {
     this.sessionStorageService.clear("planComposition");
   }
 
+  saveStatusScoring (option : String): void{
+    this.sessionStorageService.store("statusScoring", option);
+  }
 
+  getStatusScoring (): any{
+    return this.sessionStorageService.retrieve("statusScoring");
+  }
 
 
 

@@ -22,7 +22,7 @@ export class ScoringValidationService {
   /**
    * Metodo de consulta de validacion de factibilidd
    */
-   getValidationClientScoring(clientId: String, token:String): Observable<ScoringValidation> {
+   getValidationClientScoring(planService: String, token:String): Observable<ScoringValidation> {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
@@ -32,7 +32,7 @@ export class ScoringValidationService {
       headers: headers
     };
 
-    const jsontext = JSON.stringify({"client":{"clientId": clientId},"commercialOffer": {"productTypeCode": ["MOVIL", "IFIXED"],"groupPlan": "TRIPLE_PLAY"},"saleOrder": {"planCode": "1","processTypeCode": "PTFSALE","channelCode": "CAASES","cityCode": "CBA","price": 400,"creationDate": "28-07-2022","serviceQuantity": "3","hasSubsidyOfEquipmentInSale": "SI"},"userId": 21});
+    //const jsontext = JSON.stringify({"client":{"clientId": clientId},"commercialOffer": {"productTypeCode": ["MOVIL", "IFIXED"],"groupPlan": "TRIPLE_PLAY"},"saleOrder": {"planCode": "1","processTypeCode": "PTFSALE","channelCode": "CAASES","cityCode": "CBA","price": 400,"creationDate": "28-07-2022","serviceQuantity": "3","hasSubsidyOfEquipmentInSale": "SI"},"userId": 21});
     /**
      const jsontext2 = JSON.stringify({
                           "client": {
@@ -58,7 +58,7 @@ export class ScoringValidationService {
                           });
      */
 
-    return this.httpClient.post<ScoringValidation>(`${this.apiUrl}`, jsontext, httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.httpClient.post<ScoringValidation>(`${this.apiUrl}`, planService, httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }
 

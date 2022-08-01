@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./validation-client/validation-client.module').then(m => m.ValidationClientModule)
   },
   {
-    path : 'adminClient/:phone',
+    path : 'adminClient',
     loadChildren: () => import('./admin-client/admin-client.module').then(m => m.AdminClientModule)
   }
 ];
