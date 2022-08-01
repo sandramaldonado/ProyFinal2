@@ -99,3 +99,7 @@ color: #5C339D
   border: 1px solid #5c349e !important;
   padding: 5px !important;
 }
+
+.cdk-overlay-container{
+  z-index: 10100 !important;
+}
