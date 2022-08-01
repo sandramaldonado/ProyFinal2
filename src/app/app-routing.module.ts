@@ -11,7 +11,11 @@ const routes : Routes = [
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   },
   {
-    path : 'oferta/orden/:id',
+    path : 'oferta',
+    loadChildren : () => import ('./modules/sales/offer/offer.module').then (m => m.OfferModule)
+  },
+  {
+    path : 'oferta/orden-compra',
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
   },
   {
@@ -23,7 +27,7 @@ const routes : Routes = [
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },
   {
-    path: 'oferta',
+    path: 'lista-ofertas',
     loadChildren: () => import('./pages/sales/sales.module').then( m => m.SalesModule)
   },
   {
@@ -54,12 +58,10 @@ const routes : Routes = [
     path : 'compras',
     loadChildren: () => import('./modules/sales/cart/cart.module').then(m => m.CartModule)
   },
-  { path : 'oferta/detalle/:id',
+  { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
-  { path : 'oferta/orden-compra',
-    loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
-  },
+
 
   {
     path: '**',

@@ -75,4 +75,29 @@ export class WebstoreService {
     return this.sessionStorageService.retrieve(key);
   }
 
+  savePlanCompositionCode (code : string): void{
+    this.sessionStorageService.store("planCompositionCode",code);
+  }
+
+  getPlanCompositionCode (): any{
+    return this.sessionStorageService.retrieve("planCompositionCode");
+  }
+
+  savePlanComposition (planComposition : any): void{
+    this.sessionStorageService.store("planComposition",planComposition);
+  }
+
+  getPlanComposition (): any{
+    return this.sessionStorageService.retrieve("planComposition");
+  }
+
+  clearWebStorePlanComposition(){
+    this.sessionStorageService.clear("planCompositionCode");
+    this.sessionStorageService.clear("planComposition");
+  }
+
+
+
+
+
 }
