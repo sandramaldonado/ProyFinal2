@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TakePictureComponent } from '@app/modals/take-picture/take-picture.component';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import {NgxImageCompressService} from "ngx-image-compress";
+import { WebstoreService } from '@app/services/webstore/webstore.service';
 
 @Component({
   selector: 'app-documents',
@@ -10,7 +12,11 @@ import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 export class DocumentsComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
-  constructor(private modalService: BsModalService) {}
+  constructor(
+    private modalService: BsModalService,
+    private imageCompress: NgxImageCompressService,
+    private webstoreService : WebstoreService
+    ) {}
 
   ngOnInit(): void {
   }
@@ -19,8 +25,9 @@ export class DocumentsComponent implements OnInit {
 
   }
 
-  uploadFirstDocument() : void {
 
+  uploadFirstDocument(){
+    this.uploadAndCompress("firstDocument");
   }
 
   takePictureFirstDocument(){
@@ -37,7 +44,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadSecondDocument() : void {
-
+    this.uploadAndCompress("secondDocument");
   }
 
   takePictureSecondDocument() : void {
@@ -54,7 +61,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadFacePicture() : void {
-
+    this.uploadAndCompress("facePicture");
   }
 
   takeFacePicture() : void {
@@ -68,6 +75,83 @@ export class DocumentsComponent implements OnInit {
     this.bsModalRef = this.modalService.show(TakePictureComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
 
+  }
+
+  uploadAndCompress (source : string){
+    //console.log(source);
+
+    let me= this;
+
+    this.imageCompress.uploadFile()
+    .then(({image, orientation}) => {
+
+
+      /*
+      let dateInMillisec = moment().valueOf();
+      let extension = image.split(';')[0];
+      extension = extension.split("/").pop();
+      //console.log(extension);
+      if(extension ==='jpeg'){
+        extension ='jpg';
+      }
+      let fileName = dateInMillisec + '.'+ extension;
+      */
+      let size = this.imageCompress.byteCount(image);
+
+      if(size > 400000){
+        //this.openModalLoaderComponent("Cargando imagen",3);
+        console.log('Size in bytes was:', this.imageCompress.byteCount(image));
+        let proporcion= 100;
+
+        if(size <= 500000){
+          proporcion = 80;
+        }else if(size<1000000){
+          proporcion=70;
+        }else if (size < 2000000){
+          proporcion = 60;
+        }else if(size<5000000){
+          proporcion=40;
+        }else if(size < 7000000){
+          proporcion=30;
+        }else if(size < 10000000){
+          proporcion=20;
+        }else{
+          proporcion = 10;
+        }
+
+        //console.log(proporcion);
+
+        this.imageCompress.compressFile(image, orientation, proporcion, 90).then(
+          imageAsBase64 => {
+            me.webstoreService.saveDocument(source,imageAsBase64);
+            /*
+            setTimeout(() => {
+              this.closeModal();
+
+            }, 1000);
+            */
+
+            console.log('(>400000)Size in bytes is now:', this.imageCompress.byteCount(imageAsBase64));
+          }
+        );
+
+      }else{
+        this.imageCompress
+          .compressFile(image, orientation, 90, 90) // 50% ratio, 50% quality
+          .then(
+            (imageAsBase64) => {
+              me.webstoreService.saveDocument(source,imageAsBase64);
+              console.log("(<400000)Size in bytes after compression is now:", this.imageCompress.byteCount(imageAsBase64));
+            }
+          );
+
+      }
+
+    })
+    .catch(error =>{
+      //console.log(error);
+
+    });
   }
 
 }
