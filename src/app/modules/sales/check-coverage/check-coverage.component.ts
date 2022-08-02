@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as cts from "@shared/utils/constants";
 import { environment } from 'src/environments/environment';
 import { WebstoreService } from "@services/webstore/webstore.service";
@@ -84,6 +84,9 @@ export class CheckCoverageComponent implements OnInit {
 
   public environment : any;
 
+  @Output() nextCoverageStep = new EventEmitter<any>();
+  
+
   constructor(
     private webstoreService : WebstoreService
   ) { }
@@ -150,5 +153,11 @@ export class CheckCoverageComponent implements OnInit {
     })
       
   }
+
+  next(){
+    this.nextCoverageStep.emit(true);
+  }
+
+  
 
 }
