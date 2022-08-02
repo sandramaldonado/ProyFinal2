@@ -27,8 +27,8 @@ const routes : Routes = [
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },
   {
-    path: 'lista-ofertas',
-    loadChildren: () => import('./pages/sales/sales.module').then( m => m.SalesModule)
+    path: 'lista-productos',
+    loadChildren: () => import('./modules/product/product-list/product-list.module').then( m => m.ProductListModule)
   },
   {
     path: 'captcha',
@@ -37,10 +37,6 @@ const routes : Routes = [
   {
     path: 'validacion',
     loadChildren: () => import('./pages/validation/validation.module').then( m => m.ValidationModule)
-  },
-  {
-    path: 'registro',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterModule)
   },
   {
     path: 'cobertura',

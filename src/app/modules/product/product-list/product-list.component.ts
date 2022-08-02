@@ -6,10 +6,10 @@ import { Route, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-sales',
-  templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.scss']
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class SalesComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   productList: Product[] = [];
   showFiller = false;
 

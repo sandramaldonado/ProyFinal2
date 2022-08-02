@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SalesRoutingModule } from './sales-routing.module';
-import { SalesComponent } from './sales.component';
+import { ProductListRoutingModule } from './product-list-routing.module';
+import { ProductListComponent } from './product-list.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,11 +14,11 @@ import { HeaderModule } from "@layout/header/header.module";
 
 @NgModule({
   declarations: [
-    SalesComponent
+    ProductListComponent
   ],
   imports: [
     CommonModule,
-    SalesRoutingModule,
+    ProductListRoutingModule,
     MatSliderModule,
     MatSidenavModule,
     MatIconModule,
@@ -29,4 +29,4 @@ import { HeaderModule } from "@layout/header/header.module";
     
   ]
 })
-export class SalesModule { }
+export class ProductListModule { }

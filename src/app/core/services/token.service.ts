@@ -17,7 +17,7 @@ export class TokenService {
 
   gettoken(): Observable<Autenticar> {
     return this.httpClient.post<Autenticar>(`${this.urToken}`, 
-            JSON.stringify({"username":"atcpru1","password":"V1tZKv0LyinCFc3QPaH7Iw=="}), 
+            JSON.stringify({"username":"landing","password":"3X4E+U7d1m1XprRamjfaRg=="}), 
             this.httpOptions).pipe(
             retry(1), catchError(this.handleError));
   }
