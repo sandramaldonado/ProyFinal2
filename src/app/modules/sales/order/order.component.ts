@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
 
     this.modules = {
       checkCoverage: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'checkcoverage'
@@ -77,18 +77,19 @@ export class OrderComponent implements OnInit {
       /**BRE Goes Here */
 
      this.breservices.coverageEvaluation(this.autentication["data"]["token"])
-    .subscribe(response =>{
+      .subscribe(response =>{
       this.coverageData=response;
+      this.scoringStatus = this.webstoreservice.getStatusScoring();
+      this.initializeComponents();
     })
-    this.scoringStatus = this.webstoreservice.getStatusScoring();
-    this.initializeComponents()
+  
 
   }
 
   initializeComponents(){
     this.planList = this.planComposition?.planList;
-    console.log(this.planList.length);
-    console.log("this.coverageData: ",this.coverageData);
+    //console.log(this.planList.length);
+    //console.log("this.coverageData: ",this.coverageData);
 
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
@@ -105,9 +106,11 @@ export class OrderComponent implements OnInit {
     */
 
     /***** habilitar cobertura Usando Business Rules***** */
-    if(this.coverageData.Data.requireCoverageVerification != "OK"){
+    if(this.coverageData.data.requireCoverageVerification == "OK"){
+     
+      this.modules.checkCoverage.visible = true;
+    }else{
       this.modules.checkCoverage.enabled = false;
-      this.modules.checkCoverage.visible = false;
     }
 
 

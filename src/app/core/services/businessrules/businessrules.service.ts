@@ -44,7 +44,7 @@ export class BusinessrulesService {
   }
   data.productTypeCode =productTypeCode;
 
-  return this.httpClient.post<any>(`${this.apiUrl}` + "/rules/productCatalog/coverageEvaluation",JSON.stringify(data), httpOptions);
+  return this.httpClient.post<any>(`${this.apiUrl}` + "/productCatalog/coverageEvaluation",JSON.stringify(data), httpOptions);
 
   }
 
