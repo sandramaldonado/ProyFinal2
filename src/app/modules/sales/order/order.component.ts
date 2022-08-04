@@ -88,9 +88,6 @@ export class OrderComponent implements OnInit {
 
   initializeComponents(){
     this.planList = this.planComposition?.planList;
-    //console.log(this.planList.length);
-    //console.log("this.coverageData: ",this.coverageData);
-
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
     /*** Metodo usado en base a lista de planes : DEPRECATED
