@@ -90,18 +90,6 @@ export class OrderComponent implements OnInit {
     this.planList = this.planComposition?.planList;
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
-    /*** Metodo usado en base a lista de planes : DEPRECATED
-     *
-     * if(this.planList.length==1){
-      if(this.planList[0].consumptionEntityType !== "MOVIL"){
-        this.modules.checkCoverage.enabled = false;
-        this.modules.checkCoverage.visible = false;
-      }
-    }else{
-      this.modules.checkCoverage.visible = true;
-    }
-    */
-
     /***** habilitar cobertura Usando Business Rules***** */
     if(this.coverageData.data.requireCoverageVerification == "OK"){
      
