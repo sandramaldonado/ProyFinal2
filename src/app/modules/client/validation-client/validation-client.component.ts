@@ -38,6 +38,7 @@ export class ValidationClientComponent implements OnInit {
   planList: any;
   fecha: string = "";
   productTypeCode: any;
+  submitted: boolean = false;
   // definicion de valoracion de campos de formulario
   validationForm = new FormGroup({
     'dni': new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
@@ -164,6 +165,7 @@ export class ValidationClientComponent implements OnInit {
     let dni: string = "";
     let name1: string = "";
     let lastname1: string = "";
+    console.log(flagPlan);
     if (flagPlan != "undefined" || flagPlan != null) {
       statusPlan = true;
     }
@@ -186,6 +188,7 @@ export class ValidationClientComponent implements OnInit {
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
                   //this.webstoreservice.saveClientInformation(this.infoClient["data"]["data"]["0"]);
+                  this.submitted = true;
                   this.webstoreservice.saveClientInformation(this.dataClient);
                   //console.log(this.planesList);
                   const planService = this.armadoJsonScoring();
@@ -193,6 +196,7 @@ export class ValidationClientComponent implements OnInit {
                   //this.router.navigate([`/adminClient`]);
                   ///this.abrirDialogo();
                 } else {
+                  this.submitted = true;
                   //sessionStorage.setItem("infoClientStorage", this.infoClient["data"]["data"][0]);
                   //this.webstoreservice.saveClientInformation(this.infoClient["data"]["data"]["0"]);
                   this.webstoreservice.saveClientInformation(this.dataClient);
@@ -203,6 +207,7 @@ export class ValidationClientComponent implements OnInit {
                 }
                 //this.router.navigate([`/adminClient`]);
               } else {
+                this.submitted = true;
                 /**
                 const datosClient = JSON.stringify({
                   "birthday": null,

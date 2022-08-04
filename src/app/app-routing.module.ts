@@ -23,6 +23,10 @@ const routes : Routes = [
     loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)
   },
   {
+    path : 'moviles',
+    loadChildren: () => import('./modules/sales/movil-list/movil-list.module').then(m => m.MovilListModule) 
+  },
+  {
     path: 'en-construccion',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },

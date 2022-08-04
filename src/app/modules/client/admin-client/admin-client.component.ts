@@ -14,7 +14,7 @@ export class AdminClientComponent implements OnInit {
   subscriberId: any;
   key: any;
   title = "Tus datos de registro";
-  message = "Por favor ingresa tus datos personales, estos datos nos servirán para brindarte un buen servicio.";
+  message = "Llena o revisa los datos del siguiente formulario, cuando termines presiona en Continuar.";
   // definicion de tipos Dock
   tipoDoc: DocumentType[] = [{value: 'CI', description: 'CI'}, {value: 'NIT', description: 'NIT'}, {value: 'LIBRETA', description: 'LIB. MILITAR'}];
   expedido: DocumentType[] = [{value: 'CBEN', description: 'Beni'}, {value: 'CCBA', description: 'Cochabamba'}, {value: 'CLPZ', description: 'La Paz'}, {value: 'CORU', description: 'Oruro'}, {value: 'CPAN', description: 'Pando'}, {value: 'CPOT', description: 'Potosi'}, {value: 'CSCR', description: 'Sucre'}, {value: 'CSCZ', description: 'Santa Cruz'}, {value: 'CTRJ', description: 'Tarija'}];
@@ -26,6 +26,7 @@ export class AdminClientComponent implements OnInit {
   mobilNumPattern = /^[0-9]+$/;
   emailtext = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
   panelOpenState = false;
+  submitted: boolean = false;
   clientInfo: any;
   keyClient: any;
   stateScorin: String;
@@ -38,7 +39,9 @@ export class AdminClientComponent implements OnInit {
     'nroDoc': new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
     'expDoc': new FormControl(null, [Validators.required]),
     'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
-    'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
+    'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)]),
+    'razonS': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.surNameClient)]),
+    'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
 
@@ -88,6 +91,8 @@ export class AdminClientComponent implements OnInit {
     const docNumber = this.clientInfo["documentNumber"];
     const docCity = this.clientInfo["documentCity"];
     const email = this.clientInfo["email"];
+    const rSocial = this.clientInfo["fullName"];
+    const nroNit = this.clientInfo["nit"];
 
     this.validationForm.setValue(
       {
@@ -99,7 +104,9 @@ export class AdminClientComponent implements OnInit {
         nroDoc: docNumber,
         expDoc: docCity,
         nroRef: null,
-        email: email
+        email: email,
+        razonS: rSocial,
+        nit:  nroNit
       },
       {
         emitEvent: true,
@@ -154,5 +161,13 @@ export class AdminClientComponent implements OnInit {
 
     get email() {
       return this.validationForm.get('email');
+    }
+
+    get razonS() {
+      return this.validationForm.get('razonS');
+    }
+
+    get nit() {
+      return this.validationForm.get('nit');
     }
 }

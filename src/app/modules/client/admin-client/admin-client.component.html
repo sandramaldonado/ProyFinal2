@@ -1,107 +1,185 @@
 <div class="container">
     <div class="row pb-3">
-      <section class="section-body col-12 py-3">
-        <h3>{{title}}</h3>
-        <p>{{message}}</p>
-        <mat-card>
-          <mat-card-content>
-          <form [formGroup]="validationForm" style="background-color:white" class="form"
-              novalidate id="validationForm">
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="firstName" class="bold"><b>Primer Nombre:</b></label>
-                      <input type="text" class="form-control" formControlName="firstName" id="firstName"
-                          name="firstName" placeholder="Primer Nombre" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="secondName" class="bold"><b>Segundo Nombre:</b></label>
-                      <input type="text" class="form-control" formControlName="secondName" id="secondName"
-                          name="secondName" placeholder="Segundo Nombre" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="sureName" class="bold"><b>Primer Apellido:</b></label>
-                      <input type="text" class="form-control" formControlName="sureName" id="sureName"
-                          name="sureName" placeholder="Primer Apellido" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="secondSurName" class="bold"><b>Segundo Apellido:</b></label>
-                      <input type="text" class="form-control" formControlName="secondSurName" id="secondSurName"
-                          name="secondSurName" placeholder="Segundo Apellido" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-3 col-sm-12">
-                      <label for="tipo" class="bold"><b>Tipo Doc.:</b></label>
-                      <mat-select placeholder="Elija Tipo Doc." class="form-control" name="selectAction" formControlName="tipo" id="tipo"
-                      name="tipo">
-                          <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
-                              {{tipo.description}}
-                          </mat-option>
-                      </mat-select>
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="nroDoc" class="bold"><b>N&uacute;mero Doc.:</b></label>
-                      <input type="text" class="form-control" formControlName="nroDoc" id="nroDoc" name="nroDoc"
-                          placeholder="N&uacute;mero Documento" />
-                  </div>
-                  <div class="form-group col-md-3 col-sm-12">
-                      <label for="expedido" class="bold" ><b>Expedido:</b></label>
-                      <mat-select placeholder="Elija Expedido"  class="form-control" formControlName="expDoc" id="expDoc" name="expDoc">
-                          <mat-option *ngFor="let exp of expedido" [value]="exp.value">
-                              {{exp.description}}
-                          </mat-option>
-                      </mat-select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="nroRef" class="bold"><b>N&uacute;mero Referencia:</b></label>
-                      <input type="text" class="form-control" formControlName="nroRef" id="nroRef" name="nroRef"
-                          placeholder="N&uacute;mero Referencia" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="email" class="bold"><b>Correo electr&oacute;nico.:</b></label>
-                      <input type="text" class="form-control" formControlName="email" id="email" name="email"
-                          placeholder="Correo Elect&oacute;nico" />
-                  </div>
-              </div>
+        <section class="section-body col-12 py-3">
+            <h3>{{title}}</h3>
+            <p>{{message}}</p>
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="validationForm" style="background-color:white" class="form" novalidate
+                        id="validationForm">
+                        <div class="row">
+                            <h4>Datos de Generales</h4>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <!--
+                                <label for="firstName" class="bold"><b>Primer Nombre:</b></label>
+                                <input type="text" class="form-control" formControlName="firstName" id="firstName"
+                                    name="firstName" placeholder="Primer Nombre" />
+                                -->
+                                <app-input-text controlName="firstName" [submitted]="submitted" identifier="firstName"
+                                    message="Primer Nombre" description="Primer Nombre"></app-input-text>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <!--
+                                <label for="secondName" class="bold"><b>Segundo Nombre:</b></label>
+                                <input type="text" class="form-control" formControlName="secondName" id="secondName"
+                                    name="secondName" placeholder="Segundo Nombre" />
+                                -->
+                                <app-input-text controlName="secondName" [submitted]="submitted" identifier="secondName"
+                                    message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <!--
+                                <label for="sureName" class="bold"><b>Primer Apellido:</b></label>
+                                <input type="text" class="form-control" formControlName="sureName" id="sureName"
+                                    name="sureName" placeholder="Primer Apellido" />
+                                -->
+                                <app-input-text controlName="sureName" [submitted]="submitted" identifier="sureName"
+                                    message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <!--
+                                <label for="secondSurName" class="bold"><b>Segundo Apellido:</b></label>
+                                <input type="text" class="form-control" formControlName="secondSurName"
+                                    id="secondSurName" name="secondSurName" placeholder="Segundo Apellido" />
+                                -->
+                                <app-input-text controlName="secondSurName" [submitted]="submitted"
+                                    identifier="secondSurName" message="Segundo Apellido"
+                                    description="Segundo Apellido"></app-input-text>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row align-items-start justify-content-center">
+                            <div class="form-group col-md-3 col-sm-12">
+                                <div class="d-flex flex-row align-items-start d-flex justify-content-between">
+                                    <mat-form-field appearance="outline">
+                                        <mat-select placeholder="Tipo Documento" disableOptionCentering
+                                            formControlName="tipo" id="tipo" name="tipo">
+                                            <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
+                                                {{tipo.description}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!--
+                                <label for="tipo" class="bold"><b>Tipo Doc.:</b></label>
+                                <mat-select placeholder="Elija Tipo Doc." class="form-control" name="selectAction"
+                                    formControlName="tipo" id="tipo" name="tipo">
+                                    <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
+                                        {{tipo.description}}
+                                    </mat-option>
+                                </mat-select>
+                                -->
+                                
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <!--
+                                <label for="nroDoc" class="bold"><b>N&uacute;mero Doc.:</b></label>
+                                <input type="text" class="form-control" formControlName="nroDoc" id="nroDoc"
+                                    name="nroDoc" placeholder="N&uacute;mero Documento" />
+                                -->
+                                <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc"
+                                    message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                                
+                            </div>
 
-              <div class="form-group col-12">
-                  <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">El primer Nombre es
-                      Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50 Caracteres)</small>
-                  <small *ngIf="sureName?.invalid && sureName?.touched" class="text-danger"><br>El Apellido
-                      Paterno es Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50
-                      Caracteres)</small>
-                  <small *ngIf="tipo?.invalid && tipo?.touched" class="text-danger"><br>El tipo de Documento es
-                      Requerido</small>
-                  <small *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger"><br>El Carnet de Identidad
-                      es Requerido (Acepta Numeros y Letras entre 4 y 10
-                      Caracteres)</small>
-                  <small *ngIf="expDoc?.invalid && expDoc?.touched" class="text-danger"><br>El lugar de expedido
-                      es Requerido</small>
-                  <small *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger"><br>El n&uacute;mero de
-                      referencia es Requerido (Acepta solamente 8 N&uacute;meros)</small>
-                  <small *ngIf="email?.invalid && email?.touched" class="text-danger"><br>El email es Requerido
-                  </small>
-                  <br>
-                  <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
-                  <div class="text-center">
-                    <app-button [disabled]="validationForm.invalid" [content]="'Continuar'" (click)="next()"></app-button>
-                  </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="d-flex flex-row align-items-start d-flex justify-content-between">
+                                    <mat-form-field appearance="outline">
+                                        <mat-select placeholder="Elija Expedido" disableOptionCentering
+                                            formControlName="expDoc" id="expDoc" name="expDoc">
+                                            <mat-option *ngFor="let exp of expedido" [value]="exp.value">
+                                                {{exp.description}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <!--
+                                <label for="nroRef" class="bold"><b>N&uacute;mero Referencia:</b></label>
+                                <input type="text" class="form-control" formControlName="nroRef" id="nroRef"
+                                    name="nroRef" placeholder="N&uacute;mero Referencia" />
+                                -->
+                                <app-input-text controlName="nroRef" [submitted]="submitted" identifier="nroRef"
+                                    message="N&uacute;mero Referencia" description="N&uacute;mero Ref.">
+                                </app-input-text>
+                            </div>
+                        </div>
 
-              </div>
-          </form>
-          <!--
+                        <div class="form-group col-12">
+                            <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">El primer Nombre
+                                es
+                                Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50 Caracteres)</small>
+                            <small *ngIf="sureName?.invalid && sureName?.touched" class="text-danger"><br>El Apellido
+                                Paterno es Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50
+                                Caracteres)</small>
+                            <small *ngIf="tipo?.invalid && tipo?.touched" class="text-danger"><br>El tipo de Documento
+                                es
+                                Requerido</small>
+                            <small *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger"><br>El Carnet de
+                                Identidad
+                                es Requerido (Acepta Numeros y Letras entre 4 y 10
+                                Caracteres)</small>
+                            <small *ngIf="expDoc?.invalid && expDoc?.touched" class="text-danger"><br>El lugar de
+                                expedido
+                                es Requerido</small>
+                            <small *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger"><br>El n&uacute;mero
+                                de
+                                referencia es Requerido (Acepta solamente 8 N&uacute;meros)</small>
+                            <small *ngIf="email?.invalid && email?.touched" class="text-danger"><br>El email es
+                                Requerido
+                            </small>
+                            <hr>
+                            <div class="row contenido">
+                                <h4>Datos de Facturaci&oacute;n</h4>
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <!--
+                                    <label for="razonS" class="bold"><b>Nombre o Raz&oacute;n Social:</b></label>
+                                    <input type="text" class="form-control" formControlName="razonS" id="razonS"
+                                        name="razonS" placeholder="Raz&oacute;n Social" />
+                                    -->
+                                    <app-input-text controlName="razonS" [submitted]="submitted" identifier="razonS"
+                                        message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social">
+                                    </app-input-text>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <!--
+                                    <label for="nit" class="bold"><b>NIT:</b></label>
+                                    <input type="text" class="form-control" style="appearance: 'outline'" formControlName="nit" id="nit" name="nit"
+                                        placeholder="N&uacute;mero NIT" />
+                                    -->
+                                    <app-input-text controlName="nit" [submitted]="submitted" identifier="nit"
+                                        message="Ingresa N&uacute;mero de NIT" description="NIT"></app-input-text>
+                                </div>
+                                <small *ngIf="razonS?.invalid && razonS?.touched" class="text-danger"><br>La
+                                    Raz&oacute;n Social es Requerida (Solo acepta texto sin caracteres especiales entre
+                                    2 y 50
+                                    Caracteres)</small>
+                                <small *ngIf="nit?.invalid && nit?.touched" class="text-danger"><br>El n&uacute;mero NIT
+                                    es Requerido (Acepta solamente N&uacute;meros)</small>
+
+                            </div>
+                            <br>
+
+                            <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
+                            <div class="text-center">
+                                <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()"></app-button>
+                            </div>
+
+                        </div>
+                    </form>
+                    <!--
           <div class="link-back col-md-12 col-12">
               <div class="col-md-6 col-12">
                   <a href="/home" alt="regresa a pagina de Inicio"><b>Inicio</b></a>
               </div>
           </div>
             -->
-        </mat-card-content>
-        </mat-card>
-      </section>
+                </mat-card-content>
+            </mat-card>
+        </section>
     </div>
 </div>
