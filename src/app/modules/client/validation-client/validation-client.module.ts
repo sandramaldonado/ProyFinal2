@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LazyElementsModule } from '@angular-extensions/elements';
 import { SharedModule } from '@shared/shared.module';
+import { InputTextComponent } from '@shared/components/input-text/input-text.component';
 
 @NgModule({
   declarations: [

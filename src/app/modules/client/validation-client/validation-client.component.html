@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div style="background: linear-gradient(180deg, #D6F084 0%, rgba(214, 240, 132, 0) 100%);">
     <div class="parent d-flex flex-column justify-content-center container">
-        <div class="contenedor-flexible d-flex flex-column align-items-center flex-md-row align-items-md-center justify-content-center ">
+        <div
+            class="contenedor-flexible d-flex flex-column align-items-center flex-md-row align-items-md-center justify-content-center ">
             <mat-card style="margin-top: 40px">
                 <mat-card-header>
                     <img class="toolbar-logo" src="../../../assets/images/pages/header/logo-viva.png" alt="">
@@ -17,31 +18,62 @@
                 <mat-card-content>
                     <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()"
                         class="form" novalidate id="validationForm">
-                        <div class="form-group col-12">
-                            <label for="name" class="center-block bold"></label>
-                            <input type="text" class="form-control" formControlName="name" id="name" name="name"
-                                placeholder="Ingresa Primer Nombre" />
+                        <app-input-text controlName="name" [submitted]="submitted" identifier="name" message="Ingresa tu Primer Nombre" description="Nombre"></app-input-text>
+                        <app-input-text controlName="lastname" [submitted]="submitted" identifier="lastname" message="Ingresa tu Primer Apellido" description="Apellido"></app-input-text>
+                        <!--
+                        <div class="col-12 col-md-12 d-flex flex-row align-items-start d-flex justify-content-between">
+                            
+                            
+                            
+                            <mat-form-field appearance="outline">
+                                <input type="text" formControlName="name" id="name" name="name" matInput
+                                    placeholder="&nbsp;Ingresa tu Primer Nombre">
+                                <mat-label for="name" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Nombre</mat-label>
+                            </mat-form-field>
+                            
                         </div>
-                        <div class="form-group col-12">
-                            <label for="lastname" class="center-block bold"></label>
-                            <input type="text" class="form-control" formControlName="lastname" id="lastname"
-                                name="lastname" placeholder="Ingresa Primer Apellido" />
+                        -->
+                        <!--
+                        <div class="col-12 col-md-12 d-flex flex-row align-items-start d-flex justify-content-between">
+                            
+                            <mat-form-field appearance="outline" >
+                                <input type="text" formControlName="lastname" id="lastname" name="lastname" matInput
+                                    placeholder="&nbsp;Ingresa tu Primer Apellido">
+                                <mat-label for="lastname" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Apellido</mat-label>
+                            </mat-form-field>
+                            
+
+                            
                         </div>
-                        <div class="row">
-                            <div class="form-group col-6 col-md-6">
-                                <label for="subscriberId" class="bold"></label>
-                                <input type="text" class="form-control" formControlName="subscriberId" id="subscriberId"
-                                    name="subscriberId" placeholder="Ingresa tu Celular" />
+                        -->
+                        <div class='d-flex flex-row align-items-start justify-content-center'>
+                            <div class="col-6 col-md-6 col-sm-6">
+                                <!--
+                                <mat-form-field appearance="outline">
+                                    <input type="text" formControlName="dni" id="dni" name="dni" matInput
+                                        placeholder="&nbsp;Ingresa tu CI">
+                                    <mat-label for="dni" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Carnet</mat-label>
+                                </mat-form-field>
+                                -->
+
+                                <app-input-text controlName="dni" [submitted]="submitted" identifier="dni" message="Ingresa tu CI" description="Carnet"></app-input-text>
                             </div>
-                            <div class="form-group col-6 col-md-6">
-                                <label for="dni" class="bold"></label>
-                                <input type="text" class="form-control" formControlName="dni" id="dni" name="dni"
-                                    placeholder="Ingresa tu CI" />
+                            <!-- 
+                            <div class="col-6 col-md-6 col-sm-6">
+                                <mat-form-field appearance="outline">
+                                    <input type="text" formControlName="subscriberId" id="subscriberId" name="subscriberId" matInput
+                                        placeholder="&nbsp;Ingresa tu Celular">
+                                    <mat-label for="subscriberId" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Celular</mat-label>
+                                </mat-form-field>
+                            </div>
+                             -->
+                            <div class="col-6 col-md-6 col-sm-6">
+                                <app-input-text controlName="subscriberId" [submitted]="submitted" identifier="subscriberId" message="Ingresa tu Celular" description="Celular"></app-input-text>
                             </div>
                         </div>
-                        <div class="form-group col-12 center-block" style="padding-left: 60; padding-right:60">
+                        <div class="d-flex flex-row align-items-start justify-content-center" style="padding-left: 60; padding-right:60">
                             <br>
-                            <app-captcha [config]="captchaConfig" class="form-control align-items-center"></app-captcha>
+                            <app-captcha [config]="captchaConfig" class="d-flex flex-row align-items-start justify-content-center"></app-captcha>
                             <input type="checkbox" class="form-control" formControlName="captcha_status"
                                 id="captcha_status" name="captcha_status" hidden="true" />
                         </div>
@@ -50,7 +82,7 @@
                             <small *ngIf="name?.invalid && name?.touched" class="text-danger">El
                                 Nombre es Requerido (Solo acepta texto sin caracteres especiales entre 3 y 35
                                 Caracteres) </small>
-                            <small *ngIf="name?.invalid && name?.touched" class="text-danger"><br>El
+                            <small *ngIf="lastname?.invalid && lastname?.touched" class="text-danger"><br>El
                                 Apellido es Requerido (Solo acepta texto sin caracteres especiales entre 3 y 35
                                 Caracteres) </small>
                             <small *ngIf="subscriberId?.invalid && subscriberId?.touched" class="text-danger"><br>El
@@ -59,7 +91,6 @@
                             <small *ngIf="dni?.invalid && dni?.touched" class="text-danger"><br>El
                                 Carnet de Identidad es Requerido (Acepta Numeros y Letras entre 4 y 10
                                 Caracteres)</small>
-
                         </div>
                         <div class="text-center">
                             <app-button [disabled]="validationForm.invalid" [content]="'Identificarme'"></app-button>
@@ -73,10 +104,10 @@
                     </div>
                 </div>
                -->
-                    
+
                 </mat-card-content>
                 <mat-card-footer class="mat-card-footer">
-                    
+
                 </mat-card-footer>
             </mat-card>
         </div>
