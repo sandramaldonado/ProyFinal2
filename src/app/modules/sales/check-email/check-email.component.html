@@ -17,26 +17,26 @@
                                             <input
                                               class="form-control"
                                               id="codeValidationEmail"
-                                              name ="codeValidationEmail" 
-                                              formControlName ="codeValidationEmail" 
+                                              name ="codeValidationEmail"
+                                              formControlName ="codeValidationEmail"
                                               type="text"
                                               value="Codigo de validación"
                                               aria-label="readonly input example"
-                                              
+
                                             />
-                                           
+
                                             <small *ngIf="emailCode?.invalid && emailCode?.touched" class="text-danger">El codigo es obligatorio</small>
                                           </div>
                                         <div id="emailHelp" class="form-text">Introduce el codigo recibido</div>
                                     </div>
-                             
-                                   
+
+
                                     <p class="pt-2">Te llegará un correo de confirmación a tu correo electrónico para validarlo.</p>
                                     <div class="row d-flex flex-column justify-content-between align-items-center">
                                         <app-button-outline  [content]="'Enviar Codigo'" (click)="sendValidationCode()"></app-button-outline>
                                         <app-button [disabled]="emailValidationForm.invalid"  [content]="'Validar correo electronico'" (click)="validateEmail()"></app-button>
                                     </div>
-                                    <app-button [disabled]="disabled" [content]="'Siguiente'" ></app-button>
+                                    <app-button [disabled]="disabled" [content]="'Siguiente'" (click)="next()" ></app-button>
 
                                 </div>
                             </form>

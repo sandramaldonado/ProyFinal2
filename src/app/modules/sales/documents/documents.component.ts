@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TakePictureComponent } from '@app/modals/take-picture/take-picture.component';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import {NgxImageCompressService} from "ngx-image-compress";
@@ -12,6 +12,7 @@ import { WebstoreService } from '@app/services/webstore/webstore.service';
 export class DocumentsComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
+  @Output() nextDocumentStep = new EventEmitter<any>();
   constructor(
     private modalService: BsModalService,
     private imageCompress: NgxImageCompressService,
@@ -152,6 +153,10 @@ export class DocumentsComponent implements OnInit {
       //console.log(error);
 
     });
+  }
+
+  next(){
+    this.nextDocumentStep.emit(true);
   }
 
 }

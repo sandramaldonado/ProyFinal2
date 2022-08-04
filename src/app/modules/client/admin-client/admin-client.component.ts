@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
@@ -42,6 +42,8 @@ export class AdminClientComponent implements OnInit {
   });
   infoClient: any;
 
+  @Output() nextAdminClientStep = new EventEmitter<any>();
+
   constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
             private clientService: ClientService,
@@ -59,7 +61,7 @@ export class AdminClientComponent implements OnInit {
     //console.log(this.subscriberId);
     //this.loadcontents();
     //console.log(this.key);
-    
+
     //this.clientInfo = this.webstoreservice.getClientInformation();
     //console.log(this.stateScorin);
     this.loadForm();
@@ -107,6 +109,10 @@ export class AdminClientComponent implements OnInit {
 
 
 
+  }
+
+  next (){
+    this.nextAdminClientStep.emit(true);
   }
 
   onSubmit() {}

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
+import { BusinessrulesService } from '@app/services/businessrules/businessrules.service';
+import { TokenService } from '@app/services/token.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanComposition } from '@models/PlanComposition';
+import { Observable, switchAll } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -15,35 +18,49 @@ export class OrderComponent implements OnInit {
   planCompositionCode: any;
   planList: any;
   planComposition? : PlanComposition;
-  tabs : any;
+  modules : any;
+  bre :any;
   orderTabs : string[]= [];
-  coverageData : any;
+  coverageData: any;
+  autentication: any
+  scoringStatus: any;
 
   constructor(
-    private webstoreservice : WebstoreService
-  ) { 
+    private webstoreservice : WebstoreService,
+    private breservices : BusinessrulesService,
+    private tokenService : TokenService
+  ) {
 
-
-    this.tabs = {
+    this.modules = {
       checkCoverage: {
+        visible :true,
         active: false,
-        visited: false
+        enabled : true,
+        alias : 'checkcoverage'
       },
-      resultScoring: {
-        active: true,
-        visited: false
+      scoring: {
+        visible :false,
+        active: false,
+        enabled : true,
+        alias : 'scoring'
       },
       adminClient: {
+        visible :false,
         active: false,
-        visited: false
+        enabled : true,
+        alias : 'adminclient'
       },
       checkEmail: {
+        visible :false,
         active: false,
-        visited: false
+        enabled : true,
+        alias : 'checkemail'
       },
       documents: {
+        visible :false,
         active: false,
-        visited: false
+        enabled : true,
+        alias : 'documents'
       }
     };
   }
@@ -51,28 +68,115 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.planCompositionCode=this.webstoreservice.getPlanCompositionCode();
     this.planComposition = this.webstoreservice.getPlanComposition();
-    this.loadComponents();
+    this.getToken();
+
   }
 
-  loadComponents(){
+
+  loadBussinesRules(){
+      /**BRE Goes Here */
+
+     this.breservices.coverageEvaluation(this.autentication["data"]["token"])
+    .subscribe(response =>{
+      this.coverageData=response;
+    })
+    this.scoringStatus = this.webstoreservice.getStatusScoring();
+    this.initializeComponents()
+
+  }
+
+  initializeComponents(){
     this.planList = this.planComposition?.planList;
     console.log(this.planList.length);
-    if(this.planList.length==1){
-      if(this.planList[0].consumptionEntityType === "MOVIL"){
-        this.tabs.checkCoverage.active = false;
-      }else{
-        this.tabs.checkCoverage.active = true;
+    console.log("this.coverageData: ",this.coverageData);
+
+    /***COBERTURA (es el primer modulo sera visible por defecto)*****/
+
+    /*** Metodo usado en base a lista de planes : DEPRECATED
+     *
+     * if(this.planList.length==1){
+      if(this.planList[0].consumptionEntityType !== "MOVIL"){
+        this.modules.checkCoverage.enabled = false;
+        this.modules.checkCoverage.visible = false;
       }
     }else{
-      this.tabs.checkCoverage.active = true;
+      this.modules.checkCoverage.visible = true;
     }
+    */
+
+    /***** habilitar cobertura Usando Business Rules***** */
+    if(this.coverageData.Data.requireCoverageVerification != "OK"){
+      this.modules.checkCoverage.enabled = false;
+      this.modules.checkCoverage.visible = false;
+    }
+
+
+    /***SCORING (es el segundo modulo se debe evaluar si sera visible en base a la visibilidad de boertura) */
+
+    this.modules.scoring.enabled =  (this.scoringStatus == "NORMAL");
+    this.modules.scoring.visible = (this.modules.scoring.enabled &&  !this.modules.checkCoverage.visible )
+
+    /**ADMIN CLIENT */
+    this.modules.adminClient.visible = !this.modules.scoring.visible && !this.modules.checkCoverage.visible
 
   }
 
 
+  getToken() {
+    this.tokenService.gettoken()
+      .subscribe(response =>{
+        this.autentication = response;
+        this.loadBussinesRules();
 
-  nextStep(data : any){
-    console.log(data);
+      });
+  }
+
+
+  changeModule(module :any){
+  console.log(module)
+
+   switch (module) {
+    case 'checkcoverage':
+      if(this.modules.scoring.enabled){
+        this.modules.scoring.visible=true;
+      }else{
+        this.changeModule("scoring");
+      }
+
+    break;
+    case 'scoring':
+      if(this.modules.adminClient.enabled){
+        this.modules.adminClient.visible=true;
+      }else{
+        this.changeModule("adminclient");
+      }
+
+    break;
+    case 'adminclient':
+      if(this.modules.checkEmail.enabled){
+        this.modules.checkEmail.visible=true;
+      }else{
+        this.changeModule("checkemail");
+      }
+
+    break;
+    case 'checkemail':
+
+      if(this.modules.documents.enabled){
+        this.modules.documents.visible=true;
+      }else{
+        this.changeModule("documents");
+      }
+
+    break;
+    case 'documents':
+
+    break;
+
+     default:
+      break;
+   }
+
 
   }
 
