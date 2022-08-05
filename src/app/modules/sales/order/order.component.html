@@ -30,17 +30,25 @@
 
     </div>
     <div class="col-12 col-md-7">
-      <div *ngIf="showCoverage">
-        <app-check-coverage></app-check-coverage>
-      </div>
+      <app-check-coverage *ngIf="modules.checkCoverage.visible"
+                          (nextCoverageStep)="changeModule(modules.checkCoverage.alias)">
+      </app-check-coverage>
 
-      <div *ngIf="showScoring">
-        <app-result-scoring></app-result-scoring>
-      </div>
+      <app-result-scoring *ngIf="modules.scoring.visible"
+                          (nextScoringStep)="changeModule(modules.scoring.alias)">
+      </app-result-scoring>
 
-      <app-admin-client ></app-admin-client>
-      <app-check-email></app-check-email>
-      <app-documents></app-documents>
+      <app-admin-client *ngIf="modules.adminClient.visible"
+                        (nextAdminClientStep)="changeModule(modules.adminClient.alias)">
+      </app-admin-client>
+
+      <app-check-email *ngIf="modules.checkEmail.visible"
+                        (nextCheckEmailStep)="changeModule(modules.checkEmail.alias)">
+      </app-check-email>
+
+      <app-documents *ngIf="modules.documents.visible"
+                      (nextDocumentStep)="changeModule(modules.documents.alias)">
+      </app-documents>
     </div>
   </div>
 </div>

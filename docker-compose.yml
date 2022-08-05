@@ -1,0 +1,11 @@
+version: '3'
+services:
+  angular-nginx-docker:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: landing-master-sales
+    restart: always
+    ports :
+    - 8000:80
+

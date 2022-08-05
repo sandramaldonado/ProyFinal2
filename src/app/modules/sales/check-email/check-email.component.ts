@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EmailService } from '@app/services/email.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -19,6 +19,7 @@ export class CheckEmailComponent implements OnInit {
     return this.emailValidationForm.get('codeValidationEmail');
   }
 
+  @Output() nextCheckEmailStep = new EventEmitter<any>();
   constructor(
     private emailService: EmailService
   ) { }
@@ -48,6 +49,8 @@ export class CheckEmailComponent implements OnInit {
 
   }
 
+
+
   randomNumber() {
     const charsArray = "0123456789";
     const lengthOtp = 4;
@@ -62,5 +65,10 @@ export class CheckEmailComponent implements OnInit {
     }
     return ranNum.join('');
   }
+
+  next(){
+    this.nextCheckEmailStep.emit(true);
+  }
+
 
 }
