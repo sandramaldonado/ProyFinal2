@@ -26,16 +26,6 @@ export class MovilListService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     };
-    const jsontext = JSON.stringify({
-                                        "userCode": "14",
-                                        "ceTypeCodeList": [
-                                          "MOVIL",
-                                          "IFIXED",
-                                          "TV"
-                                        ],
-                                        "processId": 165435435
-                                      });
-
     const httpOptions = {
       headers: headers
     };

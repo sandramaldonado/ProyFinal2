@@ -18,7 +18,6 @@ export class AdminClientComponent implements OnInit {
   // definicion de tipos Dock
   tipoDoc: DocumentType[] = [{value: 'CI', description: 'CI'}, {value: 'NIT', description: 'NIT'}, {value: 'LIBRETA', description: 'LIB. MILITAR'}];
   expedido: DocumentType[] = [{value: 'CBEN', description: 'Beni'}, {value: 'CCBA', description: 'Cochabamba'}, {value: 'CLPZ', description: 'La Paz'}, {value: 'CORU', description: 'Oruro'}, {value: 'CPAN', description: 'Pando'}, {value: 'CPOT', description: 'Potosi'}, {value: 'CSCR', description: 'Sucre'}, {value: 'CSCZ', description: 'Santa Cruz'}, {value: 'CTRJ', description: 'Tarija'}];
-
   // definir valores de evaluacion numeros y alfa numericos
   dniClientPattern = /^[A-Za-z0-9]+$/;
   nameClient = /^[A-Za-z]+$/;
@@ -135,6 +134,7 @@ export class AdminClientComponent implements OnInit {
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
 
+    
     get firstName() {
       return this.validationForm.get('firstName');
     }
