@@ -192,6 +192,7 @@ export class ValidationClientComponent implements OnInit {
                   this.webstoreservice.saveClientInformation(this.dataClient);
                   //console.log(this.planesList);
                   const planService = this.armadoJsonScoring();
+                  console.log(planService);
                   this.scoringValidated(planService);
                   //this.router.navigate([`/adminClient`]);
                   ///this.abrirDialogo();
@@ -395,22 +396,15 @@ export class ValidationClientComponent implements OnInit {
   }
 
   scoringValidated(planService: any) {
+    console.log("scoring Json INI");
+    console.log(planService);
+    console.log("scoring Json End");
     this.scoringValidationService.getValidationClientScoring(planService, this.autentication["data"]["token"]).subscribe(
       response => {
         this.scoringValid = response;
         //sessionStorage.setItem("flowType", this.scoringValid["data"]["flowType"]);
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
         this.router.navigate(['/oferta/orden-compra']);
-        /*
-        if (this.scoringValid["data"]["flowType"] == "NORMAL") {
-          this.abrirDialogo(phone);
-        } else {
-          this.router.navigate([`client/adminClient`, phone]);
-        }
-        console.log(this.scoringValid);
-        console.log(this.scoringValid["data"]["flowType"]);
-        //this.abrirDialogo();
-        */
       },
       error => {
         console.log(error);

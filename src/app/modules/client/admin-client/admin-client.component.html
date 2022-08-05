@@ -108,6 +108,18 @@
                                 </app-input-text>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <!--
+                                <label for="nroRef" class="bold"><b>N&uacute;mero Referencia:</b></label>
+                                <input type="text" class="form-control" formControlName="nroRef" id="nroRef"
+                                    name="nroRef" placeholder="N&uacute;mero Referencia" />
+                                -->
+                                <app-input-text controlName="email" [submitted]="submitted" identifier="email"
+                                    message="Correo Electr&oacute;nico" description="email">
+                                </app-input-text>
+                            </div>
+                        </div>
 
                         <div class="form-group col-12">
                             <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">El primer Nombre
