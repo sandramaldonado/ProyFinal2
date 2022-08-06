@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MovilListService } from '@app/services/movil-list.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
@@ -25,6 +25,8 @@ export class MovilListComponent implements OnInit {
   internetState: Boolean = false;
   entertainmentState: Boolean = false;
   validationForm: any;
+
+  @Output() nextMovilListStep = new EventEmitter<any>();
 
   title = "Elije tu Número";
   message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
@@ -142,6 +144,10 @@ export class MovilListComponent implements OnInit {
       }, error => {
       console.log(error);
     });
+  }
+
+  next(){
+    this.nextMovilListStep.emit(true);
   }
 
 /*
