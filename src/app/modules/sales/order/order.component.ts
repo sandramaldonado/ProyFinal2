@@ -88,7 +88,7 @@ export class OrderComponent implements OnInit {
       this.scoringStatus = this.webstoreservice.getStatusScoring();
       this.initializeComponents();
     })
-  
+
 
   }
 
@@ -98,7 +98,7 @@ export class OrderComponent implements OnInit {
 
     /***** habilitar cobertura Usando Business Rules***** */
     if(this.coverageData.data.requireCoverageVerification == "OK"){
-     
+
       this.modules.checkCoverage.visible = true;
     }else{
       this.modules.checkCoverage.enabled = false;
