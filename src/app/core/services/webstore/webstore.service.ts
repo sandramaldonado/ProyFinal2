@@ -23,8 +23,9 @@ export class WebstoreService {
 
 
  saveToken() : void{
+
   const token = this.httpClient.post<Autenticar>(`${this.urToken}`,
-  JSON.stringify({"username":"atcpru1","password":"V1tZKv0LyinCFc3QPaH7Iw=="}),  this.httpPostOptions)
+  JSON.stringify({"username":"landing","password":"3X4E+U7d1m1XprRamjfaRg=="}),  this.httpPostOptions)
 
   .subscribe(
     response =>{
