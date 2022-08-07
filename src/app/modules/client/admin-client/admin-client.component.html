@@ -8,10 +8,13 @@
                     <form [formGroup]="validationForm" style="background-color:white" class="form" novalidate
                         id="validationForm">
                         <div class="row">
-                            <h4>Datos de Generales</h4>
+                            <h4>Datos Generales</h4>
                             <div class="form-group col-md-6 col-sm-12">
                                 <app-input-text controlName="firstName" [submitted]="submitted" identifier="firstName"
                                     message="Primer Nombre" description="Primer Nombre"></app-input-text>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">
+                                        El primer Nombre es Requerido (Solo acepta de 2 a 50 caracteres)
+                                    </mat-error>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <app-input-text controlName="secondName" [submitted]="submitted" identifier="secondName"
@@ -20,13 +23,13 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <app-input-text controlName="sureName" [submitted]="submitted" identifier="sureName"
-                                    message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                                <app-input-text controlName="sureName" [submitted]="submitted" identifier="sureName" message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="sureName?.invalid && sureName?.touched" class="text-danger">
+                                    El Primer Apellido es Requerido (Solo acepta de 2 a 50 caracteres)
+                                </mat-error>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <app-input-text controlName="secondSurName" [submitted]="submitted"
-                                    identifier="secondSurName" message="Segundo Apellido"
-                                    description="Segundo Apellido"></app-input-text>
+                                <app-input-text controlName="secondSurName" [submitted]="submitted" identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido"></app-input-text>
                             </div>
                         </div>
                         <div class="row d-flex flex-row align-items-start justify-content-center">
@@ -40,12 +43,16 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="tipo?.invalid && tipo?.touched" class="text-danger">
+                                        El tipo de Documento es Requerido
+                                    </mat-error>
                                 </div>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc"
-                                    message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
-                                
+                                <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc" message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger">
+                                    El Carnet de Identidad es Requerido (Acepta de 4 a 10 Caracteres)
+                                </mat-error>
                             </div>
 
                             <div class="col-md-3 col-sm-12">
@@ -58,6 +65,9 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="expDoc?.invalid && expDoc?.touched" class="text-danger">
+                                        El Expedido de Documento es Requerido
+                                    </mat-error>
                                 </div>
                             </div>
                         </div>
@@ -66,6 +76,9 @@
                                 <app-input-text controlName="nroRef" [submitted]="submitted" identifier="nroRef"
                                     message="N&uacute;mero Referencia" description="N&uacute;mero Ref.">
                                 </app-input-text>
+                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger">
+                                    El N&uacute;mero Referencia es Requerido (Acepta solo 8 N&uacute;meros)
+                                </mat-error>
                             </div>
                         </div>
                         <div class="row">
@@ -73,32 +86,14 @@
                                 <app-input-text controlName="email" [submitted]="submitted" identifier="email"
                                     message="Correo Electr&oacute;nico" description="email">
                                 </app-input-text>
+                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="email?.invalid && email?.touched" class="text-danger">
+                                    El Correo es Requerido 
+                                </mat-error>
                             </div>
                         </div>
 
                         <div class="form-group col-12">
-                            <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">El primer Nombre
-                                es
-                                Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50 Caracteres)</small>
-                            <small *ngIf="sureName?.invalid && sureName?.touched" class="text-danger"><br>El Apellido
-                                Paterno es Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50
-                                Caracteres)</small>
-                            <small *ngIf="tipo?.invalid && tipo?.touched" class="text-danger"><br>El tipo de Documento
-                                es
-                                Requerido</small>
-                            <small *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger"><br>El Carnet de
-                                Identidad
-                                es Requerido (Acepta Numeros y Letras entre 4 y 10
-                                Caracteres)</small>
-                            <small *ngIf="expDoc?.invalid && expDoc?.touched" class="text-danger"><br>El lugar de
-                                expedido
-                                es Requerido</small>
-                            <small *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger"><br>El n&uacute;mero
-                                de
-                                referencia es Requerido (Acepta solamente 8 N&uacute;meros)</small>
-                            <small *ngIf="email?.invalid && email?.touched" class="text-danger"><br>El email es
-                                Requerido
-                            </small>
+                            
                             <hr>
                             <div class="row contenido">
                                 <h4>Datos de Facturaci&oacute;n</h4>
@@ -106,18 +101,17 @@
                                     <app-input-text controlName="razonS" [submitted]="submitted" identifier="razonS"
                                         message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social">
                                     </app-input-text>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="razonS?.invalid && razonS?.touched" class="text-danger">
+                                        Raz&oacute;n Social es Requerida (Solo acepta de 2 a 50 caracteres)
+                                    </mat-error>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12">
                                     <app-input-text controlName="nit" [submitted]="submitted" identifier="nit"
                                         message="Ingresa N&uacute;mero de NIT" description="NIT"></app-input-text>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nit?.invalid && nit?.touched" class="text-danger">
+                                        El n&uacute;mero NIT es Requerido (Acepta solamente N&uacute;meros)
+                                    </mat-error>
                                 </div>
-                                <small *ngIf="razonS?.invalid && razonS?.touched" class="text-danger"><br>La
-                                    Raz&oacute;n Social es Requerida (Solo acepta texto sin caracteres especiales entre
-                                    2 y 50
-                                    Caracteres)</small>
-                                <small *ngIf="nit?.invalid && nit?.touched" class="text-danger"><br>El n&uacute;mero NIT
-                                    es Requerido (Acepta solamente N&uacute;meros)</small>
-
                             </div>
                             <br><div class="text-center">
                                 <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()"></app-button>
