@@ -143,7 +143,7 @@ export class AdminClientComponent implements OnInit {
     if (lastname2 != "" || lastname2 != null) {
       fullname += " "+lastname2;
     }
-    const datosClient = JSON.stringify({
+    const datosClient = {
       "birthday": this.clientInfo["birthday"],
       "clientId": this.clientInfo["clientId"],
       "documentCity": exp,
@@ -161,7 +161,7 @@ export class AdminClientComponent implements OnInit {
       "nit": nit,
       "personId": this.clientInfo["personId"],
       "personTypeCode": this.clientInfo["personTypeCode"]
-    });
+    };
     this.loadInfoClien(datosClient);
     console.log("inica");
     console.log(datosClient);
@@ -187,7 +187,7 @@ export class AdminClientComponent implements OnInit {
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
 
-    
+
     get firstName() {
       return this.validationForm.get('firstName');
     }

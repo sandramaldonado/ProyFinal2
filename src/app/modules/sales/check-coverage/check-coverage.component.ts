@@ -128,14 +128,14 @@ export class CheckCoverageComponent implements OnInit {
   verificarCobertura(): void {
 
     var data = {
-      "lng": this.markerPositions[0].lat,
-      "lat": this.markerPositions[0].lng,
+      "lng": this.markerPositions[0].lng,
+      "lat": this.markerPositions[0].lat,
       "verificationTAC": "47626",
       "maxVel": null,
       "formId": 534077243,
       "processId": 46537322758
   }
-  //console.log(data)
+  console.log(data)
 
   this.coverageService.checkGISCovarge(data)
   .subscribe(response =>{
