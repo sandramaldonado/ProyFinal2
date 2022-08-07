@@ -158,6 +158,8 @@ export class AdminClientComponent implements OnInit {
       "lastName2": lastname2,
       "middleName": name2,
       "name": name1,
+      "rSocial": rSocial,
+      "nroRef": ref,
       "nit": nit,
       "personId": this.clientInfo["personId"],
       "personTypeCode": this.clientInfo["personTypeCode"]

@@ -56,3 +56,18 @@ mat-card-content {
 mat-form-field {
   width: 100%;
 }
+
+
+::ng-deep .mat-form-field-outline-start {
+  color: purple!important;
+  border-color: purple!important;
+  border-radius: 18px 0 0 18px !important;
+  min-width: 18px !important;
+  width: 90%;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  color: purple!important;
+  border-color: purple!important;
+  border-radius: 0 18px 18px 0 !important;
+}

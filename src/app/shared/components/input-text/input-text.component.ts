@@ -18,6 +18,8 @@ export class InputTextComponent {
   @Input() message = '';
   @Input() method = '';
   @Input() description = '';
+  @Input() ngIf: any;
+  @Input() errormessage = '';
   @Input() controlName: string = "";
   @Input() validationForm!: FormGroup;
   @Input() submitted: boolean = false;
