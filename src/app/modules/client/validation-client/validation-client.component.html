@@ -6,67 +6,16 @@
             <mat-card style="margin-top: 40px">
                 <mat-card-header>
                     <img class="toolbar-logo" src="../../../assets/images/pages/header/logo-viva.png" alt="">
-                    <!--
-                    <mat-card-title>
-                    <div class="title-1"><span>{{ title }}!!!</span></div>
-                </mat-card-title>
-                <mat-card-subtitle>
-                    <div class="title-2">{{ messagge }}</div>
-                </mat-card-subtitle>    
-                -->
                 </mat-card-header>
                 <mat-card-content>
                     <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()"
                         class="form" novalidate id="validationForm">
                         <app-input-text controlName="name" [submitted]="submitted" identifier="name" message="Ingresa tu Primer Nombre" description="Nombre"></app-input-text>
                         <app-input-text controlName="lastname" [submitted]="submitted" identifier="lastname" message="Ingresa tu Primer Apellido" description="Apellido"></app-input-text>
-                        <!--
-                        <div class="col-12 col-md-12 d-flex flex-row align-items-start d-flex justify-content-between">
-                            
-                            
-                            
-                            <mat-form-field appearance="outline">
-                                <input type="text" formControlName="name" id="name" name="name" matInput
-                                    placeholder="&nbsp;Ingresa tu Primer Nombre">
-                                <mat-label for="name" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Nombre</mat-label>
-                            </mat-form-field>
-                            
-                        </div>
-                        -->
-                        <!--
-                        <div class="col-12 col-md-12 d-flex flex-row align-items-start d-flex justify-content-between">
-                            
-                            <mat-form-field appearance="outline" >
-                                <input type="text" formControlName="lastname" id="lastname" name="lastname" matInput
-                                    placeholder="&nbsp;Ingresa tu Primer Apellido">
-                                <mat-label for="lastname" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Apellido</mat-label>
-                            </mat-form-field>
-                            
-
-                            
-                        </div>
-                        -->
                         <div class='d-flex flex-row align-items-start justify-content-center'>
                             <div class="col-6 col-md-6 col-sm-6">
-                                <!--
-                                <mat-form-field appearance="outline">
-                                    <input type="text" formControlName="dni" id="dni" name="dni" matInput
-                                        placeholder="&nbsp;Ingresa tu CI">
-                                    <mat-label for="dni" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Carnet</mat-label>
-                                </mat-form-field>
-                                -->
-
                                 <app-input-text controlName="dni" [submitted]="submitted" identifier="dni" message="Ingresa tu CI" description="Carnet"></app-input-text>
                             </div>
-                            <!-- 
-                            <div class="col-6 col-md-6 col-sm-6">
-                                <mat-form-field appearance="outline">
-                                    <input type="text" formControlName="subscriberId" id="subscriberId" name="subscriberId" matInput
-                                        placeholder="&nbsp;Ingresa tu Celular">
-                                    <mat-label for="subscriberId" class="has-events">&nbsp;&nbsp;&nbsp;&nbsp;Celular</mat-label>
-                                </mat-form-field>
-                            </div>
-                             -->
                             <div class="col-6 col-md-6 col-sm-6">
                                 <app-input-text controlName="subscriberId" [submitted]="submitted" identifier="subscriberId" message="Ingresa tu Celular" description="Celular"></app-input-text>
                             </div>
@@ -96,15 +45,6 @@
                             <app-button [disabled]="validationForm.invalid" [content]="'Identificarme'"></app-button>
                         </div>
                     </form>
-
-                    <!--
-                 <div class="link-back col-md-12 col-12 form">
-                    <div class="col-md-6 col-12">
-                        <a href="/home" alt="regresa a pagina de Inicio"><b>Inicio</b></a>
-                    </div>
-                </div>
-               -->
-
                 </mat-card-content>
                 <mat-card-footer class="mat-card-footer">
 

@@ -39,7 +39,7 @@ export class AdminClientComponent implements OnInit {
     'expDoc': new FormControl(null, [Validators.required]),
     'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)]),
-    'razonS': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.surNameClient)]),
+    'razonS': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.surNameClient)]),
     'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
@@ -118,7 +118,60 @@ export class AdminClientComponent implements OnInit {
   }
 
   next (){
+
+    let name1 = this.validationForm.value.firstName!;
+    let name2 = this.validationForm.value.secondName!;
+    let lastname1 = this.validationForm.value.sureName!;
+    let lastname2 = this.validationForm.value.secondSurName!;
+    let tipo = this.validationForm.value.tipo!;
+    let ci = this.validationForm.value.nroDoc!;
+    let exp = this.validationForm.value.expDoc!;
+    let ref = this.validationForm.value.nroRef!;
+    let correo = this.validationForm.value.email!;
+    let rSocial = this.validationForm.value.razonS!;
+    let nit = this.validationForm.value.nit!;
+
+    let fullname = "";
+    fullname = name1;
+    if (name2 != "" || name2 != null) {
+      fullname += " "+name2;
+    }
+    if (lastname1 != "" || lastname1 != null) {
+      fullname += " "+lastname1;
+    }
+
+    if (lastname2 != "" || lastname2 != null) {
+      fullname += " "+lastname2;
+    }
+    const datosClient = JSON.stringify({
+      "birthday": this.clientInfo["birthday"],
+      "clientId": this.clientInfo["clientId"],
+      "documentCity": exp,
+      "documentCityDesc": this.clientInfo["documentCityDesc"],
+      "documentNumber": ci,
+      "documentType": tipo,
+      "documentTypeDesc": this.clientInfo["documentTypeDesc"],
+      "email": correo,
+      "fullName": fullname,
+      "gender": null,
+      "lastName1": lastname1,
+      "lastName2": lastname2,
+      "middleName": name2,
+      "name": name1,
+      "nit": nit,
+      "personId": this.clientInfo["personId"],
+      "personTypeCode": this.clientInfo["personTypeCode"]
+    });
+    this.loadInfoClien(datosClient);
+    console.log("inica");
+    console.log(datosClient);
+    console.log("finaliza");
     this.nextAdminClientStep.emit(true);
+  }
+
+  loadInfoClien(datosClient: any) {
+    //sessionStorage.setItem("infoClientStorage", datosClient);
+    this.webstoreservice.saveClientInformation(datosClient);
   }
 
   onSubmit() {}

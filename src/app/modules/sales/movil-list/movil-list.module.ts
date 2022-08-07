@@ -8,6 +8,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { SharedModule } from '@shared/shared.module';
+import { LazyElementsModule } from '@angular-extensions/elements';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
-    MatRadioModule
+    MatRadioModule,
+    SharedModule,
+    LazyElementsModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
   exports : [MovilListComponent]
