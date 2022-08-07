@@ -102,22 +102,27 @@ export class CheckCoverageComponent implements OnInit {
   ngOnInit(): void {
     if(this.selfLoaded){
 
-      this.webstoreService.saveToken();
-      const env : any = {};
-      const browserWindow : any = window || {};
+      this.load()
 
-      const browserWindowEnv : any = browserWindow['__env'] || {};
-      console.log("browserWindowEnv: ",browserWindowEnv)
-
-      navigator.geolocation.getCurrentPosition((position) => {
-
-        console.log (typeof position.coords.latitude)
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        }
-      })
     }
+  }
+
+  load(){
+    this.webstoreService.saveToken();
+    const env : any = {};
+    const browserWindow : any = window || {};
+
+    const browserWindowEnv : any = browserWindow['__env'] || {};
+    console.log("browserWindowEnv: ",browserWindowEnv)
+
+    navigator.geolocation.getCurrentPosition((position) => {
+
+      console.log (typeof position.coords.latitude)
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
   }
 
   verificarCobertura(): void {

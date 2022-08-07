@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
 
     this.modules = {
       checkCoverage: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'checkcoverage'
