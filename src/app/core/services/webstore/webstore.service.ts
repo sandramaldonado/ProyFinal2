@@ -3,6 +3,7 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { Photo } from '@models/Photo';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Autenticar } from '@models/Autenticar';
+import { environment } from 'src/environments/environment';
 import * as cts  from "@shared/utils/constants";
 
 
@@ -24,8 +25,8 @@ export class WebstoreService {
 
  saveToken() : void{
 
-  const token = this.httpClient.post<Autenticar>(`${this.urToken}`,
-  JSON.stringify({"username":"landing","password":"3X4E+U7d1m1XprRamjfaRg=="}),  this.httpPostOptions)
+  const token = this.httpClient.post<Autenticar>(`${environment.SSIAuthApiUrl}`,
+  JSON.stringify({"username":environment.SSITokenUsername,"password": environment.SSITokenPassword}),  this.httpPostOptions)
 
   .subscribe(
     response =>{

@@ -31,11 +31,20 @@
                             [options]="markerOptions"></map-marker>
 
                         </google-map>
-                        <div class="coverage-status p-2">
-                            <span class="m-1 fw-bold">Cobertura Media</span>
-                            <p class="m-0">El servicio puede tener dificultades de conexión.</p>
+                        <div *ngIf="markerPositions.length > 0">
+                          <div *ngIf="hasCoverage" class="coverage-status-ok p-2">
 
-                        </div>
+                              <span class="m-1 fw-bold">Sin Cobertura</span>
+                              <p class="m-0">El servicio tiene cobertura en la zona.</p>
+
+                          </div>
+                          <div *ngIf="!hasCoverage" class="coverage-status-nok p-2">
+
+                                <span class="m-1 fw-bold">Sin Cobertura</span>
+                                <p class="m-0">El servicio no tiene cobertura en la zona.</p>
+
+                          </div>
+                      </div>
 
                     </mat-card-content>
 
