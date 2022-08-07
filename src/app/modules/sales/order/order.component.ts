@@ -61,6 +61,12 @@ export class OrderComponent implements OnInit {
         active: false,
         enabled : true,
         alias : 'documents'
+      },
+      movilList: {
+        visible :false,
+        active: false,
+        enabled : true,
+        alias : 'movilList'
       }
     };
   }

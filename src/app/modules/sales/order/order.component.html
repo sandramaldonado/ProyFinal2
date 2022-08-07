@@ -49,6 +49,8 @@
       <app-documents *ngIf="modules.documents.visible"
                       (nextDocumentStep)="changeModule(modules.documents.alias)">
       </app-documents>
+      <app-movil-list *ngIf="modules.movilList.visible"
+      (nextMovilListStep)="changeModule(modules.movilList.alias)"></app-movil-list>
     </div>
   </div>
 </div>

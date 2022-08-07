@@ -9,6 +9,7 @@ import { CheckEmailModule } from "@modules/sales/check-email/check-email.module"
 import { DocumentsModule } from '@modules/sales/documents/documents.module';
 import { ResultScoringModule } from '../scoring/result/result-scoring.module';
 import { HeaderModule } from "@layout/header/header.module";
+import { MovilListModule } from '../movil-list/movil-list.module';
 
 
 
@@ -24,7 +25,8 @@ import { HeaderModule } from "@layout/header/header.module";
     CheckEmailModule,
     DocumentsModule,
     ResultScoringModule,
-    HeaderModule
+    HeaderModule,
+    MovilListModule
   ]
 })
 export class OrderModule { }
