@@ -30,27 +30,35 @@
 
     </div>
     <div class="col-12 col-md-7">
-      <app-check-coverage *ngIf="modules.checkCoverage.visible"
+      <app-check-coverage id={{modules.checkCoverage.alias}}
+                          *ngIf="modules.checkCoverage.visible"
                           (nextCoverageStep)="changeModule(modules.checkCoverage.alias)">
       </app-check-coverage>
 
-      <app-result-scoring *ngIf="modules.scoring.visible"
+      <app-result-scoring id={{modules.scoring.alias}}
+                          *ngIf="modules.scoring.visible"
                           (nextScoringStep)="changeModule(modules.scoring.alias)">
       </app-result-scoring>
 
-      <app-admin-client *ngIf="modules.adminClient.visible"
+      <app-admin-client id={{modules.adminClient.alias}}
+                        *ngIf="modules.adminClient.visible"
                         (nextAdminClientStep)="changeModule(modules.adminClient.alias)">
       </app-admin-client>
 
-      <app-check-email *ngIf="modules.checkEmail.visible"
+      <app-check-email  id={{modules.checkEmail.alias}}
+                        *ngIf="modules.checkEmail.visible"
                         (nextCheckEmailStep)="changeModule(modules.checkEmail.alias)">
       </app-check-email>
 
-      <app-documents *ngIf="modules.documents.visible"
+      <app-documents  id={{modules.documents.alias}}
+                      *ngIf="modules.documents.visible"
                       (nextDocumentStep)="changeModule(modules.documents.alias)">
       </app-documents>
-      <app-movil-list *ngIf="modules.movilList.visible"
-      (nextMovilListStep)="changeModule(modules.movilList.alias)"></app-movil-list>
+
+      <app-movil-list  id={{modules.movilList.alias}}
+                      *ngIf="modules.movilList.visible"
+                      (nextMovilListStep)="changeModule(modules.movilList.alias)">
+      </app-movil-list>
     </div>
   </div>
 </div>

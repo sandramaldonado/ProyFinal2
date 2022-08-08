@@ -10,6 +10,7 @@ import { PlanComposition } from '@models/PlanComposition';
 import { CaptchaService } from 'src/app/core/services/captcha.service';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-validation-client',
@@ -98,6 +99,8 @@ export class ValidationClientComponent implements OnInit {
    * Metodo de obtencion de fecha en formato dd-mm-yyyy
    */
   setDate() {
+
+    /*
     let date: Date = new Date();
     let anio = date.getFullYear();
     let dia = date.getDate();
@@ -114,8 +117,12 @@ export class ValidationClientComponent implements OnInit {
     } else {
       mes2 = mes.toString();
     }
-    this.fecha = dia2 + "-" + mes2 + "-" + anio.toString();
+    */
 
+    let actualDate = moment().format('DD-MM-YYYY').toString();
+    console.log(actualDate);
+    this.fecha = actualDate;
+    
   }
 
   /**

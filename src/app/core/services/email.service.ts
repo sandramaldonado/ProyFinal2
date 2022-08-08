@@ -9,7 +9,7 @@ import { WebstoreService } from './webstore/webstore.service';
   providedIn: 'root'
 })
 export class EmailService {
-  url: string = 'http://localhost:3000/planPostpagoBack/sendEmail';
+  url: string = 'http://localhost:3800/api/mastersales/sendEmail';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(
     private httpClient: HttpClient,
