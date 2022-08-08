@@ -115,6 +115,7 @@ export class ValidationClientComponent implements OnInit {
       mes2 = mes.toString();
     }
     this.fecha = dia2 + "-" + mes2 + "-" + anio.toString();
+
   }
 
   /**
@@ -226,6 +227,7 @@ export class ValidationClientComponent implements OnInit {
     console.log(this.planComposition);
     console.log(this.planList);
     this.productTypeCode = [];
+    console.log(this.fecha);
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
@@ -238,7 +240,7 @@ export class ValidationClientComponent implements OnInit {
         "productTypeCode": this.productTypeCode
       },
       "saleOrder": {
-        "planCode": "1",
+        "planCode": this.planComposition?.planCompositionCode,
         "processTypeCode": "PTFSALE",
         "channelCode": "CAASES",
         "cityCode": "CBA",
