@@ -22,40 +22,40 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                 <app-input-text controlName="sureName" [submitted]="submitted" identifier="sureName" message="Primer Apellido" description="Primer Apellido"></app-input-text>
                                 <mat-error style="text-align:right; margin-top: -7px;" *ngIf="sureName?.invalid && sureName?.touched" class="text-danger">
                                     El Primer Apellido es Requerido (Solo acepta de 2 a 50 caracteres)
                                 </mat-error>
                             </div>
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                 <app-input-text controlName="secondSurName" [submitted]="submitted" identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido"></app-input-text>
                             </div>
                         </div>
-                        <div class="row d-flex flex-row align-items-start justify-content-center">
-                            <div class="col-md-3 col-sm-12">
-                                <div class="d-flex flex-row align-items-start d-flex justify-content-between">
-                                    <mat-form-field appearance="outline">
-                                        <mat-select placeholder="Tipo Documento" disableOptionCentering
-                                            formControlName="tipo" id="tipo" name="tipo">
-                                            <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
-                                                {{tipo.description}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="tipo?.invalid && tipo?.touched" class="text-danger">
-                                        El tipo de Documento es Requerido
-                                    </mat-error>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc" message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
-                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger">
-                                    El Carnet de Identidad es Requerido (Acepta de 4 a 10 Caracteres)
+                        <div class="row">
+                            <div style="margin-left: 5px; margin-right: 15px;">
+                                <mat-form-field appearance="outline">
+                                    <mat-select placeholder="Tipo Documento" disableOptionCentering
+                                        formControlName="tipo" id="tipo" name="tipo">
+                                        <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
+                                            {{tipo.description}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-error style="text-align:right; margin-top: -7px;" *ngIf="tipo?.invalid && tipo?.touched" class="text-danger">
+                                    El tipo de Documento es Requerido
                                 </mat-error>
                             </div>
-                            <div class="col-md-3 col-sm-12">
-                                <div class="d-flex flex-row align-items-start d-flex justify-content-between">
+                        </div>
+                        <div class="row">
+                            <div class="d-flex flex-row align-items-start justify-content-between">
+                                <div class="col-md-6 col-sm-12">
+                                    <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc" message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                                    <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger">
+                                        El Carnet de Identidad es Requerido (Acepta de 4 a 10 Caracteres)
+                                    </mat-error>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
                                     <mat-form-field appearance="outline" >
                                         <mat-select placeholder="Elija Expedido" disableOptionCentering
                                             formControlName="expDoc" id="expDoc" name="expDoc">
