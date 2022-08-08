@@ -6,6 +6,7 @@ import { ButtonSecondaryComponent } from "./components/button-secondary/button-s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { InputTextComponent } from './components/input-text/input-text.component';
+import { BigInputTextComponent } from './components/big-input-text/big-input-text.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
@@ -16,12 +17,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 
 
+
 @NgModule({
   declarations: [
     ButtonComponent,
     ButtonOutlineComponent,
     ButtonSecondaryComponent,
-    InputTextComponent
+    InputTextComponent,
+    BigInputTextComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   exports: [
     InputTextComponent,
+    BigInputTextComponent,
     ButtonComponent,
     ButtonOutlineComponent,
     ButtonSecondaryComponent

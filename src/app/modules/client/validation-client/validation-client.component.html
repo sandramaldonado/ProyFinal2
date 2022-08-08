@@ -9,12 +9,12 @@
                 </mat-card-header>
                 <mat-card-content>
                     <form [formGroup]="validationForm" style="background-color:white" (ngSubmit)="onSubmit()" novalidate id="validationForm">
-                        <app-input-text controlName="name" [submitted]="submitted" identifier="name"
-                            message="Ingresa tu Primer Nombre" description="Nombre"></app-input-text>
+                        <app-big-input-text controlName="name" [submitted]="submitted" identifier="name"
+                        message="Ingresa tu Primer Nombre" description="Nombre"></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;" *ngIf="name?.invalid && name?.touched"
                             class="text-danger">El Nombre es Requerido (Solo de 3 a 35 caracteres)</mat-error>
-                        <app-input-text controlName="lastname" [submitted]="submitted" identifier="lastname"
-                            message="Ingresa tu Primer Apellido" description="Apellido"></app-input-text>
+                        <app-big-input-text controlName="lastname" [submitted]="submitted" identifier="lastname"
+                            message="Ingresa tu Primer Apellido" description="Apellido"></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;"
                             *ngIf="lastname?.invalid && lastname?.touched" class="text-danger">El Apellido es Requerido
                             (Solo de 3 a 35 caracteres)</mat-error>

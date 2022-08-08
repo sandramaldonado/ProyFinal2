@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="row d-flex flex-row align-items-start justify-content-center">
-                            <div class="form-group col-md-3 col-sm-12">
+                            <div class="col-md-3 col-sm-12">
                                 <div class="d-flex flex-row align-items-start d-flex justify-content-between">
                                     <mat-form-field appearance="outline">
                                         <mat-select placeholder="Tipo Documento" disableOptionCentering
@@ -48,16 +48,15 @@
                                     </mat-error>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                 <app-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc" message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
                                 <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger">
                                     El Carnet de Identidad es Requerido (Acepta de 4 a 10 Caracteres)
                                 </mat-error>
                             </div>
-
                             <div class="col-md-3 col-sm-12">
                                 <div class="d-flex flex-row align-items-start d-flex justify-content-between">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" >
                                         <mat-select placeholder="Elija Expedido" disableOptionCentering
                                             formControlName="expDoc" id="expDoc" name="expDoc">
                                             <mat-option *ngFor="let exp of expedido" [value]="exp.value">
@@ -73,9 +72,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12 col-sm-12">
-                                <app-input-text controlName="nroRef" [submitted]="submitted" identifier="nroRef"
-                                    message="N&uacute;mero Referencia" description="N&uacute;mero Ref.">
-                                </app-input-text>
+                                <app-big-input-text controlName="nroRef" [submitted]="submitted" identifier="nroRef"
+                                message="N&uacute;mero Referencia" description="N&uacute;mero Ref."></app-big-input-text>
                                 <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger">
                                     El N&uacute;mero Referencia es Requerido (Acepta solo 8 N&uacute;meros)
                                 </mat-error>
@@ -83,9 +81,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12 col-sm-12">
-                                <app-input-text controlName="email" [submitted]="submitted" identifier="email"
-                                    message="Correo Electr&oacute;nico" description="email">
-                                </app-input-text>
+                                <app-big-input-text controlName="email" [submitted]="submitted" identifier="email"
+                                message="Correo Electr&oacute;nico" description="email"></app-big-input-text>
                                 <mat-error style="text-align:right; margin-top: -7px;" *ngIf="email?.invalid && email?.touched" class="text-danger">
                                     El Correo es Requerido 
                                 </mat-error>
@@ -93,21 +90,19 @@
                         </div>
 
                         <div class="form-group col-12">
-                            
                             <hr>
                             <div class="row contenido">
                                 <h4>Datos de Facturaci&oacute;n</h4>
                                 <div class="form-group col-md-12 col-sm-12">
-                                    <app-input-text controlName="razonS" [submitted]="submitted" identifier="razonS"
-                                        message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social">
-                                    </app-input-text>
+                                    <app-big-input-text controlName="razonS" [submitted]="submitted" identifier="razonS"
+                                    message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social"></app-big-input-text>
                                     <mat-error style="text-align:right; margin-top: -7px;" *ngIf="razonS?.invalid && razonS?.touched" class="text-danger">
                                         Raz&oacute;n Social es Requerida (Solo acepta de 2 a 50 caracteres)
                                     </mat-error>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12">
-                                    <app-input-text controlName="nit" [submitted]="submitted" identifier="nit"
-                                        message="Ingresa N&uacute;mero de NIT" description="NIT"></app-input-text>
+                                    <app-big-input-text controlName="nit" [submitted]="submitted" identifier="nit"
+                                    message="Ingresa N&uacute;mero de NIT" description="NIT"></app-big-input-text>
                                     <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nit?.invalid && nit?.touched" class="text-danger">
                                         El n&uacute;mero NIT es Requerido (Acepta solamente N&uacute;meros)
                                     </mat-error>
