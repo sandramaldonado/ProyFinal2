@@ -25,13 +25,15 @@ typescript                      4.6.4
 docker build -t landing-master-sales-frontend:v1.0.0 -f ./Dockerfile .
 docker run -p 8000:80 landing-master-sales-frontend:v1.0.0
 
-#ejecutar imagen desde terminal para usar la imagen en el registry de GitLab
-#Logearse al Registry de Gitlab
+## ejecutar imagen desde terminal para usar la imagen en el registry de GitLab
+# Logearse al Registry de Gitlab
 docker login registry-gitlab.nuevatel.com
-#Ejecutar el container con la imagen de Giitlab
+docker build -t registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend .
+# Ejecutar el container con la imagen de Giitlab
+
 docker run -p 8000:80 registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
 
-docker build -t registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend .
+
 docker push registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
 
 ## Correr la aplicacion en ambiente de desarrollo local

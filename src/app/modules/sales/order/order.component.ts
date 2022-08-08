@@ -5,6 +5,7 @@ import { TokenService } from '@app/services/token.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanComposition } from '@models/PlanComposition';
 import { Observable, switchAll } from 'rxjs';
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-order',
@@ -28,7 +29,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private webstoreservice : WebstoreService,
     private breservices : BusinessrulesService,
-    private tokenService : TokenService
+    private tokenService : TokenService,
+    private scroller: ViewportScroller
   ) {
 
     this.modules = {
@@ -128,11 +130,17 @@ export class OrderComponent implements OnInit {
 
   changeModule(module :any){
   console.log(module)
+  var me = this;
 
    switch (module) {
     case 'checkcoverage':
       if(this.modules.scoring.enabled){
         this.modules.scoring.visible=true;
+
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("scoring");
+        }, 1000);
+
       }else{
         this.changeModule("scoring");
       }
@@ -141,6 +149,11 @@ export class OrderComponent implements OnInit {
     case 'scoring':
       if(this.modules.adminClient.enabled){
         this.modules.adminClient.visible=true;
+
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("adminclient");
+        }, 1000);
+
       }else{
         this.changeModule("adminclient");
       }
@@ -149,6 +162,12 @@ export class OrderComponent implements OnInit {
     case 'adminclient':
       if(this.modules.checkEmail.enabled){
         this.modules.checkEmail.visible=true;
+
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("checkemail");
+        }, 1000);
+
+
       }else{
         this.changeModule("checkemail");
       }
@@ -158,6 +177,11 @@ export class OrderComponent implements OnInit {
 
       if(this.modules.documents.enabled){
         this.modules.documents.visible=true;
+
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("documents");
+        }, 1000);
+
       }else{
         this.changeModule("documents");
       }
