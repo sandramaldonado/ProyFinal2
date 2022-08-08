@@ -31,7 +31,7 @@ docker login registry-gitlab.nuevatel.com
 docker build -t registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend .
 # Ejecutar el container con la imagen de Giitlab
 
-docker run -p 8000:80 registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
+docker run -p 4200:80 registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
 
 
 docker push registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
