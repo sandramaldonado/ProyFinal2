@@ -238,7 +238,7 @@ export class ValidationClientComponent implements OnInit {
         "productTypeCode": this.productTypeCode
       },
       "saleOrder": {
-        "planCode": "1",
+        "planCode": this.planComposition?.planCompositionCode,
         "processTypeCode": "PTFSALE",
         "channelCode": "CAASES",
         "cityCode": "CBA",
