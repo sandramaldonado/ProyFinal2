@@ -1,7 +1,3 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 import {EnvServiceFactory} from '../builder';
 const vars = EnvServiceFactory();
 export const environment = {
@@ -18,6 +14,8 @@ export const environment = {
   SSITokenUsername : 'landing',
   SSITokenPassword : '3X4E+U7d1m1XprRamjfaRg==',
   SSIAuthApiUrl : 'http://omega.10.45.57.104.sslip.io/auth/login',
+
+  EmailApiUrl :  'http://localhost:3800/api/mastersales/sendEmail',
 
   domain: vars.domain,
   endPoint: vars.endPoint,

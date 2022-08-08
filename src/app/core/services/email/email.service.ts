@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { retry, catchError } from 'rxjs/operators';
 import { Client } from '@models/Client';
 import { Observable, throwError } from 'rxjs';
-import { WebstoreService } from './webstore/webstore.service';
+import { WebstoreService } from '@services/webstore/webstore.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmailService {
-  url: string = 'http://localhost:3800/api/mastersales/sendEmail';
+  url: string = `${environment.EmailApiUrl}`;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(
     private httpClient: HttpClient,
