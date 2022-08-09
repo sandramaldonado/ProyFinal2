@@ -11,16 +11,16 @@ import { environment } from 'src/environments/environment';
 })
 export class EmailService {
   url: string = `${environment.EmailApiUrl}`;
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(
     private httpClient: HttpClient,
     private webstoreservice : WebstoreService
     ) { }
 
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
+    headers : new HttpHeaders({
+      'Content-Type' : 'application/json',
+      'Accept' : 'application/json'
+  })
   };
 
   sendValidationEmail(code:string): Observable<any>{

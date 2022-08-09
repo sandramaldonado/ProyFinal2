@@ -15,7 +15,7 @@ export const environment = {
   SSITokenPassword : '3X4E+U7d1m1XprRamjfaRg==',
   SSIAuthApiUrl : 'http://omega.10.45.57.104.sslip.io/auth/login',
 
-  EmailApiUrl :  'htpp://10.45.56.62:3800/api/mastersales/sendEmail',
+  EmailApiUrl :  'http://10.45.56.62:3800/api/mastersales/sendEmail',
 
   domain: vars.domain,
   endPoint: vars.endPoint,
