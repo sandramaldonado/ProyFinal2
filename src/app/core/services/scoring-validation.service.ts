@@ -10,7 +10,7 @@ export class ScoringValidationService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "http://omega.10.45.57.104.sslip.io/rules/scoring/scoringEvaluation";
+  apiUrl = "https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation";
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
