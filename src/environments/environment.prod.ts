@@ -13,7 +13,7 @@ export const environment = {
 
   SSITokenUsername : 'landing',
   SSITokenPassword : '3X4E+U7d1m1XprRamjfaRg==',
-  SSIAuthApiUrl : 'http://omega.10.45.57.104.sslip.io/auth/login',
+  SSIAuthApiUrl : 'https://omega.devnt.ssidevops.com/auth/login',
 
   EmailApiUrl :  'htpp://10.45.56.62:3800/api/mastersales/sendEmail',
 
