@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row pb-3">
         <section class="section-body col-12 py-3">
+            {{boundAttribute}}
             <h3>{{title}}</h3>
             <p>{{message}}</p>
             <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm">
@@ -19,7 +20,7 @@
                         </mat-error>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="secondName" [submitted]="submitted" identifier="secondName"
+                        <app-big-input-text controlName="secondName"  [submitted]="submitted" identifier="secondName"
                             message="Segundo Nombre" description="Segundo Nombre"></app-big-input-text>
                     </div>
                 </div>
@@ -33,7 +34,7 @@
                         </mat-error>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="secondSurName" [submitted]="submitted"
+                        <app-big-input-text controlName="secondSurName" [(ngModel)]="boundLastName"  [submitted]="submitted"
                             identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
                         </app-big-input-text>
                     </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-admin-client',
@@ -45,6 +46,11 @@ export class AdminClientComponent implements OnInit {
   infoClient: any;
 
   @Output() nextAdminClientStep = new EventEmitter<any>();
+  @LocalStorage()
+	public boundAttribute : any ="Texto Inicial";
+
+  @LocalStorage() 
+  public boundLastName : any;
 
   constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
@@ -58,6 +64,10 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.boundAttribute = "valor en OnInit";
+    this.boundAttribute = this.boundAttribute;
+    this.boundLastName = "Ingrese Apelldio";
+    this.boundLastName = this.boundLastName;
 
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
@@ -189,7 +199,7 @@ export class AdminClientComponent implements OnInit {
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
 
-
+    
     get firstName() {
       return this.validationForm.get('firstName');
     }
