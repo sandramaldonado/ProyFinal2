@@ -75,15 +75,6 @@ export class MovilListComponent implements OnInit {
         const linesEntertainment = this.numberList["data"]["data"]["tv"];
         console.log(linesMovil.length);
         
-        /*
-        validationForm = new FormGroup({
-          'dni': new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
-          'name': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
-          'lastname': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nameClient)]),
-          'subscriberId': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
-          'captcha_status': new FormControl(null, [Validators.required])
-        });
-         */
         if (linesMovil.length > 0) {
           this.movilState = true;
           constrolList = constrolList+"'movil_control': new FormControl(null, [Validators.required]),";
@@ -149,11 +140,7 @@ export class MovilListComponent implements OnInit {
   next(){
     this.nextMovilListStep.emit(true);
   }
-
-/*
-  private 
-  }*/
-
+  
   get movil_control() {
     return this.validationForm.get('movil_control');
   }
@@ -164,5 +151,13 @@ export class MovilListComponent implements OnInit {
 
   get tv_control() {
     return this.validationForm.get('tv_control');
+  }
+
+  updateOnclickMovil(e: any) {
+    console.log(e.target.value);
+  }
+  
+  updateOnclickInternet(e: any){
+    console.log(e.target.value);
   }
 }

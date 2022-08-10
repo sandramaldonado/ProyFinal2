@@ -68,7 +68,13 @@ export class OrderComponent implements OnInit {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'movilList'
+        alias : 'movillist'
+      },
+      deliveryMethod: {
+        visible :false,
+        active: false,
+        enabled : true,
+        alias : 'deliverymethod'
       }
     };
   }
@@ -188,9 +194,29 @@ export class OrderComponent implements OnInit {
 
     break;
     case 'documents':
+      if(this.modules.movilList.enabled){
+        this.modules.movilList.visible=true;
 
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("movillist");
+        }, 1000);
+
+      }else{
+        this.changeModule("movillist");
+      }
     break;
+    case 'movillist':
+      if(this.modules.deliveryMethod.enabled){
+        this.modules.deliveryMethod.visible=true;
 
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("deliverymethod");
+        }, 1000);
+
+      }else{
+        this.changeModule("deliverymethod");
+      }
+      break;
      default:
       break;
    }

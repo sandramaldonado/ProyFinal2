@@ -1,25 +1,21 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SaleModeRoutingModule } from './sale-mode-routing.module';
-import { SaleModeComponent } from './sale-mode.component';
-import { HeaderModule } from '@layout/header/header.module';
+import { StoreCityRoutingModule } from './store-city-routing.module';
+import { StoreCityComponent } from './store-city.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { SharedModule } from '@shared/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
+import { SharedModule } from '@shared/shared.module';
 import { LazyElementsModule } from '@angular-extensions/elements';
 
 
 @NgModule({
-  declarations: [
-    SaleModeComponent
-  ],
+  declarations: [StoreCityComponent],
   imports: [
     CommonModule,
-    SaleModeRoutingModule,
-    HeaderModule,
+    StoreCityRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -27,6 +23,8 @@ import { LazyElementsModule } from '@angular-extensions/elements';
     MatRadioModule,
     SharedModule,
     LazyElementsModule
-  ]
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA],
+  exports : [StoreCityComponent]
 })
-export class SaleModeModule { }
+export class StoreCityModule { }

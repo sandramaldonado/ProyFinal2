@@ -5,7 +5,7 @@
             <p>{{message}}</p>
             <mat-card>
                 <mat-card-content>
-                    <form style="background-color:white" class="form" novalidate id="validationForm">
+                    <form style="background-color:white" class="form" novalidate id="validationForm" >
                         <div *ngIf="movilState== true; then trueMovil;"></div>
                         <ng-template #trueMovil>
                             <div class="row" style="color:black">
@@ -13,7 +13,7 @@
                                 <p>Elije un N&uacute;mero</p>
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6" [id]="line.id">
                                     <div [class]="line.description" role="alert">
-                                        <mat-radio-button [value]="line.name" >{{line.name}}</mat-radio-button>
+                                        <mat-radio-button [value]="line.name" (change)="updateOnclickMovil($event)">{{line.name}}</mat-radio-button>
                                     </div>
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                                 <div *ngFor="let internet of internetList" class="col-6 col-md-6 col-sm-6"
                                     [id]="internet.id">
                                     <div [class]="internet.description" role="alert">
-                                        <mat-radio-button [value]="internet.name" >{{internet.name}}</mat-radio-button>
+                                        <mat-radio-button [value]="internet.name" (change)="updateOnclickInternet($event)" >{{internet.name}}</mat-radio-button>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                         </ng-template>
                         <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
                         <div class="text-center">
-                            <app-button [content]="'Continuar'"></app-button>
+                            <app-button [content]="'Continuar'"  (click)="next()"></app-button>
                         </div>
                     </form>
                 </mat-card-content>
