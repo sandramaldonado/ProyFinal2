@@ -9,7 +9,7 @@ export class PlanListService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "http://omega.10.45.57.104.sslip.io/product/plans";
+  apiUrl = "https://omega.devnt.ssidevops.com/product/plans";
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */

@@ -9,7 +9,7 @@ export class MovilListService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "http://omega.10.45.57.104.sslip.io/sales/find/phone/numbers";
+  apiUrl = "https://omega.devnt.ssidevops.com/sales/find/phone/numbers";
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */

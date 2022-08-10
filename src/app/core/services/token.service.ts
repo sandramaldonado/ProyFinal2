@@ -7,7 +7,7 @@ import { Autenticar } from '@models/Autenticar';
   providedIn: 'root'
 })
 export class TokenService {
-  urToken = "http://omega.10.45.57.104.sslip.io/auth/login";
+  urToken = "https://omega.devnt.ssidevops.com/auth/login";
   constructor(private httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
