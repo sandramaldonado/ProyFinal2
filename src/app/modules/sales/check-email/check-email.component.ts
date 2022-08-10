@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { EmailService } from '@app/services/email.service';
+import { EmailService } from '@app/services/email/email.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
