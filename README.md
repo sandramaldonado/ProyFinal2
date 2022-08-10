@@ -1,14 +1,14 @@
 # LandingMasterSalesFrontend  
 
-Angular CLI: 14.0.0 (npm i -g  @angular/cli@14.0.0)
-Node: 14.15.0
-Package Manager: npm 6.14.8 
-OS: darwin x64
+- Angular CLI: 14.0.0 (npm i -g  @angular/cli@14.0.0)
+- Node: 14.15.0
+- Package Manager: npm 6.14.8 
+- OS: darwin x64
 
 Angular: 14.0.0
-... animations, cdk, cli, common, compiler, compiler-cli, core
-... forms, google-maps, material, platform-browser
-... platform-browser-dynamic, router
+- animations, cdk, cli, common, compiler, compiler-cli, core
+- forms, google-maps, material, platform-browser
+- platform-browser-dynamic, router
 
 Package                         Version
 ---------------------------------------------------------
