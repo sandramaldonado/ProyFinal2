@@ -17,6 +17,8 @@ export const environment = {
 
   EmailApiUrl :  'http://10.45.56.62:3800/api/mastersales/sendEmail',
 
+  ClientValidationUrl : 'http://localhost:3000/client',
+
   domain: vars.domain,
   endPoint: vars.endPoint,
   urlClientInfoMicrofront: vars.urlClientInfoMicrofront,

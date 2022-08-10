@@ -14,7 +14,7 @@ export class WebstoreService {
   httpPostOptions = cts.httpPostOptions;
   httpGetOptions = cts.httpGetOptions;
   token : any;
-  urToken = "https://omega.devnt.ssidevops.com/auth/login";
+  apiUrl : string = `${environment.SSIAuthApiUrl}`;
 
   constructor(
     private sessionStorageService : SessionStorageService,

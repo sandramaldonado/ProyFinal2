@@ -3,12 +3,14 @@ import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import * as cts from '@shared/utils/constants';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessrulesService {
-  apiUrl : string = "https://omega.devnt.ssidevops.com/rules";
+  //apiUrl : string = "https://omega.devnt.ssidevops.com/rules";
+  apiUrl : string = `${environment.BreApiUrl}`
 
   constructor(
     private webstoreservice : WebstoreService,
