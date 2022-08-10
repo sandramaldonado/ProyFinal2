@@ -10,35 +10,68 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="firstName" [submitted]="submitted" identifier="firstName"
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else NAME1EDIT">
+                        <app-big-input-text controlName="firstName" readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
                             message="Primer Nombre" description="Primer Nombre"></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;"
                             *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">
                             El primer Nombre es Requerido (Solo acepta de 2 a 50 caracteres)
                         </mat-error>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="secondName" [submitted]="submitted" identifier="secondName"
+                    <ng-template #NAME1EDIT>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <app-big-input-text controlName="firstName" readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
+                            message="Primer Nombre" description="Primer Nombre"></app-big-input-text>
+                            <mat-error style="text-align:right; margin-top: -7px;"
+                                *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">
+                                El primer Nombre es Requerido (Solo acepta de 2 a 50 caracteres)
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else NAME2EDIT">
+                        <app-big-input-text controlName="secondName" readonly="{{stateClient}}" [submitted]="submitted" identifier="secondName"
                             message="Segundo Nombre" description="Segundo Nombre"></app-big-input-text>
                     </div>
+                    <ng-template #NAME2EDIT>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <app-big-input-text controlName="secondName" readonly="false" [submitted]="submitted" identifier="secondName"
+                            message="Segundo Nombre" description="Segundo Nombre"></app-big-input-text>
+                        </div>
+                    </ng-template>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="sureName" [submitted]="submitted" identifier="sureName"
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else SURENAME1EDIT">
+                        <app-big-input-text controlName="sureName" readonly="{{stateClient}}" [submitted]="submitted" identifier="sureName"
                             message="Primer Apellido" description="Primer Apellido"></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;"
                             *ngIf="sureName?.invalid && sureName?.touched" class="text-danger">
                             El Primer Apellido es Requerido (Solo acepta de 2 a 50 caracteres)
                         </mat-error>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="secondSurName" [submitted]="submitted"
+                    <ng-template #SURENAME1EDIT>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <app-big-input-text controlName="sureName" readonly="false" [submitted]="submitted" identifier="sureName"
+                            message="Primer Apellido" description="Primer Apellido"></app-big-input-text>
+                            <mat-error style="text-align:right; margin-top: -7px;"
+                                *ngIf="sureName?.invalid && sureName?.touched" class="text-danger">
+                                El Primer Apellido es Requerido (Solo acepta de 2 a 50 caracteres)
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else SURENAME2EDIT">
+                        <app-big-input-text controlName="secondSurName" readonly="readonly" [submitted]="submitted"
                             identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
                         </app-big-input-text>
                     </div>
+                    <ng-template #SURENAME2EDIT>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <app-big-input-text controlName="secondSurName" readonly="readonly" [submitted]="submitted"
+                            identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
+                            </app-big-input-text>
+                        </div>
+                    </ng-template>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="stateClient; else NAME2EDIT">
                     <mat-form-field appearance="outline">
                         <mat-select placeholder="Tipo Documento" disableOptionCentering formControlName="tipo" id="tipo"
                             name="tipo">
@@ -53,15 +86,15 @@
                     </mat-error>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <app-big-input-text controlName="nroDoc" [submitted]="submitted" identifier="nroDoc"
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else NAME2EDIT">
+                        <app-big-input-text controlName="nroDoc" readonly="readonly" [submitted]="submitted" identifier="nroDoc"
                             message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;"
                             *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger">
                             El Carnet de Identidad es Requerido (Acepta de 4 a 10 Caracteres)
                         </mat-error>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="stateClient; else NAME2EDIT">
                         <mat-form-field appearance="outline">
                             <mat-select placeholder="Elija Expedido" disableOptionCentering formControlName="expDoc"
                                 id="expDoc" name="expDoc">
@@ -78,7 +111,7 @@
                 </div>
 
                 <div class="row">
-                    <app-big-input-text controlName="nroRef" [submitted]="submitted" identifier="nroRef"
+                    <app-big-input-text controlName="nroRef" readonly="false" [submitted]="submitted" identifier="nroRef"
                         message="N&uacute;mero Referencia" description="N&uacute;mero Ref."></app-big-input-text>
                     <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nroRef?.invalid && nroRef?.touched"
                         class="text-danger">
@@ -86,7 +119,7 @@
                     </mat-error>
                 </div>
                 <div class="row">
-                    <app-big-input-text controlName="email" [submitted]="submitted" identifier="email"
+                    <app-big-input-text controlName="email" readonly="false" [submitted]="submitted" identifier="email"
                             message="Correo Electr&oacute;nico" description="email"></app-big-input-text>
                         <mat-error style="text-align:right; margin-top: -7px;" *ngIf="email?.invalid && email?.touched"
                             class="text-danger">
@@ -101,7 +134,7 @@
                 </div>
 
                 <div class="row">
-                    <app-big-input-text controlName="razonS" [submitted]="submitted" identifier="razonS"
+                    <app-big-input-text controlName="razonS" readonly="false" [submitted]="submitted" identifier="razonS"
                                 message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social">
                             </app-big-input-text>
                             <mat-error style="text-align:right; margin-top: -7px;"
@@ -110,7 +143,7 @@
                             </mat-error>
                 </div>
                 <div class="row">
-                    <app-big-input-text controlName="nit" [submitted]="submitted" identifier="nit"
+                    <app-big-input-text controlName="nit" readonly="false" [submitted]="submitted" identifier="nit"
                                 message="Ingresa N&uacute;mero de NIT" description="NIT"></app-big-input-text>
                             <mat-error style="text-align:right; margin-top: -7px;" *ngIf="nit?.invalid && nit?.touched"
                                 class="text-danger">

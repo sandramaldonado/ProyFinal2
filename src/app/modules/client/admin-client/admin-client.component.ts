@@ -29,6 +29,7 @@ export class AdminClientComponent implements OnInit {
   clientInfo: any;
   keyClient: any;
   stateScorin: String;
+  stateClient: boolean = false;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -58,7 +59,7 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
     //this.loadcontents();
@@ -82,6 +83,11 @@ export class AdminClientComponent implements OnInit {
   }
 
   loadForm() {
+    if (this.clientInfo["clientId"] != "null" || this.clientInfo["clientId"] != "NULL" || this.clientInfo["clientId"] != "") {
+      console.log("entra");
+      this.stateClient = true;
+    }
+
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];
@@ -164,6 +170,7 @@ export class AdminClientComponent implements OnInit {
       "personId": this.clientInfo["personId"],
       "personTypeCode": this.clientInfo["personTypeCode"]
     };
+
     this.loadInfoClien(datosClient);
     console.log("inica");
     console.log(datosClient);

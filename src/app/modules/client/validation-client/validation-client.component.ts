@@ -120,7 +120,7 @@ export class ValidationClientComponent implements OnInit {
     */
 
     let actualDate = moment().format('DD-MM-YYYY').toString();
-    console.log(actualDate);
+    //console.log(actualDate);
     this.fecha = actualDate;
     
   }
@@ -173,13 +173,13 @@ export class ValidationClientComponent implements OnInit {
             response => {
               this.infoClient = response;
               dataClient = this.infoClient["data"]["data"][0];
-              console.log(dataClient);
+              //console.log(dataClient);
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   const planService = this.armadoJsonScoring();
-                  console.log(planService);
+                  //console.log(planService);
                   this.scoringValidated(planService);
                 } else {
                   this.submitted = true;
@@ -231,10 +231,7 @@ export class ValidationClientComponent implements OnInit {
   armadoJsonScoring() {
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
-    console.log(this.planComposition);
-    console.log(this.planList);
     this.productTypeCode = [];
-    console.log(this.fecha);
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
