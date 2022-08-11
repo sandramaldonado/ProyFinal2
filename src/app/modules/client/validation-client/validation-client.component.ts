@@ -52,12 +52,13 @@ export class ValidationClientComponent implements OnInit {
     length: 6,
     cssClass: 'custom',
     back: {
+      border: '1px solid',
       stroke: "#2F9688",
-      solid: "#f2efd2"
+      solid: "white" //"#f2efd2"
     },
     font: {
-      color: "#000000",
-      size: "35px"
+      color: "purple", //"#000000",
+      size: "35px",
     }
   };
 
@@ -192,7 +193,7 @@ export class ValidationClientComponent implements OnInit {
                 }
               } else {
                 this.submitted = true;
-                sessionStorage.setItem("isClient", "false");
+                
                 var datosClient2:any = [];
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;

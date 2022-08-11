@@ -1,64 +1,60 @@
 mat-label.has-events {
     pointer-events: auto;
-    color:purple;
+    color:#5C349D;
 }
 
 mat-form-field {
     width: 100%;
 }
 
+input{
+    color: #5C349D;
+}
+
+/* El icono debe ser "position: absolute"
+ * Ademas le damos un "display: block" y lo posicionamos */
+input.input{
+    padding-right: 1.5rem;
+  }
+  
+#icon{
+    position: absolute;
+    display: block;
+    bottom: .5rem;
+    right: 0.1rem;
+    opacity: 0.5!important;
+    user-select: none;
+    cursor: pointer;
+}
+
 
 ::ng-deep .mat-form-field-outline-start {
-    color: purple!important;
-    border-color: purple!important;
+    color: #5C349D;
+    border-color: #5C349D!important;
     border-radius: 9px 0 0 9px !important;
     min-width: 9px !important;
     //width: 100%;
 }
 
 ::ng-deep .mat-form-field-outline-end {
-    color: purple!important;
-    border-color: purple!important;
+    color: #5C349D;
+    border-color: #5C349D!important;
     border-radius: 0 9px 9px 0 !important;
     //width: 90%;
 }
 
 //input outline color
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: purple!important;
+    color: #5C349D;
     // opacity: 1!important;
 }
 
 //mat-input focused color
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: purple!important;
+    color: #5C349D!important;
 }
-
 
 .tamañodiv{
     margin-left: 5px;
     margin-right: 5px;
 }
-
-//::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.1em 0px !important;}
-/*
-
-::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
-
-::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    transform: translateY(-0.4em) scale(.98);
-    width: 100%;
-}
-
-
-//input outline color
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: purple!important;
-    // opacity: 1!important;
-}
-
-//mat-input focused color
-::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: purple!important;
-}
-*/
