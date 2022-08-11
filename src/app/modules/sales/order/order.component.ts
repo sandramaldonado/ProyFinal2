@@ -59,7 +59,7 @@ export class OrderComponent implements OnInit {
         alias : 'checkemail'
       },
       documents: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'documents'
@@ -94,7 +94,7 @@ export class OrderComponent implements OnInit {
       .subscribe(response =>{
       this.coverageData=response;
       this.scoringStatus = this.webstoreservice.getStatusScoring();
-      this.initializeComponents();
+      //this.initializeComponents();
     })
 
 
