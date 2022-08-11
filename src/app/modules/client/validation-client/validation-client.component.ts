@@ -7,9 +7,10 @@ import { ScoringValidationService } from '@app/services/scoring-validation.servi
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { NgxCaptchaService } from '@binssoft/ngx-captcha';
 import { PlanComposition } from '@models/PlanComposition';
-import { CaptchaService } from '@services/captcha.service';
-import { ClientService } from '@services/client.service';
-import { TokenService } from '@services/token.service';
+import { CaptchaService } from 'src/app/core/services/captcha.service';
+import { ClientService } from 'src/app/core/services/client.service';
+import { TokenService } from 'src/app/core/services/token.service';
+import { OrdersService } from 'src/app/core/services/orders.service';
 import * as moment from 'moment';
 
 @Component({
@@ -67,6 +68,7 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
+    private ordersService: OrdersService,
     private webstoreservice: WebstoreService) {
 
     this.autentication = {};
@@ -192,11 +194,12 @@ export class ValidationClientComponent implements OnInit {
                 }
               } else {
                 this.submitted = true;
+
                 sessionStorage.setItem("isClient", "false");
-                var datosClient2:any = [];
+                var datosClient2:any = {};
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;
-                datosClient2["documentCity"] = null;
+                datosClient2["documentCity"] = "CCBA";
                 datosClient2["documentCityDesc"] = null;
                 datosClient2["documentNumber"] = dni;
                 datosClient2["documentType"] = "CI";
@@ -210,10 +213,12 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["name"] = name1;
                 datosClient2["nit"] = null;
                 datosClient2["personId"] = null;
-                datosClient2["personTypeCode"] = null;
+                datosClient2["personTypeCode"] = "NATURAL";
+                console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
                 this.webstoreservice.saveStatusScoring("NORMAL");
-                this.router.navigate(['/oferta/orden-compra']);
+                this.createPerson();
+                //this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -234,12 +239,17 @@ export class ValidationClientComponent implements OnInit {
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
     this.productTypeCode = [];
+    console.log(this.fecha);
+    const client = this.webstoreservice.getClientInformation();
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
     this.armadoScoring = JSON.stringify({
       "client": {
-        "clientId": this.infoClient["data"]["data"]["0"]["clientId"]
+        "clientId": client.clientId, //this.infoClient["data"]["data"]["0"]["clientId"],
+        "documentNumber": client.clientId?null:client.documentNumber,
+        "documentTypeCode": client.clientId?null:client.documentType,
+        "fullname": client.clientId?null:client.fullName
       },
       "commercialOffer": {
         "groupPlan": this.planComposition?.planCompositionCode,
@@ -291,6 +301,28 @@ export class ValidationClientComponent implements OnInit {
 
   get captcha_status() {
     return this.validationForm.get('captcha_status');
+  }
+
+  createPerson(){
+    const person = this.webstoreservice.getClientInformation();
+    const param = {
+      createPerson: person,
+      createPersonAdditionalData: [
+        {
+          dataTypeCode: 'CONTACT_PHONE',
+          status: 'A',
+          valueData: this.validationForm.value.subscriberId
+        }
+      ],
+      userId: this.autentication["data"]["userId"]
+    }
+    this.ordersService.createPerson(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log(response);
+        person.personId = response.data.data.personId;
+        this.webstoreservice.saveClientInformation(person);
+        this.router.navigate(['/oferta/orden-compra']);
+      });
   }
 
 }
