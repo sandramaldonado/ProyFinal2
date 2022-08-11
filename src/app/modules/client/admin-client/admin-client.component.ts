@@ -29,7 +29,7 @@ export class AdminClientComponent implements OnInit {
   clientInfo: any;
   keyClient: any;
   stateScorin: String;
-  stateClient: boolean = false;
+  stateClient: boolean = true;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -52,6 +52,7 @@ export class AdminClientComponent implements OnInit {
             private clientService: ClientService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
+    this.stateClient = (sessionStorage.getItem("isClient") == "true");
     this.clientInfo = this.webstoreservice.getClientInformation();
     this.stateScorin = this.webstoreservice.getStatusScoring();
 
@@ -83,11 +84,6 @@ export class AdminClientComponent implements OnInit {
   }
 
   loadForm() {
-    if (this.clientInfo["clientId"] != "null" || this.clientInfo["clientId"] != "NULL" || this.clientInfo["clientId"] != "") {
-      console.log("entra");
-      this.stateClient = true;
-    }
-
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];

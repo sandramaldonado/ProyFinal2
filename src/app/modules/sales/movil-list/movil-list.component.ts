@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatRadioChange } from '@angular/material/radio';
 import { MovilListService } from '@app/services/movil-list.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { RadioLines } from '@models/Radio-Lines';
@@ -18,13 +19,16 @@ export class MovilListComponent implements OnInit {
   numberList: any;
   productTypeCode: any;
   planService:any;
-  linesList: RadioLines[] = [];
-  internetList: RadioLines[] = [];
-  tvList: RadioLines[] = [];
+  linesList: any = [];
+  internetList: any = [];
+  tvList: any = [];
   movilState: Boolean = false;
   internetState: Boolean = false;
   entertainmentState: Boolean = false;
   validationForm: any;
+  lineaInternet = "";
+  lineaTv = "";
+  limitLine = 5;
 
   @Output() nextMovilListStep = new EventEmitter<any>();
 
@@ -40,7 +44,7 @@ export class MovilListComponent implements OnInit {
 
   ngOnInit(): void {
     this.armadoJsonScoring();
-    this.loadForm();
+    this.searchList();
   }
 
   armadoJsonScoring(){
@@ -61,7 +65,7 @@ export class MovilListComponent implements OnInit {
 
   }
 
-  loadForm() 
+  searchList() 
   {
     var indexAux = 0;
     this.listagroup = [];
@@ -71,25 +75,31 @@ export class MovilListComponent implements OnInit {
         this.numberList = response;
         //console.log(this.numberList);
         const linesMovil = this.numberList["data"]["data"]["movil"];
-        const linesInternet = this.numberList["data"]["data"]["ifixed"];
-        const linesEntertainment = this.numberList["data"]["data"]["tv"];
-        console.log(linesMovil.length);
         
         if (linesMovil.length > 0) {
           this.movilState = true;
           constrolList = constrolList+"'movil_control': new FormControl(null, [Validators.required]),";
           this.listagroup.push('movil_control');
           for (let index = indexAux; index < linesMovil.length; index++) {
+            //{value:"store",design:"storefront",style:"background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;",name:"Recoja en Tienda",id:"1",checked:false},
             if (index == 0) {
-              this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-info divOption'});  
+              this.linesList.push({id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true});  
+              //this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-info divOption'});  
             } else {
-              this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-secondary divOption'});
+              this.linesList.push({id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false});  
+              //this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-secondary divOption'});
             } 
             indexAux = indexAux + 1;
           }  
         }
+
+        const linesInternet = this.numberList["data"]["data"]["ifixed"];
+        const linesEntertainment = this.numberList["data"]["data"]["tv"];
         console.log(linesInternet);
         if (linesInternet.length > 0) {
+          this.lineaInternet = linesInternet[0];
+          /**
+          
           this.listagroup.push('internet_control');
           constrolList = constrolList+"'internet_control': new FormControl(null, [Validators.required]),";
           let indexAuxBase = indexAux;
@@ -98,18 +108,23 @@ export class MovilListComponent implements OnInit {
           for (let index = 0; index < linesInternet.length; index++) {
             indexAuxBase = indexAuxBase + index;
             if (index == 0) {
-              this.internetList.push({id: indexAuxBase.toString(), name: linesInternet[index], description: 'alert alert-info divOption'});  
+              this.internetList.push({id: index.toString(), name: linesInternet[index], value: linesInternet[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true});  
+              //this.internetList.push({id: indexAuxBase.toString(), name: linesInternet[index], description: 'alert alert-info divOption'});  
             } else {
-              this.internetList.push({id: indexAuxBase.toString(), name: linesInternet[index], description: 'alert alert-secondary divOption'});
+              this.internetList.push({id: index.toString(), name: linesInternet[index], value: linesInternet[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false});  
+              //this.internetList.push({id: indexAuxBase.toString(), name: linesInternet[index], description: 'alert alert-secondary divOption'});
             } 
             indexAux = indexAux + 1;
           }  
           console.log("internetdata");
           console.log(this.internetList);
+           */
         }
 
         console.log(linesEntertainment);
         if (linesEntertainment.length > 0) {
+          this.lineaTv = linesEntertainment[0];
+          /*
           this.listagroup.push('tv_control');
           constrolList = constrolList+"'tv_control': new FormControl(null, [Validators.required])";
           let indexAuxBase = indexAux;
@@ -118,12 +133,15 @@ export class MovilListComponent implements OnInit {
             indexAuxBase = indexAuxBase + index;
             console.log("internet "+index);
             if (index == indexAuxBase) {
-              this.tvList.push({id: indexAuxBase.toString(), name: linesEntertainment[index], description: 'alert alert-info divOption'});  
+              this.tvList.push({id: index.toString(), name: linesInternet[index], value: linesInternet[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true});  
+              //this.tvList.push({id: indexAuxBase.toString(), name: linesEntertainment[index], description: 'alert alert-info divOption'});  
             } else {
-              this.tvList.push({id: indexAuxBase.toString(), name: linesEntertainment[index], description: 'alert alert-secondary divOption'});
+              this.tvList.push({id: index.toString(), name: linesInternet[index], value: linesInternet[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false});  
+              //this.tvList.push({id: indexAuxBase.toString(), name: linesEntertainment[index], description: 'alert alert-secondary divOption'});
             } 
             indexAux = indexAux + 1;
           }  
+           */
         }
         console.log(this.listagroup);
         constrolList = constrolList+"}";
@@ -139,6 +157,34 @@ export class MovilListComponent implements OnInit {
 
   next(){
     this.nextMovilListStep.emit(true);
+  }
+
+  radioChange(event: MatRadioChange) {
+    console.log(event.source.name);
+    console.log(event.source.value);
+    var line = event.source.value;
+    const linesMovil = this.numberList["data"]["data"]["movil"];
+    console.log(linesMovil);
+    this.linesList = [];
+
+    for (let index = 0; index < linesMovil.length; index++) {
+      //{value:"store",design:"storefront",style:"background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;",name:"Recoja en Tienda",id:"1",checked:false},
+      if (line == linesMovil[index]) {
+        this.linesList.push({id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true});  
+        //this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-info divOption'});  
+      } else {
+        this.linesList.push({id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false});  
+        //this.linesList.push({id: index.toString(), name: linesMovil[index], description: 'alert alert-secondary divOption'});
+      } 
+    }  
+
+    /*
+    if (event.source.value === 'store') {
+        console.log(event.source.value);
+    } else {
+      alert("Servicio no disponible Temporalmente");
+    }
+     */
   }
   
   get movil_control() {
