@@ -109,14 +109,36 @@ $app-light-theme: mat-light-theme( $mat-primary-palette, $mat-accent-palette, $m
   font-weight: 500;
   padding: 2px 24px !important;
 }
+
+.mat-button {
+  font-family: MUSEO300-REGULAR;
+}
+
 .arrow-circle-back {
   font-size: 34px;
   width: 34px !important;
   height: 34px !important;
   line-height: 34px !important;
+  margin-right: 6px;
 }
 .full-width {
   width: 100%;
+}
+.spacer-form{
+  height: 10px;
+}
+.dialog-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+}
+.dialog-subtitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  margin-right: 6px;
+  white-space: nowrap;
 }
 /* end microfront address */
 
