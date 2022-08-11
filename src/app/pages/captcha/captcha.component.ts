@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { CaptchaService } from '../../shared/services/captcha.service';
+import { CaptchaService } from '@services/captcha.service';
 
 @Component({
   selector: 'app-captcha',
@@ -35,7 +35,7 @@ export class CaptchaComponent implements OnChanges {
       if (!this.config.type) {
         this.config["type"] = 1;
       }
-      
+
       if (!this.config.back || !this.config.back.stroke) {
         this.config["back"]["stroke"] = "";
       }
@@ -50,7 +50,7 @@ export class CaptchaComponent implements OnChanges {
   createCaptcha() {
     switch(this.config.type) {
       case 1: // only alpha numaric degits to type
-  
+
       let char =
       Math.random()
         .toString(24)
@@ -60,7 +60,7 @@ export class CaptchaComponent implements OnChanges {
         .substring(2, 4);
       this.code = this.resultCode = char.toUpperCase();
       break;
-      case 2: // solve the calculation 
+      case 2: // solve the calculation
       let num1 = Math.floor(Math.random() * 99);
       let num2 = Math.floor(Math.random() * 9);
       let operators = ['+','-'];
@@ -69,7 +69,7 @@ export class CaptchaComponent implements OnChanges {
       this.resultCode = (operator == '+')? (num1+num2):(num1-num2);
       break;
     }
-    
+
     setTimeout(() => {
       let captcahCanvas: any = document.getElementById("captcahCanvas");
       var ctx = captcahCanvas.getContext("2d");
@@ -91,7 +91,7 @@ export class CaptchaComponent implements OnChanges {
         }
         ctx.stroke();
       }
-       
+
       // this.captchaCode.emit(char);
     }, 100);
   }
@@ -107,7 +107,7 @@ export class CaptchaComponent implements OnChanges {
     console.log(this.captch_input);
     if (this.captch_input != this.resultCode) {
       this.captchService.setCaptchaStatus(false);
-      
+
     } else  {
       this.captchService.setCaptchaStatus(true);
     }

@@ -7,9 +7,9 @@ import { ScoringValidationService } from '@app/services/scoring-validation.servi
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { NgxCaptchaService } from '@binssoft/ngx-captcha';
 import { PlanComposition } from '@models/PlanComposition';
-import { CaptchaService } from 'src/app/core/services/captcha.service';
-import { ClientService } from 'src/app/core/services/client.service';
-import { TokenService } from 'src/app/core/services/token.service';
+import { CaptchaService } from '@services/captcha.service';
+import { ClientService } from '@services/client.service';
+import { TokenService } from '@services/token.service';
 import * as moment from 'moment';
 
 @Component({
@@ -44,7 +44,7 @@ export class ValidationClientComponent implements OnInit {
   submitted: boolean = false;
   fecha: string = "";
   autentication: any;
-  
+
   // Variables captcha
   captchaStatus: any = '';
   captchaConfig: any = {
@@ -122,7 +122,7 @@ export class ValidationClientComponent implements OnInit {
     let actualDate = moment().format('DD-MM-YYYY').toString();
     console.log(actualDate);
     this.fecha = actualDate;
-    
+
   }
 
   /**
