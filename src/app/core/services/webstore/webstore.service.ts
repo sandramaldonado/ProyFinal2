@@ -14,7 +14,7 @@ export class WebstoreService {
   httpPostOptions = cts.httpPostOptions;
   httpGetOptions = cts.httpGetOptions;
   token : any;
-  urToken = "http://omega.10.45.57.104.sslip.io/auth/login";
+  urToken = "https://omega.devnt.ssidevops.com/auth/login";
 
   constructor(
     private sessionStorageService : SessionStorageService,

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BusinessrulesService {
-  apiUrl : string = "http://omega.10.45.57.104.sslip.io/rules";
+  apiUrl : string = "https://omega.devnt.ssidevops.com/rules";
 
   constructor(
     private webstoreservice : WebstoreService,
