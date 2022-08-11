@@ -36,6 +36,8 @@ export class WebstoreService {
       }
 
       this.localStorageService.store("TOKEN",response.data?.token);
+      this.sessionStorageService.store ("token", response.data?.token);
+      this.sessionStorageService.store ("userId", response.data?.userId);
     }
   )
 

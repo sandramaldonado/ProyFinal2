@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanComposition } from '@models/PlanComposition';
 import { Observable, switchAll } from 'rxjs';
 import { ViewportScroller } from "@angular/common";
+import { OrdersService } from '@app/services/orders.service';
 
 @Component({
   selector: 'app-order',
@@ -30,7 +31,8 @@ export class OrderComponent implements OnInit {
     private webstoreservice : WebstoreService,
     private breservices : BusinessrulesService,
     private tokenService : TokenService,
-    private scroller: ViewportScroller
+    private scroller: ViewportScroller,
+    private ordersService: OrdersService
   ) {
 
     this.modules = {
@@ -128,8 +130,9 @@ export class OrderComponent implements OnInit {
     this.tokenService.gettoken()
       .subscribe(response =>{
         this.autentication = response;
-        this.loadBussinesRules();
-
+        //this.loadBussinesRules();
+        this.webstoreservice.saveDataInSession('userId', response.data?.userId);
+        this.createOrder();
       });
   }
 
@@ -222,6 +225,51 @@ export class OrderComponent implements OnInit {
    }
 
 
+  }
+
+  createOrder(){
+    const client = this.webstoreservice.getClientInformation();
+    const param = {
+      "orderType": "PTFSALE",
+      "orderTypeName": "VENTAS",
+      "partyId": client.personId,
+      "fullName": client.fullName,
+      "customerId": client.clientId,
+      "channelCode": "CAATCL",
+      "channelName": "ATENCION AL CLIENTE",
+      "workplaceCode": "TIEEDISSA",
+      "workplaceName": "Tienda Edificio Issa",
+      "cityCode": client.documentCity,
+      "cityName": client.documentCityDesc,
+      "userId": this.autentication["data"]["userId"],
+      "userName": "landing",
+      "userFullName": "landing",
+      "userRoleCode": "ROL_ASESOR_3"
+    }
+    this.ordersService.createOrder(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log(response);
+        this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
+        this.registerCommercialOffer(response.data.data.orderMainId);
+        //this.loadBussinesRules();
+      });
+  }
+
+  registerCommercialOffer(orderId: any){
+    const plan = this.webstoreservice.getPlanComposition();
+    const param = {
+      "orderId": orderId,
+      "sequence": 0,
+      "userId": this.autentication["data"]["userId"],
+      "microFrontendId": "commercial-offers-microfront-app",
+      "microFrontendData": JSON.stringify(plan),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log(response);
+        this.loadBussinesRules();
+      });
   }
 
 }

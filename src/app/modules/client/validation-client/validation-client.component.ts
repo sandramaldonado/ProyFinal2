@@ -265,7 +265,7 @@ export class ValidationClientComponent implements OnInit {
         "serviceQuantity": this.planComposition?.numberOfEntities,
         "hasSubsidyOfEquipmentInSale": "NO"
       },
-      "userId": 21
+      "userId": this.autentication["data"]["userId"]
     });
     console.log(this.armadoScoring);
     return this.armadoScoring;
