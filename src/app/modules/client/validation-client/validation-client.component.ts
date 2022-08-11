@@ -120,7 +120,7 @@ export class ValidationClientComponent implements OnInit {
     */
 
     let actualDate = moment().format('DD-MM-YYYY').toString();
-    console.log(actualDate);
+    //console.log(actualDate);
     this.fecha = actualDate;
 
   }
@@ -176,12 +176,14 @@ export class ValidationClientComponent implements OnInit {
               console.log(dataClient);
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
+                  sessionStorage.setItem("isClient", "true");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   const planService = this.armadoJsonScoring();
-                  console.log(planService);
+                  //console.log(planService);
                   this.scoringValidated(planService);
                 } else {
+                  sessionStorage.setItem("isClient", "false");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   this.webstoreservice.saveStatusScoring("NORMAL");
@@ -190,7 +192,7 @@ export class ValidationClientComponent implements OnInit {
                 }
               } else {
                 this.submitted = true;
-
+                sessionStorage.setItem("isClient", "false");
                 var datosClient2:any = [];
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;
@@ -231,10 +233,7 @@ export class ValidationClientComponent implements OnInit {
   armadoJsonScoring() {
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
-    console.log(this.planComposition);
-    console.log(this.planList);
     this.productTypeCode = [];
-    console.log(this.fecha);
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
