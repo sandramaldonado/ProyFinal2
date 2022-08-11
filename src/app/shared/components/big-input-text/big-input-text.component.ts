@@ -22,6 +22,7 @@ export class BigInputTextComponent {
   @Input() controlName: string = "";
   @Input() validationForm!: FormGroup;
   @Input() submitted: boolean = false;
+  @Input() readonly = '';
 
   get hasError(): boolean {
     return (

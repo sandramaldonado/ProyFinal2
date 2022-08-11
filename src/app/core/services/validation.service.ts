@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { retry, catchError } from 'rxjs/operators';
 import { Client } from '@models/Client';
 import { Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidationService {
-  apiUrl: string = 'http://localhost:3000/client';
+  apiUrl: string = `${environment.ClientValidationUrl}`;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private httpClient: HttpClient) { }
 

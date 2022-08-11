@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { ScoringValidation } from '@models/ScoringValidation';
 import { retry, catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class ScoringValidationService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation";
+  //apiUrl = "https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation";
+  apiUrl : string = `${environment.ScoringApiUrl}`;
+
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
