@@ -27,6 +27,14 @@ const routes : Routes = [
     loadChildren: () => import('./modules/sales/movil-list/movil-list.module').then(m => m.MovilListModule) 
   },
   {
+    path : 'entrega',
+    loadChildren: () => import('./modules/sales/delivery-method/delivery-method.module').then(m => m.DeliveryMethodModule) 
+  },
+  {
+    path : 'stores',
+    loadChildren: () => import('./modules/sales/store-city/store-city.module').then(m => m.StoreCityModule) 
+  },
+  {
     path: 'en-construccion',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },

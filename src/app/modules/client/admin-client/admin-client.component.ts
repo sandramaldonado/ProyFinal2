@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-admin-client',
@@ -29,6 +30,7 @@ export class AdminClientComponent implements OnInit {
   clientInfo: any;
   keyClient: any;
   stateScorin: String;
+  stateClient: boolean = true;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -43,14 +45,21 @@ export class AdminClientComponent implements OnInit {
     'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
+  visited : boolean = false;
 
   @Output() nextAdminClientStep = new EventEmitter<any>();
+  @LocalStorage()
+	public boundAttribute : any ="Texto Inicial";
+
+  @LocalStorage() 
+  public boundLastName : any;
 
   constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
             private clientService: ClientService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
+    this.stateClient = (sessionStorage.getItem("isClient") == "true");
     this.clientInfo = this.webstoreservice.getClientInformation();
     this.stateScorin = this.webstoreservice.getStatusScoring();
 
@@ -58,7 +67,7 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
     //this.loadcontents();
@@ -164,10 +173,13 @@ export class AdminClientComponent implements OnInit {
       "personId": this.clientInfo["personId"],
       "personTypeCode": this.clientInfo["personTypeCode"]
     };
+
     this.loadInfoClien(datosClient);
     console.log("inica");
     console.log(datosClient);
     console.log("finaliza");
+
+    this.visited = true;
     this.nextAdminClientStep.emit(true);
   }
 
@@ -189,7 +201,7 @@ export class AdminClientComponent implements OnInit {
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
 
-
+    
     get firstName() {
       return this.validationForm.get('firstName');
     }

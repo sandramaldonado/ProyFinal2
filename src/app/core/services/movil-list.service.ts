@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { retry, catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ export class MovilListService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "https://omega.devnt.ssidevops.com/sales/find/phone/numbers";
+  //apiUrl = "https://omega.devnt.ssidevops.com/sales/find/phone/numbers";
+  apiUrl : string = `${environment.MovilNumberListApiUrl}`;
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */

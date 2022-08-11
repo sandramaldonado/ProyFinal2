@@ -5,45 +5,25 @@
             <p>{{message}}</p>
             <mat-card>
                 <mat-card-content>
-                    <form style="background-color:white" class="form" novalidate id="validationForm">
+                    <form style="background-color:white" class="form" novalidate id="validationForm" >
                         <div *ngIf="movilState== true; then trueMovil;"></div>
                         <ng-template #trueMovil>
                             <div class="row" style="color:black">
                                 <h4 style="color:black"><b>MOVIL</b></h4>
                                 <p>Elije un N&uacute;mero</p>
-                                <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6" [id]="line.id">
-                                    <div [class]="line.description" role="alert">
-                                        <mat-radio-button [value]="line.name" >{{line.name}}</mat-radio-button>
+                                <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
+                                    <div [class]="line.description" [style]="line.style" role="alert">
+                                        <mat-radio-button name="movil" [value]="line.value" [checked]="line.checked" (change)="radioChange($event)">
+                                            <span>&nbsp;{{line.name}}</span>
+                                        </mat-radio-button>
                                     </div>
                                 </div>
                             </div>
                         </ng-template>
-                        <div *ngIf="internetState == true; then trueInternet;"></div>
-                        <ng-template #trueInternet>
-                            <div class="row" style="color:black">
-                                <h4 style="color:black"><b>INTERNET</b></h4>
-                                <div *ngFor="let internet of internetList" class="col-6 col-md-6 col-sm-6"
-                                    [id]="internet.id">
-                                    <div [class]="internet.description" role="alert">
-                                        <mat-radio-button [value]="internet.name" >{{internet.name}}</mat-radio-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
-                        <div *ngIf="entertainmentState == true; then trueTv;"></div>
-                        <ng-template #trueTv>
-                            <div class="row" style="color:black">
-                                <h4 style="color:black"><b>ENTRETENIMIENTO</b></h4>
-                                <div *ngFor="let tv of tvList" class="col-6 col-md-6 col-sm-6" [id]="tv.id">
-                                    <div [class]="tv.description" role="alert">
-                                        <mat-radio-button [value]="tv.name" >{{tv.name}}</mat-radio-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-template>
+                        <br><br><br><br>
                         <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
                         <div class="text-center">
-                            <app-button [content]="'Continuar'"></app-button>
+                            <app-button [content]="'Continuar'"  (click)="next()"></app-button>
                         </div>
                     </form>
                 </mat-card-content>

@@ -2,12 +2,15 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { retry, catchError, Observable, throwError } from 'rxjs';
 import { Autenticar } from '@models/Autenticar';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  urToken = "https://omega.devnt.ssidevops.com/auth/login";
+  //urToken = "https://omega.devnt.ssidevops.com/auth/login";
+  urToken : string = `${environment.SSIAuthApiUrl}`;
+
   constructor(private httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
