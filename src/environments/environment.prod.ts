@@ -18,6 +18,16 @@ export const environment = {
   EmailApiUrl :  'http://10.45.56.62:3800/api/mastersales/sendEmail',
 
   ClientValidationUrl : 'http://localhost:3000/client',
+  
+  ScoringApiUrl : 'https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation',
+
+  CatalogProductApiUrl : 'https://omega.devnt.ssidevops.com/product/plans',
+
+  MovilNumberListApiUrl : 'https://omega.devnt.ssidevops.com/sales/find/phone/numbers' ,
+
+  ClientSearchApiUrl : 'https://omega.devnt.ssidevops.com/crm360/client/person/search',
+
+  BreApiUrl  : 'https://omega.devnt.ssidevops.com/rules',
 
   domain: vars.domain,
   endPoint: vars.endPoint,
