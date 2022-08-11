@@ -86,9 +86,11 @@ export class CheckCoverageComponent implements OnInit {
 
   public environment : any;
   public hasCoverage : boolean= false;
+  public visited : boolean = false;
 
   @Input() selfLoaded : boolean = true;
   @Output() nextCoverageStep = new EventEmitter<any>();
+  validDataCoverage: any;
 
 
 
@@ -140,8 +142,10 @@ export class CheckCoverageComponent implements OnInit {
   this.coverageService.checkGISCovarge(data)
   .subscribe(response =>{
     console.log(response);
-    if(response.errorCode == 'OK' && response.hasCoverage=='OK')
+    if(response.errorCode == 'OK' && response.hasCoverage=='OK'){
       this.hasCoverage=true;
+      this.validDataCoverage = data;
+    }
     else
       this.hasCoverage=false;
   });
@@ -193,6 +197,8 @@ export class CheckCoverageComponent implements OnInit {
   }
 
   next(){
+    this.coverageService.saveCoverageData(this.validDataCoverage);
+    this.visited = true;
     this.nextCoverageStep.emit(true);
   }
 

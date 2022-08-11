@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Autenticar } from '@models/Autenticar';
 import { environment } from 'src/environments/environment';
 import * as cts  from "@shared/utils/constants";
+import { strict } from 'assert';
 
 
 @Injectable({
@@ -94,6 +95,7 @@ export class WebstoreService {
   }
 
   clearWebStorePlanComposition(){
+    this.sessionStorageService.clear();
     this.sessionStorageService.clear("planCompositionCode");
     this.sessionStorageService.clear("planComposition");
   }
@@ -105,6 +107,15 @@ export class WebstoreService {
   getStatusScoring (): any{
     return this.sessionStorageService.retrieve("statusScoring");
   }
+
+  saveDataInSession(key:string, data : any): void{
+    this.sessionStorageService.store(key,data);
+  }
+
+  getDataInSession (key: string): any{
+    return this.sessionStorageService.retrieve(key);
+  }
+
 
 
 

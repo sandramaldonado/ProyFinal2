@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="row text-center">
-                    <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
+                    <app-button *ngIf ="!visited" [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
                     </app-button>
                 </div>
             </form>

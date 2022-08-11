@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EmailService } from '@app/services/email/email.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WebstoreService } from "@services/webstore/webstore.service";
 
 @Component({
   selector: 'app-check-email',
@@ -15,16 +16,21 @@ export class CheckEmailComponent implements OnInit {
     'codeValidationEmail': new FormControl('', [Validators.required]),
   });
 
+  emailData :any;
+
   get emailCode() {
     return this.emailValidationForm.get('codeValidationEmail');
   }
 
   @Output() nextCheckEmailStep = new EventEmitter<any>();
   constructor(
-    private emailService: EmailService
+    private emailService: EmailService,
+    private webstoreservice : WebstoreService
   ) { }
 
   ngOnInit(): void {
+    console.log("check email");
+    this.sendValidationCode();
   }
 
   validateEmail(){
@@ -35,6 +41,8 @@ export class CheckEmailComponent implements OnInit {
     this.randomEmailCode
     if(this.emailCode?.value == this.randomEmailCode){
       this.disabled = false;
+      this.validCode = true;
+      this.next();
     }
 
 
@@ -48,8 +56,6 @@ export class CheckEmailComponent implements OnInit {
     });
 
   }
-
-
 
   randomNumber() {
     const charsArray = "0123456789";
@@ -67,6 +73,7 @@ export class CheckEmailComponent implements OnInit {
   }
 
   next(){
+    this.webstoreservice.saveDataInSession("checkemail",{validationCode: this.randomEmailCode})
     this.nextCheckEmailStep.emit(true);
   }
 

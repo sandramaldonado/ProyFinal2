@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { WebstoreService } from '@services/webstore/webstore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 export class CoverageService {
 
   constructor(
-    private httpClient : HttpClient
+    private httpClient : HttpClient,
+    private webstoreservice : WebstoreService
   ) { }
 
   checkGISCovarge(data:any): Observable<any> {
@@ -28,5 +30,9 @@ export class CoverageService {
 
     return this.httpClient.post<any>(`${environment.AVLApiUrl}`, JSON.stringify(data), httpOptions);
 
+  }
+
+  saveCoverageData (data : any){
+    this.webstoreservice.saveDataInSession("coverage", data)
   }
 }

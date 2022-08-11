@@ -43,6 +43,7 @@ export class AdminClientComponent implements OnInit {
     'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
+  visited : boolean = false;
 
   @Output() nextAdminClientStep = new EventEmitter<any>();
 
@@ -168,6 +169,8 @@ export class AdminClientComponent implements OnInit {
     console.log("inica");
     console.log(datosClient);
     console.log("finaliza");
+
+    this.visited = true;
     this.nextAdminClientStep.emit(true);
   }
 
