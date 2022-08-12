@@ -22,6 +22,7 @@ export class InputTextComponent {
   @Input() controlName: string = "";
   @Input() validationForm!: FormGroup;
   @Input() submitted: boolean = false;
+  @Input() flotante= '';
 
   get hasError(): boolean {
     return (

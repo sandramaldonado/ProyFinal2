@@ -43,7 +43,7 @@ export class AdminClientComponent implements OnInit {
     'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)]),
     'razonS': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.surNameClient)]),
-    'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
+    'nit': new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
   visited : boolean = false;
