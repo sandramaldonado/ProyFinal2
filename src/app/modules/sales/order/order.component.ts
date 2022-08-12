@@ -194,16 +194,7 @@ export class OrderComponent implements OnInit {
 
     break;
     case 'documents':
-      if(this.modules.detailsale.enable)
-      {
-        this.modules.detailsale.visible = true;
-        setTimeout(function(){
-          me.scroller.scrollToAnchor("detailsale");
-        },100);
-      }else{
-        this.changeModule("detailsale")
-      }
-
+    
     break;
 
      default:
