@@ -18,6 +18,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 //import { ClientModule } from './pages/client/client.module';
 import { AuthInterceptor } from "@app/interceptors/auth-interceptor";
+
 //import { MovilListComponent } from './modules/sales/movil-list/movil-list.component';
 
 @NgModule({

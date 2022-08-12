@@ -58,6 +58,12 @@
                       *ngIf="modules.movilList.visible"
                       (nextMovilListStep)="changeModule(modules.movilList.alias)">
       </app-movil-list>
+      <app-detail-sale id={{modules.detailsale.alias}}
+                       *ngIf="modules.detailsale.visible"
+                       (nextDocumentStep)="changeModule(modules.detailsale.alias)">
+
+      </app-detail-sale>
+      
     </div>
   </div>
 </div>
