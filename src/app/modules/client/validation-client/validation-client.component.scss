@@ -59,6 +59,10 @@ mat-error{
     border-radius: 0 12px 12px 0 !important;
   }
 
+.mat-success{
+    color: green;
+}
+
 // mat-icon-stepper selected color change 
 ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
     background-color: #5C349D;
@@ -78,6 +82,11 @@ mat-error{
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
     color: red!important;
     opacity: 0.8!important;
+}
+
+// This is to remove the line underneath the input controls.
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
 }
 
 //////////////////////////////// ICONO EN INPUT //////////////////////////////// 

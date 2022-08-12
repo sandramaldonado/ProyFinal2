@@ -23,12 +23,13 @@
                                 </mat-error>
                             </div>
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6" >
+                                <!--
+                                <span id="icon" *ngIf="!validationForm.get('subscriberId')?.errors"><i color="success" class="material-icons">check_circle</i></span>
+                                -->
                                 <app-input-text controlName="subscriberId" [submitted]="submitted"
                                     identifier="subscriberId" message="Ingresa tu Celular" description="Celular">
                                 </app-input-text>
-                                <!--
-                                <span id="icon" *ngIf="subscriberId?.invalid && subscriberId?.touched"><i style="color:red;" class="material-icons">error_outline</i></span>
-                                -->
+                                
                                 <mat-error *ngIf="subscriberId?.invalid && subscriberId?.touched">
                                     Por favor ingresa solo n&uacute;meros
                                 </mat-error>

@@ -97,6 +97,17 @@ mat-error{
   opacity: 0.8!important;
 }
 
+
+
+
+::ng-deep {
+  .two .mat-select-value-text {
+    color : #5C349D;
+   }
+  }
+
+
+
 /*
 
 ::ng-deep .mat-form-field-outline-start {
