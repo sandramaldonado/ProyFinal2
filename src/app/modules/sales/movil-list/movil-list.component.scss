@@ -65,6 +65,13 @@ mat-card-header {
 
 }
 
+.linkMore {
+  text-align: right;
+  font-weight: bold;
+  text-decoration: none;
+  color: darkblue ;
+}
+
 ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
 	background-color: white!important;
     border-color: white!important; /*outer ring color change*/
@@ -72,7 +79,7 @@ mat-card-header {
 }
 
 ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-	background-color: #9eee58!important;   /*inner circle color change*/
+	background-color: #5C339D!important;   /*inner circle color change*/
     border-color: white!important;
     border-radius: 8px 8px 8px 8px;
 }
