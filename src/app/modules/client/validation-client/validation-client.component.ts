@@ -10,6 +10,7 @@ import { PlanComposition } from '@models/PlanComposition';
 import { CaptchaService } from 'src/app/core/services/captcha.service';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
+import { OrdersService } from 'src/app/core/services/orders.service';
 import * as moment from 'moment';
 
 @Component({
@@ -44,7 +45,7 @@ export class ValidationClientComponent implements OnInit {
   submitted: boolean = false;
   fecha: string = "";
   autentication: any;
-  
+
   // Variables captcha
   captchaStatus: any = '';
   captchaConfig: any = {
@@ -52,12 +53,13 @@ export class ValidationClientComponent implements OnInit {
     length: 6,
     cssClass: 'custom',
     back: {
+      border: '1px solid',
       stroke: "#2F9688",
-      solid: "#f2efd2"
+      solid: "white" //"#f2efd2"
     },
     font: {
-      color: "#000000",
-      size: "35px"
+      color: "purple", //"#000000",
+      size: "35px",
     }
   };
 
@@ -67,6 +69,7 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
+    private ordersService: OrdersService,
     private webstoreservice: WebstoreService) {
 
     this.autentication = {};
@@ -120,9 +123,9 @@ export class ValidationClientComponent implements OnInit {
     */
 
     let actualDate = moment().format('DD-MM-YYYY').toString();
-    console.log(actualDate);
+    //console.log(actualDate);
     this.fecha = actualDate;
-    
+
   }
 
   /**
@@ -176,12 +179,14 @@ export class ValidationClientComponent implements OnInit {
               console.log(dataClient);
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
+                  sessionStorage.setItem("isClient", "true");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   const planService = this.armadoJsonScoring();
-                  console.log(planService);
+                  //console.log(planService);
                   this.scoringValidated(planService);
                 } else {
+                  sessionStorage.setItem("isClient", "false");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   this.webstoreservice.saveStatusScoring("NORMAL");
@@ -191,10 +196,11 @@ export class ValidationClientComponent implements OnInit {
               } else {
                 this.submitted = true;
 
-                var datosClient2:any = [];
+                sessionStorage.setItem("isClient", "false");
+                var datosClient2:any = {};
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;
-                datosClient2["documentCity"] = null;
+                datosClient2["documentCity"] = "CCBA";
                 datosClient2["documentCityDesc"] = null;
                 datosClient2["documentNumber"] = dni;
                 datosClient2["documentType"] = "CI";
@@ -208,10 +214,12 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["name"] = name1;
                 datosClient2["nit"] = null;
                 datosClient2["personId"] = null;
-                datosClient2["personTypeCode"] = null;
+                datosClient2["personTypeCode"] = "NATURAL";
+                console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
                 this.webstoreservice.saveStatusScoring("NORMAL");
-                this.router.navigate(['/oferta/orden-compra']);
+                this.createPerson();
+                //this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -231,16 +239,18 @@ export class ValidationClientComponent implements OnInit {
   armadoJsonScoring() {
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
-    console.log(this.planComposition);
-    console.log(this.planList);
     this.productTypeCode = [];
     console.log(this.fecha);
+    const client = this.webstoreservice.getClientInformation();
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
     this.armadoScoring = JSON.stringify({
       "client": {
-        "clientId": this.infoClient["data"]["data"]["0"]["clientId"]
+        "clientId": client.clientId, //this.infoClient["data"]["data"]["0"]["clientId"],
+        "documentNumber": client.clientId?null:client.documentNumber,
+        "documentTypeCode": client.clientId?null:client.documentType,
+        "fullname": client.clientId?null:client.fullName
       },
       "commercialOffer": {
         "groupPlan": this.planComposition?.planCompositionCode,
@@ -256,7 +266,7 @@ export class ValidationClientComponent implements OnInit {
         "serviceQuantity": this.planComposition?.numberOfEntities,
         "hasSubsidyOfEquipmentInSale": "NO"
       },
-      "userId": 21
+      "userId": this.autentication["data"]["userId"]
     });
     console.log(this.armadoScoring);
     return this.armadoScoring;
@@ -292,6 +302,28 @@ export class ValidationClientComponent implements OnInit {
 
   get captcha_status() {
     return this.validationForm.get('captcha_status');
+  }
+
+  createPerson(){
+    const person = this.webstoreservice.getClientInformation();
+    const param = {
+      createPerson: person,
+      createPersonAdditionalData: [
+        {
+          dataTypeCode: 'CONTACT_PHONE',
+          status: 'A',
+          valueData: this.validationForm.value.subscriberId
+        }
+      ],
+      userId: this.autentication["data"]["userId"]
+    }
+    this.ordersService.createPerson(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log(response);
+        person.personId = response.data.data.personId;
+        this.webstoreservice.saveClientInformation(person);
+        this.router.navigate(['/oferta/orden-compra']);
+      });
   }
 
 }
