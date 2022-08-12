@@ -7,10 +7,10 @@ mat-form-field {
     width: 100%;
 }
 
-input{
-    color: #5C349D;
+.tamañodiv{
+    margin-left: 5px;
+    margin-right: 5px;
 }
-
 
 /*  
 
@@ -20,9 +20,15 @@ input.ng-valid {
 
 /* El icono debe ser "position: absolute"
  * Ademas le damos un "display: block" y lo posicionamos */
-input.input{
+ input{
+    color: #5C349D;
+}
+
+/* El icono debe ser "position: absolute"
+ * Ademas le damos un "display: block" y lo posicionamos */
+ input.input{
     padding-right: 1.5rem;
-  }
+}
   
 #icon{
     position: absolute;
@@ -33,7 +39,6 @@ input.input{
     user-select: none;
     cursor: pointer;
 }
-
 
 
 /*
@@ -65,7 +70,4 @@ input.input{
 }
 */
 
-.tamañodiv{
-    margin-left: 5px;
-    margin-right: 5px;
-}
+

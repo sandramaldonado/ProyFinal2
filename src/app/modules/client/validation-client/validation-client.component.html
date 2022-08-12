@@ -10,27 +10,27 @@
                     <form [formGroup]="validationForm" style="background-color:white;" (ngSubmit)="onSubmit()" novalidate id="validationForm">
                         <app-big-input-text controlName="name" readonly="false" [submitted]="submitted" identifier="name"
                         message="Ingresa tu Primer Nombre" description="Nombre"></app-big-input-text>
-                        <mat-error style="text-align:right; margin-top: -17px;" *ngIf="name?.invalid && name?.touched"
-                            class="text-danger">Por favor ingresa datos válidos</mat-error>
+                        <mat-error *ngIf="name?.invalid && name?.touched">Por favor ingresa datos v&aacute;lidos</mat-error>
                         <app-big-input-text controlName="lastname" readonly="false" [submitted]="submitted" identifier="lastname"
                             message="Ingresa tu Primer Apellido" description="Apellido"></app-big-input-text>
-                        <mat-error style="text-align:right; margin-top: -17px;"
-                            *ngIf="lastname?.invalid && lastname?.touched" class="text-danger">Por favor ingresa datos válidos</mat-error>
+                        <mat-error *ngIf="lastname?.invalid && lastname?.touched" >Por favor ingresa datos v&aacute;lidos</mat-error>
                         <div class="d-flex flex-row align-items-start justify-content-between">
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                 <app-input-text controlName="dni" [submitted]="submitted" identifier="dni"
                                     message="Ingresa tu CI" description="Carnet"></app-input-text>
-                                <mat-error style="text-align:right; margin-top: -17px;" *ngIf="dni?.invalid && dni?.touched" class="text-danger">
-                                    Por favor ingresa datos válidos
+                                <mat-error *ngIf="dni?.invalid && dni?.touched" >
+                                    Por favor ingresa datos v&aacute;lidos
                                 </mat-error>
                             </div>
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6" >
                                 <app-input-text controlName="subscriberId" [submitted]="submitted"
                                     identifier="subscriberId" message="Ingresa tu Celular" description="Celular">
                                 </app-input-text>
+                                <!--
                                 <span id="icon" *ngIf="subscriberId?.invalid && subscriberId?.touched"><i style="color:red;" class="material-icons">error_outline</i></span>
-                                <mat-error style="text-align:right; margin-top: -17px;" *ngIf="subscriberId?.invalid && subscriberId?.touched" class="text-danger">
-                                    Por favor ingresa solo números
+                                -->
+                                <mat-error *ngIf="subscriberId?.invalid && subscriberId?.touched">
+                                    Por favor ingresa solo n&uacute;meros
                                 </mat-error>
                             </div>
                         </div>

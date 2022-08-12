@@ -1,7 +1,7 @@
 <div class="d-flex flex-row align-items-start d-flex justify-content-between">
-    <mat-form-field appearance="outline" class="tamañodiv form-field" >
-        <input  type="text" class="input" [readonly]="readonly" [formControlName]="controlName" id="{{identifier}}" name="{{identifier}}" matInput placeholder="&nbsp;{{message}}">
-        <mat-label for="{{identifier}}" class="has-events">&nbsp;&nbsp;{{description}}</mat-label>
+    <mat-form-field appearance="outline" class="tamañodiv">
+        <mat-label class="has-events">&nbsp;&nbsp;{{description}}</mat-label>
+        <input matInput type="text" class="input" [readonly]="readonly" [formControlName]="controlName"
+            id="{{identifier}}" name="{{identifier}}" placeholder="&nbsp;{{message}}">
     </mat-form-field>
 </div>
-

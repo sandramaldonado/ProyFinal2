@@ -72,7 +72,7 @@ export class CaptchaComponent implements OnChanges {
       ctx.fillStyle = this.config.back.solid;
       ctx.fillRect(0, 0, captcahCanvas.width, captcahCanvas.height);
       ctx.beginPath();
-      captcahCanvas.style.letterSpacing = 15 + "px";
+      captcahCanvas.style.letterSpacing = 7 + "px";
       ctx.font = this.config.font.size + " " + "sans-serif";
       ctx.fillStyle = this.config.font.color;
       ctx.textBaseline = "middle";
