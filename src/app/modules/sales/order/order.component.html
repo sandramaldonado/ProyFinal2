@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="d-none d-md-block col-5 bg bg-light bg-gradient  border py-5 px-5 my-1">
@@ -58,12 +59,8 @@
                       *ngIf="modules.movilList.visible"
                       (nextMovilListStep)="changeModule(modules.movilList.alias)">
       </app-movil-list>
-      <app-detail-sale id={{modules.detailsale.alias}}
-                       *ngIf="modules.detailsale.visible"
-                       (nextDocumentStep)="changeModule(modules.detailsale.alias)">
 
-      </app-detail-sale>
-      
+
     </div>
   </div>
 </div>

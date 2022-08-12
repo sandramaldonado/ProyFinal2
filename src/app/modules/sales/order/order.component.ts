@@ -75,7 +75,7 @@ export class OrderComponent implements OnInit {
       detailsale:{
         visible:false,
         active:false,
-        enable:true,
+        enabled:true,
         alias: 'detailsale'
       },
       deliveryMethod: {

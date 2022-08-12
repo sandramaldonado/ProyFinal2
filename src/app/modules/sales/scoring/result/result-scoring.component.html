@@ -7,10 +7,7 @@
                   <p>¿Deseas continuar?</p>
 
               <div class="d-flex flex-column">
-                <div *ngIf="WasInformed" class="alert alert-success">
-                  Ha sido informado de la necesidad de un pago con tarjeta de debido/credito
-                </div>
-                <app-button *ngIf="!WasInformed" [content]="'Continuar'" (click)="next()" ></app-button>
+                <app-button *ngIf="!acceptRecurrentPayment" [content]="'Continuar'" (click)="next()" ></app-button>
               </div>
 
               <app-button-outline  [content]="'Ver otros planes'" ></app-button-outline>
