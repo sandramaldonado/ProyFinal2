@@ -1,10 +1,11 @@
+<app-header></app-header>
 <div class="container">
     <div class="row pb-3 ">
 
         <!--<section class="detail col-12 col-md-5 d-none d-md-block border border-primary border-end-0 rounded-start"></section>-->
         <section class="section-body col-12 py-3">
             <div class=" d-flex flex-column justify-content-around">
-        
+
                 <h3 id="title">Detalle de Compra</h3>
 
                 <mat-card class="my-3 border" id="matservicios">
@@ -14,7 +15,7 @@
                                 <img id="icono" src="assets/images/iconos/Vector.png">
 
                                 <p id="fecha">Se paga a partir del 1 de agosto</p>
-                              
+
                                 <ul class="">
                                     <li class="" >
                                         <div class="productname">
@@ -23,7 +24,7 @@
 
                                         <div class="price"> {{currency}}{{precio}}
                                         </div>
-                                        
+
                                     </li>
                                   </ul>
 
@@ -43,11 +44,11 @@
                                         <div class="productname">
                                             {{datos}}
                                         </div>
-                                    
-                                        
+
+
                                     </li>
 
-                
+
 
                                 </ul>
 
@@ -80,7 +81,7 @@
                 </div>
 
                     <app-button id="comprar" [content]="'Comprar'" (click)="next()"></app-button>
-                
+
             </div>
 
         </section>

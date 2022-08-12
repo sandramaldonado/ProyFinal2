@@ -10,7 +10,7 @@ import { DocumentsModule } from '@modules/sales/documents/documents.module';
 import { ResultScoringModule } from '../scoring/result/result-scoring.module';
 import { HeaderModule } from "@layout/header/header.module";
 import { MovilListModule } from '../movil-list/movil-list.module';
-import {DetailSaleModule}from '../detail-sale/detail-sale/detail-sale.module';
+import { DetailSaleModule }from '../detail/detail-sale/detail-sale.module';
 
 
 
