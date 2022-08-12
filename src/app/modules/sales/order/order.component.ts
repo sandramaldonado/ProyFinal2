@@ -61,7 +61,7 @@ export class OrderComponent implements OnInit {
         alias : 'checkemail'
       },
       documents: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'documents'
@@ -103,7 +103,7 @@ export class OrderComponent implements OnInit {
       .subscribe(response =>{
       this.coverageData=response;
       this.scoringStatus = this.webstoreservice.getStatusScoring();
-      //this.initializeComponents();
+      this.initializeComponents();
     })
 
 
@@ -260,7 +260,7 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
         this.registerCommercialOffer(response.data.data.orderMainId);
-        //this.loadBussinesRules();
+        this.loadBussinesRules();
       });
   }
 
