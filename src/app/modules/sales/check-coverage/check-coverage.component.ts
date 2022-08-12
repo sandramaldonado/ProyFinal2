@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { WebstoreService } from "@services/webstore/webstore.service";
 import { CoverageService } from '@app/services/coverage/coverage.service';
 import { response } from 'express';
+import { OrdersService } from '@app/services/orders.service';
 
 @Component({
   selector: 'app-check-coverage',
@@ -27,6 +28,11 @@ export class CheckCoverageComponent implements OnInit {
   markerPositions: google.maps.LatLngLiteral[] = [];
   cities = cts.cities;
 
+  client: any;
+  orderId: any;
+  userId: any;
+  addressList: any[] = [];
+  urlPersonInfoMicrofront = environment.urlPersonInfoMicrofront;
   public addressParamClass: any = {
     contentExistAddress: ' spacer-form',
     contentAddress: ' full-width bg-section padding-section',
@@ -78,7 +84,7 @@ export class CheckCoverageComponent implements OnInit {
   public microfrontParamIn: any = {
     orderId: 0,
     sequence: 0,
-    userId: 21,
+    userId: 5,
     microfrontId: 'address-microfront-app',
 }
 
@@ -98,14 +104,24 @@ export class CheckCoverageComponent implements OnInit {
 
   constructor(
     private webstoreService : WebstoreService,
-    private coverageService : CoverageService
+    private coverageService : CoverageService,
+    private ordersService: OrdersService
   ) { }
 
   ngOnInit(): void {
     if(this.selfLoaded){
 
-      this.load()
+      this.load();
 
+      this.client = this.webstoreService.getClientInformation();
+      this.orderId = this.webstoreService.getDataInSession('orderMainId');
+      this.userId = this.webstoreService.getDataInSession('userId');
+      this.microfrontParamIn  = {
+        orderId: this.orderId,
+        sequence: 0,
+        userId: this.userId,
+        microfrontId: 'address-microfront-app',
+      }
     }
   }
 
@@ -200,8 +216,30 @@ export class CheckCoverageComponent implements OnInit {
     this.coverageService.saveCoverageData(this.validDataCoverage);
     this.visited = true;
     this.nextCoverageStep.emit(true);
+    this.microfrontParamIn.mode = 'READONLY';
   }
 
+  updateAddressComplete(event: any){
+    console.log(event);
+    this.registerAddress(event.detail.microfrontData);
+  }
+
+  registerAddress(data: any[]){
+    if(!data || data.length===0) return;
+    const param = {
+      "orderId": this.orderId,
+      "sequence": 1,
+      "userId": this.userId,
+      "microFrontendId": "address-microfront-app",
+      "microFrontendData": JSON.stringify(data),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+        this.webstoreService.saveDataInSession('addressData', data);
+      });
+  }
 
 
 }
