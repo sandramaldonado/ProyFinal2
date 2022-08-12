@@ -19,20 +19,24 @@ const routes : Routes = [
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
   },
   {
+    path : 'detalle-compra',
+    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
+  },
+  {
     path : 'client',
     loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)
   },
   {
     path : 'moviles',
-    loadChildren: () => import('./modules/sales/movil-list/movil-list.module').then(m => m.MovilListModule) 
+    loadChildren: () => import('./modules/sales/movil-list/movil-list.module').then(m => m.MovilListModule)
   },
   {
     path : 'entrega',
-    loadChildren: () => import('./modules/sales/delivery-method/delivery-method.module').then(m => m.DeliveryMethodModule) 
+    loadChildren: () => import('./modules/sales/delivery-method/delivery-method.module').then(m => m.DeliveryMethodModule)
   },
   {
     path : 'stores',
-    loadChildren: () => import('./modules/sales/store-city/store-city.module').then(m => m.StoreCityModule) 
+    loadChildren: () => import('./modules/sales/store-city/store-city.module').then(m => m.StoreCityModule)
   },
   {
     path: 'en-construccion',

@@ -33,6 +33,7 @@ export class MovilListComponent implements OnInit {
 
   title = "Elije tu Número";
   message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
+  visited: boolean = false;
 
   constructor(private movilListService: MovilListService,
     private webstoreservice: WebstoreService,
@@ -107,7 +108,7 @@ export class MovilListComponent implements OnInit {
     let numeros = {};
     if (this.movilLine != "") {
       dataMovil = {"movil": [this.movilLine]};
-    } 
+    }
     if (this.wanLine != "") {
       dataWan = {"ifixed": [this.wanLine]};
     } if (this.tvLine != "") {
@@ -119,10 +120,13 @@ export class MovilListComponent implements OnInit {
         "transactionId": this.numberList["data"]["transactionId"],
         "data": numeros
     }});
-    
+
     this.webstoreservice.saveMovilListinformation(list2);
     let test = this.webstoreservice.getMovilListInformation();
     console.log(test);
+
+    this.visited =true;
+    this.nextMovilListStep.emit(true);
   }
 
   radioChange(event: MatRadioChange) {

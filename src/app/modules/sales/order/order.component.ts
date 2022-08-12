@@ -70,13 +70,20 @@ export class OrderComponent implements OnInit {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'movillist'
+        alias : 'movilList'
+      },
+      detailsale:{
+        visible:false,
+        active:false,
+        enabled:true,
+        alias: 'detailsale'
       },
       deliveryMethod: {
         visible :false,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
+
       }
     };
   }
@@ -197,6 +204,7 @@ export class OrderComponent implements OnInit {
 
     break;
     case 'documents':
+
       if(this.modules.movilList.enabled){
         this.modules.movilList.visible=true;
 
@@ -207,6 +215,7 @@ export class OrderComponent implements OnInit {
       }else{
         this.changeModule("movillist");
       }
+
     break;
     case 'movillist':
       if(this.modules.deliveryMethod.enabled){
@@ -251,7 +260,7 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
         this.registerCommercialOffer(response.data.data.orderMainId);
-        //this.loadBussinesRules();
+        this.loadBussinesRules();
       });
   }
 

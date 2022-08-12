@@ -3,6 +3,7 @@ import { TakePictureComponent } from '@app/modals/take-picture/take-picture.comp
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import {NgxImageCompressService} from "ngx-image-compress";
 import { WebstoreService } from '@app/services/webstore/webstore.service';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-documents',
@@ -14,6 +15,18 @@ export class DocumentsComponent implements OnInit {
   bsModalRef?: BsModalRef;
   @Output() nextDocumentStep = new EventEmitter<any>();
   visited: boolean = false;
+
+  @SessionStorage('firstDocument')
+	public firstDocument : any;
+
+  @SessionStorage('secondDocument')
+	public secondDocument : any;
+
+  @SessionStorage('facePicture')
+	public facePicture : any;
+
+  previewImage? : string;
+  webstoreImage? : string;
   constructor(
     private modalService: BsModalService,
     private imageCompress: NgxImageCompressService,
