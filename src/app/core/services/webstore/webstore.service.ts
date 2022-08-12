@@ -36,6 +36,8 @@ export class WebstoreService {
       }
 
       this.localStorageService.store("TOKEN",response.data?.token);
+      this.sessionStorageService.store ("token", response.data?.token);
+      this.sessionStorageService.store ("userId", response.data?.userId);
     }
   )
 
@@ -63,6 +65,13 @@ export class WebstoreService {
     this.sessionStorageService.store("photoFace",photo);
   }
 
+  saveMovilListinformation (movilListInfo : any) : void{
+    this.sessionStorageService.store ("movilListInfo", movilListInfo);
+  }
+
+  getMovilListInformation (){
+    return this.sessionStorageService.retrieve("movilListInfo")
+  }
 
 
   getSelfie () : Photo {

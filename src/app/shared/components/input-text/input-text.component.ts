@@ -32,4 +32,8 @@ export class InputTextComponent {
 
   constructor(private cc: ControlContainer) { }
 
+  changed(value: any){
+    console.log("changed", value.target.value);
+  }
+
 }

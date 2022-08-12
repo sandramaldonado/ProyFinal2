@@ -54,12 +54,21 @@
                     <mat-card-content class="py-2 text-center p-2">
 
 
-                           <ax-lazy-element *axLazyElementDynamic="'address-microfront-app',
+                        <!--   <ax-lazy-element *axLazyElementDynamic="'address-microfront-app',
                            url: 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';"
                            [microfrontParamIn]="microfrontParamIn"
                            [paramClass]="addressParamClass"
                            >
-                       </ax-lazy-element>
+                       </ax-lazy-element> -->
+
+                      <address-microfront-app
+                          *axLazyElement="urlPersonInfoMicrofront"
+                          [paramClass]="addressParamClass"
+                          [addressList]="addressList"
+                          [microfrontParamIn]="microfrontParamIn"
+                          (updateComplete)="updateAddressComplete($event)"
+                          [clientId]="client?.clientId">
+                      </address-microfront-app>
 
                     </mat-card-content>
 

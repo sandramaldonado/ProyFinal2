@@ -8,7 +8,7 @@ import { WebstoreService } from "@services/webstore/webstore.service";
 })
 export class ResultScoringComponent implements OnInit {
   @Output() nextScoringStep = new EventEmitter<any>();
-  WasInformed : boolean = false;
+  acceptRecurrentPayment : boolean = false;
   constructor(
     private webstoreservice : WebstoreService
   ) { }
@@ -17,8 +17,8 @@ export class ResultScoringComponent implements OnInit {
   }
 
   next(){
-    this.webstoreservice.saveDataInSession("scoringResult",{scoringInformed:true});
-    this.WasInformed = true;
+    this.webstoreservice.saveDataInSession("scoring",{acceptRecurrentPayment:true});
+    this.acceptRecurrentPayment = true;
     this.nextScoringStep.emit(true);
   }
 
