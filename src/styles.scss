@@ -103,15 +103,15 @@ $app-light-theme: mat-light-theme( $mat-primary-palette, $mat-accent-palette, $m
 }
 
 .mat-raised-button {
-  font-family: MUSEO300-REGULAR;
+  font-family: MUSEO500-REGULAR;
   border-radius: 20px !important;
   font-size: 14px;
-  font-weight: 500;
-  padding: 2px 24px !important;
+  font-weight: 600;
+  padding: 4px 24px !important;
 }
 
 .mat-button {
-  font-family: MUSEO300-REGULAR;
+  font-family: MUSEO500-REGULAR;
 }
 
 .arrow-circle-back {
@@ -140,7 +140,19 @@ $app-light-theme: mat-light-theme( $mat-primary-palette, $mat-accent-palette, $m
   margin-right: 6px;
   white-space: nowrap;
 }
+.value-section {
+  font-family: MUSEO500-REGULAR;
+}
 /* end microfront address */
+
+.custom-button {
+  font-family: MUSEO500-REGULAR;
+  border-radius: 20px !important;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 280px !important;
+  padding: 4px 24px !important;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
@@ -239,7 +251,9 @@ color: #5C339D
 
 .bg-section{
   border: 1px solid #5c349e !important;
-  padding: 5px !important;
+  padding: 6px !important;
+  text-align: start;
+  border-radius: 6px;
 }
 
 .cdk-overlay-container{

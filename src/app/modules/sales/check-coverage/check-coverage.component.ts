@@ -93,11 +93,12 @@ export class CheckCoverageComponent implements OnInit {
   public environment : any;
   public hasCoverage : boolean= false;
   public visited : boolean = false;
+  public addressSelected : boolean = false;
 
   @Input() selfLoaded : boolean = true;
   @Output() nextCoverageStep = new EventEmitter<any>();
   validDataCoverage: any;
-
+  addresses: any[] = [];
 
 
 
@@ -216,28 +217,33 @@ export class CheckCoverageComponent implements OnInit {
     this.coverageService.saveCoverageData(this.validDataCoverage);
     this.visited = true;
     this.nextCoverageStep.emit(true);
-    this.microfrontParamIn.mode = 'READONLY';
+    this.registerAddress();
   }
 
   updateAddressComplete(event: any){
     console.log(event);
-    this.registerAddress(event.detail.microfrontData);
+    this.addresses = event.detail.microfrontData;
+    this.addresses.forEach((address: any) => {
+      if (address.selected) {
+        this.addressSelected = true;
+      }
+    });
   }
 
-  registerAddress(data: any[]){
-    if(!data || data.length===0) return;
+  registerAddress(){
+    if(!this.addresses || this.addresses.length===0) return;
     const param = {
       "orderId": this.orderId,
       "sequence": 1,
       "userId": this.userId,
       "microFrontendId": "address-microfront-app",
-      "microFrontendData": JSON.stringify(data),
+      "microFrontendData": JSON.stringify(this.addresses),
       "statusCode": "INI"
     }
     this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
       response => {
         console.log(response);
-        this.webstoreService.saveDataInSession('addressData', data);
+        this.webstoreService.saveDataInSession('addressData', this.addresses);
       });
   }
 
