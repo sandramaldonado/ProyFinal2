@@ -1,0 +1,18 @@
+{
+    "ADDRESS_COMPONENT": {
+    "CITY": "Ciudad",
+    "ZONE": "Zona",
+    "STREET": "Calle",
+    "STREET_REFERENCE_ONE": "Calle de referencia 1",
+    "STREET_REFERENCE_TWO": "Calle de referencia 2",
+    "NUMBER_HOUSE": "Nro. Casa",
+    "BUILDING": "Edificio",
+    "FLOOR": "Piso",
+    "DEPARTMENT": "Departamento",
+    "OBSERVATIONS": "Observaciones",
+    "NEW_ADDRESS": "Nueva Dirección",
+    "ADDITIONAL_DATA": "Datos adicionales",
+    "BASIC_DATA_TITLE": "DATOS BÁSICOS",
+    "ADDRESS_TITLE": "DIRECCIONES"
+  }
+}
