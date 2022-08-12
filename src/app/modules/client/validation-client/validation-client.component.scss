@@ -44,6 +44,7 @@ mat-card-footer{
 
 
 /////////////////////////   INPUT STYLE FORMULARIO    /////////////////////////
+/*
 ::ng-deep .mat-form-field-outline-start {
     color: #5C349D!important;
     border-color: #5C349D!important;
@@ -68,9 +69,10 @@ mat-card-footer{
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
     color: #5C349D!important;
 }
-
+*/
 /* El icono debe ser "position: absolute"
  * Ademas le damos un "display: block" y lo posicionamos */
+ 
 input.input{
     padding-right: 1.5rem;
 }

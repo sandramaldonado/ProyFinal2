@@ -11,6 +11,13 @@ input{
     color: #5C349D;
 }
 
+
+/*  
+
+input.ng-valid {
+    border:1px solid green;
+  }
+
 /* El icono debe ser "position: absolute"
  * Ademas le damos un "display: block" y lo posicionamos */
 input.input{
@@ -27,6 +34,9 @@ input.input{
     cursor: pointer;
 }
 
+
+
+/*
 
 ::ng-deep .mat-form-field-outline-start {
     color: #5C349D;
@@ -53,6 +63,7 @@ input.input{
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
     color: #5C349D!important;
 }
+*/
 
 .tamañodiv{
     margin-left: 5px;
