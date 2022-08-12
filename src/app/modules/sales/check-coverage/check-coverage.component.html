@@ -73,7 +73,7 @@
                     </mat-card-content>
 
                 </mat-card>
-                <app-button *ngIf="!visited"  [disabled]="!hasCoverage"  [content]="'Siguiente'" (click)="next()"></app-button>
+                <app-button *ngIf="!visited"  [disabled]="!hasCoverage || !addressSelected"  [content]="'Siguiente'" (click)="next()"></app-button>
             </div>
         </section>
 
