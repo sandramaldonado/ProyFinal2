@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row pb-3">
         <section class="section-body col-12 py-3">
+            {{boundAttribute}}
             <h3>{{title}}</h3>
             <p>{{message}}</p>
             <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm">
@@ -194,7 +195,7 @@
                 </div>
 
                 <div class="row text-center">
-                    <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
+                    <app-button *ngIf ="!visited" [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
                     </app-button>
                 </div>
             </form>

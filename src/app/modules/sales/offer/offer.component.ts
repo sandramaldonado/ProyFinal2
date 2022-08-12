@@ -5,6 +5,7 @@ import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanListService } from '@app/services/plan-list.service';
 import { PlanComposition } from '@models/PlanComposition';
+import { OrdersService } from '@app/services/orders.service';
 
 @Component({
   selector: 'app-offer',
@@ -24,7 +25,8 @@ export class OfferComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private planListService : PlanListService,
-    private webstoreService : WebstoreService
+    private webstoreService : WebstoreService,
+    private ordersService: OrdersService
   ) { }
 
   ngOnInit(): void {

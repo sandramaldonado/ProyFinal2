@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { CaptchaService } from 'src/app/core/services/captcha.service';
+import { CaptchaService } from '@services/captcha.service';
 
 @Component({
   selector: 'app-captcha',
@@ -56,7 +56,7 @@ export class CaptchaComponent implements OnChanges {
             .substring(2, 4);
         this.code = this.resultCode = char.toUpperCase();
         break;
-      case 2: // solve the calculation 
+      case 2: // solve the calculation
         let num1 = Math.floor(Math.random() * 99);
         let num2 = Math.floor(Math.random() * 9);
         let operators = ['+', '-'];

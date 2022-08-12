@@ -13,6 +13,7 @@ export class DocumentsComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
   @Output() nextDocumentStep = new EventEmitter<any>();
+  visited: boolean = false;
   constructor(
     private modalService: BsModalService,
     private imageCompress: NgxImageCompressService,
@@ -156,6 +157,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   next(){
+    this.visited =true;
     this.nextDocumentStep.emit(true);
   }
 

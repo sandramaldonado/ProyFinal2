@@ -2,8 +2,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
+import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-admin-client',
@@ -44,12 +46,19 @@ export class AdminClientComponent implements OnInit {
     'nit': new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
+  visited : boolean = false;
 
   @Output() nextAdminClientStep = new EventEmitter<any>();
+  @LocalStorage()
+	public boundAttribute : any ="Texto Inicial";
+
+  @LocalStorage()
+  public boundLastName : any;
 
   constructor(private router: Router,
             private activatedRoute: ActivatedRoute,
             private clientService: ClientService,
+            private ordersService: OrdersService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
     this.stateClient = (sessionStorage.getItem("isClient") == "true");
@@ -60,7 +69,7 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.webstoreservice.saveToken();
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
     //this.loadcontents();
@@ -171,6 +180,11 @@ export class AdminClientComponent implements OnInit {
     console.log("inica");
     console.log(datosClient);
     console.log("finaliza");
+
+    this.visited = true;
+
+    this.registerClient();
+
     this.nextAdminClientStep.emit(true);
   }
 
@@ -227,5 +241,21 @@ export class AdminClientComponent implements OnInit {
 
     get nit() {
       return this.validationForm.get('nit');
+    }
+
+    registerClient(){
+      const client = this.webstoreservice.getClientInformation();
+      const param = {
+        "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+        "sequence": 2,
+        "userId": this.webstoreservice.getDataInSession('userId'),
+        "microFrontendId": "person-microfront-app",
+        "microFrontendData": JSON.stringify(client),
+        "statusCode": "INI"
+      }
+      this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+        response => {
+          console.log(response);
+        });
     }
 }
