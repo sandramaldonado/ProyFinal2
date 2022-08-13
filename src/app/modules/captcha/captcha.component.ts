@@ -76,7 +76,7 @@ export class CaptchaComponent implements OnChanges {
       ctx.font = this.config.font.size + " " + "sans-serif";
       ctx.fillStyle = this.config.font.color;
       ctx.textBaseline = "middle";
-      ctx.fillText(this.code, 50, 40);
+      ctx.fillText(this.code, 30, 40);
       if (this.config.back.stroke) {
         ctx.strokeStyle = this.config.back.stroke;
         for (var i = 0; i < 150; i++) {
