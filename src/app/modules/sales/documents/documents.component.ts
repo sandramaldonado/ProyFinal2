@@ -168,6 +168,18 @@ export class DocumentsComponent implements OnInit {
 
     });
   }
+  removeFirstDocument(){
+    this.webstoreService.saveDocument('firstDocument','');
+
+  }
+  removeSecondDocument(){
+    this.webstoreService.saveDocument('secondDocument','');
+
+  }
+  removeFacePicture(){
+    this.webstoreService.saveDocument('facePicture','');
+
+  }
 
   next(){
     this.visited =true;
