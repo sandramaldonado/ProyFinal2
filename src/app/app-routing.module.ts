@@ -19,6 +19,10 @@ const routes : Routes = [
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
   },
   {
+    path : 'almost-done',
+    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+  },
+  {
     path : 'detalle-compra',
     loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
   },

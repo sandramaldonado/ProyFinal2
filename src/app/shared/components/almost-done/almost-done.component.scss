@@ -1,0 +1,37 @@
+#banner{
+display: block;
+text-align: center;
+position: relative;
+width: 341px;
+padding: 5%;
+height: 138px;
+
+background: linear-gradient(180deg, rgba(214, 240, 132, 0) 0%, #D6F084 100%);
+border-radius: 10px;
+}
+
+#padre{
+  justify-content: center;
+  align-items: center;
+  display: block;
+}
+
+#boton{
+  
+  position: relative;
+  display: block
+
+}
+
+
+#presiona{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
+
+color: #5C339D;
+
+}
