@@ -12,8 +12,8 @@ export class DeliveryMethodComponent implements OnInit {
   title = "¿Cómo prefieres recibir tus equipos?";
   message = "El servicio contratado tiene artículos que debemos entregarte.";
   listOfOptions = [
-      {value:"store",design:"storefront",style:"background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;",name:"Recoja en Tienda",id:"1",checked:false},
-      {value:"delivery",design:"delivery_dining",style:"background-color:#5C339D; color: white;border: 4px solid #5C339D; border-radius:12px;",name:"Delivery",id:"2",checked:true}
+      {value:"store",design:"storefront",style:"background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;",name:"Recoja en Tienda",id:"1",checked:true}
+      //{value:"delivery",design:"delivery_dining",style:"background-color:#5C339D; color: white;border: 4px solid #5C339D; border-radius:12px;",name:"Delivery",id:"2",checked:true}
       ];
 
   validationForm = new FormGroup({
