@@ -1,0 +1,143 @@
+.textTittle h5{
+    color:purple;
+}
+
+.textParrafo p{
+    color:black;
+}
+
+
+mat-label.has-events {
+    pointer-events: auto;
+    color:#5C349D;
+  }
+  
+  mat-card-header {
+     .title-1{
+         font-size: 2.5vh; // 2.5vh;
+         text-align: left;
+         color: purple;
+         font-family: MUSEO900-REGULAR;
+         //font-family:'Museo';
+         margin: 0;
+  
+     }
+     .title-2{
+         font-size: 1.8vh;
+         text-align: left;
+         color: black;
+         //font-family:'Museo';
+         font-family: MUSEO600-REGULAR;
+     }
+    }
+  
+    mat-card-title{
+      margin-bottom: .5vh;
+    }
+  
+    .mat-icon-button{
+      width: 4vh!important;
+      height: auto!important;
+      margin-top: -6px;
+      margin-right: -3px;
+  }
+  
+  mat-card-content {
+      background: #F0F0F0;
+      color: purple;
+      border-radius: 0 0 25px 25px ;
+  }
+  
+  .link-back a {
+      text-align: right;
+      font-weight: bold;
+      text-decoration: none;
+      color: rgb(179, 2, 167) ;
+  }
+  
+  .mat-card{
+    padding: 10px !important;
+    width: 100%;
+    color: #7B7B7B;
+  }
+  
+  .section-body{
+    background: #ffff;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  /////////////////////////   INPUT STYLE FORMULARIO    /////////////////////////
+  mat-error{
+    text-align:right;
+    margin-top: -17px;
+  }
+  
+  ::ng-deep .mat-form-field-outline-start {
+    border-radius: 12px 0 0 12px !important;
+    min-width: 12px !important;
+  }
+  
+  ::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 12px 12px 0 !important;
+  }
+  
+  // mat-icon-stepper selected color change 
+  ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: #5C349D;
+  }
+  
+  //mat-input focused color
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #5C349D!important;
+  }
+  
+  //input outline color
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #5C349D!important;
+    // opacity: 1!important;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: red!important;
+    opacity: 0.8!important;
+  }
+  
+  
+  
+  
+  ::ng-deep {
+    .two .mat-select-value-text {
+      color : #5C349D;
+     }
+    }
+  
+  
+  
+  /*
+  
+  ::ng-deep .mat-form-field-outline-start {
+    color: purple!important;
+    border-color: purple!important;
+    border-radius: 18px 0 0 18px !important;
+    min-width: 18px !important;
+    //width: 90%;
+  }
+  
+  ::ng-deep .mat-form-field-outline-end {
+    color: purple!important;
+    border-color: purple!important;
+    border-radius: 0 18px 18px 0 !important;
+  }
+  */
+  
+  .readonly-wrapper {
+    cursor: not-allowed;
+  }
+  
+  .readonly-wrapper .readonly-block {
+    pointer-events: none;
+  }
+  
