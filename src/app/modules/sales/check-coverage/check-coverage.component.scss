@@ -24,6 +24,7 @@
 
     border: 1px solid #AC99CE;
     border-radius: 10px;
+    overflow: auto;
   }
 
   .detail{
@@ -37,10 +38,24 @@
     //border: 1px solid rgba(132, 102, 182, 0.1);
   }
 
-  .coverage-status {
+  .coverage-result {
+    img{
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .coverage-status-ok {
     background: #D6F084;
     color: #5c349e;
-    height: 55px;
+    //height: 55px;
+    border-radius: 0px 0px 10px 10px;
+  }
+
+  .coverage-status-nok {
+    background: #D6F084;
+    color: #5c349e;
+    //height: 55px;
     border-radius: 0px 0px 10px 10px;
   }
 

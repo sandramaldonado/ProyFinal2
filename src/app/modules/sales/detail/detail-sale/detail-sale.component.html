@@ -1,0 +1,92 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row pb-3 ">
+
+        <!--<section class="detail col-12 col-md-5 d-none d-md-block border border-primary border-end-0 rounded-start"></section>-->
+        <section class="section-body col-12 py-3">
+            <div class=" d-flex flex-column justify-content-around">
+
+                <h3 id="title">Detalle de Compra</h3>
+
+                <mat-card class="my-3 border" id="matservicios">
+                    <mat-card-content class="">
+                            <div class="">
+                                <h3 id="servicios">Servicios Adquiridos
+                                <img id="icono" src="assets/images/iconos/Vector.png">
+
+                                <p id="fecha">Se paga a partir del 1 de agosto</p>
+
+                                <ul class="">
+                                    <li class="" >
+                                        <div class="productname">
+                                            {{producto}}
+                                        </div>
+
+                                        <div class="price"> {{currency}}{{precio}}
+                                        </div>
+
+                                    </li>
+                                  </ul>
+
+                                </h3>
+                            </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="my-3 border" id="matservicios">
+                    <mat-card-content class="">
+                            <div class="">
+                                <h3 id="servicios">Articulos Adquiridos:
+                                <img id="icono" src="assets/images/iconos/Vector.png">
+                                <p id="fecha">Se paga a partir del 1 de agosto</p>
+                                <ul class="">
+                                    <li class="" *ngFor="let datos of data1">
+                                        <div class="productname">
+                                            {{datos}}
+                                        </div>
+
+
+                                    </li>
+
+
+
+                                </ul>
+
+
+
+                                </h3>
+                            </div>
+                    </mat-card-content>
+                </mat-card>
+
+<!--                 <div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <p id="pago">Pago Automatico (descuento 20%)</p>
+
+                </div>
+
+                <p id="activa">
+                    Activa el pago automático para recibir descuentos con el pago con tarjeta y mantente al día con tus facturas.
+                </p> -->
+
+                <div>
+                    <h3 id="total">Total Compra:
+                        <img id="icono" src="assets/images/iconos/carrito.png"></h3>
+                    <h3 id="totalnumero">
+                        Bs {{total}}
+                    </h3>
+                </div>
+
+                    <app-button id="comprar" [content]="'Comprar'" (click)="next()"></app-button>
+
+            </div>
+
+        </section>
+
+
+    </div>
+</div>
+

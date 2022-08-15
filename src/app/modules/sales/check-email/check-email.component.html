@@ -5,21 +5,51 @@
             <div class=" d-flex flex-column justify-content-around align-items-center">
                     <h3>Validación de email</h3>
                     <p>Es necesario validar tu correo electrónico para el envío de facturas electrónicas  y otras notificaciones.</p>
-                <mat-card class="my-3 border">
-                    <mat-card-content class="text-center">
-                            <div class="d-flex flex-column justify-content-between align-items-center py-5">
-                                <img src="assets/images/iconos/email.png" alt="" class="pb-2">
-                                <p>No olvides que será utilizado como método de contacto oficial </p>
-                                <div class="mb-3">
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">Introduce el codigo recibido</div>
-                                </div>
-                                <p class="pt-2">Te llegará un correo de confirmación a tu correo electrónico para validarlo.</p>
-                                <app-button  [content]="'Validar correo electronico'" (click)="validateEmail()"></app-button>
+                    <mat-card class="my-3 border">
+                        <mat-card-content class="text-center">
+                            <form action="" [formGroup]="emailValidationForm" #formEmail="ngForm" >
+                                <div class="d-flex flex-column justify-content-between align-items-center py-5">
+                                    <img src="assets/images/iconos/email.png" alt="" class="pb-2">
+                                    <p>No olvides que será utilizado como método de contacto oficial </p>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="codeValidationEmail">Codigo de validación</label>
+                                        <div class="form-outline">
+                                            <input
+                                              class="form-control"
+                                              id="codeValidationEmail"
+                                              name ="codeValidationEmail"
+                                              formControlName ="codeValidationEmail"
+                                              type="text"
+                                              value="Codigo de validación"
+                                              aria-label="readonly input example"
+                                              my-1
 
-                            </div>
-                    </mat-card-content>
-                </mat-card>
+                                            />
+
+                                            <div class="d-flex flex-column">
+                                              <small *ngIf="emailCode?.invalid && emailCode?.touched" class="text-danger">El codigo es obligatorio</small>
+                                              <small *ngIf="!validCode && formEmail.submitted" class="text-danger">El codigo no es valido</small>
+                                              <small *ngIf="validCode && formEmail.submitted" class="text-success">El codigo es valido</small>
+                                            </div>
+
+                                          </div>
+                                        <div id="emailHelp" class="form-text">Introduce el codigo recibido</div>
+                                        <a class="form-text" (click)="sendValidationCode()">Reenviar codigo</a>
+                                        <div class="form-text">  {{this.randomEmailCode}}</div>
+                                    </div>
+
+
+                                    <p class="">Te llegará un correo de confirmación a tu correo electrónico para validarlo.</p>
+                                    <div class="row d-flex flex-column justify-content-between align-items-center">
+
+                                        <app-button [disabled]="emailValidationForm.invalid"  [content]="'Validar correo electronico'" (click)="validateEmail()"></app-button>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </mat-card-content>
+                    </mat-card>
             </div>
         </section>
     </div>

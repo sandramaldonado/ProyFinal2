@@ -1,0 +1,73 @@
+mat-label.has-events {
+    pointer-events: auto;
+    color:#5C349D;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.tamañodiv{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/*  
+
+input.ng-valid {
+    border:1px solid green;
+  }
+
+/* El icono debe ser "position: absolute"
+ * Ademas le damos un "display: block" y lo posicionamos */
+ input{
+    color: #5C349D;
+}
+
+/* El icono debe ser "position: absolute"
+ * Ademas le damos un "display: block" y lo posicionamos */
+ input.input{
+    padding-right: 1.5rem;
+}
+  
+#icon{
+    position: absolute;
+    display: block;
+    bottom: .5rem;
+    right: 0.1rem;
+    opacity: 0.5!important;
+    user-select: none;
+    cursor: pointer;
+}
+
+
+/*
+
+::ng-deep .mat-form-field-outline-start {
+    color: #5C349D;
+    border-color: #5C349D!important;
+    border-radius: 9px 0 0 9px !important;
+    min-width: 9px !important;
+    //width: 100%;
+}
+
+::ng-deep .mat-form-field-outline-end {
+    color: #5C349D;
+    border-color: #5C349D!important;
+    border-radius: 0 9px 9px 0 !important;
+    //width: 90%;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #5C349D;
+    // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #5C349D!important;
+}
+*/
+
+

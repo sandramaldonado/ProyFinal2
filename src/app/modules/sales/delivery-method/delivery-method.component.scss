@@ -1,0 +1,17 @@
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+	background-color: white!important;
+    border-color: white!important; /*outer ring color change*/
+    border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+	background-color: #5C339D!important;   /*inner circle color change*/
+    border-color: white!important;
+    border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    background-color: white!important;
+	border-color: white!important; /*outer ring color change*/
+    border-radius: 8px 8px 8px 8px;
+}

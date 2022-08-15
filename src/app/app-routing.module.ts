@@ -11,20 +11,44 @@ const routes : Routes = [
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   },
   {
-    path : 'oferta/orden/:id',
+    path : 'oferta',
+    loadChildren : () => import ('./modules/sales/offer/offer.module').then (m => m.OfferModule)
+  },
+  {
+    path : 'oferta/orden-compra',
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
+  },
+  {
+    path : 'almost-done',
+    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+  },
+  {
+    path : 'detalle-compra',
+    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
   },
   {
     path : 'client',
     loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)
   },
   {
+    path : 'moviles',
+    loadChildren: () => import('./modules/sales/movil-list/movil-list.module').then(m => m.MovilListModule)
+  },
+  {
+    path : 'entrega',
+    loadChildren: () => import('./modules/sales/delivery-method/delivery-method.module').then(m => m.DeliveryMethodModule)
+  },
+  {
+    path : 'stores',
+    loadChildren: () => import('./modules/sales/store-city/store-city.module').then(m => m.StoreCityModule)
+  },
+  {
     path: 'en-construccion',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)
   },
   {
-    path: 'oferta',
-    loadChildren: () => import('./pages/sales/sales.module').then( m => m.SalesModule)
+    path: 'lista-productos',
+    loadChildren: () => import('./modules/product/product-list/product-list.module').then( m => m.ProductListModule)
   },
   {
     path: 'captcha',
@@ -35,12 +59,12 @@ const routes : Routes = [
     loadChildren: () => import('./pages/validation/validation.module').then( m => m.ValidationModule)
   },
   {
-    path: 'registro',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterModule)
-  },
-  {
     path: 'cobertura',
     loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
+  },
+  {
+    path: 'documentos',
+    loadChildren: () => import('./modules/sales/documents/documents.module').then( m => m.DocumentsModule)
   },
   {
     path: 'verificar-email',
@@ -54,12 +78,10 @@ const routes : Routes = [
     path : 'compras',
     loadChildren: () => import('./modules/sales/cart/cart.module').then(m => m.CartModule)
   },
-  { path : 'oferta/detalle/:id',
+  { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
-  { path : 'oferta/orden-compra',
-    loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
-  },
+
 
   {
     path: '**',

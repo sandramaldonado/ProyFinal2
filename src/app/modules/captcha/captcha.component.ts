@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { CaptchaService } from 'src/app/core/services/captcha.service';
+import { CaptchaService } from '@services/captcha.service';
 
 @Component({
   selector: 'app-captcha',
@@ -56,7 +56,7 @@ export class CaptchaComponent implements OnChanges {
             .substring(2, 4);
         this.code = this.resultCode = char.toUpperCase();
         break;
-      case 2: // solve the calculation 
+      case 2: // solve the calculation
         let num1 = Math.floor(Math.random() * 99);
         let num2 = Math.floor(Math.random() * 9);
         let operators = ['+', '-'];
@@ -72,11 +72,11 @@ export class CaptchaComponent implements OnChanges {
       ctx.fillStyle = this.config.back.solid;
       ctx.fillRect(0, 0, captcahCanvas.width, captcahCanvas.height);
       ctx.beginPath();
-      captcahCanvas.style.letterSpacing = 15 + "px";
-      ctx.font = this.config.font.size + " " + this.config.font.family;
+      captcahCanvas.style.letterSpacing = 7 + "px";
+      ctx.font = this.config.font.size + " " + "sans-serif";
       ctx.fillStyle = this.config.font.color;
       ctx.textBaseline = "middle";
-      ctx.fillText(this.code, 40, 50);
+      ctx.fillText(this.code, 30, 40);
       if (this.config.back.stroke) {
         ctx.strokeStyle = this.config.back.stroke;
         for (var i = 0; i < 150; i++) {

@@ -1,10 +1,8 @@
 <div class="container">
     <div class="row d-flex flex-column justify-content-center align-items-center py-3">
       <h3>Toma de Fotografia</h3>
-      <p>Por favor acepte el requerimiento de uso de la camara</p>
+      <p class="mb-0">Por favor acepte el requerimiento de uso de la camara</p>
         <mat-card >
-            <mat-card-header>
-            </mat-card-header>
             <mat-card-content class="text-center">
                 <webcam
                 style="min-width: 270px;"
@@ -21,9 +19,9 @@
             <mat-card-footer class="p-2">
                 <div class="d-flex flex-column justify-content-center align-items-center border rounded mt-2 mt-lg-0 p-2" style="background-color: white;">
                     <div class="snapshot-title text-center " >Vista Previa</div>
-                    <img [src]="webcamImage?.imageAsDataUrl" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
+                    <img [src]="previewImage" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
                     <app-button-outline  [content]="'Eliminar Fotografia'" (click)="removePicture()"></app-button-outline>
-                      <app-button  [content]="'Siguiente'" (click)="savePicture()"></app-button>
+                      <app-button  [content]="'Guardar'" (click)="savePicture()"></app-button>
                   </div>
 
             </mat-card-footer>

@@ -1,26 +1,41 @@
 # LandingMasterSalesFrontend  
 
-Angular CLI: 14.0.0 (npm i -g  @angular/cli@14.0.0)
-Node: 14.15.0
-Package Manager: npm 6.14.8 
-OS: darwin x64
+- Angular CLI: 14.0.0 (npm i -g  @angular/cli@14.0.0)
+- Node: 14.15.0
+- Package Manager: npm 6.14.8 
+- OS: darwin x64
 
 Angular: 14.0.0
-... animations, cdk, cli, common, compiler, compiler-cli, core
-... forms, google-maps, material, platform-browser
-... platform-browser-dynamic, router
+- animations, cdk, cli, common, compiler, compiler-cli, core
+- forms, google-maps, material, platform-browser
+- platform-browser-dynamic, router
 
 Package                         Version
 ---------------------------------------------------------
-@angular-devkit/architect       0.1400.0
-@angular-devkit/build-angular   14.0.0
-@angular-devkit/core            14.0.0
-@angular-devkit/schematics      14.0.0
-@schematics/angular             14.0.0
-rxjs                            7.5.5
-typescript                      4.6.4
+- @angular-devkit/architect       0.1400.0
+- @angular-devkit/build-angular   14.0.0
+- @angular-devkit/core            14.0.0
+- @angular-devkit/schematics      14.0.0
+- @schematics/angular             14.0.0
+- rxjs                            7.5.5
+- typescript                      4.6.4
 
-    
+## Comandos Docker 
+# crear imagen local : iniciar desde la carpeta de la landing donde se encuentra el Dockerfile
+- docker build -t landing-master-sales-frontend -f ./Dockerfile .
+- docker run -p 4200:80 landing-master-sales-frontend
+
+## ejecutar imagen desde terminal para usar la imagen en el registry de GitLab
+# Logearse al Registry de Gitlab
+- docker login registry-gitlab.nuevatel.com
+- docker build -t registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend .
+
+# Ejecutar el container con la imagen de Giitlab
+
+- docker run -p 4200:80 registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
+
+# Subir imagen al Git Lab Registry
+- docker push registry-gitlab.nuevatel.com/spdev/landing-page-master-sales-frontend
 
 ## Correr la aplicacion en ambiente de desarrollo local
 

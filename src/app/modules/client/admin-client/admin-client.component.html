@@ -1,109 +1,192 @@
-
 <div class="container">
     <div class="row pb-3">
+        <section class="section-body col-12 py-3">
+            {{boundAttribute}}
+            <h3>{{title}}</h3>
+            <p>{{message}}</p>
+            <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm">
+                <div class="row ">
+                    <div class="container" style="color:black;">
+                        <h4><b>Datos Generales</b></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6" *ngIf="stateClient; else NAME1EDIT">
+                        <app-input-text controlName="firstName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
+                            message="Primer Nombre" description="Primer Nombre"></app-input-text>
+                        <mat-error *ngIf="firstName?.invalid && firstName?.touched" >
+                            Por favor ingresa datos v&aacute;lidos
+                        </mat-error>
+                    </div>
+                    <ng-template #NAME1EDIT>
+                        <div class="col-6">
+                            <app-input-text controlName="firstName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
+                            message="Primer Nombre" description="Primer Nombre"></app-input-text>
+                            <mat-error  *ngIf="firstName?.invalid && firstName?.touched" >
+                                Por favor ingresa datos v&aacute;lidos
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                    <div class="col-6" *ngIf="stateClient; else NAME2EDIT">
+                        <app-input-text controlName="secondName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="secondName"
+                            message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
+                    </div>
+                    <ng-template #NAME2EDIT>
+                        <div class="col-6">
+                            <app-input-text controlName="secondName"  readonly="false" [submitted]="submitted" identifier="secondName"
+                            message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
+                        </div>
+                    </ng-template>
+                </div>
 
-      <section class="section-body col-12 py-3">
-        <h3>{{title}}</h3>
-        <p>{{message}}</p>
-        <mat-card>
-          <mat-card-content>
-          <form [formGroup]="validationForm" style="background-color:white" class="form"
-              novalidate id="validationForm">
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="firstName" class="bold"><b>Primer Nombre:</b></label>
-                      <input type="text" class="form-control" formControlName="firstName" id="firstName"
-                          name="firstName" placeholder="Primer Nombre" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="secondName" class="bold"><b>Segundo Nombre:</b></label>
-                      <input type="text" class="form-control" formControlName="secondName" id="secondName"
-                          name="secondName" placeholder="Segundo Nombre" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="sureName" class="bold"><b>Primer Apellido:</b></label>
-                      <input type="text" class="form-control" formControlName="sureName" id="sureName"
-                          name="sureName" placeholder="Primer Apellido" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="secondSurName" class="bold"><b>Segundo Apellido:</b></label>
-                      <input type="text" class="form-control" formControlName="secondSurName" id="secondSurName"
-                          name="secondSurName" placeholder="Segundo Apellido" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-3 col-sm-12">
-                      <label for="tipo" class="bold"><b>Tipo Doc.:</b></label>
-                      <mat-select placeholder="Elija Tipo Doc." class="form-control" name="selectAction" formControlName="tipo" id="tipo"
-                      name="tipo">
-                          <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value">
-                              {{tipo.description}}
-                          </mat-option>
-                      </mat-select>
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="nroDoc" class="bold"><b>N&uacute;mero Doc.:</b></label>
-                      <input type="text" class="form-control" formControlName="nroDoc" id="nroDoc" name="nroDoc"
-                          placeholder="N&uacute;mero Documento" />
-                  </div>
-                  <div class="form-group col-md-3 col-sm-12">
-                      <label for="expedido" class="bold" ><b>Expedido:</b></label>
-                      <mat-select placeholder="Elija Expedido"  class="form-control" formControlName="expDoc" id="expDoc" name="expDoc">
-                          <mat-option *ngFor="let exp of expedido" [value]="exp.value">
-                              {{exp.description}}
-                          </mat-option>
-                      </mat-select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="nroRef" class="bold"><b>N&uacute;mero Referencia:</b></label>
-                      <input type="text" class="form-control" formControlName="nroRef" id="nroRef" name="nroRef"
-                          placeholder="N&uacute;mero Referencia" />
-                  </div>
-                  <div class="form-group col-md-6 col-sm-12">
-                      <label for="email" class="bold"><b>Correo electr&oacute;nico.:</b></label>
-                      <input type="text" class="form-control" formControlName="email" id="email" name="email"
-                          placeholder="Correo Elect&oacute;nico" />
-                  </div>
-              </div>
+                <div class="row">
+                    <div class="col-6" *ngIf="stateClient; else SURENAME1EDIT">
+                        <app-input-text controlName="sureName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="sureName"
+                            message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                        <mat-error *ngIf="sureName?.invalid && sureName?.touched" >
+                            Por favor ingresa datos v&aacute;lidos
+                        </mat-error>
+                    </div>
+                    <ng-template #SURENAME1EDIT>
+                        <div class="col-6">
+                            <app-input-text controlName="sureName"  readonly="false" [submitted]="submitted" identifier="sureName"
+                            message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                            <mat-error *ngIf="sureName?.invalid && sureName?.touched" >
+                                Por favor ingresa datos v&aacute;lidos
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                    <div class="col-6" *ngIf="stateClient; else SURENAME2EDIT">
+                        <app-input-text controlName="secondSurName"  readonly="{{stateClient}}" [submitted]="submitted"
+                            identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
+                        </app-input-text>
+                    </div>
+                    <ng-template #SURENAME2EDIT>
+                        <div class="col-6">
+                            <app-input-text controlName="secondSurName"  readonly="false" [submitted]="submitted"
+                            identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
+                            </app-input-text>
+                        </div>
+                    </ng-template>
+                </div>
 
-              <div class="form-group col-12">
-                  <small *ngIf="firstName?.invalid && firstName?.touched" class="text-danger">El primer Nombre es
-                      Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50 Caracteres)</small>
-                  <small *ngIf="sureName?.invalid && sureName?.touched" class="text-danger"><br>El Apellido
-                      Paterno es Requerido (Solo acepta texto sin caracteres especiales entre 2 y 50
-                      Caracteres)</small>
-                  <small *ngIf="tipo?.invalid && tipo?.touched" class="text-danger"><br>El tipo de Documento es
-                      Requerido</small>
-                  <small *ngIf="nroDoc?.invalid && nroDoc?.touched" class="text-danger"><br>El Carnet de Identidad
-                      es Requerido (Acepta Numeros y Letras entre 4 y 10
-                      Caracteres)</small>
-                  <small *ngIf="expDoc?.invalid && expDoc?.touched" class="text-danger"><br>El lugar de expedido
-                      es Requerido</small>
-                  <small *ngIf="nroRef?.invalid && nroRef?.touched" class="text-danger"><br>El n&uacute;mero de
-                      referencia es Requerido (Acepta solamente 8 N&uacute;meros)</small>
-                  <small *ngIf="email?.invalid && email?.touched" class="text-danger"><br>El email es Requerido
-                  </small>
-                  <br>
-                  <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
-                  <div class="text-center">
-                    <app-button [disabled]="validationForm.invalid" [content]="'Continuar'"></app-button>
-                  </div>
+                <div class="row" *ngIf="stateClient; else TYPEEDIT">
+                    <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
+                        <mat-select placeholder="Tipo Documento" formControlName="tipo" id="tipo" 
+                            name="tipo" [disabled]="true" class="{{false ? 'one' : 'two'}}">
+                            <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
+                                {{tipo.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error  *ngIf="tipo?.invalid && tipo?.touched">
+                        Por favor elija una opci&oacute;n
+                    </mat-error>
+                </div>
+                <ng-template #TYPEEDIT>
+                    <div class="row">
+                        <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;" >
+                            <mat-select placeholder="Tipo Documento" disableOptionCentering formControlName="tipo" id="tipo" 
+                                name="tipo" class="{{false ? 'one' : 'two'}}">
+                                <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
+                                    {{tipo.description}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-error *ngIf="tipo?.invalid && tipo?.touched">
+                            Por favor elija una opci&oacute;n
+                        </mat-error>
+                    </div>
+                </ng-template>
+                <div class="row">
+                    <div class="col-6" *ngIf="stateClient; else DNIEDIT">
+                        <app-input-text controlName="nroDoc"  readonly="{{stateClient}}" [submitted]="submitted" identifier="nroDoc"
+                            message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                        <mat-error *ngIf="nroDoc?.invalid && nroDoc?.touched" >
+                            Por favor ingresa datos v&aacute;lidos
+                        </mat-error>
+                    </div>
+                    <ng-template #DNIEDIT>
+                        <div class="col-6">
+                            <app-input-text controlName="nroDoc"  readonly="false" [submitted]="submitted" identifier="nroDoc"
+                                message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                            <mat-error *ngIf="nroDoc?.invalid && nroDoc?.touched" >
+                                Por favor ingresa datos v&aacute;lidos
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                    <div class="col-6" *ngIf="stateClient; else EMITEDIT">
+                        <mat-form-field appearance="outline" >
+                            <mat-select placeholder="Elija Expedido" formControlName="expDoc" 
+                                id="expDoc" name="expDoc" [disabled]="true" class="{{false ? 'one' : 'two'}}">
+                                <mat-option *ngFor="let exp of expedido" [value]="exp.value" style="color:#5C349D;">
+                                    {{exp.description}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-error *ngIf="expDoc?.invalid && expDoc?.touched" >
+                            Por favor elija una opci&oacute;n
+                        </mat-error>
+                    </div>
+                    <ng-template #EMITEDIT>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" >
+                                <mat-select placeholder="Elija Expedido" disableOptionCentering formControlName="expDoc" 
+                                    id="expDoc" name="expDoc" class="{{false ? 'one' : 'two'}}">
+                                    <mat-option *ngFor="let exp of expedido" [value]="exp.value" style="color:#5C349D;">
+                                        {{exp.description}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-error *ngIf="expDoc?.invalid && expDoc?.touched" >
+                                Por favor elija una opci&oacute;n
+                            </mat-error>
+                        </div>
+                    </ng-template>
+                </div>
 
-              </div>
-          </form>
-          <!--
-          <div class="link-back col-md-12 col-12">
-              <div class="col-md-6 col-12">
-                  <a href="/home" alt="regresa a pagina de Inicio"><b>Inicio</b></a>
-              </div>
-          </div>
-            -->
-        </mat-card-content>
-        </mat-card>
-      </section>
+                <div class="row">
+                    <app-big-input-text controlName="nroRef"  readonly="false" [submitted]="submitted" identifier="nroRef"
+                        message="N&uacute;mero Referencia" description="N&uacute;mero Ref."></app-big-input-text>
+                    <mat-error *ngIf="nroRef?.invalid && nroRef?.touched">
+                        Por favor ingresa solo n&uacute;meros
+                    </mat-error>
+                </div>
+                <div class="row">
+                    <app-big-input-text controlName="email"  readonly="false" [submitted]="submitted" identifier="email"
+                            message="Correo Electr&oacute;nico" description="email"></app-big-input-text>
+                        <mat-error *ngIf="email?.invalid && email?.touched">
+                            Por favor ingresa datos v&aacute;lidos
+                        </mat-error>
+                </div>
+
+                <div class="row ">
+                    <div class="container" style="color:black;">
+                        <h4><b>Datos de Facturaci&oacute;n</b></h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <app-big-input-text controlName="razonS"  readonly="false" [submitted]="submitted" identifier="razonS"
+                                message="Ingresa la Raz&oacute;n Social" description="Raz&oacute;n Social">
+                            </app-big-input-text>
+                            <mat-error *ngIf="razonS?.invalid && razonS?.touched" >
+                                Por favor ingresa datos v&aacute;lidos
+                            </mat-error>
+                </div>
+                <div class="row">
+                    <app-big-input-text controlName="nit"  readonly="false" [submitted]="submitted" identifier="nit"
+                                message="Ingresa N&uacute;mero de NIT" description="NIT"></app-big-input-text>
+                            <mat-error *ngIf="nit?.invalid && nit?.touched">
+                                Por favor ingresa datos v&aacute;lidos
+                            </mat-error>
+                </div>
+
+                <div class="row text-center">
+                    <app-button *ngIf ="!visited" [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
+                    </app-button>
+                </div>
+            </form>
+        </section>
     </div>
 </div>

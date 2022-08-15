@@ -1,9 +1,10 @@
-<div class="col-12 captcha-container {{ config.cssClass} align-items-center">
-    <canvas id="captcahCanvas" width="316" height="80"></canvas>
-    <div class="captcha-actions">
+<div class="form-group captcha-container {{config.cssClass} ">
+    <div class="d-flex flex-row justify-content-center">
+        <canvas id="captcahCanvas" width="257" height="70" style="max-width: 23rem; border: 1px solid #5C339D;border-radius:8px;"></canvas>
+    </div>
+    <div class="col-12 captcha-actions d-flex justify-content-center">
         <input class="form-group" type="text" [(ngModel)]="captch_input" />
         <input type="button" value="Check" (click)="checkCaptcha()" />
-        <a href="javascript:void(0)" class="cpt-btn" (click)="playCaptcha()">🔈</a>
         <a href="javascript:void(0)" class="cpt-btn reload" (click)="createCaptcha()">&#x21bb;</a>
     </div>
 </div>

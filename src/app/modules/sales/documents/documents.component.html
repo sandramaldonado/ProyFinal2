@@ -7,7 +7,13 @@
             <mat-card class="my-3 border">
                 <mat-card-content class="text-center">
                         <div class="d-flex flex-column justify-content-between align-items-center py-5">
-                            <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                            <img *ngIf="!firstDocument  || firstDocument =='' " src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                            <div *ngIf="firstDocument  && firstDocument !='' " class=" border rounded mt-2 mt-lg-0 p-2" style="background-color: white; position: relative;">
+                              <img [src]="firstDocument" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
+                              <button class="btn-remove" mat-fab color="primary" (click)="removeFirstDocument();" style="position: absolute; top: 10px; right: 0;">
+                                <mat-icon>delete_outline</mat-icon>
+                              </button>
+                            </div>
                             <p>Sube la fotografía de CI (anverso) </p>
                             <app-button  [content]="'Subir imagen'" (click)="uploadFirstDocument()"></app-button>
                             <app-button-outline  [content]="'Tomar fotografia'" (click)="takePictureFirstDocument()"></app-button-outline>
@@ -17,7 +23,14 @@
             <mat-card class="my-3 border">
               <mat-card-content class="text-center">
                       <div class="d-flex flex-column justify-content-between align-items-center py-5">
-                          <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                          <img  *ngIf="!secondDocument  || secondDocument =='' " src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                           <div *ngIf="secondDocument  && secondDocument !=''" class="border rounded mt-2 mt-lg-0 p-2" style="background-color: white; position: relative;">
+                            <div class="snapshot-title text-center " >Vista Previa</div>
+                            <img [src]="secondDocument" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
+                            <button class="btn-remove" mat-fab color="primary" (click)="removeSecondDocument();" style="position: absolute; top: 10px; right: 0;">
+                              <mat-icon>delete_outline</mat-icon>
+                            </button>
+                          </div>
                           <p>Sube la fotografía de CI (reverso)</p>
                           <app-button  [content]="'Subir imagen'" (click)="uploadSecondDocument()"></app-button>
                           <app-button-outline  [content]="'Tomar fotografia'" (click)="takePictureSecondDocument()"></app-button-outline>
@@ -27,14 +40,26 @@
             <mat-card class="my-3 border">
               <mat-card-content class="text-center">
                       <div class="d-flex flex-column justify-content-between align-items-center py-5">
-                          <img src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                          <img *ngIf="!facePicture || facePicture =='' " src="assets/images/iconos/picture.png" alt="" class="pb-2">
+                          <div *ngIf="facePicture  && facePicture !=''"  class="border rounded mt-2 mt-lg-0 p-2" style="background-color: white; position: relative;">
+                            <div class="snapshot-title text-center " >Vista Previa</div>
+                            <img [src]="facePicture" class=""  style=" min-height: 200px; width: 270px; height :auto;"/>
+
+                          <button mat-fab color="primary" (click)="removeFacePicture();" style="position: absolute; top: 10px; right: 0;">
+                            <mat-icon>delete_outline</mat-icon>
+                          </button>
+                          </div>
                           <p>Sube la fotografía de ti sin gorra o algo q tape tu rostro</p>
                           <app-button  [content]="'Subir imagen'" (click)="uploadFacePicture()"></app-button>
                           <app-button-outline  [content]="'Tomar fotografia'" (click)="takeFacePicture()"></app-button-outline>
+
                       </div>
               </mat-card-content>
             </mat-card>
-
+            <app-button *ngIf="!visited"
+              [disabled]="!firstDocumentIsValid || !firstDocumentIsValid || !facePictureIsValid"
+              [content]="'Siguiente'"
+              (click)="next()"></app-button>
           </div>
       </section>
   </div>

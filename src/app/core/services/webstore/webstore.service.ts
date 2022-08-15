@@ -3,7 +3,9 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { Photo } from '@models/Photo';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Autenticar } from '@models/Autenticar';
+import { environment } from 'src/environments/environment';
 import * as cts  from "@shared/utils/constants";
+import { strict } from 'assert';
 
 
 @Injectable({
@@ -13,7 +15,7 @@ export class WebstoreService {
   httpPostOptions = cts.httpPostOptions;
   httpGetOptions = cts.httpGetOptions;
   token : any;
-  urToken = "http://omega.10.45.57.104.sslip.io/auth/login";
+  apiUrl : string = `${environment.SSIAuthApiUrl}`;
 
   constructor(
     private sessionStorageService : SessionStorageService,
@@ -23,16 +25,19 @@ export class WebstoreService {
 
 
  saveToken() : void{
-  const token = this.httpClient.post<Autenticar>(`${this.urToken}`, 
-  JSON.stringify({"username":"atcpru1","password":"V1tZKv0LyinCFc3QPaH7Iw=="}),  this.httpPostOptions)
+
+  const token = this.httpClient.post<Autenticar>(`${environment.SSIAuthApiUrl}`,
+  JSON.stringify({"username":environment.SSITokenUsername,"password": environment.SSITokenPassword}),  this.httpPostOptions)
 
   .subscribe(
     response =>{
       if(response.data?.token){
         localStorage.setItem("TOKEN",response.data.token);
       }
-     
+
       this.localStorageService.store("TOKEN",response.data?.token);
+      this.sessionStorageService.store ("token", response.data?.token);
+      this.sessionStorageService.store ("userId", response.data?.userId);
     }
   )
 
@@ -60,9 +65,67 @@ export class WebstoreService {
     this.sessionStorageService.store("photoFace",photo);
   }
 
+  saveMovilListinformation (movilListInfo : any) : void{
+    this.sessionStorageService.store ("movilListInfo", movilListInfo);
+  }
+
+  getMovilListInformation (){
+    return this.sessionStorageService.retrieve("movilListInfo")
+  }
+
+
   getSelfie () : Photo {
     console.log(this.sessionStorageService.retrieve('photoFace'));
     return this.sessionStorageService.retrieve('photoFace');
   }
+
+  saveDocument (key : string, document : any): void{
+    this.sessionStorageService.store(key,document);
+  }
+
+  getDocument (key : string): any{
+    return this.sessionStorageService.retrieve(key);
+  }
+
+  savePlanCompositionCode (code : string): void{
+    this.sessionStorageService.store("planCompositionCode",code);
+  }
+
+  getPlanCompositionCode (): any{
+    return this.sessionStorageService.retrieve("planCompositionCode");
+  }
+
+  savePlanComposition (planComposition : any): void{
+    this.sessionStorageService.store("planComposition",planComposition);
+  }
+
+  getPlanComposition (): any{
+    return this.sessionStorageService.retrieve("planComposition");
+  }
+
+  clearWebStorePlanComposition(){
+    this.sessionStorageService.clear();
+    this.sessionStorageService.clear("planCompositionCode");
+    this.sessionStorageService.clear("planComposition");
+  }
+
+  saveStatusScoring (option : String): void{
+    this.sessionStorageService.store("statusScoring", option);
+  }
+
+  getStatusScoring (): any{
+    return this.sessionStorageService.retrieve("statusScoring");
+  }
+
+  saveDataInSession(key:string, data : any): void{
+    this.sessionStorageService.store(key,data);
+  }
+
+  getDataInSession (key: string): any{
+    return this.sessionStorageService.retrieve(key);
+  }
+
+
+
 
 }

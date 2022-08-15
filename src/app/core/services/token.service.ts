@@ -2,12 +2,15 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { retry, catchError, Observable, throwError } from 'rxjs';
 import { Autenticar } from '@models/Autenticar';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  urToken = "http://omega.10.45.57.104.sslip.io/auth/login";
+  //urToken = "https://omega.devnt.ssidevops.com/auth/login";
+  urToken : string = `${environment.SSIAuthApiUrl}`;
+
   constructor(private httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -16,8 +19,15 @@ export class TokenService {
   };
 
   gettoken(): Observable<Autenticar> {
+    /*
+    username: "landing", 
+password: "3X4E+U7d1m1XprRamjfaRg=="
+     */
     return this.httpClient.post<Autenticar>(`${this.urToken}`, 
-            JSON.stringify({"username":"atcpru1","password":"V1tZKv0LyinCFc3QPaH7Iw=="}), 
+            JSON.stringify({
+              "username": "landing",
+              "password": "3X4E+U7d1m1XprRamjfaRg=="
+          }), 
             this.httpOptions).pipe(
             retry(1), catchError(this.handleError));
   }

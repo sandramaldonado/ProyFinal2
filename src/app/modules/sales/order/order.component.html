@@ -1,36 +1,66 @@
 <app-header></app-header>
 <div class="container">
   <div class="row">
-    <div class="d-none d-md-block col-5 bg bg-light bg-gradient  border py-5 px-5">
+    <div class="d-none d-md-block col-5 bg bg-light bg-gradient  border py-5 px-5 my-1">
       <div class="sticky-top ">
-        <div class="text-center">
+        <section class="section-body col-12 py-3">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+              <h3>{{planComposition?.groupTradeName }}</h3>
 
-          <h2>TRIPLE PLAY</h2>
-          <hr>
-          <h4 class="text-left">Movil</h4>
-          <p>60 min + 50 sms + 4Gb</p>
-          <hr>
-          <h4>TV Cable</h4>
-          <p>150 Canales</p>
-          <hr>
-          <h4>Wifi</h4>
-          <p>200 Mbps</p>
-        </div>
+
+              <div *ngFor="let item of planComposition?.planList" class="row w-100 border-top pt-2">
+
+                  <div class="col-1 text-end">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
+
+                  </div>
+                  <div class="col-11">
+
+                    <p class="component-title mb-0 fw-bold">{{item?.consumptionEntityType}}</p>
+                    <p >{{item?.componentOffer}}</p>
+                  </div>
+              </div>
+
+
+            </div>
+        </section>
       </div>
 
     </div>
     <div class="col-12 col-md-7">
-      <div *ngIf="showCoverage">
-        <app-check-coverage></app-check-coverage>
-      </div>
+      <app-check-coverage id={{modules.checkCoverage.alias}}
+                          *ngIf="modules.checkCoverage.visible"
+                          (nextCoverageStep)="changeModule(modules.checkCoverage.alias)">
+      </app-check-coverage>
 
-      <div *ngIf="showScoring">
-        <app-result-scoring></app-result-scoring>
-      </div>
+      <app-result-scoring id={{modules.scoring.alias}}
+                          *ngIf="modules.scoring.visible"
+                          (nextScoringStep)="changeModule(modules.scoring.alias)">
+      </app-result-scoring>
 
-      <app-admin-client ></app-admin-client>
-      <app-check-email></app-check-email>
-      <app-documents></app-documents>
+      <app-admin-client id={{modules.adminClient.alias}}
+                        *ngIf="modules.adminClient.visible"
+                        (nextAdminClientStep)="changeModule(modules.adminClient.alias)">
+      </app-admin-client>
+
+      <app-check-email  id={{modules.checkEmail.alias}}
+                        *ngIf="modules.checkEmail.visible"
+                        (nextCheckEmailStep)="changeModule(modules.checkEmail.alias)">
+      </app-check-email>
+
+      <app-documents  id={{modules.documents.alias}}
+                      *ngIf="modules.documents.visible"
+                      (nextDocumentStep)="changeModule(modules.documents.alias)">
+      </app-documents>
+
+      <app-movil-list  id={{modules.movilList.alias}}
+                      *ngIf="modules.movilList.visible"
+                      (nextMovilListStep)="changeModule(modules.movilList.alias)">
+      </app-movil-list>
+
+
     </div>
   </div>
 </div>
