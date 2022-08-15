@@ -33,16 +33,27 @@
                         </google-map>
                         <div *ngIf="markerPositions.length > 0">
                           <div *ngIf="hasCoverage" class="coverage-status-ok p-2">
-
-                              <span class="m-1 fw-bold">Con Cobertura</span>
-                              <p class="m-0">El servicio tiene cobertura en la zona.</p>
-
+                            <div class="row d-flex flex-row">
+                                <div>
+                                    <img src="assets/images/iconos/atention-green.png" alt="">
+                                </div>
+                                <div>
+                                    <span class="m-1 fw-bold">Cobertura Alta</span>
+                                    <p class="m-0">El servicio tiene una cobertura excelente en la zona.</p>
+                                </div>
+                                
+                            </div>
                           </div>
                           <div *ngIf="!hasCoverage" class="coverage-status-nok p-2">
-
-                                <span class="m-1 fw-bold">Sin Cobertura</span>
-                                <p class="m-0">El servicio no tiene cobertura en la zona.</p>
-
+                            <div class="row d-flex flex-row">
+                                <div>
+                                    <img src="assets/images/iconos/atention-red.png" alt="">
+                                </div>
+                                <div>
+                                    <span class="m-1 fw-bold">Cobertura Baja</span>
+                                    <p class="m-0">El servicio no tiene cobertura en la zona.</p>
+                                </div>
+                            </div>
                           </div>
                       </div>
 
