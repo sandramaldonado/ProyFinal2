@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { SharedModule } from '@shared/shared.module';
 import { LazyElementsModule } from '@angular-extensions/elements';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { LazyElementsModule } from '@angular-extensions/elements';
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatSelectModule,
     SharedModule,
     LazyElementsModule
   ],
