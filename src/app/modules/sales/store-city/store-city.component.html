@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">
                     <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
-                        <mat-select placeholder="Elija una Ciudad" formControlName="city" id="city" 
+                        <mat-select placeholder="Ciudad" formControlName="city" id="city" 
                             name="store"  (selectionChange)="someMethod($event.value)">
                             <mat-option *ngFor="let city of cityList" [value]="city.value" style="color:#5C349D;">
                                 {{city.description}}
