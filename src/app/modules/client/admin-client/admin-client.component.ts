@@ -184,6 +184,7 @@ export class AdminClientComponent implements OnInit {
     this.visited = true;
 
     this.registerClient();
+    this.registerBillingInfo();
 
     this.nextAdminClientStep.emit(true);
   }
@@ -251,6 +252,44 @@ export class AdminClientComponent implements OnInit {
         "userId": this.webstoreservice.getDataInSession('userId'),
         "microFrontendId": "person-microfront-app",
         "microFrontendData": JSON.stringify(client),
+        "statusCode": "INI"
+      }
+      this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+        response => {
+          console.log(response);
+        });
+    }
+
+    registerBillingInfo(){
+      const client = this.webstoreservice.getClientInformation();
+      const addressData = this.webstoreservice.getDataInSession('addressData');
+      let billAddress: any;
+      addressData.forEach((element: any) => {
+        if(element.selected){
+          billAddress = element;
+        }
+      });
+
+      let billing = {
+        "observations":"",
+        "invoiceLabel":client.rSocial,
+        "nit":client.nit,
+        "email":client.email,
+        "referencePhone":client.nroRef,
+        "address":{
+           "addressId":billAddress.addressId,
+           "addressTypeCode":"BILL_ADDR"
+        },
+        "payment":{
+           "paymentTypeCode":"TFPEFE"
+        }
+     }
+      const param = {
+        "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+        "sequence": 3,
+        "userId": this.webstoreservice.getDataInSession('userId'),
+        "microFrontendId": "billing-info-microfront-app",
+        "microFrontendData": JSON.stringify(billing),
         "statusCode": "INI"
       }
       this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
