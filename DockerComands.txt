@@ -1,0 +1,101 @@
+  
+Build container from Dockerfile, run in the same directory of Dockerfile
+docker build -t getting-started .
+
+---------------------------------------
+Run Container (-d: deatached  p: port number ))
+docker run -d -p 80:80 docker/getting-started
+
+You'll notice a few flags being used. Here's some more info on them:
+-d - run the container in detached mode (in the background)
+-p 80:80 - map port 80 of the host to port 80 in the container
+docker/getting-started - the image to use
+
+-------------------------------------------
+This command used the Dockerfile to build a new container image.
+docker build -t getting-started .
+
+-----------------------------------------
+Lis all running containers
+docker ps
+
+------------------------------------------
+Stop running container with ID/Name
+docker stop b8b2bb6c9b29
+
+------------------------------------------
+Remove Stoped Container with ID/Name
+docker rm b8b2bb6c9b29
+
+------------------------------------------
+List Docker Images 
+docker image ls
+
+-------------------------------------------
+Login to Docker Hub
+ docker login -u cristhianvalencia
+
+ ------------------------------------------
+Tag a container prior to push to docker hub
+docker tag getting-started cristhianvalencia/getting-started
+
+---------------------------------------------
+Push container to docker hub
+docker push cristhianvalencia/getting-started
+
+------------------------------------------------
+Create a volume by using the docker volume create command.
+docker volume create todo-db
+
+on windows the volumens are in \\wsl$\docker-desktop-data\version-pack-data\community\docker
+--------------------------------------------------------
+Start the todo app container, but add the -v flag to specify a volume mount. We will use the named volume and mount it to /etc/todos, which will capture all files created at the path.
+docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+
+---------------------------------------------------------
+Inspect volumen
+docker volume inspect todo-db
+
+-------------------------------------------------------
+
+=======================================
+Starting a Dev-Mode Container¶
+========================================
+Now that you are in the getting-started/app directory, run the following command. We'll explain what's going on afterwards:
+
+
+docker run -dp 3000:3000 \
+    -w /app -v "$(pwd):/app" \
+    node:12-alpine \
+    sh -c "yarn install && yarn run dev"
+If you are using PowerShell then use this command.
+
+
+docker run -dp 3000:3000 `
+    -w /app -v "$(pwd):/app" `
+    node:12-alpine `
+    sh -c "yarn install && yarn run dev"
+If you are using an Apple Silicon Mac or another ARM64 device then use this command.
+
+
+docker run -dp 3000:3000 \
+    -w /app -v "$(pwd):/app" \
+    node:12-alpine \
+    sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
+-dp 3000:3000 - same as before. Run in detached (background) mode and create a port mapping
+-w /app - sets the container's present working directory where the command will run from
+-v "$(pwd):/app" - bind mount (link) the host's present getting-started/app directory to the container's /app directory. Note: Docker requires absolute paths for binding mounts, so in this example we use pwd for printing the absolute path of the working directory, i.e. the app directory, instead of typing it manually
+node:12-alpine - the image to use. Note that this is the base image for our app from the Dockerfile
+sh -c "yarn install && yarn run dev" - the command. We're starting a shell using sh (alpine doesn't have bash) and running yarn install to install all dependencies and then running yarn run dev. If we look in the package.json, we'll see that the dev script is starting nodemon.
+
+--------------------------------------------
+Watch logs
+docker logs -f <container-id>
+
+--------------------------------------------
+Start Interactive Session 
+docker exec -it <Docker_id> sh
+
+-i: Intractive 
+-t: virtual terminal
+sh: SSH

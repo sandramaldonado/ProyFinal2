@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { retry, catchError, Observable, throwError, pipe } from 'rxjs';
 import { Client } from '@models/Client';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class ClientService {
   // definicion de variables cabecera y url de consumo
   headers: any;
   httpOptions: any;
-  apiUrl = "https://omega.devnt.ssidevops.com/crm360/client/person/search";
+  //apiUrl = "https://omega.devnt.ssidevops.com/crm360/client/person/search";
+  apiUrl : string = `${environment.ClientSearchApiUrl}`;
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */

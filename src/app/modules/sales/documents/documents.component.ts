@@ -3,6 +3,7 @@ import { TakePictureComponent } from '@app/modals/take-picture/take-picture.comp
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import {NgxImageCompressService} from "ngx-image-compress";
 import { WebstoreService } from '@app/services/webstore/webstore.service';
+import {LocalStorage, SessionStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-documents',
@@ -13,6 +14,25 @@ export class DocumentsComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
   @Output() nextDocumentStep = new EventEmitter<any>();
+  visited: boolean = false;
+
+  @SessionStorage('firstDocument')
+	public firstDocument : any;
+
+  firstDocumentIsValid :boolean = false;
+
+  @SessionStorage('secondDocument')
+	public secondDocument : any;
+
+  secondDocumentIsValid :boolean = false;
+
+  @SessionStorage('facePicture')
+	public facePicture : any;
+
+  facePictureIsValid :boolean = false;
+
+  previewImage? : string;
+  webstoreImage? : string;
   constructor(
     private modalService: BsModalService,
     private imageCompress: NgxImageCompressService,
@@ -29,6 +49,7 @@ export class DocumentsComponent implements OnInit {
 
   uploadFirstDocument(){
     this.uploadAndCompress("firstDocument");
+    this.firstDocumentIsValid = true;
   }
 
   takePictureFirstDocument(){
@@ -45,6 +66,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadSecondDocument() : void {
+    this.secondDocumentIsValid = true;
     this.uploadAndCompress("secondDocument");
   }
 
@@ -62,6 +84,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadFacePicture() : void {
+    this.facePictureIsValid = true;
     this.uploadAndCompress("facePicture");
   }
 
@@ -154,9 +177,33 @@ export class DocumentsComponent implements OnInit {
 
     });
   }
+  removeFirstDocument(){
+    this.firstDocumentIsValid = false;
+    this.webstoreService.saveDocument('firstDocument','');
 
+  }
+  removeSecondDocument(){
+    this.secondDocumentIsValid=false;
+    this.webstoreService.saveDocument('secondDocument','');
+
+  }
+  removeFacePicture(){
+    this.facePictureIsValid = false;
+    this.webstoreService.saveDocument('facePicture','');
+
+  }
+
+  validateDocuments(): boolean{
+    let res = false;
+
+    res= this.firstDocument != "" && this.secondDocument != "" && this.facePicture != "";
+    return res
+  }
   next(){
+    this.visited =true;
     this.nextDocumentStep.emit(true);
   }
+
+
 
 }

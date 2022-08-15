@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { MovilListService } from '@app/services/movil-list.service';
+import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { RadioLines } from '@models/Radio-Lines';
 
@@ -33,9 +34,11 @@ export class MovilListComponent implements OnInit {
 
   title = "Elije tu Número";
   message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
+  visited: boolean = false;
 
   constructor(private movilListService: MovilListService,
     private webstoreservice: WebstoreService,
+    private ordersService: OrdersService,
     private formBuilder: FormBuilder) {
     this.key = sessionStorage.getItem("key");
   }
@@ -107,7 +110,7 @@ export class MovilListComponent implements OnInit {
     let numeros = {};
     if (this.movilLine != "") {
       dataMovil = {"movil": [this.movilLine]};
-    } 
+    }
     if (this.wanLine != "") {
       dataWan = {"ifixed": [this.wanLine]};
     } if (this.tvLine != "") {
@@ -119,10 +122,14 @@ export class MovilListComponent implements OnInit {
         "transactionId": this.numberList["data"]["transactionId"],
         "data": numeros
     }});
-    
+
     this.webstoreservice.saveMovilListinformation(list2);
     let test = this.webstoreservice.getMovilListInformation();
     console.log(test);
+
+    this.visited =true;
+    this.registerAactivation(numeros);
+    this.nextMovilListStep.emit(true);
   }
 
   radioChange(event: MatRadioChange) {
@@ -157,6 +164,58 @@ export class MovilListComponent implements OnInit {
         }
       }
     }
+  }
+
+  registerAactivation(numbers: any){
+    console.log(numbers);
+    if(!numbers) return;
+    const addressData = this.webstoreservice.getDataInSession('addressData');
+    let instAddress: any;
+    addressData.forEach((element: any) => {
+      if(element.selected){
+        instAddress = element;
+      }
+    });
+
+    let microfrontData: any[] = [];
+
+    if(numbers.movil && numbers.movil.length>0){
+      microfrontData.push({
+        "planType":"MOVIL",
+        "serviceIdentifier":numbers.movil[0]
+     });
+    }
+    if(numbers.ifixed && numbers.ifixed.length>0){
+      microfrontData.push({
+        "planType":"IFIXED",
+        "serviceIdentifier":numbers.ifixed[0],
+        "address":{
+           "addressId":instAddress?.addressId,
+           "addressTypeCode":"INS_ADDR"
+        }
+     });
+    }
+    if(numbers.tv && numbers.tv.length>0){
+      microfrontData.push({
+        "planType":"TV",
+        "serviceIdentifier":numbers.tv[0]
+     });
+    }
+
+     const param = {
+      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+      "sequence": 4,
+      "userId": this.webstoreservice.getDataInSession('userId'),
+      "microFrontendId": "activation-data-microfront-app",
+      "microFrontendData": JSON.stringify(microfrontData),
+      "statusCode": "INI"
+    }
+
+    this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+
+      });
   }
 
 }

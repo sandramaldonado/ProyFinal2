@@ -31,18 +31,31 @@
                             [options]="markerOptions"></map-marker>
 
                         </google-map>
-                        <div *ngIf="markerPositions.length > 0">
+                        <div *ngIf="markerPositions.length > 0" class="coverage-result">
                           <div *ngIf="hasCoverage" class="coverage-status-ok p-2">
-
-                              <span class="m-1 fw-bold">Con Cobertura</span>
-                              <p class="m-0">El servicio tiene cobertura en la zona.</p>
-
+                            <div class="row">
+                                <div class="d-flex flex-row justify-content-between align-items-start">
+                                    <img src="assets/images/iconos/atention-green.png" alt="" class="mx-2 align-self-center">
+                                    <div>
+                                        <span class="fw-bold">Cobertura Alta</span>
+                                        <p class="my-0">El servicio tiene una cobertura excelente en la zona.</p>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
                           </div>
                           <div *ngIf="!hasCoverage" class="coverage-status-nok p-2">
-
-                                <span class="m-1 fw-bold">Sin Cobertura</span>
-                                <p class="m-0">El servicio no tiene cobertura en la zona.</p>
-
+                            <div class="row">
+                                <div class="d-flex flex-row">
+                                    <img src="assets/images/iconos/atention-red.png" alt="" class="mx-2 align-self-center">
+                                    <div>
+                                        <span class="fw-bold">Cobertura Baja</span>
+                                        <p class="my-0">El servicio no tiene cobertura en la zona.</p>
+                                    </div>
+                                </div>
+                               
+                            </div>
                           </div>
                       </div>
 
@@ -54,17 +67,26 @@
                     <mat-card-content class="py-2 text-center p-2">
 
 
-                           <ax-lazy-element *axLazyElementDynamic="'address-microfront-app',
+                        <!--   <ax-lazy-element *axLazyElementDynamic="'address-microfront-app',
                            url: 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';"
                            [microfrontParamIn]="microfrontParamIn"
                            [paramClass]="addressParamClass"
                            >
-                       </ax-lazy-element>
+                       </ax-lazy-element> -->
+
+                      <address-microfront-app
+                          *axLazyElement="urlPersonInfoMicrofront"
+                          [paramClass]="addressParamClass"
+                          [addressList]="addressList"
+                          [microfrontParamIn]="microfrontParamIn"
+                          (updateComplete)="updateAddressComplete($event)"
+                          [clientId]="client?.clientId">
+                      </address-microfront-app>
 
                     </mat-card-content>
 
                 </mat-card>
-                <app-button  [content]="'Siguiente'" (click)="next()"></app-button>
+                <app-button *ngIf="!visited"  [disabled]="!hasCoverage || !addressSelected"  [content]="'Siguiente'" (click)="next()"></app-button>
             </div>
         </section>
 
