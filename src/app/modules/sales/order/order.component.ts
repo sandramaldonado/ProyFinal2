@@ -260,7 +260,7 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
         this.registerCommercialOffer(response.data.data.orderMainId);
-        //this.loadBussinesRules();
+        this.loadBussinesRules();
       });
   }
 

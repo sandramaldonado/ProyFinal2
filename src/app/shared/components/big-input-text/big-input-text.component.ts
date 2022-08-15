@@ -23,6 +23,7 @@ export class BigInputTextComponent {
   @Input() validationForm!: FormGroup;
   @Input() submitted: boolean = false;
   @Input() readonly = '';
+  @Input() flotante= '';
 
   get hasError(): boolean {
     return (
