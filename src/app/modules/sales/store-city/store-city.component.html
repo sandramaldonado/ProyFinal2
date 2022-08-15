@@ -1,1 +1,59 @@
-<p>store-city works!</p>
+<div class="container">
+    <div class="row pb-3">
+        <section class="section-body col-12 py-3">
+            <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm">
+                <div class="row ">
+                    <div class="container text-left textTittle textParrafo">
+                        <h5><b>Recojo en Tienda</b></h5>
+                        <p>Te enviaremos un correo electr&oacute;nico con las instrucciones de instalaci&oacute;n y un c&oacute;digo QR. Bastar&aacute; con mostrar el c&oacute;digo QR en la tienda de tu preferencia para recoger tus equipos. </p>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="container text-left textTittle textParrafo">
+                        <h5><b>Elija Ciudad</b></h5>
+                        <p>Elige la ciudad en la cu&aacute;l recogerás el equipo.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
+                        <mat-select placeholder="Ciudad" formControlName="city" id="city" 
+                            name="store"  (selectionChange)="someMethod($event.value)">
+                            <mat-option *ngFor="let city of cityList" [value]="city.value" style="color:#5C349D;">
+                                {{city.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error  *ngIf="store?.invalid && store?.touched">
+                        Por favor elija una opci&oacute;n
+                    </mat-error>
+                </div>
+                <div class="row ">
+                    <div class="container text-left textTittle textParrafo">
+                        <h5><b>Elija Tienda</b></h5>
+                        <p>Elige la tienda de la cu&aacute;l recoger&aacute;s el equipo.</p>
+                    </div>
+                </div>
+                <!--
+                <div class="row">
+                    <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
+                        <mat-select placeholder="Elija un Tienda" formControlName="store" id="store" 
+                            name="store" >
+                            <mat-option *ngFor="let stores of storeList" [value]="stores.value" style="color:#5C349D;">
+                                {{stores.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error  *ngIf="store?.invalid && store?.touched">
+                        Por favor elija una opci&oacute;n
+                    </mat-error>
+                </div>
+                -->
+
+                <div class="row text-center">
+                    <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
+                    </app-button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

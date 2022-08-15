@@ -19,11 +19,17 @@ export class DocumentsComponent implements OnInit {
   @SessionStorage('firstDocument')
 	public firstDocument : any;
 
+  firstDocumentIsValid :boolean = false;
+
   @SessionStorage('secondDocument')
 	public secondDocument : any;
 
+  secondDocumentIsValid :boolean = false;
+
   @SessionStorage('facePicture')
 	public facePicture : any;
+
+  facePictureIsValid :boolean = false;
 
   previewImage? : string;
   webstoreImage? : string;
@@ -43,6 +49,7 @@ export class DocumentsComponent implements OnInit {
 
   uploadFirstDocument(){
     this.uploadAndCompress("firstDocument");
+    this.firstDocumentIsValid = true;
   }
 
   takePictureFirstDocument(){
@@ -59,6 +66,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadSecondDocument() : void {
+    this.secondDocumentIsValid = true;
     this.uploadAndCompress("secondDocument");
   }
 
@@ -76,6 +84,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   uploadFacePicture() : void {
+    this.facePictureIsValid = true;
     this.uploadAndCompress("facePicture");
   }
 
@@ -168,10 +177,33 @@ export class DocumentsComponent implements OnInit {
 
     });
   }
+  removeFirstDocument(){
+    this.firstDocumentIsValid = false;
+    this.webstoreService.saveDocument('firstDocument','');
 
+  }
+  removeSecondDocument(){
+    this.secondDocumentIsValid=false;
+    this.webstoreService.saveDocument('secondDocument','');
+
+  }
+  removeFacePicture(){
+    this.facePictureIsValid = false;
+    this.webstoreService.saveDocument('facePicture','');
+
+  }
+
+  validateDocuments(): boolean{
+    let res = false;
+
+    res= this.firstDocument != "" && this.secondDocument != "" && this.facePicture != "";
+    return res
+  }
   next(){
     this.visited =true;
     this.nextDocumentStep.emit(true);
   }
+
+
 
 }
