@@ -20,7 +20,7 @@ const routes : Routes = [
   },
   {
     path : 'almost-done',
-    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+    loadChildren : () => import ('../app/modules/sales/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
   },
   {
     path : 'detalle-compra',
