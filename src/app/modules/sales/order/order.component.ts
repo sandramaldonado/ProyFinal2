@@ -81,17 +81,11 @@ export class OrderComponent implements OnInit {
         enabled : true,
         alias : 'documents'
       },
-      movilList: {
+      movillist: {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'movilList'
-      },
-      detailsale:{
-        visible:false,
-        active:false,
-        enabled:true,
-        alias: 'detailsale'
+        alias : 'movillist'
       },
       deliverymethod: {
         visible :true,
@@ -167,7 +161,7 @@ export class OrderComponent implements OnInit {
 
 
   changeModule(module :any){
-  console.log(module)
+  console.log(module);
   var me = this;
 
    switch (module) {
@@ -227,8 +221,8 @@ export class OrderComponent implements OnInit {
     break;
     case 'documents':
 
-      if(this.modules.movilList.enabled){
-        this.modules.movilList.visible=true;
+      if(this.modules.movillist.enabled){
+        this.modules.movillist.visible=true;
 
         setTimeout(function(){
           me.scroller.scrollToAnchor("movillist");
@@ -239,10 +233,10 @@ export class OrderComponent implements OnInit {
       }
 
     break;
-    /*
+    
     case 'movillist':
-      if(this.modules.deliveryMethod.enabled){
-        this.modules.deliveryMethod.visible=true;
+      if(this.modules.deliverymethod.enabled){
+        this.modules.deliverymethod.visible=true;
 
         setTimeout(function(){
           me.scroller.scrollToAnchor("deliverymethod");
@@ -251,17 +245,18 @@ export class OrderComponent implements OnInit {
       }else{
         this.changeModule("deliverymethod");
       }
-      break;*/
-    case 'movilList':
-      if(this.modules.payment.enabled){
-        this.modules.payment.visible=true;
+      break;
+
+    case 'deliverymethod':
+      if(this.modules.almostdone.enabled){
+        this.modules.almostdone.visible=true;
 
         setTimeout(function(){
-          me.scroller.scrollToAnchor("payment");
+          me.scroller.scrollToAnchor("almostdone");
         }, 1000);
 
       }else{
-        this.changeModule("payment");
+        this.changeModule("almostdone");
       }
       break;
      default:
