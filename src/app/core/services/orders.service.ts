@@ -9,6 +9,7 @@ import { Observable, map } from 'rxjs';
 export class OrdersService {
 
   endPoint = environment.endPoint;
+  endPointMgd = environment.urlMgd;
 
   constructor(private http: HttpClient) { }
 
@@ -44,6 +45,18 @@ export class OrdersService {
       headers: headers
     };
     return this.http.post<any>(this.endPoint + '/sales/creates/client/person', param, httpOptions)
+      .pipe(
+        map(res => res));
+  }
+
+  uploadDocuments(param: any, token: any): Observable<any> {
+    var headers = {
+      'Authorization': 'Bearer ' + token
+    };
+    const httpOptions = {
+      headers: headers
+    };
+    return this.http.post<any>(this.endPointMgd + '/documents/upload', param, httpOptions)
       .pipe(
         map(res => res));
   }

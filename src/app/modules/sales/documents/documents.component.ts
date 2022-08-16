@@ -4,6 +4,7 @@ import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import {NgxImageCompressService} from "ngx-image-compress";
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import {LocalStorage, SessionStorage} from 'ngx-webstorage';
+import { OrdersService } from '@app/services/orders.service';
 
 @Component({
   selector: 'app-documents',
@@ -36,7 +37,8 @@ export class DocumentsComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private imageCompress: NgxImageCompressService,
-    private webstoreService : WebstoreService
+    private webstoreService : WebstoreService,
+    private ordersService: OrdersService,
     ) {}
 
   ngOnInit(): void {
@@ -202,8 +204,72 @@ export class DocumentsComponent implements OnInit {
   next(){
     this.visited =true;
     this.nextDocumentStep.emit(true);
+    this.registerDocuments();
+  }
+
+  formatImgData(imageBase64: any): string{
+    let data = imageBase64.split(',');
+    if(data.length > 1){
+      return data[1];
+    }
+    return data[0];
   }
 
 
+  registerDocuments(){
+    const client = this.webstoreService.getClientInformation();
+    const ci_front = this.formatImgData(this.webstoreService.getDataInSession('firstDocument'));
+    const ci_back = this.formatImgData(this.webstoreService.getDataInSession('secondDocument'));
+    const photo = this.formatImgData(this.webstoreService.getDataInSession('facePicture'));
+    const param = {
+      "partyId": client.personId,                   //partyId es el personId del cliente CRM -- Obligatorio
+      "partyName": client.fullName,  //Nombre completo el cliente-- Obligatorio
+      "orderType": "PTFSALE",     //Tipo de order -- Obligatorio
+      "serviceType": "NORMAL",     //Tipo de servicio en este caso "NORMAL" -- Obligatorio
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),               //orderId después de invocar al servicio que genera la orden  -- Obligatorio
+      "documents": [                         //Lista de documentos imagens -- Obligatorio
+        {
+          "fileCode": "CI_FRONT",      //código de tipo de archivo  -- Obligatorio
+          "fileFormat": "png",                                 // png , jpg, gif etc
+          "file": ci_front  // Imagen en base64-- Obligatorio
+        },
+        {
+          "fileCode": "CI_BACK",      //código de tipo de archivo  -- Obligatorio
+          "fileFormat": "png",                                 // png , jpg, gif etc
+          "file": ci_back  // Imagen en base64-- Obligatorio
+        },
+        {
+          "fileCode": "PHOTO_CUSTOMER",      //código de tipo de archivo  -- Obligatorio
+          "fileFormat": "png",                                 // png , jpg, gif etc
+          "file": photo  // Imagen en base64-- Obligatorio
+        }
+      ]
+    }
+    console.log(JSON.stringify(param));
+    this.ordersService.uploadDocuments(param, this.webstoreService.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+        const param = {
+          documents: response
+        };
+        this.registerDocumentsOrder(param);
+      });
+  }
+
+
+  registerDocumentsOrder(data: any){
+    const param = {
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),
+      "sequence": 5,
+      "userId": this.webstoreService.getDataInSession('userId'),
+      "microFrontendId": "digitization-sale-microfront-app",
+      "microFrontendData": JSON.stringify(data),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+      });
+  }
 
 }

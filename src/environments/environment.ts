@@ -39,7 +39,8 @@ export const environment = {
   urlVasMicrofront: vars.urlVasMicrofront,
   urlDashboardMicrofront: vars.urlDashboardMicrofront,
   urlCardPayMicrofrontApp: vars.urlCardPaymentMicrofront,
-  applicationId: 2
+  urlMgd: vars.urlMgd,
+  applicationId: 0
 
 };
 
