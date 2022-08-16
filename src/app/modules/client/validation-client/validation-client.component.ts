@@ -179,14 +179,14 @@ export class ValidationClientComponent implements OnInit {
               console.log(dataClient);
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
-                  sessionStorage.setItem("isClient", "true");
+                  //sessionStorage.setItem("isClient", true);
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   const planService = this.armadoJsonScoring();
                   //console.log(planService);
                   this.scoringValidated(planService);
                 } else {
-                  sessionStorage.setItem("isClient", "false");
+                  //sessionStorage.setItem("isClient", "false");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   this.webstoreservice.saveStatusScoring("NORMAL");
@@ -195,8 +195,7 @@ export class ValidationClientComponent implements OnInit {
                 }
               } else {
                 this.submitted = true;
-
-                sessionStorage.setItem("isClient", "false");
+                //sessionStorage.setItem("isClient", "false");
                 var datosClient2:any = {};
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;

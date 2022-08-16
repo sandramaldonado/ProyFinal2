@@ -229,6 +229,9 @@ export class OrderComponent implements OnInit {
         this.changeModule("deliverymethod");
       }
       break;
+      case 'deliverymethod':
+        
+        break;
      default:
       break;
    }
