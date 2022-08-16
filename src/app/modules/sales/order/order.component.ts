@@ -82,7 +82,7 @@ export class OrderComponent implements OnInit {
         alias : 'documents'
       },
       movilList: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'movilList'
@@ -94,13 +94,13 @@ export class OrderComponent implements OnInit {
         alias: 'detailsale'
       },
       deliverymethod: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
       },
       almostdone: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'almostdone'
