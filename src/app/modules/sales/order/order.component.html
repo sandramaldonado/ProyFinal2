@@ -59,11 +59,12 @@
                       *ngIf="modules.movilList.visible"
                       (nextMovilListStep)="changeModule(modules.movilList.alias)">
       </app-movil-list>
-   
+
       <app-delivery-method  id={{modules.deliveryMethod.alias}}
                       *ngIf="modules.deliveryMethod.visible"
                       (nextDeliveryMethodStep)="changeModule(modules.deliveryMethod.alias)">
       </app-delivery-method>
+   
 
     </div>
   </div>
