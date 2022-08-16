@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: Offer Component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '@app/services/client.service';
 import { TokenService } from '@app/services/token.service';
@@ -18,7 +33,11 @@ export class OfferComponent implements OnInit {
   planCompositionCode: any;
   planesList: any;
   planComposition? : PlanComposition;
+  totalOfferTariff : number = 0;
   public showButton : boolean = false;
+  planListServices: any[] | undefined;
+  consumptionFormCode: string | undefined;
+  offerTariff: number | undefined;
   constructor(
     private clientService: ClientService,
     private  tokenService: TokenService,
@@ -54,22 +73,45 @@ export class OfferComponent implements OnInit {
     .subscribe(
       response => {
         this.planesList = response;
-        console.log(this.planesList);
+        //console.log(this.planesList);
         const planDataList = this.planesList["data"]["data"];
 
         var plan = planDataList.filter(function(v:any){
           return v.planCompositionCode=== me.planCompositionCode;
         });
         this.planComposition = plan[0];
-        console.log(this.planComposition);
+        this.consumptionFormCode = this.planComposition?.consumptionFormCode;
+        this.offerTariff = this.planComposition?.tariff;
         this.showButton = true;
 
       });
 
   }
+
+  calculateTotalOfferTariff(){
+    
+    let total = 0;
+    if(this.consumptionFormCode =="CCOPOS"){
+    
+      total = (this.offerTariff ? this.offerTariff : 0);
+      this.planListServices = this.planComposition?.planList;
+
+      if(this.planListServices){
+        for (let index = 0; index < this.planListServices.length; index++) {
+          //console.log(this.planListServices[index]["categoryData"].tariff);
+          total += this.planListServices[index]["categoryData"].tariff? this.planListServices[index]["categoryData"].tariff : 0;
+        }
+      }
+    }
+    console.log("calculate offerTotalTariff",total)
+    this.webstoreService.saveDataInSession("offerTotalTariff",total);
+
+  }
   onClick(){
     this.webstoreService.savePlanCompositionCode(this.planCompositionCode);
     this.webstoreService.savePlanComposition(this.planComposition);
+    this.webstoreService.saveDataInSession("offerConsumptionFormCode",this.consumptionFormCode);
+    this.calculateTotalOfferTariff()
     this.router.navigate(['/client/validationClient']);
 
   }

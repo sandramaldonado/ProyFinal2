@@ -24,11 +24,11 @@ const routes : Routes = [
   },
   {
     path : 'almost-done',
-    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+    loadChildren : () => import ('../app/modules/sales/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
   },
   {
     path : 'detalle-compra',
-    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
+    loadChildren : () => import ('./modules/sales/detail/detail.module').then (m => m.DetailModule)
   },
   {
     path : 'client',
@@ -84,6 +84,10 @@ const routes : Routes = [
   },
   { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./modules/sales/card-payment/card-payment.module').then( m => m.CardPaymentModule)
   },
 
 

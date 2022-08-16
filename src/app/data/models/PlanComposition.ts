@@ -1,13 +1,14 @@
 
 export interface PlanComposition {
   planCompositionCode?: string;
+  consumptionForm?:string;
+  consumptionFormCode?:string;
   planTradeName?: string;
   groupTradeName?: string;
   numberOfEntities?:string;
   tariff?: number;
   tariffCurrency?: string;
   currencyCode?:string;
-  consumptionForm?:string;
   planList?: any[]
 
 

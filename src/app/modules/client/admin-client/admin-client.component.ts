@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: Admin Client Component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
