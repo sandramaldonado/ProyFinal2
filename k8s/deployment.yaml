@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: landing-sales-frontend
+  name: landing-sales-frontend
+  namespace: applications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: landing-sales-frontend
+  template:
+    metadata:
+      labels:
+        app: landing-sales-frontend
+    spec:
+      containers:
+      - image: spdev/landing-page-master-sales-frontend:snapshot
+        name: landing-sales-frontend
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "64m"
+          limits:
+            memory: "256Mi"
+            cpu: "128m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html/env.js
+            name: config
+            subPath: env.js
+      imagePullSecrets:
+        - name: gitlabdev
+      volumes:
+        - name: config
+          configMap:
+            name: landing-sales-frontend
