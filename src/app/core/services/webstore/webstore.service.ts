@@ -128,6 +128,13 @@ export class WebstoreService {
   getScoring (): any{
     return this.sessionStorageService.retrieve("scoring");
   }
+  getOfferConsuptioncode(){
+    return this.sessionStorageService.retrieve("offerconsumptionformcode");
+  }
+
+  getOfferTotaldetail(){
+    return this.sessionStorageService.retrieve("offertotaltariff");
+  }
 
 
 
