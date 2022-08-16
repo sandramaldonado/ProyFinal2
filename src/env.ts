@@ -10,6 +10,7 @@
     sessionHub: 'https://session-hub-web.devnt.ssidevops.com',
     urlVasMicrofront: 'https://view360.devnt.ssidevops.com/vas-microfront-app/main.js',
     urlDashboardMicrofront: 'https://view360.devnt.ssidevops.com/dashboard-microfront-app/main.js',
+    urlCardPayMicrofrontApp: 'https://view360.devnt.ssidevops.com/card-pay-microfront-app/main.js',//http://localhost:4297/main.js',
     urlMgd: 'https://view360.salamancasolutions.com/mgdv2/mgd'
   };
 }(this));
