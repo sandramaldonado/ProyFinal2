@@ -50,9 +50,6 @@ export class StoreCityComponent implements OnInit {
     this.storesList = this.storeGroup[0][value];
   }
 
-  next(){
-  }
-
   get city() {
     return this.validationForm.get('city');
   }

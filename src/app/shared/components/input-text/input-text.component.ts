@@ -23,6 +23,7 @@ export class InputTextComponent {
   @Input() validationForm!: FormGroup;
   @Input() submitted: boolean = false;
   @Input() flotante= '';
+  @Input() readonly = '';
 
   get hasError(): boolean {
     return (

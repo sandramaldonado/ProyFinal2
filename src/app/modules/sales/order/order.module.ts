@@ -11,6 +11,7 @@ import { ResultScoringModule } from '../scoring/result/result-scoring.module';
 import { HeaderModule } from "@layout/header/header.module";
 import { MovilListModule } from '../movil-list/movil-list.module';
 import { DetailSaleModule }from '../detail/detail-sale/detail-sale.module';
+import { DeliveryMethodModule } from '../delivery-method/delivery-method.module';
 
 
 
@@ -28,7 +29,8 @@ import { DetailSaleModule }from '../detail/detail-sale/detail-sale.module';
     ResultScoringModule,
     HeaderModule,
     MovilListModule,
-    DetailSaleModule
+    DetailSaleModule,
+    DeliveryMethodModule
   ]
 })
 export class OrderModule { }
