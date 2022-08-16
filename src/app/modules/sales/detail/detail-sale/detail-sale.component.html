@@ -58,19 +58,20 @@
                             </div>
                     </mat-card-content>
                 </mat-card>
+                <section class="example-section" *ngIf="Visible()">
+                    <mat-slide-toggle
+                        class="example-margin"
+                        [color]="color"
+                        [checked]="checked"
+                        [disabled]="disabled"
+                        [(ngModel)]="isChecked"
+                        >
+                      Pago Automatico
+                      <p id="descuento">(descuento 20%)</p>
+                    </mat-slide-toggle>
+                    
+                </section>
 
-<!--                 <div>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <p id="pago">Pago Automatico (descuento 20%)</p>
-
-                </div>
-
-                <p id="activa">
-                    Activa el pago automático para recibir descuentos con el pago con tarjeta y mantente al día con tus facturas.
-                </p> -->
 
                 <div>
                     <h3 id="total">Total Compra:
@@ -78,9 +79,12 @@
                     <h3 id="totalnumero">
                         Bs {{total}}
                     </h3>
+                    <p id="label" *ngIf="descuentoActivado() && isChecked">
+                        Bs 20
+                    </p>
                 </div>
 
-                    <app-button id="comprar" [content]="'Comprar'" (click)="next()"></app-button>
+                    <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button>
 
             </div>
 

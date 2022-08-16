@@ -5,8 +5,9 @@
                 <div class="row ">
                     <div class="container text-left textTittle textParrafo">
                         <h5><b>Recojo en Tienda</b></h5>
-                        <p>Te enviaremos un correo electr&oacute;nico con las instrucciones de instalaci&oacute;n y un c&oacute;digo QR. Bastar&aacute; con mostrar el c&oacute;digo QR en la tienda de tu preferencia para recoger tus equipos. </p>
+                        <p>Te enviaremos un correo electr&oacute;nico con las instrucciones de instalaci&oacute;n y un c&oacute;digo QR.<br>Bastar&aacute; con mostrar el c&oacute;digo QR en la tienda de tu preferencia para recoger tus equipos. </p>
                     </div>
+                    
                 </div>
                 <div class="row ">
                     <div class="container text-left textTittle textParrafo">
@@ -23,7 +24,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-error  *ngIf="store?.invalid && store?.touched">
+                    <mat-error  *ngIf="city?.invalid && city?.touched">
                         Por favor elija una opci&oacute;n
                     </mat-error>
                 </div>
@@ -33,12 +34,11 @@
                         <p>Elige la tienda de la cu&aacute;l recoger&aacute;s el equipo.</p>
                     </div>
                 </div>
-                <!--
                 <div class="row">
                     <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
                         <mat-select placeholder="Elija un Tienda" formControlName="store" id="store" 
                             name="store" >
-                            <mat-option *ngFor="let stores of storeList" [value]="stores.value" style="color:#5C349D;">
+                            <mat-option *ngFor="let stores of storesList" [value]="stores.value" style="color:#5C349D;">
                                 {{stores.description}}
                             </mat-option>
                         </mat-select>
@@ -46,12 +46,6 @@
                     <mat-error  *ngIf="store?.invalid && store?.touched">
                         Por favor elija una opci&oacute;n
                     </mat-error>
-                </div>
-                -->
-
-                <div class="row text-center">
-                    <app-button [disabled]="validationForm.invalid" [content]="'Siguiente'" (click)="next()">
-                    </app-button>
                 </div>
             </form>
         </section>

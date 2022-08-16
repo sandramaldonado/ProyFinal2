@@ -3,14 +3,14 @@
         <section class="section-body col-12 py-3">
             <h3>{{title}}</h3>
             <p>{{message}} <a href="#">Ver detallle de artículos</a></p>
-            <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm" style="margin-top:80px;">
-                <div class="row">
-                    <div class="container" style="color:purple;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container" style="color:#5C349D;">
                         <h5><b>Elija el metodo de entrega</b></h5>
                         <br>
                     </div>
                 </div>
-                <div class="row">
+                <div class="col-12">
                     <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
                         <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
                             <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
@@ -19,12 +19,15 @@
                         </div>
                     </mat-radio-group>
                 </div>
-                <div class="col-12 col-md-7">
-                    <!--
-                    <app-store-city id={{modules.checkCoverage.alias}} *ngIf="modules.checkCoverage.visible" (nextCoverageStep)="changeModule(modules.checkCoverage.alias)"></app-store-city>
-                    -->
+                <div class="col-12" id="optionDelivery">
+                    <app-store-city *ngIf="methods.storesInfo.active">
+                    </app-store-city>
                 </div>
-            </form>
+                <div class="row text-center">
+                    <app-button [content]="'Siguiente'" (click)="next()">
+                    </app-button>
+                </div>
+            </div>
         </section>
     </div>
 </div>

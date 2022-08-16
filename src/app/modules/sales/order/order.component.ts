@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: Order Component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, OnInit } from '@angular/core';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { BusinessrulesService } from '@app/services/businessrules/businessrules.service';
@@ -66,31 +81,26 @@ export class OrderComponent implements OnInit {
         enabled : true,
         alias : 'documents'
       },
-      movilList: {
+      movillist: {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'movilList'
+        alias : 'movillist'
       },
-      detailsale:{
-        visible:false,
-        active:false,
-        enabled:true,
-        alias: 'detailsale'
-      },
-      deliveryMethod: {
+      deliverymethod: {
         visible :false,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
-
       },
-      payment: {
+      almostdone: {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'payment'
+        alias : 'almostdone'
+
       }
+ 
     };
   }
 
@@ -151,7 +161,7 @@ export class OrderComponent implements OnInit {
 
 
   changeModule(module :any){
-  console.log(module)
+  console.log(module);
   var me = this;
 
    switch (module) {
@@ -211,8 +221,8 @@ export class OrderComponent implements OnInit {
     break;
     case 'documents':
 
-      if(this.modules.movilList.enabled){
-        this.modules.movilList.visible=true;
+      if(this.modules.movillist.enabled){
+        this.modules.movillist.visible=true;
 
         setTimeout(function(){
           me.scroller.scrollToAnchor("movillist");
@@ -223,10 +233,10 @@ export class OrderComponent implements OnInit {
       }
 
     break;
-    /*
+    
     case 'movillist':
-      if(this.modules.deliveryMethod.enabled){
-        this.modules.deliveryMethod.visible=true;
+      if(this.modules.deliverymethod.enabled){
+        this.modules.deliverymethod.visible=true;
 
         setTimeout(function(){
           me.scroller.scrollToAnchor("deliverymethod");
@@ -235,17 +245,17 @@ export class OrderComponent implements OnInit {
       }else{
         this.changeModule("deliverymethod");
       }
-      break;*/
-    case 'movilList':
-      if(this.modules.payment.enabled){
-        this.modules.payment.visible=true;
+      break;
+    case 'deliverymethod':
+      if(this.modules.almostdone.enabled){
+        this.modules.almostdone.visible=true;
 
         setTimeout(function(){
-          me.scroller.scrollToAnchor("payment");
+          me.scroller.scrollToAnchor("almostdone");
         }, 1000);
 
       }else{
-        this.changeModule("payment");
+        this.changeModule("almostdone");
       }
       break;
      default:
@@ -298,6 +308,10 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.loadBussinesRules();
       });
+  }
+
+  submitOrder(){
+
   }
 
 }

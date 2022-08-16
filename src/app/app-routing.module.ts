@@ -15,16 +15,20 @@ const routes : Routes = [
     loadChildren : () => import ('./modules/sales/offer/offer.module').then (m => m.OfferModule)
   },
   {
+    path : 'scoring',
+    loadChildren : () => import ('./modules/sales/scoring/result/result-scoring.module').then (m => m.ResultScoringModule)
+  },
+  {
     path : 'oferta/orden-compra',
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
   },
   {
     path : 'almost-done',
-    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+    loadChildren : () => import ('../app/modules/sales/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
   },
   {
     path : 'detalle-compra',
-    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
+    loadChildren : () => import ('./modules/sales/detail/detail.module').then (m => m.DetailModule)
   },
   {
     path : 'client',
