@@ -82,7 +82,7 @@ export class OrderComponent implements OnInit {
         alias : 'documents'
       },
       movilList: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'movilList'
@@ -93,19 +93,20 @@ export class OrderComponent implements OnInit {
         enabled:true,
         alias: 'detailsale'
       },
-      deliveryMethod: {
-        visible :false,
+      deliverymethod: {
+        visible :true,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
-
       },
-      payment: {
-        visible :false,
+      almostdone: {
+        visible :true,
         active: false,
         enabled : true,
-        alias : 'payment'
+        alias : 'almostdone'
+
       }
+ 
     };
   }
 
@@ -313,6 +314,10 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.loadBussinesRules();
       });
+  }
+
+  submitOrder(){
+
   }
 
 }
