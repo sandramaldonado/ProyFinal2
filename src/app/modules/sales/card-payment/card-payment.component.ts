@@ -9,7 +9,11 @@ import { environment } from "@env";
 })
 
 export class CardPaymentComponent implements OnInit {
-    // public urlCardPaymentMicrofront = environment.urlCardPaymentMicrofront;
+
+    microFrontKeys = {
+        url: environment.urlCardPayMicrofrontApp,
+        id: 'card-pay-microfront-app'
+    }
     public userId: any;
     public microFrontParamIn = {
         theme: "light-green",

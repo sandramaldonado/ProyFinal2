@@ -12,5 +12,6 @@ export const environment = {
   sessionHub: vars.sessionHub,
   urlVasMicrofront: vars.urlVasMicrofront,
   urlDashboardMicrofront: vars.urlDashboardMicrofront,
+  urlCardPayMicrofrontApp: vars.urlCardPayMicrofrontApp,
   applicationId: 2
 };

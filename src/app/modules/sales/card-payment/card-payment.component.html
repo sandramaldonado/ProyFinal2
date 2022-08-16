@@ -12,8 +12,8 @@
                 </ax-lazy-element>
             </ng-template> -->
 
-        <ax-lazy-element *axLazyElementDynamic="'card-pay-microfront-app',
-                           url: 'https://view360.devnt.ssidevops.com/card-pay-microfront-app/main.js';"
+        <ax-lazy-element *axLazyElementDynamic="microFrontKeys.id,
+                           url: microFrontKeys.url;"
                         paramIn={{toSendString(microFrontParamIn)}}
                         paramClass={{toSendString(paramClass)}}>
         </ax-lazy-element>
