@@ -4,14 +4,16 @@ import { ProductService } from '@app/services/product.service';
 import { Product } from '@models/Product';
 import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
-
+import {ThemePalette} from '@angular/material/core';
 @Component({
   selector: 'app-detail-sale',
   templateUrl: './detail-sale.component.html',
   styleUrls: ['./detail-sale.component.scss']
 })
 export class DetailSaleComponent implements OnInit {
-  disabled : boolean = true;
+  color: ThemePalette = 'accent';
+  checked = true ;
+  disabled = false;
   DetailForm = new FormGroup({
     'DetailForm': new FormControl('', [Validators.required]),
   });
@@ -27,12 +29,22 @@ export class DetailSaleComponent implements OnInit {
   planList: any;
   articulo: any;
   x:any;
+  scoring:any
+  descuento:any;
   constructor(public webStorage: WebstoreService) { }
 
 
 
   ngOnInit(): void {
     this.getProduct();
+    this.scoring = this.webStorage.getScoring();
+    if(this.scoring["acceptRecurrentPayment"] == true){
+      this.checked = true;
+    }
+    else{
+      this.checked = false;
+    }
+    
 
   }
 
@@ -63,8 +75,21 @@ export class DetailSaleComponent implements OnInit {
 
   }
 
-  next(){
-    this.nextCheckEmailStep.emit(true);
+  descuentoActivado(){
+    if(this.checked == true)
+    {
+      console.log(this.checked);
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  comprar(){
+ 
+    
+    
   }
 
 }

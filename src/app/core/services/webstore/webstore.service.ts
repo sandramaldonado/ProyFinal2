@@ -125,6 +125,9 @@ export class WebstoreService {
     return this.sessionStorageService.retrieve(key);
   }
 
+  getScoring (): any{
+    return this.sessionStorageService.retrieve("scoring");
+  }
 
 
 
