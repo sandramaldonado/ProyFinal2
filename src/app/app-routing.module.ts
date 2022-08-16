@@ -81,6 +81,10 @@ const routes : Routes = [
   { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
+  {
+    path: 'payment',
+    loadChildren: () => import('./modules/sales/card-payment/card-payment.module').then( m => m.CardPaymentModule)
+  },
 
 
   {
