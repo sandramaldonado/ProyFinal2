@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
+import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
 import { Console } from 'console';
@@ -12,19 +13,19 @@ import { Console } from 'console';
   styleUrls: ['./store-city.component.scss']
 })
 export class StoreCityComponent implements OnInit {
-  cityList: DocumentType[] = [{value: 'CBEN', description: 'Beni'}, 
-                              {value: 'CCBA', description: 'Cochabamba'}, 
-                              {value: 'CLPZ', description: 'La Paz'}, 
-                              {value: 'CORU', description: 'Oruro'}, 
-                              {value: 'CPAN', description: 'Pando'}, 
-                              {value: 'CPOT', description: 'Potosi'}, 
-                              {value: 'CSCR', description: 'Sucre'}, 
-                              {value: 'CSCZ', description: 'Santa Cruz'}, 
+  cityList: DocumentType[] = [{value: 'CBEN', description: 'Beni'},
+                              {value: 'CCBA', description: 'Cochabamba'},
+                              {value: 'CLPZ', description: 'La Paz'},
+                              {value: 'CORU', description: 'Oruro'},
+                              {value: 'CPAN', description: 'Pando'},
+                              {value: 'CPOT', description: 'Potosi'},
+                              {value: 'CSCR', description: 'Sucre'},
+                              {value: 'CSCZ', description: 'Santa Cruz'},
                               {value: 'CTRJ', description: 'Tarija'}];
 
   storesList: DocumentType[] = [];
 
-  storeGroup: any = [{"CCBA": [{value: "Tienda 1", description: "Tienda 1"}, {value: "Tienda 2", description: "Tienda 2"}], 
+  storeGroup: any = [{"CCBA": [{value: "Tienda 1", description: "Tienda 1"}, {value: "Tienda 2", description: "Tienda 2"}],
                       "CLPZ": [{value: "Tienda 3", description: "Tienda 3"}, {value: "Tienda 4", description: "Tienda 4"}],
                       "CBEN": [{value: "Tienda 5", description: "Tienda 5"}, {value: "Tienda 6", description: "Tienda 6"}],
                       "CORU": [{value: "Tienda 7", description: "Tienda 7"}, {value: "Tienda 8", description: "Tienda 8"}],
@@ -39,9 +40,11 @@ export class StoreCityComponent implements OnInit {
     'city': new FormControl(null, [Validators.required])
   });
 
-  constructor() { }
+  constructor(private webstoreService : WebstoreService,
+    private ordersService: OrdersService) { }
 
   ngOnInit(): void {
+    console.log('init store-city');
   }
 
   someMethod(value: any){
@@ -51,6 +54,7 @@ export class StoreCityComponent implements OnInit {
   }
 
   next(){
+    this.registerDeliveryType();
   }
 
   get city() {
@@ -60,4 +64,26 @@ export class StoreCityComponent implements OnInit {
   get store() {
     return this.validationForm.get('store');
   }
+
+  registerDeliveryType(){
+    const data ={
+      "deliveryTypeId":"authorizedPointTypeId",
+      "deliveryTypeDesc":"authorizedPoint",
+      "paymentTypeId":"paymentCashId",
+      "paymentTypeDesc":"paymentCash"
+   }
+    const param = {
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),
+      "sequence": 5,
+      "userId": this.webstoreService.getDataInSession('userId'),
+      "microFrontendId": "delivery-type-microfront-app",
+      "microFrontendData": JSON.stringify(data),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+      });
+  }
+
 }
