@@ -93,19 +93,20 @@ export class OrderComponent implements OnInit {
         enabled:true,
         alias: 'detailsale'
       },
-      deliveryMethod: {
+      deliverymethod: {
         visible :false,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
-
       },
-      payment: {
+      almostdone: {
         visible :false,
         active: false,
         enabled : true,
-        alias : 'payment'
+        alias : 'almostdone'
+
       }
+ 
     };
   }
 
@@ -313,6 +314,10 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.loadBussinesRules();
       });
+  }
+
+  submitOrder(){
+
   }
 
 }

@@ -60,10 +60,17 @@
                       (nextMovilListStep)="changeModule(modules.movilList.alias)">
       </app-movil-list>
 
-      <app-card-payment [id]="modules.payment.alias"
-                        *ngIf="modules.payment.visible"
-                        (nextMovilListStep)="changeModule(modules.payment.alias)">
-      </app-card-payment>
+      <app-delivery-method id={{modules.deliverymethod.alias}}
+                          *ngIf="modules.deliverymethod.visible"
+                          (nextDeliveryMethodStep)="changeModule(modules.deliverymethod.alias)">
+      </app-delivery-method>
+
+      <app-almost-done
+                    [id]="modules.almostdone.alias"
+                        *ngIf="modules.almostdone.visible"
+                      (nextMovilListStep)="submitOrder()">
+
+      </app-almost-done>
     </div>
   </div>
 </div>

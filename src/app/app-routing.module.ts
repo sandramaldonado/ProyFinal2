@@ -24,7 +24,7 @@ const routes : Routes = [
   },
   {
     path : 'detalle-compra',
-    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
+    loadChildren : () => import ('./modules/sales/detail/detail.module').then (m => m.DetailModule)
   },
   {
     path : 'client',
