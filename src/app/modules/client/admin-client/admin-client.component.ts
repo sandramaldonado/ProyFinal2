@@ -45,8 +45,8 @@ export class AdminClientComponent implements OnInit {
   submitted: boolean = false;
   clientInfo: any;
   keyClient: any;
-  stateScorin: String;
-  stateClient: boolean = true;
+  stateScorin: String = "";
+  stateClient: Boolean = false;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -76,7 +76,6 @@ export class AdminClientComponent implements OnInit {
             private ordersService: OrdersService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
-    this.stateClient = (sessionStorage.getItem("isClient") == "true");
     this.clientInfo = this.webstoreservice.getClientInformation();
     this.stateScorin = this.webstoreservice.getStatusScoring();
 
@@ -84,7 +83,8 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.webstoreservice.saveToken();
+    
+    //this.webstoreservice.saveToken();
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
     //this.loadcontents();
@@ -95,7 +95,8 @@ export class AdminClientComponent implements OnInit {
     this.loadForm();
   }
 
-  loadcontents() {
+  /**
+   loadcontents() {
     this.clientService.getClientByMovil(this.subscriberId, this.key)
         .subscribe(
           response => {
@@ -106,8 +107,18 @@ export class AdminClientComponent implements OnInit {
             console.log(error);
           });
   }
+   */
 
   loadForm() {
+    console.log(this.clientInfo["clientId"]);
+    if (this.clientInfo["clientId"] > 0) {
+      console.log("Existe");
+      this.stateClient = true;  
+    } else {
+      console.log("No Existe");
+      this.stateClient = false;
+    }
+    
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];
@@ -144,7 +155,6 @@ export class AdminClientComponent implements OnInit {
   }
 
   next (){
-
     let name1 = this.validationForm.value.firstName!;
     let name2 = this.validationForm.value.secondName!;
     let lastname1 = this.validationForm.value.sureName!;

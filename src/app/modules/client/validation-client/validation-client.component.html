@@ -17,7 +17,7 @@
                         <div class="d-flex flex-row align-items-start justify-content-between">
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                 <app-input-text controlName="dni" [submitted]="submitted" identifier="dni"
-                                    message="Ingresa tu CI" description="Carnet"></app-input-text>
+                                    message="Ingresa tu CI" description="Carnet" readonly="false"></app-input-text>
                                 <mat-error *ngIf="dni?.invalid && dni?.touched" >
                                     Por favor ingresa datos v&aacute;lidos
                                 </mat-error>
@@ -27,7 +27,7 @@
                                 <span id="icon" *ngIf="!validationForm.get('subscriberId')?.errors"><i color="success" class="material-icons">check_circle</i></span>
                                 -->
                                 <app-input-text controlName="subscriberId" [submitted]="submitted"
-                                    identifier="subscriberId" message="Ingresa tu Celular" description="Celular">
+                                    identifier="subscriberId" message="Ingresa tu Celular" readonly="false" description="Celular">
                                 </app-input-text>
                                 
                                 <mat-error *ngIf="subscriberId?.invalid && subscriberId?.touched">

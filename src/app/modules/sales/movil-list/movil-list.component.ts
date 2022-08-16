@@ -78,9 +78,9 @@ export class MovilListComponent implements OnInit {
             if (index < this.limitLine) {
               if (index == 0) {
                 this.movilLine = linesMovil[index];
-                this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true });
+                this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #AC99CE; color: white; border: 2px solid #5C349D; border-radius:15px;', checked: true });
               } else {
-                this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false });
+                this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'background-color: #F1F1F1; color: black; border-radius:15px;', checked: false });
               }
             }
           }
@@ -96,8 +96,6 @@ export class MovilListComponent implements OnInit {
         if (linesEntertainment.length > 0) {
           this.tvLine = linesEntertainment[0];
         }
-        console.log(this.listagroup);
-        console.log(this.linesList);
       }, error => {
         console.log(error);
       });
@@ -124,11 +122,10 @@ export class MovilListComponent implements OnInit {
     }});
 
     this.webstoreservice.saveMovilListinformation(list2);
-    let test = this.webstoreservice.getMovilListInformation();
-    console.log(test);
 
     this.visited =true;
     this.registerAactivation(numeros);
+
     this.nextMovilListStep.emit(true);
   }
 
@@ -140,9 +137,9 @@ export class MovilListComponent implements OnInit {
 
     for (let index = 0; index < this.limitLine; index++) {
       if (line == linesMovil[index]) {
-        this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true });
+        this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #AC99CE; color: white; border: 2px solid #5C349D; border-radius:15px;', checked: true });
       } else {
-        this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false });
+        this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'background-color: #F1F1F1; color: black; border-radius:15px;', checked: false });
       }
     }
   }
@@ -157,9 +154,9 @@ export class MovilListComponent implements OnInit {
       for (let index = 0; index < linesMovil.length; index++) {
         if (index < this.limitLine) {
           if (index == 0) {
-            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #AC99CE; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true });
+            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #AC99CE; color: white; border: 2px solid #5C349D; border-radius:15px;', checked: true });
           } else {
-            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false });
+            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'background-color: #F1F1F1; color: black; border-radius:15px;', checked: false });
           }
         }
       }

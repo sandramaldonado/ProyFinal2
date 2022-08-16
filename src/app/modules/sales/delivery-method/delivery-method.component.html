@@ -5,7 +5,7 @@
             <p>{{message}} <a href="#">Ver detallle de artículos</a></p>
             <div class="row">
                 <div class="col-12">
-                    <div class="container" style="color:purple;">
+                    <div class="container" style="color:#5C349D;">
                         <h5><b>Elija el metodo de entrega</b></h5>
                         <br>
                     </div>
@@ -23,7 +23,10 @@
                     <app-store-city *ngIf="methods.storesInfo.active">
                     </app-store-city>
                 </div>
-                
+                <div class="row text-center">
+                    <app-button [content]="'Siguiente'" (click)="next()">
+                    </app-button>
+                </div>
             </div>
         </section>
     </div>

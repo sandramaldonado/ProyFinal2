@@ -1,79 +1,45 @@
 <div class="container">
     <div class="row pb-3">
         <section class="section-body col-12 py-3">
-            {{boundAttribute}}
-            <h3>{{title}}</h3>
+            <h3><span><i style="color:#5C349D;" class="material-icons">account_circle</i>&nbsp;{{title}}</span></h3>
             <p>{{message}}</p>
             <form [formGroup]="validationForm" style="background-color:white" novalidate id="validationForm">
                 <div class="row ">
-                    <div class="container" style="color:black;">
+                    <div class="container" style="color:#5C349D;">
                         <h4><b>Datos Generales</b></h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6" *ngIf="stateClient; else NAME1EDIT">
+                    <div class="col-6">
                         <app-input-text controlName="firstName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
-                            message="Primer Nombre" description="Primer Nombre"></app-input-text>
+                        message="Primer Nombre" description="Primer Nombre"></app-input-text>
                         <mat-error *ngIf="firstName?.invalid && firstName?.touched" >
                             Por favor ingresa datos v&aacute;lidos
                         </mat-error>
                     </div>
-                    <ng-template #NAME1EDIT>
-                        <div class="col-6">
-                            <app-input-text controlName="firstName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
-                            message="Primer Nombre" description="Primer Nombre"></app-input-text>
-                            <mat-error  *ngIf="firstName?.invalid && firstName?.touched" >
-                                Por favor ingresa datos v&aacute;lidos
-                            </mat-error>
-                        </div>
-                    </ng-template>
-                    <div class="col-6" *ngIf="stateClient; else NAME2EDIT">
+                    <div class="col-6">
                         <app-input-text controlName="secondName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="secondName"
-                            message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
+                        message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
                     </div>
-                    <ng-template #NAME2EDIT>
-                        <div class="col-6">
-                            <app-input-text controlName="secondName"  readonly="false" [submitted]="submitted" identifier="secondName"
-                            message="Segundo Nombre" description="Segundo Nombre"></app-input-text>
-                        </div>
-                    </ng-template>
                 </div>
-
                 <div class="row">
-                    <div class="col-6" *ngIf="stateClient; else SURENAME1EDIT">
+                    <div class="col-6">
                         <app-input-text controlName="sureName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="sureName"
-                            message="Primer Apellido" description="Primer Apellido"></app-input-text>
+                        message="Primer Apellido" description="Primer Apellido"></app-input-text>
                         <mat-error *ngIf="sureName?.invalid && sureName?.touched" >
                             Por favor ingresa datos v&aacute;lidos
                         </mat-error>
                     </div>
-                    <ng-template #SURENAME1EDIT>
-                        <div class="col-6">
-                            <app-input-text controlName="sureName"  readonly="false" [submitted]="submitted" identifier="sureName"
-                            message="Primer Apellido" description="Primer Apellido"></app-input-text>
-                            <mat-error *ngIf="sureName?.invalid && sureName?.touched" >
-                                Por favor ingresa datos v&aacute;lidos
-                            </mat-error>
-                        </div>
-                    </ng-template>
-                    <div class="col-6" *ngIf="stateClient; else SURENAME2EDIT">
+                    <div class="col-6">
                         <app-input-text controlName="secondSurName"  readonly="{{stateClient}}" [submitted]="submitted"
-                            identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
+                        identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
                         </app-input-text>
                     </div>
-                    <ng-template #SURENAME2EDIT>
-                        <div class="col-6">
-                            <app-input-text controlName="secondSurName"  readonly="false" [submitted]="submitted"
-                            identifier="secondSurName" message="Segundo Apellido" description="Segundo Apellido">
-                            </app-input-text>
-                        </div>
-                    </ng-template>
                 </div>
-
-                <div class="row" *ngIf="stateClient; else TYPEEDIT">
+                <div class="row">
                     <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
                         <mat-select placeholder="Tipo Documento" formControlName="tipo" id="tipo" 
-                            name="tipo" [disabled]="true" class="{{false ? 'one' : 'two'}}">
+                            name="tipo" [disabled]="stateClient==true">
                             <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
                                 {{tipo.description}}
                             </mat-option>
@@ -83,42 +49,18 @@
                         Por favor elija una opci&oacute;n
                     </mat-error>
                 </div>
-                <ng-template #TYPEEDIT>
-                    <div class="row">
-                        <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;" >
-                            <mat-select placeholder="Tipo Documento" disableOptionCentering formControlName="tipo" id="tipo" 
-                                name="tipo" class="{{false ? 'one' : 'two'}}">
-                                <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
-                                    {{tipo.description}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-error *ngIf="tipo?.invalid && tipo?.touched">
-                            Por favor elija una opci&oacute;n
-                        </mat-error>
-                    </div>
-                </ng-template>
                 <div class="row">
-                    <div class="col-6" *ngIf="stateClient; else DNIEDIT">
-                        <app-input-text controlName="nroDoc"  readonly="{{stateClient}}" [submitted]="submitted" identifier="nroDoc"
-                            message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
+                    <div class="col-6">
+                        <app-input-text controlName="nroDoc" readonly="{{stateClient}}" [submitted]="submitted" identifier="nroDoc"
+                        message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
                         <mat-error *ngIf="nroDoc?.invalid && nroDoc?.touched" >
                             Por favor ingresa datos v&aacute;lidos
                         </mat-error>
                     </div>
-                    <ng-template #DNIEDIT>
-                        <div class="col-6">
-                            <app-input-text controlName="nroDoc"  readonly="false" [submitted]="submitted" identifier="nroDoc"
-                                message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
-                            <mat-error *ngIf="nroDoc?.invalid && nroDoc?.touched" >
-                                Por favor ingresa datos v&aacute;lidos
-                            </mat-error>
-                        </div>
-                    </ng-template>
-                    <div class="col-6" *ngIf="stateClient; else EMITEDIT">
+                    <div class="col-6">
                         <mat-form-field appearance="outline" >
                             <mat-select placeholder="Elija Expedido" formControlName="expDoc" 
-                                id="expDoc" name="expDoc" [disabled]="true" class="{{false ? 'one' : 'two'}}">
+                                id="expDoc" name="expDoc" [disabled]="stateClient==true">
                                 <mat-option *ngFor="let exp of expedido" [value]="exp.value" style="color:#5C349D;">
                                     {{exp.description}}
                                 </mat-option>
@@ -128,23 +70,9 @@
                             Por favor elija una opci&oacute;n
                         </mat-error>
                     </div>
-                    <ng-template #EMITEDIT>
-                        <div class="col-6">
-                            <mat-form-field appearance="outline" >
-                                <mat-select placeholder="Elija Expedido" disableOptionCentering formControlName="expDoc" 
-                                    id="expDoc" name="expDoc" class="{{false ? 'one' : 'two'}}">
-                                    <mat-option *ngFor="let exp of expedido" [value]="exp.value" style="color:#5C349D;">
-                                        {{exp.description}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-error *ngIf="expDoc?.invalid && expDoc?.touched" >
-                                Por favor elija una opci&oacute;n
-                            </mat-error>
-                        </div>
-                    </ng-template>
                 </div>
 
+                
                 <div class="row">
                     <app-big-input-text controlName="nroRef"  readonly="false" [submitted]="submitted" identifier="nroRef"
                         message="N&uacute;mero Referencia" description="N&uacute;mero Ref."></app-big-input-text>
@@ -161,7 +89,7 @@
                 </div>
 
                 <div class="row ">
-                    <div class="container" style="color:black;">
+                    <div class="container" style="color:#5C349D;">
                         <h4><b>Datos de Facturaci&oacute;n</b></h4>
                     </div>
                 </div>
