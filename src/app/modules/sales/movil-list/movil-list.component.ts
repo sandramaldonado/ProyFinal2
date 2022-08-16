@@ -157,7 +157,7 @@ export class MovilListComponent implements OnInit {
       for (let index = 0; index < linesMovil.length; index++) {
         if (index < this.limitLine) {
           if (index == 0) {
-            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #d3a1f9; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true });
+            this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-info divOption', style: 'background-color: #AC99CE; color: white; border: 4px solid #5C339D; border-radius:12px;', checked: true });
           } else {
             this.linesList.push({ id: index.toString(), name: linesMovil[index], value: linesMovil[index], description: 'alert alert-secondary divOption', style: 'color: black; border-radius:12px;', checked: false });
           }
@@ -204,7 +204,7 @@ export class MovilListComponent implements OnInit {
 
      const param = {
       "orderId": this.webstoreservice.getDataInSession('orderMainId'),
-      "sequence": 1,
+      "sequence": 4,
       "userId": this.webstoreservice.getDataInSession('userId'),
       "microFrontendId": "activation-data-microfront-app",
       "microFrontendData": JSON.stringify(microfrontData),

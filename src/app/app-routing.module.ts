@@ -63,6 +63,10 @@ const routes : Routes = [
     loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   },
   {
+    path: 'documentos',
+    loadChildren: () => import('./modules/sales/documents/documents.module').then( m => m.DocumentsModule)
+  },
+  {
     path: 'verificar-email',
     loadChildren: () => import('./modules/sales/check-email/check-email.module').then( m => m.CheckEmailModule)
   },
@@ -76,6 +80,10 @@ const routes : Routes = [
   },
   { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./modules/sales/card-payment/card-payment.module').then( m => m.CardPaymentModule)
   },
 
 

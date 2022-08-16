@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '@shared/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { LazyElementsModule } from '@angular-extensions/elements';
+import { StoreCityModule } from '../store-city/store-city.module';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { LazyElementsModule } from '@angular-extensions/elements';
     MatButtonModule,
     MatRadioModule,
     SharedModule,
-    LazyElementsModule
+    LazyElementsModule,
+    StoreCityModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
   exports : [DeliveryMethodComponent]

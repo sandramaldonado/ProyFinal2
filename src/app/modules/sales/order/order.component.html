@@ -60,7 +60,10 @@
                       (nextMovilListStep)="changeModule(modules.movilList.alias)">
       </app-movil-list>
 
-
+      <app-card-payment [id]="modules.payment.alias"
+                        *ngIf="modules.payment.visible"
+                        (nextMovilListStep)="changeModule(modules.payment.alias)">
+      </app-card-payment>
     </div>
   </div>
 </div>
