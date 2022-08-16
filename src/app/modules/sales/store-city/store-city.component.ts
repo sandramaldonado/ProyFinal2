@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-store-city',
@@ -20,6 +21,9 @@ export class StoreCityComponent implements OnInit {
                               {value: 'CSCR', description: 'Sucre'}, 
                               {value: 'CSCZ', description: 'Santa Cruz'}, 
                               {value: 'CTRJ', description: 'Tarija'}];
+
+  storesList: DocumentType[] = [];
+
   storeGroup: any = [{"CCBA": [{value: "Tienda 1", description: "Tienda 1"}, {value: "Tienda 2", description: "Tienda 2"}], 
                       "CLPZ": [{value: "Tienda 3", description: "Tienda 3"}, {value: "Tienda 4", description: "Tienda 4"}],
                       "CBEN": [{value: "Tienda 5", description: "Tienda 5"}, {value: "Tienda 6", description: "Tienda 6"}],
@@ -31,7 +35,7 @@ export class StoreCityComponent implements OnInit {
                       "CTRJ": [{value: "Tienda 17", description: "Tienda 17"}, {value: "Tienda 18", description: "Tienda 18"}],
                     }];
   validationForm = new FormGroup({
-    'stores': new FormControl(null, [Validators.required]),
+    'store': new FormControl(null, [Validators.required]),
     'city': new FormControl(null, [Validators.required])
   });
 
@@ -40,8 +44,10 @@ export class StoreCityComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  someMethod(event: any){
-
+  someMethod(value: any){
+    console.log(value);
+    //console.log(this.storeGroup);
+    this.storesList = this.storeGroup[0][value];
   }
 
   next(){
