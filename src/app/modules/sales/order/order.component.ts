@@ -94,13 +94,13 @@ export class OrderComponent implements OnInit {
         alias: 'detailsale'
       },
       deliverymethod: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
       },
       almostdone: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'almostdone'
