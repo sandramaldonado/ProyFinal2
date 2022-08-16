@@ -1,11 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ClientService } from '@app/services/client.service';
-import { OrdersService } from '@app/services/orders.service';
-import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-store-city',
@@ -40,8 +35,7 @@ export class StoreCityComponent implements OnInit {
     'city': new FormControl(null, [Validators.required])
   });
 
-  constructor(private webstoreService : WebstoreService,
-    private ordersService: OrdersService) { }
+  constructor() { }
 
   ngOnInit(): void {
     console.log('init store-city');
@@ -53,10 +47,6 @@ export class StoreCityComponent implements OnInit {
     this.storesList = this.storeGroup[0][value];
   }
 
-  next(){
-    this.registerDeliveryType();
-  }
-
   get city() {
     return this.validationForm.get('city');
   }
@@ -65,25 +55,5 @@ export class StoreCityComponent implements OnInit {
     return this.validationForm.get('store');
   }
 
-  registerDeliveryType(){
-    const data ={
-      "deliveryTypeId":"authorizedPointTypeId",
-      "deliveryTypeDesc":"authorizedPoint",
-      "paymentTypeId":"paymentCashId",
-      "paymentTypeDesc":"paymentCash"
-   }
-    const param = {
-      "orderId": this.webstoreService.getDataInSession('orderMainId'),
-      "sequence": 5,
-      "userId": this.webstoreService.getDataInSession('userId'),
-      "microFrontendId": "delivery-type-microfront-app",
-      "microFrontendData": JSON.stringify(data),
-      "statusCode": "INI"
-    }
-    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
-      response => {
-        console.log(response);
-      });
-  }
 
 }

@@ -1,16 +1,15 @@
 <div class="container">
   <div class="row pb-3 ">
       <section class="section-body col-12 py-3">
-          <div class=" d-flex flex-column justify-content-around align-items-center">
+          <div class="divMain d-flex flex-column justify-content-around">
                   <h3>Antes de continuar</h3>
-                  <p>Debido a tu capacidad de endeudamiento, para continuar el proceso de compra por este canal deberás habilitar el pago automático de tu servicio de manera mensual mediante una tarjeta de débito o crédito que te pediremos antes de concluir tu compra. Es un proceso sencillo que te asegurará que puedas adquirir este plan.</p>
-                  <p>¿Deseas continuar?</p>
+                  <p>Debido a tu capacidad de endeudamiento, para continuar el proceso de compra por este canal <b>deber&aacute;s habilitar el pago autom&aacute;tico de tu servicio de manera mensual</b> mediante una tarjeta de d&eacute;bito o cr&eacute;dito que te pediremos antes de concluir tu compra. <br> Es un proceso sencillo que te asegurar&aacute; que puedas adquirir este plan. <br> <br> ¿Deseas continuar?</p>
 
-              <div class="d-flex flex-column">
+              <div class="d-flex flex-column justify-content-around align-items-center">
                 <app-button *ngIf="!acceptRecurrentPayment" [content]="'Continuar'" (click)="next()" ></app-button>
+                <app-button-outline  [content]="'Ver otros planes'" ></app-button-outline>
               </div>
-
-              <app-button-outline  [content]="'Ver otros planes'" ></app-button-outline>
+              
           </div>
       </section>
   </div>
