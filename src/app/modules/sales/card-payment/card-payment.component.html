@@ -1,0 +1,30 @@
+<div class="container">
+<div class="row pb-3">
+    <section class="section-body col-12 py-3">
+        <h3>{{title}}</h3>
+        <p>{{message}}</p>
+        <mat-card>
+            <!-- <ng-template *ngIf="dyMicrofront" >
+                <ax-lazy-element *axLazyElementDynamic="dyMicrofront.microfrontId,
+                                    url: dyMicrofront.microfrontUrl ;"
+                                cardPayParamIn={{cardPayParamIn}}
+                                paramClass={{paramClass}}>
+                </ax-lazy-element>
+            </ng-template> -->
+
+        <ax-lazy-element *axLazyElementDynamic="'card-pay-microfront-app',
+                           url: 'https://view360.devnt.ssidevops.com/card-pay-microfront-app/main.js';"
+                        paramIn={{toSendString(microFrontParamIn)}}
+                        paramClass={{toSendString(paramClass)}}>
+        </ax-lazy-element>
+
+        </mat-card>
+        <!-- <card-pay-microfront-app 
+        *axLazyElement="urlCardPaymentMicrofront"
+        [paramClass]="cardPayParamClass"        
+        >
+        </card-pay-microfront-app> -->
+    </section>
+
+</div>
+</div>
