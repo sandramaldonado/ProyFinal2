@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: Order Component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, OnInit } from '@angular/core';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { BusinessrulesService } from '@app/services/businessrules/businessrules.service';

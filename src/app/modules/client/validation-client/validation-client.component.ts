@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: validation client component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -184,7 +199,13 @@ export class ValidationClientComponent implements OnInit {
                   this.webstoreservice.saveClientInformation(dataClient);
                   const planService = this.armadoJsonScoring();
                   //console.log(planService);
-                  this.scoringValidated(planService);
+                  let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
+                  if(offerconsumptionformcode == "CCOPOS"){
+                    this.scoringValidated(planService);
+                  }else{
+                    this.webstoreservice.saveStatusScoring("EXPRESS");
+                  }
+                 
                 } else {
                   sessionStorage.setItem("isClient", "false");
                   this.submitted = true;
