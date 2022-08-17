@@ -40,9 +40,10 @@ export class DocumentsComponent implements OnInit {
     private webstoreService : WebstoreService,
     private ordersService: OrdersService,
     ) {}
+    ngOnInit(): void{
+      console.log("init documents");
+    }
 
-  ngOnInit(): void {
-  }
 
   openModalWithComponent() {
 

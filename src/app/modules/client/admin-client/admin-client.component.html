@@ -38,8 +38,8 @@
                 </div>
                 <div class="row">
                     <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
-                        <mat-select placeholder="Tipo Documento" formControlName="tipo" id="tipo" 
-                            name="tipo" [disabled]="stateClient==true">
+                        <mat-select placeholder="Tipo Documento" formControlName="tipo" id="tipo"
+                            name="tipo" [disabled]="stateClient===true">
                             <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
                                 {{tipo.description}}
                             </mat-option>
@@ -59,8 +59,8 @@
                     </div>
                     <div class="col-6">
                         <mat-form-field appearance="outline" >
-                            <mat-select placeholder="Elija Expedido" formControlName="expDoc" 
-                                id="expDoc" name="expDoc" [disabled]="stateClient==true">
+                            <mat-select placeholder="Elija Expedido" formControlName="expDoc"
+                                id="expDoc" name="expDoc" [disabled]="stateClient===true">
                                 <mat-option *ngFor="let exp of expedido" [value]="exp.value" style="color:#5C349D;">
                                     {{exp.description}}
                                 </mat-option>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="row">
                     <app-big-input-text controlName="nroRef"  readonly="false" [submitted]="submitted" identifier="nroRef"
                         message="N&uacute;mero Referencia" description="N&uacute;mero Ref."></app-big-input-text>
