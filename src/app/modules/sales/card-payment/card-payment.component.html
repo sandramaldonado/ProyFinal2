@@ -15,7 +15,7 @@ TC2: LTE Standalone http://10.45.56.62:4200/oferta?code=LTEPREO3 -> no tiene mon
 TC3: Triple play http://10.45.56.62:4200/oferta?code=TIPBATVF no hay monto cuando no selecciono el pago automatico
 --> 
         </mat-card>
-        <card-pay-microfront-app *axLazyElement="'http://localhost:4297/main.js'"
+        <card-pay-microfront-app *axLazyElement="microFrontKeys.url"
                                 paramIn={{toSendString(microFrontParamIn)}}
                                 paramClass={{toSendString(paramClass)}}
                                 (dataPayMent)="dataPayMent($event)">
