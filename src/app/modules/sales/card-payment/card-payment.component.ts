@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
 import { WebstoreService } from "@app/services/webstore/webstore.service";
 import { environment } from "@env";
 
@@ -44,7 +45,8 @@ export class CardPaymentComponent implements OnInit {
     message = "Introduce tu tarjeta de débito o crédito para que puedas pagar tus servicios VIVA cada mes.";
 
     constructor(
-        private webstoreService: WebstoreService
+        private webstoreService: WebstoreService,
+        private router: Router
     ) {
         console.log("*******getClientInformation")
         console.log(this.webstoreService.getClientInformation())//SIRVE
@@ -115,6 +117,11 @@ export class CardPaymentComponent implements OnInit {
 
     toSendString(data: any) {
         return JSON.stringify(data);
+    }
+    dataPayMent(event: any): void{
+        console.log(event.detail)
+        console.log(event.detail.data)
+        this.router.navigate(['/payment-done']);
     }
 
     next() {
