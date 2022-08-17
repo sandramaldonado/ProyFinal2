@@ -65,9 +65,10 @@
                         [disabled]="disabled"
                         [(ngModel)]="isChecked"
                         (change)="onChange($event)"
+                        id="pago"
                         >
                       Pago Automatico
-                      <p id="descuento">(descuento 20%)</p>
+                      <p id="descuento">(descuento 10%)</p>
                     </mat-slide-toggle>
 
                 </section>
@@ -84,9 +85,9 @@
                         </div>
                         <div class="col-6 text-end">
                           <span id="totalnumero">Bs {{total}}</span>
-                          <span><p id="label" *ngIf="descuentoActivado() && isChecked">
+                          <!-- <span><p id="label" *ngIf="descuentoActivado() && isChecked">
                             Bs 20
-                        </p></span>
+                        </p></span> -->
                         </div>
                     </div>
                 </div>
@@ -100,7 +101,7 @@
                         </h3>
                     </div>
                     <div class="col-3 text-end">
-                      <span id="num">Bs 5</span>
+                      <span id="num">Bs {{conDescuento}}</span>
 
                     </div>
                 </div>

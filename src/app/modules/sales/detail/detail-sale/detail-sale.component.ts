@@ -5,8 +5,7 @@ import { Product } from '@models/Product';
 import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
 import {ThemePalette} from '@angular/material/core';
-import {MatSlideToggleModule,MatSlideToggleChange,MatSlideToggle} from '@angular/material/slide-toggle';
-
+import {MatSlideToggleModule,MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-detail-sale',
@@ -21,7 +20,7 @@ export class DetailSaleComponent implements OnInit {
     'DetailForm': new FormControl('', [Validators.required]),
   });
   @Output() nextCheckEmailStep = new EventEmitter<any>();
-  isChecked=false;
+  isChecked:any;
   product :any;
   producto:any;
   precio:any;
@@ -35,6 +34,8 @@ export class DetailSaleComponent implements OnInit {
   scoring:any
   descuento:any;
   code:any;
+
+  conDescuento: any;
 
   constructor(public webStorage: WebstoreService) { }
 
@@ -50,7 +51,7 @@ export class DetailSaleComponent implements OnInit {
     else{
       this.checked = false;
     }
-
+    
 
   }
 
@@ -84,7 +85,6 @@ export class DetailSaleComponent implements OnInit {
   Visible(){
     this.code = this.webStorage.getOfferConsuptioncode();
     console.log(this.code);
-    console.log("a ver")
     if (this.code == "CCOPOS"){
 
       return true;
@@ -97,11 +97,10 @@ export class DetailSaleComponent implements OnInit {
 
 
   descuentoActivado(){
-
+    
     if(this.checked == true   )
     {
       console.log(this.checked);
-      console.log("asdf")
       return true;
     }
     else{
@@ -109,28 +108,26 @@ export class DetailSaleComponent implements OnInit {
     }
   }
 
-  automaticPayment(){
-
-    if(this.isChecked)
-    {
-      this.webStorage.saveAutomaticPayment(true);
-      console.log("a ver")
-    }
-    else{
-      this.webStorage.saveAutomaticPayment(false);
-    }
-  }
-
 
   comprar(){
-
+ 
+    
+    
   }
+
+
+  
+
 
   onChange($event: MatSlideToggleChange) {
     console.log($event);
     console.log("queso:" + this.isChecked);
+    this.discount();
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
 
+  discount(){
+    this.conDescuento =  ((this.total * 10)/100);
+  }
 
 }

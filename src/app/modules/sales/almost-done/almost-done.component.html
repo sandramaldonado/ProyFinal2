@@ -1,4 +1,4 @@
-<div id="padre" class=" d-flex flex-column justify-content-around align-items-center">
+<div id="padre" class=" d-flex flex-column justify-content-around">
     <div id="banner" class=" d-flex flex-column justify-content-around align-items-center">
         <h3>
             Ya casi terminamos
@@ -10,9 +10,16 @@
         <img src="../../../../assets/images/iconos/down.png">
 
     </div>
-    <app-button id="boton" [content]="'Detalle de Compra'" (click)="detalle()">
-        <span src="../../../../assets/images/iconos/moto.png"></span>
-    </app-button>
+    
 
 
 </div>
+<div class=" d-flex flex-column justify-content-around align-items-center">
+    <button class="button-active" (click)="detalle()" >
+        <img id="moto" src="../../../../assets/images/iconos/moto.png">
+        
+        Detalle De Compra
+        <p id="linea">Linea Movil</p>
+    </button >
+</div>
+
