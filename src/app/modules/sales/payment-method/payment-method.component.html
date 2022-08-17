@@ -1,0 +1,16 @@
+
+<h4>Elige un método de pago</h4>
+
+<div class="col-12">
+  <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
+      <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
+          <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i style="color:white;" class="material-icons">{{op.design}}</i>
+              <div>&nbsp;{{op.name}}</div>
+            </div>
+              <!-- <span><i style="color:white;" class="material-icons">{{op.design}}</i>&nbsp;{{op.name}}</span> -->
+          </mat-radio-button>
+      </div>
+  </mat-radio-group>
+</div>
