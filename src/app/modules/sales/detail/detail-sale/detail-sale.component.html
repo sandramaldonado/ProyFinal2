@@ -64,6 +64,7 @@
                         [checked]="checked"
                         [disabled]="disabled"
                         [(ngModel)]="isChecked"
+                        (change)="onChange($event)"
                         >
                       Pago Automatico
                       <p id="descuento">(descuento 20%)</p>

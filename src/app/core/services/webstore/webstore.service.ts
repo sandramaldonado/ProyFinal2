@@ -137,6 +137,7 @@ export class WebstoreService {
   }
   saveAutomaticPayment (automaticPayment : any): void{
     this.sessionStorageService.store("automaticPayment",automaticPayment);
+    
   }
 
 

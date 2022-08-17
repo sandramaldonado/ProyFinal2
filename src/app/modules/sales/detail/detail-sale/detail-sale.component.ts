@@ -21,7 +21,7 @@ export class DetailSaleComponent implements OnInit {
     'DetailForm': new FormControl('', [Validators.required]),
   });
   @Output() nextCheckEmailStep = new EventEmitter<any>();
-  isChecked:any;
+  isChecked=false;
   product :any;
   producto:any;
   precio:any;
@@ -50,8 +50,6 @@ export class DetailSaleComponent implements OnInit {
       this.checked = false;
     }
 
-    
-    
 
   }
 
@@ -128,6 +126,9 @@ export class DetailSaleComponent implements OnInit {
 
   onChange($event: MatSlideToggleChange) {
     console.log($event);
+    console.log("queso:" + this.isChecked);
+    this.webStorage.saveAutomaticPayment(this.isChecked);
+    
 }
 
   comprar(){}
