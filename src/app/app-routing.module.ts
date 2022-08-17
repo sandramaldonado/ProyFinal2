@@ -59,10 +59,6 @@ const routes : Routes = [
     loadChildren: () => import('./pages/captcha/captcha.module').then( m => m.CaptchaModule)
   },
   {
-    path: 'validacion',
-    loadChildren: () => import('./pages/validation/validation.module').then( m => m.ValidationModule)
-  },
-  {
     path: 'cobertura',
     loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   },

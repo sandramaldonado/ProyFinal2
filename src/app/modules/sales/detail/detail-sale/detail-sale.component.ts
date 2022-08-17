@@ -134,6 +134,9 @@ export class DetailSaleComponent implements OnInit {
     console.log("queso:" + this.isChecked);
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
+  radioChange($event : any){
+
+  }
     
     
 }
