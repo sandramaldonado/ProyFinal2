@@ -22,17 +22,16 @@ export class CardPaymentComponent implements OnInit {
         col11: 'col-11',
         col12: 'col-12',
         col6: 'col-6',
-        containerField: 'd-flex flex-row align-items-start d-flex justify-content-between',
+        // containerField: 'd-flex flex-row align-items-start d-flex justify-content-between',
         sizeForm: 'tamañodiv form-field',
-        labelInput: 'has-events',
+        labelInput: 'hasEvents',
         labelAlert: 'matError text-danger',
         txtCenter: 'text-center',
         customBtn: 'custom-button',
         appearance: 'outline',
         floatLabel: 'always',
-        backgroundGreend: 'background-green',
-        p15: 'padding-15',
-
+        backgroundGreend: 'backgroundGreen',
+        p15: 'padding15',
         // Aling items
         aCenter: 'align-items-center'
     }
@@ -83,7 +82,7 @@ export class CardPaymentComponent implements OnInit {
             termsOfService: {mode:"required", url:urlTerms}, // mode: required | option
             amount: "150.90",
             currency: "BOB",
-            cart: "[{sellerId:'NT', sellerDesc:'Viva'}]",
+            cart: [{sellerId:'NT', sellerDesc:'Viva'}],
             recurring: "required", // required | option
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,

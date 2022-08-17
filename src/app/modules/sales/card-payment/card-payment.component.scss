@@ -1,43 +1,54 @@
-app-card-payment {
-    .background-green {
-        background: #DFF39F !important;
-        border-radius: 15px;
-        padding: 15px;
-    }
+.pFont {
+    font-family: 'Roboto';
+    color: #8C8C8D;
+}
 
-    .padding-15 {
-        padding: 15px;
-    }
+.titleFont {
+    font-family: 'Museo';
+}
 
-    mat-label.has-events {
-        pointer-events: auto;
-        color: #5C349D;
-    }
+.backgroundGreen {
+    background: #DFF39F;
+    border-radius: 15px;
+    padding: 15px;
+}
 
-    mat-form-field {
-        width: 95%;
-    }
+.padding15 {
+    padding: 15px;
+}
 
-    input {
-        color: #5C349D;
-    }
+mat-label.hasEvents {
+    pointer-events: auto;
+    color: #5C349D;
+}
 
-    /* El icono debe ser "position: absolute"
+mat-form-field {
+    width: 95%;
+}
+
+input {
+    color: #5C349D;
+}
+
+/* El icono debe ser "position: absolute"
  * Ademas le damos un "display: block" y lo posicionamos */
 
+#icon {
+    position: absolute;
+    display: block;
+    bottom: .5rem;
+    right: 0.1rem;
+    opacity: 0.5 !important;
+    user-select: none;
+    cursor: pointer;
+}
 
-    #icon {
-        position: absolute;
-        display: block;
-        bottom: .5rem;
-        right: 0.1rem;
-        opacity: 0.5 !important;
-        user-select: none;
-        cursor: pointer;
-    }
+.tamañodiv {
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
-    .tamañodiv {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+.matError {
+    text-align:right; 
+    margin-top: -7px;
 }

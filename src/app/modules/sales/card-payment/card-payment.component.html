@@ -1,29 +1,19 @@
 <div class="container">
 <div class="row pb-3">
     <section class="section-body col-12 py-3">
-        <h3>{{title}}</h3>
-        <p>{{message}}</p>
+        <h3 class="titleFont">{{title}}</h3>
+        <p class="pFont">{{message}}</p>
         <mat-card>
-            <!-- <ng-template *ngIf="dyMicrofront" >
-                <ax-lazy-element *axLazyElementDynamic="dyMicrofront.microfrontId,
-                                    url: dyMicrofront.microfrontUrl ;"
-                                cardPayParamIn={{cardPayParamIn}}
-                                paramClass={{paramClass}}>
-                </ax-lazy-element>
-            </ng-template> -->
-
-        <ax-lazy-element *axLazyElementDynamic="microFrontKeys.id,
-                           url: microFrontKeys.url;"
-                        paramIn={{toSendString(microFrontParamIn)}}
-                        paramClass={{toSendString(paramClass)}}>
-        </ax-lazy-element>
-
+            <!-- <ax-lazy-element *axLazyElementDynamic="microFrontKeys.id,
+                            url: 'http://localhost:4297/main.js';"
+                            paramIn={{toSendString(microFrontParamIn)}}
+                            paramClass={{toSendString(paramClass)}}>
+            </ax-lazy-element> -->
         </mat-card>
-        <!-- <card-pay-microfront-app 
-        *axLazyElement="urlCardPaymentMicrofront"
-        [paramClass]="cardPayParamClass"        
-        >
-        </card-pay-microfront-app> -->
+        <card-pay-microfront-app *axLazyElement="'http://localhost:4297/main.js'"
+                                paramIn={{toSendString(microFrontParamIn)}}
+                                paramClass={{toSendString(paramClass)}}>
+        </card-pay-microfront-app>
     </section>
 
 </div>
