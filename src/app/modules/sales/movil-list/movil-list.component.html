@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="movilState;">
     <div class="row pb-3">
         <section class="section-body col-12 py-3">
             <h3>{{title}}</h3>
@@ -6,10 +6,8 @@
             <mat-card>
                 <mat-card-content>
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
-                        <div *ngIf="movilState; else FALSEMOVIL;">
+                        <div>
                             <div class="row">
-                                <h4><b>MOVIL</b></h4>
-                                <p>Elige un N&uacute;mero</p>
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
                                     <div [class]="line.description" [style]="line.style" role="alert">
                                         <mat-radio-button name="movil" [value]="line.value" [checked]="line.checked" (change)="radioChange($event)">
@@ -24,7 +22,9 @@
                                 </div>
                             </div>
                         </div>
-                        <ng-template #FALSEMOVIL>
+                       
+                        <!--
+                         <ng-template #FALSEMOVIL>
                             <div class="row" *ngIf="internetState">
                                 <div class="container">
                                     <h4>Internet</h4>
@@ -39,6 +39,7 @@
                                 </div>
                             </div>
                         </ng-template>
+                        -->
                            
                         <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
                         <div class="text-center">
@@ -50,3 +51,11 @@
         </section>
     </div>
 </div>
+
+<ngx-spinner
+  bdColor = "rgba(51, 51, 51, 0.8)"
+  size = "large"
+  color = "#D6F084"
+  [fullScreen]="false"
+  type = "ball-8bits">
+</ngx-spinner>

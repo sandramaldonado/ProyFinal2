@@ -47,6 +47,7 @@ export class AdminClientComponent implements OnInit {
   keyClient: any;
   stateScorin: String = "";
   stateClient: Boolean = false;
+  stateSelect: Boolean = false;
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -113,9 +114,11 @@ export class AdminClientComponent implements OnInit {
     console.log(this.clientInfo["clientId"]);
     if (this.clientInfo["clientId"] > 0) {
       console.log("Existe");
-      this.stateClient = true;  
+      this.stateClient = true;
+      this.stateSelect = true;
     } else {
       console.log("No Existe");
+      this.stateSelect = true;
       this.stateClient = false;
     }
     

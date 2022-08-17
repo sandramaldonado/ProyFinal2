@@ -48,9 +48,9 @@
                     </mat-error>
                 </div>
                 
-                <div class="row" *ngIf="stateLocation">
-                    <div class="row" style="background-color: #FBFAFC; border: 1px solid #5C349D; border-radius:10px; margin-left: 2px; margin-right: 2px;">
-                        <div class="col-2 col-md-2 col-sm-2">
+                <div class="col-12" *ngIf="stateLocation">
+                    <div class="row" style="background-color: #FBFAFC; border: 1px solid #5C349D; border-radius:10px; margin-left:2px; margin-right:2px;">
+                        <div class="col-2 col-md-2 col-sm-2 text-center">
                             <br>
                             <span><i class="material-icons md-36" style="color:#5C349D;">qr_code</i></span>
                         </div>
@@ -60,7 +60,7 @@
                             <p><b>Enviamos un QR a tu correo electr&oacute;nico</b> para que recojas tus art&iacute;culos en la sucursal de tu preferencia</p>
                         </div>
                     </div>
-                    <div class="col-12" id="optionDelivery">
+                    <div class="col-12" style="margin-top:27px;">
                         <app-almost-done></app-almost-done>
                     </div>
                 </div>

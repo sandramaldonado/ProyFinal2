@@ -5,6 +5,7 @@ import { MovilListService } from '@app/services/movil-list.service';
 import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { RadioLines } from '@models/Radio-Lines';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-movil-list',
@@ -42,16 +43,28 @@ export class MovilListComponent implements OnInit {
   constructor(private movilListService: MovilListService,
     private webstoreService: WebstoreService,
     private ordersService: OrdersService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private spinnerService: NgxSpinnerService) {
     this.key = sessionStorage.getItem("key");
     this.orderId = this.webstoreService.getDataInSession('orderMainId');
     this.userId = this.webstoreService.getDataInSession('userId');
   }
 
   ngOnInit(): void {
+    /** spinner starts on init */
+    this.spinnerService.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinnerService.hide();
+    }, 10000);
+
+
     this.armadoJsonScoring();
     this.searchList();
+    
   }
+
 
   armadoJsonScoring() {
     this.planComposition = this.webstoreService.getPlanComposition();
@@ -117,6 +130,11 @@ export class MovilListComponent implements OnInit {
           this.entertainmentState = true;
           this.tvLine = linesEntertainment[0];
         }
+
+        if (this.movilLine == "") {
+          this.next();
+        }
+
       }, error => {
         console.log(error);
       });

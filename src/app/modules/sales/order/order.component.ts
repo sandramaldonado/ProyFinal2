@@ -246,18 +246,7 @@ export class OrderComponent implements OnInit {
         this.changeModule("deliverymethod");
       }
       break;
-    case 'deliverymethod':
-      if(this.modules.almostdone.enabled){
-        this.modules.almostdone.visible=true;
-
-        setTimeout(function(){
-          me.scroller.scrollToAnchor("almostdone");
-        }, 1000);
-
-      }else{
-        this.changeModule("almostdone");
-      }
-      break;
+    
      default:
       break;
    }

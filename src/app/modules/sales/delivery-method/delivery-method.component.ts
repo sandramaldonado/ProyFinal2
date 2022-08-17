@@ -15,7 +15,7 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
   message = "El servicio contratado tiene artículos que debemos entregarte.";
   methods: any;
   listOfOptions = [
-      {value:"storesInfo",design:"storefront",style:"background-color: #5C349D; color: white; border: 1px solid #5C349D; border-radius:16px;",name:"Recoja en Tienda",id:"1",checked:true}//,
+      {value:"storesInfo",design:"storefront",style:"background-color: #5C349D; color: white; border: 1px solid #5C349D; border-radius:16px;", name:"Recoja en Tienda",id:"1",checked:true}//,
       //{value:"delivery",design:"delivery_dining",style:"background-color:#5C339D; color: white;border: 4px solid #5C339D; border-radius:12px;",name:"Delivery",id:"2",checked:false}
       ];
 
