@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { SalesService } from "@app/services/sales/sales.service";
 import { WebstoreService } from "@app/services/webstore/webstore.service";
 import { environment } from "@env";
 
@@ -10,7 +11,7 @@ import { environment } from "@env";
 })
 
 export class CardPaymentComponent implements OnInit {
-    
+
     title = "Configura tu tarjeta de crédito o débito";
     message = "Introduce tu tarjeta de débito o crédito para que puedas pagar tus servicios VIVA cada mes.";
     person: any;
@@ -40,11 +41,13 @@ export class CardPaymentComponent implements OnInit {
     }
     fullNames: string | undefined;
     fullLastNames: string | undefined;
-     
+    offertotaltariff: any;
+
     constructor(
         private webstoreService: WebstoreService,
+        private salesService: SalesService,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         const orderId = this.webstoreService.getDataInSession('orderMainId');
@@ -54,10 +57,12 @@ export class CardPaymentComponent implements OnInit {
         console.log('*****TOKEN');
         const token = this.webstoreService.getDataInSession('token');
         console.log(token);
-
+        this.offertotaltariff = this.webstoreService.getDataInSession('offertotaltariff');
+        console.log("****this.offertotaltariff")
+        console.log(this.offertotaltariff)
         this.fullNames = this.getNames();
         this.fullLastNames = this.getLastNames();
-        
+
         this.microFrontParamIn = {
             theme: "light-green",
             orderType: "SALES",
@@ -66,16 +71,16 @@ export class CardPaymentComponent implements OnInit {
             entityType: "partyId",//cableado
             entityId: this.person && this.person.personId ? this.person.personId : null,//cableado,
             language: "es",
-            termsOfService: {mode:"required", url:urlTerms}, // mode: required | option
-            amount: "150.90",
+            termsOfService: { mode: "required", url: urlTerms }, // mode: required | option
             currency: "BOB",
-            cart: [{sellerId:'NT', sellerDesc:'Viva'}],
+            cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
             recurring: "required", // required | option
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
             payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
             user: this.person,
+            amount: this.offertotaltariff,
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
@@ -86,7 +91,7 @@ export class CardPaymentComponent implements OnInit {
     getNames() {
         const data = this.person;
         let name = data.name;
-        if(data.middleName != null){
+        if (data.middleName != null) {
             name = name + ' ' + data.middleName;
         }
         return name.trim();
@@ -95,7 +100,7 @@ export class CardPaymentComponent implements OnInit {
     getLastNames() {
         const data = this.person;
         let lastName = data.lastName1;
-        if(data.lastName2 != null){
+        if (data.lastName2 != null) {
             lastName = lastName + ' ' + data.lastName2;
         }
         return lastName.trim();
@@ -104,9 +109,33 @@ export class CardPaymentComponent implements OnInit {
     toSendString(data: any) {
         return JSON.stringify(data);
     }
-    dataPayMent(event: any): void{
+    dataPayMent(event: any): void {
+        if(event && event.detail){
         console.log(event.detail)
         console.log(event.detail.data)
-        this.router.navigate(['/payment-done']);
+        }
+        const data = {
+            "orderNumber": "00000000026",
+            "saleType": "EXPRESS",
+            "processType": "PTFSALE",
+            "planCodeList": [
+                "PTVM"
+            ],
+            "rawData": "",
+            "totalPrice": 0,
+            "totalItems": 0,
+            "deliveryMethod": "MANUAL",
+            "requiresCashbox": "0",
+            "requiresBonification": "0",
+            "requiresCustomerApproval": "0",
+            "requiresValidateCustomerData": "0",
+            "system": "CRM"
+        }
+
+        this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res) => {
+            console.log(res)
+        })
+        // this.router.navigate(['/payment-done']);
+
     }
 }
