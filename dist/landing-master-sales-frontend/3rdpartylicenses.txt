@@ -35,6 +35,9 @@ MIT
 @angular/core
 MIT
 
+@angular/flex-layout
+MIT
+
 @angular/forms
 MIT
 
