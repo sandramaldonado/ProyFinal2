@@ -10,6 +10,7 @@ import { SharedModule } from '@shared/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { LazyElementsModule } from '@angular-extensions/elements';
 import { StoreCityModule } from '../store-city/store-city.module';
+import { AlmostDoneModule } from '../almost-done/almost-done.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { StoreCityModule } from '../store-city/store-city.module';
     MatRadioModule,
     SharedModule,
     LazyElementsModule,
-    StoreCityModule
+    StoreCityModule,
+    AlmostDoneModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
   exports : [DeliveryMethodComponent]

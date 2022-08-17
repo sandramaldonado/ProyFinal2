@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { OrdersService } from '@app/services/orders.service';
@@ -10,7 +10,7 @@ import { WebstoreService } from '@app/services/webstore/webstore.service';
   templateUrl: './delivery-method.component.html',
   styleUrls: ['./delivery-method.component.scss']
 })
-export class DeliveryMethodComponent implements OnInit {
+export class DeliveryMethodComponent implements OnInit, OnChanges {
   title = "¿Cómo prefieres recibir tus equipos?";
   message = "El servicio contratado tiene artículos que debemos entregarte.";
   methods: any;
@@ -24,9 +24,8 @@ export class DeliveryMethodComponent implements OnInit {
   });
   @Output() nextDeliveryMethodStep = new EventEmitter<any>();
 
-  constructor(private webstoreService : WebstoreService,
-    private ordersService: OrdersService,
-            private changeDetectorRef: ChangeDetectorRef){
+  constructor(private webstoreService: WebstoreService,
+            private ordersService: OrdersService) {
     this.methods = {
       storesInfo: {
         active: false,
@@ -37,6 +36,9 @@ export class DeliveryMethodComponent implements OnInit {
         visited: false
       }
     };
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    alert("Existió un error en ejecución");
   }
 
   ngOnInit(): void {
@@ -64,10 +66,6 @@ export class DeliveryMethodComponent implements OnInit {
         }
         break;
     }
-  }
-
-  ngAfterViewInit(): void {
-    this.changeDetectorRef.detectChanges();
   }
 
   radioChange(event: MatRadioChange) {

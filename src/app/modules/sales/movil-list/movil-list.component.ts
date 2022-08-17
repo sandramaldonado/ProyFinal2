@@ -28,7 +28,10 @@ export class MovilListComponent implements OnInit {
   movilLine = "";
   wanLine = "";
   tvLine = "";
+  orderId: any;
+  userId: any;
   limitLine = 5;
+  movilCounter = 0;
 
   @Output() nextMovilListStep = new EventEmitter<any>();
 
@@ -41,6 +44,8 @@ export class MovilListComponent implements OnInit {
     private ordersService: OrdersService,
     private formBuilder: FormBuilder) {
     this.key = sessionStorage.getItem("key");
+    this.orderId = this.webstoreservice.getDataInSession('orderMainId');
+    this.userId = this.webstoreservice.getDataInSession('userId');
   }
 
   ngOnInit(): void {
@@ -60,21 +65,29 @@ export class MovilListComponent implements OnInit {
     this.planService = JSON.stringify({
       "userCode": "14",
       "ceTypeCodeList": this.productTypeCode,
-      "processId": 165435435
+      "processId": this.orderId
     });
 
   }
 
   searchList() {
+    let linesMovil = "";
+    let linesInternet = "";
+    let linesEntertainment = "";
     this.listagroup = [];
     this.movilListService.getMovilList(this.planService, this.key).subscribe(
       response => {
         this.numberList = response;
-        const linesMovil = this.numberList["data"]["data"]["movil"];
+        console.log(this.numberList);
+        if (this.numberList["data"]["data"]["movil"] != null) {
+          linesMovil = this.numberList["data"]["data"]["movil"];  
+        }
+
         if (linesMovil.length > 0) {
           this.movilState = true;
           this.listagroup.push('movil_control');
           for (let index = 0; index < this.limitLine; index++) {
+            this.movilCounter = index;
             if (index < this.limitLine) {
               if (index == 0) {
                 this.movilLine = linesMovil[index];
@@ -86,14 +99,22 @@ export class MovilListComponent implements OnInit {
           }
         }
 
-        const linesInternet = this.numberList["data"]["data"]["ifixed"];
-        const linesEntertainment = this.numberList["data"]["data"]["tv"];
+        if (this.numberList["data"]["data"]["ifixed"] != null) {
+          linesInternet = this.numberList["data"]["data"]["ifixed"];  
+        }
+
+        if (this.numberList["data"]["data"]["tv"] != null) {
+          linesEntertainment = this.numberList["data"]["data"]["tv"];  
+        }
+
         console.log(linesInternet);
         if (linesInternet.length > 0) {
+          this.internetState = true;
           this.wanLine = linesInternet[0];
         }
         console.log(linesEntertainment);
         if (linesEntertainment.length > 0) {
+          this.entertainmentState = true;
           this.tvLine = linesEntertainment[0];
         }
       }, error => {
