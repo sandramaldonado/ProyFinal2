@@ -22,7 +22,7 @@ export class CardPaymentComponent implements OnInit {
         col11: 'col-11',
         col12: 'col-12',
         col6: 'col-6',
-        containerField: 'd-flex flex-column justify-content-around align-items-center',
+        containerField: 'd-flex flex-row align-items-start d-flex justify-content-between',
         sizeForm: 'tamañodiv form-field',
         labelInput: 'has-events',
         labelAlert: 'matError text-danger',
@@ -49,7 +49,6 @@ export class CardPaymentComponent implements OnInit {
     ) {
         console.log("*******getClientInformation")
         console.log(this.webstoreService.getClientInformation())//SIRVE
-        this.microFrontParamIn.user = this.webstoreService.getClientInformation();
         console.log('*****TOKEN');
         console.log(this.webstoreService.getDataInSession('token'));
         this.fullNames = this.getNames();
@@ -71,7 +70,8 @@ export class CardPaymentComponent implements OnInit {
         const planComposition = this.webstoreService.getPlanComposition();
         console.log(planComposition)
         const urlTerms = 'https://www.viva.com.bo/';
-
+        const user = this.webstoreService.getClientInformation();
+        
         this.microFrontParamIn = {
             theme: "light-green",
             orderType: "SALES",
@@ -80,7 +80,7 @@ export class CardPaymentComponent implements OnInit {
             entityType: "partyId",//cableado
             entityId: person && person.personId ? person.personId : null,//cableado,
             language: "es",
-            termsOfService: `{mode:'required',url:'${urlTerms}'}`, // mode: required | option
+            termsOfService: {mode:"required", url:urlTerms}, // mode: required | option
             amount: "150.90",
             currency: "BOB",
             cart: "[{sellerId:'NT', sellerDesc:'Viva'}]",
@@ -88,7 +88,8 @@ export class CardPaymentComponent implements OnInit {
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
-            payAmountMode: "required" // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
+            payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
+            user: user
             //OMEGA3
             //payAmountMode: optional/required 
             //si es contra entrega no mostrar el monto

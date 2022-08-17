@@ -1,124 +1,43 @@
-mat-label {
-    background: white
-}
-
-mat-label.has-events {
-    pointer-events: auto;
-    color: purple;
-}
-
-mat-form-field {
-    width: 100%;
-}
-
-
-::ng-deep .mat-form-field-outline-start {
-    color: purple !important;
-    border-color: purple !important;
-    border-radius: 9px 0 0 9px !important;
-    min-width: 9px !important;
-}
-
-::ng-deep .mat-form-field-outline-end {
-    color: purple !important;
-    border-color: purple !important;
-    border-radius: 0 9px 9px 0 !important;
-}
-
-//input outline color
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: purple !important;
-}
-
-//mat-input focused color
-::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: purple !important;
-}
-
-
-.tamañodiv {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-// ------button----
-.button-active {
-    background-color: #5C339D;
-    font-size: 1rem !important;
-    padding: 12px 10px;
-    border-radius: 20px;
-    color: #ffff;
-    width: 285px;
-    height: 44px !important;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-    font-family: MUSEO500-REGULAR;
-}
-
-@media (max-width: 768px) {
-    .button-active {
-        margin-right: 0px !important;
-        font-size: .9em !important;
+app-card-payment {
+    .background-green {
+        background: #DFF39F !important;
+        border-radius: 15px;
+        padding: 15px;
     }
-}
 
-@media (max-width: 576px) {
-    .button-active {
-        height: 45px;
+    .padding-15 {
+        padding: 15px;
     }
-}
 
-.button-wrap {
-    margin-top: 1.5vh;
-}
+    mat-label.has-events {
+        pointer-events: auto;
+        color: #5C349D;
+    }
 
-.button-disactived {
-    background: #e0e0e0;
-    font-size: 1.1em;
-    border-radius: 20px;
-    color: black;
-    margin-top: 1.5vh;
-    width: 300px;
-    height: 40px;
-    font-weight: bold;
-    border: 2px solid #8260A5;
-    font-family: MUSEO500-REGULAR;
-    box-sizing: border-box;
-}
+    mat-form-field {
+        width: 95%;
+    }
 
-button {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: all .4s ease-in-out;
-}
+    input {
+        color: #5C349D;
+    }
 
-.button-message {
-    color: #ffff;
-    font-weight: 900;
-    font-size: small;
-    font-family: MUSEO500-REGULAR;
-    margin-bottom: 4px;
-}
-
-.button-active:hover {
-    transform: scale(1.04, 1.0000000099);
-    -ms-transform: scale(1.04, 1.0000000099);
-    -webkit-transform: scale(1.04, 1.0000000099);
-}
+    /* El icono debe ser "position: absolute"
+ * Ademas le damos un "display: block" y lo posicionamos */
 
 
-button:focus {
-    border-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 1px 1px rgb(208, 208, 208) inset, 0 0 8px rgb(220, 220, 220);
-    outline: 0 none;
-}
+    #icon {
+        position: absolute;
+        display: block;
+        bottom: .5rem;
+        right: 0.1rem;
+        opacity: 0.5 !important;
+        user-select: none;
+        cursor: pointer;
+    }
 
-.background-green {
-    background: #DFF39F;
-    border-radius: 15px;
-    padding: 15px;
-}
-
-.padding-15 {
-    padding: 15px;
+    .tamañodiv {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
