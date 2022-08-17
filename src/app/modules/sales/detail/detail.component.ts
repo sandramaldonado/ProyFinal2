@@ -48,14 +48,20 @@ export class DetailComponent implements OnInit {
         enabled : true,
         alias : 'detailsale'
       },
+      paymentMethod: {
+        visible :true,
+        active: false,
+        enabled : true,
+        alias : 'paymentMethod'
+      },
       payment: {
         visible :true,
         active: false,
         enabled : true,
         alias : 'payment'
       }
-     
-   
+
+
     };
    }
 

@@ -1,0 +1,91 @@
+mat-card-header {
+    .title-1{
+        font-size: 2.5vh; // 2.5vh;
+        text-align: left;
+        color: purple;
+        font-family: MUSEO900-REGULAR;
+        //font-family:'Museo';
+        margin: 0;
+ 
+    }
+    .title-2{
+        font-size: 1.8vh;
+        text-align: left;
+        color: black;
+        //font-family:'Museo';
+        font-family: MUSEO600-REGULAR;
+    }
+   }
+ 
+   mat-card-title{
+     margin-bottom: .5vh;
+   }
+ 
+   .mat-icon-button{
+     width: 4vh!important;
+     height: auto!important;
+     margin-top: -6px;
+     margin-right: -3px;
+ }
+ 
+ mat-card-content {
+     background: #F0F0F0;
+     color: purple;
+     border-radius: 0 0 25px 25px ;
+ }
+ 
+ .link-back a {
+     text-align: right;
+     font-weight: bold;
+     text-decoration: none;
+     color: rgb(179, 2, 167) ;
+ }
+ 
+ .mat-card{
+   padding: 10px !important;
+   width: 100%;
+   color: #7B7B7B;
+ }
+ 
+ .section-body{
+   background: #ffff;
+   //border-radius: 0px 10px 10px 0px;
+   //border: 1px solid rgba(132, 102, 182, 0.1);
+ }
+ 
+ mat-form-field {
+   width: 100%;
+ }
+
+ .divOption {
+  margin-top:5px; 
+  margin-bottom:5px; 
+  margin-left:5px; 
+  margin-right:5px;
+
+}
+
+.linkMore {
+  text-align: right;
+  font-weight: bold;
+  text-decoration: none;
+  color: darkblue ;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+	background-color: white!important;
+    border-color: white!important; /*outer ring color change*/
+    border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+	background-color: #5C339D!important;   /*inner circle color change*/
+    border-color: white!important;
+    border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    background-color: white!important;
+	border-color: white!important; /*outer ring color change*/
+    border-radius: 8px 8px 8px 8px;
+}

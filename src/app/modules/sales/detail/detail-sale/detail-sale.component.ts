@@ -35,10 +35,7 @@ export class DetailSaleComponent implements OnInit {
   scoring:any
   descuento:any;
   code:any;
-  listOfOptions = [
-    {value:"cardPayment",design:"credit_card",style:"background-color: #5C349D; color: white; border: 1px solid #5C349D; border-radius:16px;",name:"Tarjeta débito/credito",id:"1",checked:true},
-    {value:"uponDelivery",design:"local_atm",style:"background-color:#5C339D; color: white; border: 1px solid #5C339D; border-radius:16px;",name:"Pago a contra entrega",id:"2",checked:false}
-    ];
+
   constructor(public webStorage: WebstoreService) { }
 
 
@@ -123,8 +120,8 @@ export class DetailSaleComponent implements OnInit {
       this.webStorage.saveAutomaticPayment(false);
     }
   }
-    
-    
+
+
   comprar(){
 
   }
@@ -134,6 +131,6 @@ export class DetailSaleComponent implements OnInit {
     console.log("queso:" + this.isChecked);
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
-    
-    
+
+
 }

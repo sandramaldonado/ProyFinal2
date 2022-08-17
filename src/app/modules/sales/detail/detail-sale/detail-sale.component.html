@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="col-3 text-end">
                                       <span id="price">{{currency}}{{precio}}</span>
-                                    
+
                                     </div>
                                 </div>
                             </div>
@@ -74,8 +74,8 @@
 
 
                 <div class="d-flex flex-column justify-content-around">
-                    
-                    
+
+
 
                     <div class="row">
                         <div class="col-6 text-start">
@@ -95,26 +95,17 @@
                     <div class="col-7 text-start">
                         <img id="icono" src="assets/images/iconos/Discount.png">
                         <h3 id="des">Descuento total por pago automatico
-                            
-                        
+
+
                         </h3>
                     </div>
                     <div class="col-3 text-end">
                       <span id="num">Bs 5</span>
-                    
+
                     </div>
                 </div>
 
                 <!-- <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button> -->
-                <div class="col-12">
-                    <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
-                        <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
-                            <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
-                                <span><i style="color:white;" class="material-icons">{{op.design}}</i>&nbsp;{{op.name}}</span>
-                            </mat-radio-button>
-                        </div>
-                    </mat-radio-group>
-                </div>
 
             </div>
 
