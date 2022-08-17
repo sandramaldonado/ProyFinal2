@@ -290,11 +290,15 @@ export class AdminClientComponent implements OnInit {
       const client = this.webstoreservice.getClientInformation();
       const addressData = this.webstoreservice.getDataInSession('addressData');
       let billAddress: any;
-      addressData.forEach((element: any) => {
-        if(element.selected){
-          billAddress = element;
-        }
-      });
+      let billAddressId = -1;
+      if(addressData){
+        addressData.forEach((element: any) => {
+          if(element.selected){
+            billAddress = element;
+          }
+        });
+        billAddressId= billAddress.addressId;
+      }
 
       let billing = {
         "observations":"",
@@ -303,7 +307,7 @@ export class AdminClientComponent implements OnInit {
         "email":client.email,
         "referencePhone":client.nroRef,
         "address":{
-           "addressId":billAddress.addressId,
+           "addressId":billAddressId,
            "addressTypeCode":"BILL_ADDR"
         },
         "payment":{
