@@ -8,32 +8,31 @@
 
                 <h3 id="title">Detalle de Compra</h3>
 
-                <mat-card class="my-3 border" id="matservicios">
-                    <mat-card-content class="">
-                            <div class="">
+                <mat-card class="d-flex flex-column justify-content-around" id="matservicios">
+                    <mat-card-content class="d-flex flex-column justify-content-around">
+                            <div class="mb-3">
                                 <h3 id="servicios">Servicios Adquiridos
                                 <img id="icono" src="assets/images/iconos/Vector.png">
 
                                 <p id="fecha">Se paga a partir del 1 de agosto</p>
 
-                                <ul class="">
-                                    <li class="" >
-                                        <div class="productname">
-                                            {{producto}}
-                                        </div>
-
-                                        <div class="price"> {{currency}}{{precio}}
-                                        </div>
-
-                                    </li>
-                                  </ul>
 
                                 </h3>
+
+                                <div class="row" >
+                                    <div class="col-7 text-start">
+                                        <h3 id="productname"> {{producto}}</h3>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                      <span id="price">{{currency}}{{precio}}</span>
+                                    
+                                    </div>
+                                </div>
                             </div>
                     </mat-card-content>
                 </mat-card>
 
-                <mat-card class="my-3 border" id="matservicios">
+                <!-- <mat-card class="my-3 border" id="matservicios">
                     <mat-card-content class="">
                             <div class="">
                                 <h3 id="servicios">Articulos Adquiridos:
@@ -41,7 +40,7 @@
                                 <p id="fecha">Se paga a partir del 1 de agosto</p>
                                 <ul class="">
                                     <li class="" *ngFor="let datos of data1">
-                                        <div class="productname">
+                                        <div id="productname">
                                             {{datos}}
                                         </div>
 
@@ -57,7 +56,7 @@
                                 </h3>
                             </div>
                     </mat-card-content>
-                </mat-card>
+                </mat-card> -->
                 <section class="example-section" *ngIf="Visible()">
                     <mat-slide-toggle
                         class="example-margin"
@@ -65,6 +64,7 @@
                         [checked]="checked"
                         [disabled]="disabled"
                         [(ngModel)]="isChecked"
+                        (change)="onChange($event)"
                         >
                       Pago Automatico
                       <p id="descuento">(descuento 20%)</p>
@@ -73,15 +73,36 @@
                 </section>
 
 
-                <div>
-                    <h3 id="total">Total Compra:
-                        <img id="icono" src="assets/images/iconos/carrito.png"></h3>
-                    <h3 id="totalnumero">
-                        Bs {{total}}
-                    </h3>
-                    <p id="label" *ngIf="descuentoActivado() && isChecked">
-                        Bs 20
-                    </p>
+                <div class="d-flex flex-column justify-content-around">
+                    
+                    
+
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <h3 id="total">Total Compra:
+                                <img id="icono" src="assets/images/iconos/carrito.png"></h3>
+                        </div>
+                        <div class="col-6 text-end">
+                          <span id="totalnumero">Bs {{total}}</span>
+                          <span><p id="label" *ngIf="descuentoActivado() && isChecked">
+                            Bs 20
+                        </p></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="aviso" *ngIf="isChecked">
+                    <div class="col-7 text-start">
+                        <img id="icono" src="assets/images/iconos/Discount.png">
+                        <h3 id="des">Descuento total por pago automatico
+                            
+                        
+                        </h3>
+                    </div>
+                    <div class="col-3 text-end">
+                      <span id="num">Bs 5</span>
+                    
+                    </div>
                 </div>
 
                 <!-- <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button> -->
