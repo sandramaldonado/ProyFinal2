@@ -84,7 +84,7 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     //this.webstoreservice.saveToken();
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
@@ -121,7 +121,7 @@ export class AdminClientComponent implements OnInit {
       this.stateSelect = true;
       this.stateClient = false;
     }
-    
+
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];
@@ -234,7 +234,7 @@ export class AdminClientComponent implements OnInit {
     'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
-  
+
 
 
     get firstName() {
@@ -293,7 +293,7 @@ export class AdminClientComponent implements OnInit {
       const client = this.webstoreservice.getClientInformation();
       const addressData = this.webstoreservice.getDataInSession('addressData');
       let billAddress: any;
-      let billAddressId = -1;
+      let billAddressId = 0;
       if(addressData){
         addressData.forEach((element: any) => {
           if(element.selected){

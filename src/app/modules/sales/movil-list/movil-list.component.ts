@@ -62,7 +62,7 @@ export class MovilListComponent implements OnInit {
 
     this.armadoJsonScoring();
     this.searchList();
-    
+
   }
 
 
@@ -93,7 +93,7 @@ export class MovilListComponent implements OnInit {
         this.numberList = response;
         console.log(this.numberList);
         if (this.numberList["data"]["data"]["movil"] != null) {
-          linesMovil = this.numberList["data"]["data"]["movil"];  
+          linesMovil = this.numberList["data"]["data"]["movil"];
         }
 
         if (linesMovil.length > 0) {
@@ -113,11 +113,11 @@ export class MovilListComponent implements OnInit {
         }
 
         if (this.numberList["data"]["data"]["ifixed"] != null) {
-          linesInternet = this.numberList["data"]["data"]["ifixed"];  
+          linesInternet = this.numberList["data"]["data"]["ifixed"];
         }
 
         if (this.numberList["data"]["data"]["tv"] != null) {
-          linesEntertainment = this.numberList["data"]["data"]["tv"];  
+          linesEntertainment = this.numberList["data"]["data"]["tv"];
         }
 
         console.log(linesInternet);
@@ -207,11 +207,17 @@ export class MovilListComponent implements OnInit {
     if(!numbers) return;
     const addressData = this.webstoreService.getDataInSession('addressData');
     let instAddress: any;
-    addressData.forEach((element: any) => {
-      if(element.selected){
-        instAddress = element;
-      }
-    });
+    let instAddressId=0;
+    if(addressData){
+      addressData.forEach((element: any) => {
+        if(element.selected){
+          instAddress = element;
+        }
+
+        instAddressId= instAddress?.addressId;
+      });
+    }
+
 
     let microfrontData: any[] = [];
 
@@ -226,7 +232,7 @@ export class MovilListComponent implements OnInit {
         "planType":"IFIXED",
         "serviceIdentifier":numbers.ifixed[0],
         "address":{
-           "addressId":instAddress?.addressId,
+           "addressId":instAddressId,
            "addressTypeCode":"INS_ADDR"
         }
      });
