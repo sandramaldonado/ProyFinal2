@@ -13,8 +13,6 @@ export class ResultScoringComponent implements OnInit {
     private webstoreservice : WebstoreService
   ) { }
 
-  ngOnInit(): void {
-  }
 
   next(){
     this.webstoreservice.saveDataInSession("scoring",{acceptRecurrentPayment:true});

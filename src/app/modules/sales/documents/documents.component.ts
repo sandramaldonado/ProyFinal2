@@ -41,8 +41,7 @@ export class DocumentsComponent implements OnInit {
     private ordersService: OrdersService,
     ) {}
 
-  ngOnInit(): void {
-  }
+
 
   openModalWithComponent() {
 

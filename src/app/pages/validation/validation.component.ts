@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ValidationComponent implements OnInit, OnChanges {
   clientDni: any;
   resultDni: Boolean;
-  
+
   clientPhone: any;
   resultPhone: Boolean;
   hasError = true;
@@ -24,9 +24,9 @@ export class ValidationComponent implements OnInit, OnChanges {
     dniNumber: new FormControl(''),
     phoneNumber: new FormControl(''),
   });
-  
-  constructor( private dialog: MatDialog, 
-              private validationService: ValidationService, 
+
+  constructor( private dialog: MatDialog,
+              private validationService: ValidationService,
               private rutaActiva: ActivatedRoute,
               private router: Router,
               private route: ActivatedRoute) {
@@ -48,7 +48,7 @@ export class ValidationComponent implements OnInit, OnChanges {
       phoneNumber
     });
   }
-  
+
   setupForm() {
     this.gropuForm = new FormGroup({
       phoneNumber: new FormControl('', [
@@ -75,10 +75,8 @@ export class ValidationComponent implements OnInit, OnChanges {
       }
     };
   }
-  
-  ngOnChanges () {
-    
-  }
+
+
 
   saveForm(): void {
     let dni:string = this.gropuForm.controls.dniNumber.value!;
@@ -95,7 +93,7 @@ export class ValidationComponent implements OnInit, OnChanges {
             if (!confirm("Los datos ingresados son incorrectos!!! \n"+
                   "¿Desea realizar nuevamente el intento de validación?")) {
               this.router.navigate([`/home`]);
-            }  
+            }
           }
         },
         error => {
@@ -106,8 +104,8 @@ export class ValidationComponent implements OnInit, OnChanges {
     }
   }
 /**
- * 
- 
+ *
+
   validationDni(dni: String): any {
     var stateDni = 0;
     this.validationService.getClientDni(dni)
@@ -150,7 +148,7 @@ export class ValidationComponent implements OnInit, OnChanges {
  */
 
   validationNumbers(number: string) {
-    var valoresAceptados = /^[0-9]+$/; 
+    var valoresAceptados = /^[0-9]+$/;
     var state = false;
     if (number.match(valoresAceptados) && number.length == 8) {
       state = true;

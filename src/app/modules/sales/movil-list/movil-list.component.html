@@ -6,7 +6,7 @@
             <mat-card>
                 <mat-card-content>
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
-                        <div *ngIf="movilState == true; then trueMovil;"></div>
+                        <div *ngIf="movilState === true; then trueMovil;"></div>
                         <ng-template #trueMovil>
                             <div class="row">
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
@@ -16,7 +16,7 @@
                                         </mat-radio-button>
                                     </div>
                                 </div>
-                                <div *ngIf="limitLine == 5" class="col-6 col-md-6 col-sm-6">
+                                <div *ngIf="limitLine === 5" class="col-6 col-md-6 col-sm-6">
                                     <div class="alert alert-light divOption" style="text-align:center;" role="alert">
                                         <a href="javascript: void(0);" class="linkMore" (click)="clickme()"> Mas opciones..</a>
                                     </div>
