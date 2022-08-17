@@ -32,7 +32,7 @@ export class MovilListComponent implements OnInit {
 
   @Output() nextMovilListStep = new EventEmitter<any>();
 
-  title = "Elije tu Número";
+  title = "Elige tu Número";
   message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
   visited: boolean = false;
 
