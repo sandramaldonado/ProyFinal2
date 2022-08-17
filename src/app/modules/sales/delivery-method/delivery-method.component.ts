@@ -2,6 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
+import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class DeliveryMethodComponent implements OnInit {
   });
   @Output() nextDeliveryMethodStep = new EventEmitter<any>();
 
-  constructor(private webstoreservice: WebstoreService,
+  constructor(private webstoreService : WebstoreService,
+    private ordersService: OrdersService,
             private changeDetectorRef: ChangeDetectorRef){
     this.methods = {
       storesInfo: {
@@ -80,6 +82,27 @@ export class DeliveryMethodComponent implements OnInit {
 
   next(){
     this.nextDeliveryMethodStep.emit(true);
+    this.registerDeliveryType();
   }
 
+  registerDeliveryType(){
+    const data ={
+      "deliveryTypeId":"authorizedPointTypeId",
+      "deliveryTypeDesc":"authorizedPoint",
+      "paymentTypeId":"paymentCashId",
+      "paymentTypeDesc":"paymentCash"
+   }
+    const param = {
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),
+      "sequence": 6,
+      "userId": this.webstoreService.getDataInSession('userId'),
+      "microFrontendId": "delivery-type-microfront-app",
+      "microFrontendData": JSON.stringify(data),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+      });
+  }
 }

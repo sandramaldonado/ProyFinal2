@@ -8,7 +8,9 @@
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
                         <div *ngIf="movilState === true; then trueMovil;"></div>
                         <ng-template #trueMovil>
-                            <div class="row">
+                            <div class="row" style="color:black">
+                                <h4 style="color:black"><b>MOVIL</b></h4>
+                                <p>Elige un N&uacute;mero</p>
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
                                     <div [class]="line.description" [style]="line.style" role="alert">
                                         <mat-radio-button name="movil" [value]="line.value" [checked]="line.checked" (change)="radioChange($event)">

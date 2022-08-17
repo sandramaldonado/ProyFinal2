@@ -88,13 +88,13 @@ export class OrderComponent implements OnInit {
         alias : 'movillist'
       },
       deliverymethod: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'deliverymethod'
       },
       almostdone: {
-        visible :false,
+        visible :true,
         active: false,
         enabled : true,
         alias : 'almostdone'

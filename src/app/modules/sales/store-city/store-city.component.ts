@@ -1,10 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ClientService } from '@app/services/client.service';
-import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-store-city',
@@ -41,7 +37,9 @@ export class StoreCityComponent implements OnInit {
 
   constructor() { }
 
-
+  ngOnInit(): void {
+    console.log('init store-city');
+  }
 
   someMethod(value: any){
     console.log(value);
@@ -56,4 +54,6 @@ export class StoreCityComponent implements OnInit {
   get store() {
     return this.validationForm.get('store');
   }
+
+
 }
