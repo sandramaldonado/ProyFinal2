@@ -1,7 +1,7 @@
 
-<h4>Elige un método de pago</h4>
+<h4 *ngIf="total>0">Elige un método de pago</h4>
 <div class="sp-20"></div>
-<div class="col-12">
+<div class="col-12" *ngIf="total>0">
   <mat-radio-group name="entregaData" fxLayout="column" [(ngModel)]="optionSelected" (change)="radioChange($event)">
       <div *ngFor="let op of listOfOptions" class="alert alert-info" [ngClass]="{'checked': op.value===optionSelected, 'unchecked': op.value!==optionSelected}" role="alert">
           <mat-radio-button name="entregaData" [value]="op.value" class="custom-radio">
@@ -13,3 +13,7 @@
       </div>
   </mat-radio-group>
 </div>
+<div style="text-align: center;">
+  <app-button *ngIf="!methodSelected" [content]="'Continuar'" (click)="next()"></app-button>
+</div>
+

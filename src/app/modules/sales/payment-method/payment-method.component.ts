@@ -13,9 +13,10 @@ export class PaymentMethodComponent implements OnInit {
     {value:'cardPayment',design:'credit_card',name:'Tarjeta débito / crédito'}
   ];
 
-  @Output() nextMovilListStep = new EventEmitter<any>();
+  @Output() nextPaymentMethodStep = new EventEmitter<any>();
   flow: any;
-
+  total = 0;
+  methodSelected = false;
 
   constructor(
     private webstoreservice: WebstoreService) {
@@ -30,11 +31,18 @@ export class PaymentMethodComponent implements OnInit {
   ngOnInit(): void {
     console.log('init PaymentMethodComponent');
     this.optionSelected = 'cardPayment';
+    this.total = this.webstoreservice.getOfferTotaldetail();
+    this.webstoreservice.saveDataInSession('paymentMethod', this.optionSelected);
   }
 
   radioChange(event: any) {
     console.log(event);
     this.webstoreservice.saveDataInSession('paymentMethod', event.value);
+  }
+
+  next(){
+    this.nextPaymentMethodStep.emit(true);
+    this.methodSelected = true;
   }
 
 }
