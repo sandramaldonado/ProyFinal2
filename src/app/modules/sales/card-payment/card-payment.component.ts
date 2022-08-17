@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { WebstoreService } from "@app/services/webstore/webstore.service";
 import { environment } from "@env";
@@ -10,6 +10,10 @@ import { environment } from "@env";
 })
 
 export class CardPaymentComponent implements OnInit {
+    
+    title = "Configura tu tarjeta de crédito o débito";
+    message = "Introduce tu tarjeta de débito o crédito para que puedas pagar tus servicios VIVA cada mes.";
+    person: any;
 
     microFrontKeys = {
         url: environment.urlCardPayMicrofrontApp,
@@ -23,7 +27,6 @@ export class CardPaymentComponent implements OnInit {
         col11: 'col-11',
         col12: 'col-12',
         col6: 'col-6',
-        // containerField: 'd-flex flex-row align-items-start d-flex justify-content-between',
         sizeForm: 'tamañodiv form-field',
         labelInput: 'hasEvents',
         labelAlert: 'matError text-danger',
@@ -31,47 +34,29 @@ export class CardPaymentComponent implements OnInit {
         customBtn: 'custom-button',
         appearance: 'outline',
         floatLabel: 'always',
-        backgroundGreend: 'backgroundGreen',
+        backgroundgreend: 'backgroundgreend',
         p15: 'padding15',
-        // Aling items
         aCenter: 'align-items-center'
     }
     fullNames: string | undefined;
     fullLastNames: string | undefined;
-
-    @Output() nextCoverageStep = new EventEmitter<any>();
-
-    title = "Configura tu tarjeta de crédito o débito";
-    message = "Introduce tu tarjeta de débito o crédito para que puedas pagar tus servicios VIVA cada mes.";
-
+     
     constructor(
         private webstoreService: WebstoreService,
         private router: Router
-    ) {
-        console.log("*******getClientInformation")
-        console.log(this.webstoreService.getClientInformation())//SIRVE
-        console.log('*****TOKEN');
-        console.log(this.webstoreService.getDataInSession('token'));
-        this.fullNames = this.getNames();
-        this.fullLastNames = this.getLastNames();
-    }
+    ) {}
 
     ngOnInit(): void {
-        // console.log("*******getAuthenticateInformation")
-        // console.log(this.webstoreService.getAuthenticateInformation())
-        console.log("*******getMovilListInformation")
-        console.log(this.webstoreService.getMovilListInformation())
-        const orderId = this.webstoreService.getDataInSession('orderMainId')
-        console.log("*******orderId")
-        console.log(orderId)
-        const person = this.webstoreService.getClientInformation();
-        console.log("*******personId")
-        console.log(person.personId)
-        console.log("*******getPlanComposition")
-        const planComposition = this.webstoreService.getPlanComposition();
-        console.log(planComposition)
+        const orderId = this.webstoreService.getDataInSession('orderMainId');
+        this.person = this.webstoreService.getClientInformation();
         const urlTerms = 'https://www.viva.com.bo/';
-        const user = this.webstoreService.getClientInformation();
+
+        console.log('*****TOKEN');
+        const token = this.webstoreService.getDataInSession('token');
+        console.log(token);
+
+        this.fullNames = this.getNames();
+        this.fullLastNames = this.getLastNames();
         
         this.microFrontParamIn = {
             theme: "light-green",
@@ -79,7 +64,7 @@ export class CardPaymentComponent implements OnInit {
             orderId: orderId ? orderId : null,
             channel: "LANDING",// LANDING | OMEGA3
             entityType: "partyId",//cableado
-            entityId: person && person.personId ? person.personId : null,//cableado,
+            entityId: this.person && this.person.personId ? this.person.personId : null,//cableado,
             language: "es",
             termsOfService: {mode:"required", url:urlTerms}, // mode: required | option
             amount: "150.90",
@@ -90,7 +75,8 @@ export class CardPaymentComponent implements OnInit {
             fullLastNames: this.fullLastNames,
             uniqueId: null,
             payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
-            user: user
+            user: this.person,
+            token: token
             //OMEGA3
             //payAmountMode: optional/required 
             //si es contra entrega no mostrar el monto
@@ -98,7 +84,7 @@ export class CardPaymentComponent implements OnInit {
     }
 
     getNames() {
-        const data = this.webstoreService.getClientInformation();
+        const data = this.person;
         let name = data.name;
         if(data.middleName != null){
             name = name + ' ' + data.middleName;
@@ -107,7 +93,7 @@ export class CardPaymentComponent implements OnInit {
     }
 
     getLastNames() {
-        const data = this.webstoreService.getClientInformation();
+        const data = this.person;
         let lastName = data.lastName1;
         if(data.lastName2 != null){
             lastName = lastName + ' ' + data.lastName2;
@@ -122,9 +108,5 @@ export class CardPaymentComponent implements OnInit {
         console.log(event.detail)
         console.log(event.detail.data)
         this.router.navigate(['/payment-done']);
-    }
-
-    next() {
-        this.nextCoverageStep.emit(true);
     }
 }
