@@ -166,7 +166,7 @@ export class CheckCoverageComponent implements OnInit {
     else
       this.hasCoverage=false;
   });
-  this.hasCoverage=true;
+
   }
 
 
