@@ -26,8 +26,11 @@
   }
 
   #servicios{
-  font-size: 12px;
+  font-size: 16px;
   color: #5C349D;
+  font-family: 'MUSEO700-REGULAR';
+  font-style: normal;
+font-weight: 600;
 }
 
 
@@ -183,7 +186,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 12px;
 line-height: 14px;
-color: #676767;
+color: #939393;
 }
 
 #label{
@@ -197,15 +200,52 @@ color: #676767;
 }
 #totalnumero{
   
-  font-size: 12px;
-  color: #000;
-  text-align: right;
+  width: 46px;
+height: 21px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+text-align: right;
+
+color: #000000;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+flex-grow: 0;
 
 }
 #total{
 
-  font-size: 12px;
-  color: #000;
+  /* Total compra */
+
+
+width: 252px;
+height: 21px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #000000;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 1;
 
 }
 
@@ -223,7 +263,7 @@ color: #676767;
 
 #num{
 
-  font-family: 'Roboto';
+  font-family: 'MUSEO700-REGULAR';
 font-style: normal;
 font-weight: 600;
 font-size: 24px;
@@ -242,6 +282,18 @@ border-radius: 10px;
 padding: 20px !important;
 }
 
+#pago{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #939393;
+
+}
 
 
 
