@@ -69,7 +69,7 @@
                       Pago Automatico
                       <p id="descuento">(descuento 20%)</p>
                     </mat-slide-toggle>
-                    
+
                 </section>
 
 
@@ -105,7 +105,16 @@
                     </div>
                 </div>
 
-                    <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button>
+                <!-- <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button> -->
+                <div class="col-12">
+                    <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
+                        <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
+                            <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
+                                <span><i style="color:white;" class="material-icons">{{op.design}}</i>&nbsp;{{op.name}}</span>
+                            </mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
 
             </div>
 
