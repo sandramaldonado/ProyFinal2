@@ -260,7 +260,7 @@ export class DocumentsComponent implements OnInit {
   registerDocumentsOrder(data: any){
     const param = {
       "orderId": this.webstoreService.getDataInSession('orderMainId'),
-      "sequence": 5,
+      "sequence": 4,
       "userId": this.webstoreService.getDataInSession('userId'),
       "microFrontendId": "digitization-sale-microfront-app",
       "microFrontendData": JSON.stringify(data),

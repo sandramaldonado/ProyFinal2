@@ -201,7 +201,7 @@ export class MovilListComponent implements OnInit {
 
      const param = {
       "orderId": this.webstoreservice.getDataInSession('orderMainId'),
-      "sequence": 4,
+      "sequence": 5,
       "userId": this.webstoreservice.getDataInSession('userId'),
       "microFrontendId": "activation-data-microfront-app",
       "microFrontendData": JSON.stringify(microfrontData),
