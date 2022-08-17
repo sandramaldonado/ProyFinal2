@@ -35,7 +35,7 @@ export class MovilListComponent implements OnInit {
 
   @Output() nextMovilListStep = new EventEmitter<any>();
 
-  title = "Elije tu Número";
+  title = "Elige tu Número";
   message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
   visited: boolean = false;
 
@@ -222,7 +222,7 @@ export class MovilListComponent implements OnInit {
 
      const param = {
       "orderId": this.webstoreservice.getDataInSession('orderMainId'),
-      "sequence": 4,
+      "sequence": 5,
       "userId": this.webstoreservice.getDataInSession('userId'),
       "microFrontendId": "activation-data-microfront-app",
       "microFrontendData": JSON.stringify(microfrontData),

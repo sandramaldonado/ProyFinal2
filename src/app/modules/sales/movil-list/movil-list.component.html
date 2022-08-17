@@ -8,6 +8,8 @@
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
                         <div *ngIf="movilState; else FALSEMOVIL;">
                             <div class="row">
+                                <h4><b>MOVIL</b></h4>
+                                <p>Elige un N&uacute;mero</p>
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
                                     <div [class]="line.description" [style]="line.style" role="alert">
                                         <mat-radio-button name="movil" [value]="line.value" [checked]="line.checked" (change)="radioChange($event)">
@@ -15,7 +17,7 @@
                                         </mat-radio-button>
                                     </div>
                                 </div>
-                                <div *ngIf="limitLine == 5" class="col-6 col-md-6 col-sm-6">
+                                <div *ngIf="limitLine === 5" class="col-6 col-md-6 col-sm-6">
                                     <div class="alert alert-light divOption" style="text-align:center;" role="alert">
                                         <a href="javascript: void(0);" class="linkMore" (click)="clickme()"> Mas opciones..</a>
                                     </div>

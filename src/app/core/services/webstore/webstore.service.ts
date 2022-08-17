@@ -135,7 +135,10 @@ export class WebstoreService {
   getOfferTotaldetail(){
     return this.sessionStorageService.retrieve("offertotaltariff");
   }
-
+  saveAutomaticPayment (automaticPayment : any): void{
+    this.sessionStorageService.store("automaticPayment",automaticPayment);
+    
+  }
 
 
 }

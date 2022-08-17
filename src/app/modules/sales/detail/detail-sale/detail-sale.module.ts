@@ -7,6 +7,7 @@ import {DetailSaleComponent}from './detail-sale.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "@shared/shared.module";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CommonModule,
     DetailSaleRoutingModule,
     MatCardModule,
+    MatRadioModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
