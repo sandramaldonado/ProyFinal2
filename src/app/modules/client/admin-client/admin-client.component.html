@@ -11,7 +11,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <app-input-text controlName="firstName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="firstName"
+                        <app-input-text controlName="firstName"  readonly="true" [submitted]="submitted" identifier="firstName"
                         message="Primer Nombre" description="Primer Nombre"></app-input-text>
                         <mat-error *ngIf="firstName?.invalid && firstName?.touched" >
                             Por favor ingresa datos v&aacute;lidos
@@ -24,7 +24,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <app-input-text controlName="sureName"  readonly="{{stateClient}}" [submitted]="submitted" identifier="sureName"
+                        <app-input-text controlName="sureName"  readonly="true" [submitted]="submitted" identifier="sureName"
                         message="Primer Apellido" description="Primer Apellido"></app-input-text>
                         <mat-error *ngIf="sureName?.invalid && sureName?.touched" >
                             Por favor ingresa datos v&aacute;lidos
@@ -39,7 +39,7 @@
                 <div class="row">
                     <mat-form-field appearance="outline" style="width:99%; margin-right:2px; margin-left:2px;">
                         <mat-select placeholder="Tipo Documento" formControlName="tipo" id="tipo"
-                            name="tipo" [disabled]="stateClient===true">
+                            name="tipo" [disabled]="stateSelect===true">
                             <mat-option *ngFor="let tipo of tipoDoc" [value]="tipo.value" style="color:#5C349D;">
                                 {{tipo.description}}
                             </mat-option>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <app-input-text controlName="nroDoc" readonly="{{stateClient}}" [submitted]="submitted" identifier="nroDoc"
+                        <app-input-text controlName="nroDoc" readonly="true" [submitted]="submitted" identifier="nroDoc"
                         message="N&uacute;mero Documento" description="N&uacute;mero Doc."></app-input-text>
                         <mat-error *ngIf="nroDoc?.invalid && nroDoc?.touched" >
                             Por favor ingresa datos v&aacute;lidos

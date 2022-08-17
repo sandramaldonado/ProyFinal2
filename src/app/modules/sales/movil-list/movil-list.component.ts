@@ -5,6 +5,7 @@ import { MovilListService } from '@app/services/movil-list.service';
 import { OrdersService } from '@app/services/orders.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { RadioLines } from '@models/Radio-Lines';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-movil-list',
@@ -40,21 +41,33 @@ export class MovilListComponent implements OnInit {
   visited: boolean = false;
 
   constructor(private movilListService: MovilListService,
-    private webstoreservice: WebstoreService,
+    private webstoreService: WebstoreService,
     private ordersService: OrdersService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private spinnerService: NgxSpinnerService) {
     this.key = sessionStorage.getItem("key");
-    this.orderId = this.webstoreservice.getDataInSession('orderMainId');
-    this.userId = this.webstoreservice.getDataInSession('userId');
+    this.orderId = this.webstoreService.getDataInSession('orderMainId');
+    this.userId = this.webstoreService.getDataInSession('userId');
   }
 
   ngOnInit(): void {
+    /** spinner starts on init */
+    this.spinnerService.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinnerService.hide();
+    }, 10000);
+
+
     this.armadoJsonScoring();
     this.searchList();
+    
   }
 
+
   armadoJsonScoring() {
-    this.planComposition = this.webstoreservice.getPlanComposition();
+    this.planComposition = this.webstoreService.getPlanComposition();
     this.planList = this.planComposition?.planList;
     console.log(this.planComposition);
     console.log(this.planList);
@@ -117,6 +130,11 @@ export class MovilListComponent implements OnInit {
           this.entertainmentState = true;
           this.tvLine = linesEntertainment[0];
         }
+
+        if (this.movilLine == "") {
+          this.next();
+        }
+
       }, error => {
         console.log(error);
       });
@@ -142,7 +160,7 @@ export class MovilListComponent implements OnInit {
         "data": numeros
     }});
 
-    this.webstoreservice.saveMovilListinformation(list2);
+    this.webstoreService.saveMovilListinformation(list2);
 
     this.visited =true;
     this.registerAactivation(numeros);
@@ -187,7 +205,7 @@ export class MovilListComponent implements OnInit {
   registerAactivation(numbers: any){
     console.log(numbers);
     if(!numbers) return;
-    const addressData = this.webstoreservice.getDataInSession('addressData');
+    const addressData = this.webstoreService.getDataInSession('addressData');
     let instAddress: any;
     addressData.forEach((element: any) => {
       if(element.selected){
@@ -221,15 +239,15 @@ export class MovilListComponent implements OnInit {
     }
 
      const param = {
-      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),
       "sequence": 5,
-      "userId": this.webstoreservice.getDataInSession('userId'),
+      "userId": this.webstoreService.getDataInSession('userId'),
       "microFrontendId": "activation-data-microfront-app",
       "microFrontendData": JSON.stringify(microfrontData),
       "statusCode": "INI"
     }
 
-    this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
       response => {
         console.log(response);
 
