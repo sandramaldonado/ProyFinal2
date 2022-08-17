@@ -23,10 +23,14 @@
   }
 
   #servicios{
+<<<<<<< Updated upstream
   position: relative;
   float: left;
   left: 10%;
   font-size: 12px;
+=======
+  font-size: 16px;
+>>>>>>> Stashed changes
   color: #5C349D;
 }
 
@@ -185,7 +189,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 12px;
 line-height: 14px;
-color: #676767;
+color: #8C8C8D;
 }
 
 #label{
@@ -204,6 +208,7 @@ color: #676767;
   position: relative;
   text-align: center;
   
+<<<<<<< Updated upstream
   font-size: 12px;
   color: #000;
 
@@ -218,7 +223,67 @@ color: #676767;
 
 }
 
+=======
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+  
+  text-align: right;
+  
+  color: #000000;
 
+}
+#total{
+
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;  
+
+color: #000000;
+
+}
+
+#des{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+
+color: #676767;
+}
+
+#num{
+
+font-family: 'MUSEO700-REGULAR';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 29px;
+color: #5C349D;
+}
+
+#aviso{
+  background: rgba(255, 168, 83, 0.5);
+border-radius: 10px;
+padding: 20px !important;
+}
+>>>>>>> Stashed changes
+
+#pago{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+color: #939393;
+}
 
 
 

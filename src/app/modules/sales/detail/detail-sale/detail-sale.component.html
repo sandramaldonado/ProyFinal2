@@ -65,9 +65,11 @@
                         [checked]="checked"
                         [disabled]="disabled"
                         [(ngModel)]="isChecked"
+                        (change)="onChange($event)"
+                        id="pago"
                         >
-                      Pago Automatico
-                      <p id="descuento">(descuento 20%)</p>
+                      Pago Automático
+                      <p id="descuento">(descuento 10%)</p>
                     </mat-slide-toggle>
                     
                 </section>
@@ -82,14 +84,45 @@
                     <p id="label" *ngIf="descuentoActivado() && isChecked">
                         Bs 20
                     </p>
+
+                <div class="d-flex flex-column justify-content-around">
+
+
+
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <h3 id="total">Total Compra:
+                                <img id="icono" src="assets/images/iconos/carrito.png"></h3>
+                        </div>
+                        <div class="col-6 text-end">
+                          <span id="totalnumero">Bs {{total}}</span>
+                          <!-- <span><p id="label" *ngIf="descuentoActivado() && isChecked">
+                            Bs 20
+                        </p></span> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="aviso" *ngIf="isChecked">
+                    <div class="col-7 text-start">
+                        <img id="icono" src="assets/images/iconos/Discount.png">
+                        <h3 id="des">Descuento total por pago automatico
+
+
+                        </h3>
+                    </div>
+                    <div class="col-3 text-end">
+                      <span id="num">Bs {{conDescuento}}</span>
+
+                    </div>
+
                 </div>
 
                     <app-button id="comprar" [content]="'Comprar'" (click)="comprar()"></app-button>
 
-            </div>
+                </div>
 
-        </section>
-
+    
 
     </div>
 </div>

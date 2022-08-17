@@ -5,6 +5,8 @@ import { Product } from '@models/Product';
 import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
 import {ThemePalette} from '@angular/material/core';
+import {MatSlideToggleModule,MatSlideToggleChange} from '@angular/material/slide-toggle';
+
 @Component({
   selector: 'app-detail-sale',
   templateUrl: './detail-sale.component.html',
@@ -32,6 +34,9 @@ export class DetailSaleComponent implements OnInit {
   scoring:any
   descuento:any;
   code:any;
+
+  conDescuento: any;
+
   constructor(public webStorage: WebstoreService) { }
 
 
@@ -108,6 +113,21 @@ export class DetailSaleComponent implements OnInit {
  
     
     
+  }
+
+
+  
+
+
+  onChange($event: MatSlideToggleChange) {
+    console.log($event);
+    console.log("queso:" + this.isChecked);
+    this.discount();
+    this.webStorage.saveAutomaticPayment(this.isChecked);
+  }
+
+  discount(){
+    this.conDescuento =  ((this.total * 10)/100);
   }
 
 }
