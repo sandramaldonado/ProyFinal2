@@ -55,7 +55,7 @@ export class DetailComponent implements OnInit {
         alias : 'paymentMethod'
       },
       payment: {
-        visible :true,
+        visible :false,
         active: false,
         enabled : true,
         alias : 'payment'
@@ -69,6 +69,24 @@ export class DetailComponent implements OnInit {
     this.planCompositionCode=this.webstoreservice.getPlanCompositionCode();
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
+
+  }
+
+  changeModule(module :any){
+    console.log(module);
+    var me = this;
+
+    switch (module) {
+      case 'paymentMethod':
+        this.modules.payment.visible = true;
+        this.modules.detailSale.enabled = false;
+        setTimeout(function(){
+          me.scroller.scrollToAnchor("payment");
+        }, 1000);
+        break;
+      default:
+        break;
+    }
   }
 
 }
