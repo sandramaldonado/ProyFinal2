@@ -5,6 +5,9 @@ import { Product } from '@models/Product';
 import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
 import {ThemePalette} from '@angular/material/core';
+import {MatSlideToggleModule,MatSlideToggleChange,MatSlideToggle} from '@angular/material/slide-toggle';
+
+
 @Component({
   selector: 'app-detail-sale',
   templateUrl: './detail-sale.component.html',
@@ -46,6 +49,8 @@ export class DetailSaleComponent implements OnInit {
     else{
       this.checked = false;
     }
+
+    
     
 
   }
@@ -80,6 +85,7 @@ export class DetailSaleComponent implements OnInit {
   Visible(){
     this.code = this.webStorage.getOfferConsuptioncode();
     console.log(this.code);
+    console.log("a ver")
     if (this.code == "CCOPOS"){
 
       return true;
@@ -96,6 +102,7 @@ export class DetailSaleComponent implements OnInit {
     if(this.checked == true   )
     {
       console.log(this.checked);
+      console.log("asdf")
       return true;
     }
     else{
@@ -104,10 +111,25 @@ export class DetailSaleComponent implements OnInit {
   }
 
 
-  comprar(){
+  automaticPayment(){
+
+    if(this.isChecked)
+    {
+      this.webStorage.saveAutomaticPayment(true);
+      console.log("a ver")
+    }
+    else{
+      this.webStorage.saveAutomaticPayment(false);
+    }
  
     
     
   }
+
+  onChange($event: MatSlideToggleChange) {
+    console.log($event);
+}
+
+  comprar(){}
 
 }
