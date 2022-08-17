@@ -12,7 +12,8 @@
         </mat-card>
         <card-pay-microfront-app *axLazyElement="microFrontKeys.url"
                                 paramIn={{toSendString(microFrontParamIn)}}
-                                paramClass={{toSendString(paramClass)}}>
+                                paramClass={{toSendString(paramClass)}}
+                                (dataPayMent)="dataPayMent($event)">
         </card-pay-microfront-app>
     </section>
 
