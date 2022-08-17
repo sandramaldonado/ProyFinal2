@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
 
 @Component({
@@ -8,6 +9,9 @@ import { DocumentType } from '@models/DocumentType';
   styleUrls: ['./store-city.component.scss']
 })
 export class StoreCityComponent implements OnInit {
+  cityLocation: any= {};
+  storeLocation: any= {};
+  stateLocation: Boolean = false;
   cityList: DocumentType[] = [{value: 'CBEN', description: 'Beni'},
                               {value: 'CCBA', description: 'Cochabamba'},
                               {value: 'CLPZ', description: 'La Paz'},
@@ -35,16 +39,37 @@ export class StoreCityComponent implements OnInit {
     'city': new FormControl(null, [Validators.required])
   });
 
-  constructor() { }
+  constructor(private webstoreService: WebstoreService) { 
+    
+  }
 
   ngOnInit(): void {
+    this.webstoreService.saveDeliveryStoreMethod(JSON.stringify({}));
     console.log('init store-city');
   }
 
   someMethod(value: any){
+    this.cityLocation = {};
+    this.cityLocation = {"city": value,};
+    this.stateLocation = false;
     console.log(value);
-    //console.log(this.storeGroup);
     this.storesList = this.storeGroup[0][value];
+  }
+
+  someMethodStore(value: any){
+    this.storeLocation = {};
+    this.storeLocation = {"storage": value};
+    this.stateLocation = true;
+    let dataLocation = {};
+    let completState = {};
+    if (this.stateLocation) {
+      dataLocation = Object.assign(this.cityLocation, this.storeLocation);  
+      completState = JSON.stringify({"data": dataLocation,
+                                    "state": this.stateLocation});
+      console.log(completState);         
+      this.webstoreService.saveDeliveryStoreMethod(completState);
+    }
+
   }
 
   get city() {

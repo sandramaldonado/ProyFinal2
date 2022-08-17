@@ -40,12 +40,12 @@ export class MovilListComponent implements OnInit {
   visited: boolean = false;
 
   constructor(private movilListService: MovilListService,
-    private webstoreservice: WebstoreService,
+    private webstoreService: WebstoreService,
     private ordersService: OrdersService,
     private formBuilder: FormBuilder) {
     this.key = sessionStorage.getItem("key");
-    this.orderId = this.webstoreservice.getDataInSession('orderMainId');
-    this.userId = this.webstoreservice.getDataInSession('userId');
+    this.orderId = this.webstoreService.getDataInSession('orderMainId');
+    this.userId = this.webstoreService.getDataInSession('userId');
   }
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class MovilListComponent implements OnInit {
   }
 
   armadoJsonScoring() {
-    this.planComposition = this.webstoreservice.getPlanComposition();
+    this.planComposition = this.webstoreService.getPlanComposition();
     this.planList = this.planComposition?.planList;
     console.log(this.planComposition);
     console.log(this.planList);
@@ -142,7 +142,7 @@ export class MovilListComponent implements OnInit {
         "data": numeros
     }});
 
-    this.webstoreservice.saveMovilListinformation(list2);
+    this.webstoreService.saveMovilListinformation(list2);
 
     this.visited =true;
     this.registerAactivation(numeros);
@@ -187,7 +187,7 @@ export class MovilListComponent implements OnInit {
   registerAactivation(numbers: any){
     console.log(numbers);
     if(!numbers) return;
-    const addressData = this.webstoreservice.getDataInSession('addressData');
+    const addressData = this.webstoreService.getDataInSession('addressData');
     let instAddress: any;
     addressData.forEach((element: any) => {
       if(element.selected){
@@ -221,15 +221,15 @@ export class MovilListComponent implements OnInit {
     }
 
      const param = {
-      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+      "orderId": this.webstoreService.getDataInSession('orderMainId'),
       "sequence": 5,
-      "userId": this.webstoreservice.getDataInSession('userId'),
+      "userId": this.webstoreService.getDataInSession('userId'),
       "microFrontendId": "activation-data-microfront-app",
       "microFrontendData": JSON.stringify(microfrontData),
       "statusCode": "INI"
     }
 
-    this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+    this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
       response => {
         console.log(response);
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WebstoreService } from '@app/services/webstore/webstore.service';
 
 @Component({
   selector: 'app-almost-done',
@@ -8,10 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./almost-done.component.scss']
 })
 export class AlmostDoneComponent implements OnInit {
-
-  constructor(private router:Router) { }
+  stateLocation: Boolean = false;
+  locationInfo: any;
+  constructor(private router:Router, private webstoreService: WebstoreService) {
+    this.locationInfo = this.webstoreService.getDeliveryStoreMethod();
+    console.log(this.locationInfo);
+   }
 
   ngOnInit(): void {
+    this.stateLocation = this.locationInfo?.state;
+    console.log(this.stateLocation);
     console.log("need implementation?");
   }
 
