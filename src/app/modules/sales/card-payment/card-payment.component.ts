@@ -109,33 +109,33 @@ export class CardPaymentComponent implements OnInit {
     toSendString(data: any) {
         return JSON.stringify(data);
     }
+    
     dataPayMent(event: any): void {
-        if(event && event.detail){
-        console.log(event.detail)
-        console.log(event.detail.data)
+        if (event) {
+            console.log(event)
+            const offernumberofentities = this.webstoreService.getDataInSession('offernumberofentities');
+            const ordermainid = this.webstoreService.getDataInSession('ordermainid');
+            const plancompositioncode = this.webstoreService.getDataInSession('plancompositioncode');
+            const data = {
+                orderNumber: ordermainid,
+                saleType: "EXPRESS",// CABLEADO
+                processType: "PTFSALE",// CABLEADO
+                planCodeList: [plancompositioncode],// CABLEADO
+                rawData: "",// CABLEADO
+                totalPrice: "0",// CABLEADO
+                totalItems: offernumberofentities,
+                deliveryMethod: "MANUAL",// CABLEADO
+                requiresCashbox: "0",// CABLEADO
+                requiresBonification: "0",// CABLEADO
+                requiresCustomerApproval: "0",// CABLEADO
+                requiresValidateCustomerData: "0",// CABLEADO
+                system: "LANDING"
+            }
+            console.log(data);
+            this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res: any) => {
+                console.log(res)
+                this.router.navigate(['/payment-done']);
+            });
         }
-        const data = {
-            "orderNumber": "00000000026",
-            "saleType": "EXPRESS",
-            "processType": "PTFSALE",
-            "planCodeList": [
-                "PTVM"
-            ],
-            "rawData": "",
-            "totalPrice": 0,
-            "totalItems": 0,
-            "deliveryMethod": "MANUAL",
-            "requiresCashbox": "0",
-            "requiresBonification": "0",
-            "requiresCustomerApproval": "0",
-            "requiresValidateCustomerData": "0",
-            "system": "CRM"
-        }
-
-        this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res) => {
-            console.log(res)
-        })
-        // this.router.navigate(['/payment-done']);
-
     }
 }

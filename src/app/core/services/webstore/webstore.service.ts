@@ -61,6 +61,14 @@ export class WebstoreService {
     return this.sessionStorageService.retrieve("clientInformation")
   }
 
+  saveDeliveryStoreMethod (storeInfo : any) : void{
+    this.sessionStorageService.store ("storeInfo", storeInfo);
+  }
+
+  getDeliveryStoreMethod (){
+    return this.sessionStorageService.retrieve("storeInfo")
+  }
+
   saveSelfie (photo : any): void{
     this.sessionStorageService.store("photoFace",photo);
   }

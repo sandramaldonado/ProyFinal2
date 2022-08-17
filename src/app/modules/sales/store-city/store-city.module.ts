@@ -11,6 +11,7 @@ import { SharedModule } from '@shared/shared.module';
 import { LazyElementsModule } from '@angular-extensions/elements';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { AlmostDoneModule } from '../almost-done/almost-done.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatSelectModule,
     SharedModule,
-    LazyElementsModule
+    LazyElementsModule,
+    AlmostDoneModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
   exports : [StoreCityComponent]
