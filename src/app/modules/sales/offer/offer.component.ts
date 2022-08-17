@@ -91,7 +91,7 @@ export class OfferComponent implements OnInit {
   calculateTotalOfferTariff(){
     
     let total = 0;
-    if(this.consumptionFormCode =="CCOPOS"){
+    if(this.consumptionFormCode =="CCOPRE"){
     
       total = (this.offerTariff ? this.offerTariff : 0);
       this.planListServices = this.planComposition?.planList;
@@ -111,6 +111,8 @@ export class OfferComponent implements OnInit {
     this.webstoreService.savePlanCompositionCode(this.planCompositionCode);
     this.webstoreService.savePlanComposition(this.planComposition);
     this.webstoreService.saveDataInSession("offerConsumptionFormCode",this.consumptionFormCode);
+    this.webstoreService.saveDataInSession("offerNumberOfEntities",this.planComposition?.numberOfEntities);
+    
     this.calculateTotalOfferTariff()
     this.router.navigate(['/client/validationClient']);
 
