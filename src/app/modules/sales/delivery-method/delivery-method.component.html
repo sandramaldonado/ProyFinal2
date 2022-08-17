@@ -11,19 +11,21 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
-                        <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
-                            <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
-                                <span><i style="color:white;" class="material-icons">{{op.design}}</i>&nbsp;{{op.name}}</span>
-                            </mat-radio-button>
-                        </div>
-                    </mat-radio-group>
+                    <div class="row" style="margin-left: 2px; margin-right: 2px;">
+                        <mat-radio-group name="entregaData" fxLayout="column" (change)="radioChange($event)">
+                            <div *ngFor="let op of listOfOptions" class="alert alert-info" [style]="op.style" role="alert">
+                                <mat-radio-button name="entregaData" [value]="op.value" [checked]="op.checked">
+                                    <span><i style="color:white;" class="material-icons">{{op.design}}</i>&nbsp;{{op.name}}</span>
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
                 </div>
-                <div class="col-12" id="optionDelivery">
+                <div class="col-12">
                     <app-store-city *ngIf="methods.storesInfo.active">
                     </app-store-city>
                 </div>
-                <div class="col-12" id="optionDelivery">
+                <div class="col-12">
                     <app-almost-done *ngIf="methods.storesInfo.active"></app-almost-done>
                 </div>
                 <!--

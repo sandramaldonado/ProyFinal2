@@ -42,6 +42,7 @@
     "ngx-bootstrap": "^8.0.0",
     "ngx-captcha": "^11.0.0",
     "ngx-image-compress": "^13.1.13",
+    "ngx-spinner": "^14.0.0",
     "ngx-webcam": "^0.4.1",
     "ngx-webstorage": "^10.0.1",
     "rxjs": "~7.5.0",

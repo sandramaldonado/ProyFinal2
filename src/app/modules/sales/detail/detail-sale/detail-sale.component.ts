@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '@app/services/product.service';
 import { Product } from '@models/Product';
@@ -15,7 +15,7 @@ import {MatSlideToggleModule,MatSlideToggleChange} from '@angular/material/slide
 export class DetailSaleComponent implements OnInit {
   color: ThemePalette = 'accent';
   checked = true ;
-  disabled = false;
+  @Input() disabled = false;
   DetailForm = new FormGroup({
     'DetailForm': new FormControl('', [Validators.required]),
   });
