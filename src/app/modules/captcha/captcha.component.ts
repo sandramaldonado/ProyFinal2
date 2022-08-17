@@ -22,7 +22,7 @@ import { CaptchaService } from '@services/captcha.service';
   styleUrls: ['./captcha.component.scss']
 })
 export class CaptchaComponent implements OnChanges {
-  @Input("config") config: any = {};
+  @Input() config: any = {};
   @Output() captchaCode = new EventEmitter();
   captch_input: any = null;
   code: any = null;

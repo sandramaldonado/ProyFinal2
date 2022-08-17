@@ -6,8 +6,7 @@
             <mat-card>
                 <mat-card-content>
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
-                        <div *ngIf="movilState == true; then trueMovil;"></div>
-                        <ng-template #trueMovil>
+                        <div *ngIf="movilState; else FALSEMOVIL;">
                             <div class="row">
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
                                     <div [class]="line.description" [style]="line.style" role="alert">
@@ -22,7 +21,23 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <ng-template #FALSEMOVIL>
+                            <div class="row" *ngIf="internetState">
+                                <div class="container">
+                                    <h4>Internet</h4>
+                                    <p style="color: #848484">Se asigno de manera directa la linea {{wanLine}}</p>
+                                </div>
+                                
+                            </div>
+                            <div class="row" *ngIf="entertainmentState">
+                                <div class="container">
+                                    <h4>Entretenimiento - TV</h4>
+                                    <p style="color: #848484">Se asigno de manera directa la linea {{tvLine}}</p>
+                                </div>
+                            </div>
                         </ng-template>
+                           
                         <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
                         <div class="text-center">
                             <app-button [content]="'Continuar'"  (click)="next()"></app-button>
