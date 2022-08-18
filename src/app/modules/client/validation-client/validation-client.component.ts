@@ -237,7 +237,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["documentType"] = "CI";
                 datosClient2["documentTypeDesc"] = null;
                 datosClient2["email"] = null;
-                datosClient2["fullName"] = null;
+                datosClient2["fullName"] = name1 + " " + lastname1;
                 datosClient2["gender"] = null;
                 datosClient2["lastName1"] = lastname1;
                 datosClient2["lastName2"] = null;
@@ -248,7 +248,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-                
+
                 if (offerconsumptionformcode == "CCOPRE") {
                   this.webstoreservice.saveStatusScoring("EXPRESS");  
                 } else {
@@ -280,13 +280,19 @@ export class ValidationClientComponent implements OnInit {
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
+    
+    let clientExiste = {};
+    if (client.clientId > 0) {
+      clientExiste = {"clientId": client.clientId};
+    } else {
+      clientExiste = {"clientId": null,
+                      "documentNumber": client.documentNumber,
+                      "documentTypeCode": client.documentType,
+                      "fullname": client.fullName
+                    };
+    }
     this.armadoScoring = JSON.stringify({
-      "client": {
-        "clientId": client.clientId, //this.infoClient["data"]["data"]["0"]["clientId"],
-        "documentNumber": client.clientId?null:client.documentNumber,
-        "documentTypeCode": client.clientId?null:client.documentType,
-        "fullname": client.clientId?null:client.fullName
-      },
+      "client": clientExiste,
       "commercialOffer": {
         "groupPlan": this.planComposition?.planCompositionCode,
         "productTypeCode": this.productTypeCode
