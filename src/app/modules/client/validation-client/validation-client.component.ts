@@ -40,6 +40,7 @@ export class ValidationClientComponent implements OnInit {
   scoringValid: any;
   planList: any;
   productTypeCode: any;
+  flagPREPOST = '';
 
   // definir valores de evaluacion numeros y alfa numericos
   dniClientPattern = /^[A-Za-z0-9]+$/;
@@ -86,7 +87,8 @@ export class ValidationClientComponent implements OnInit {
     private scoringValidationService: ScoringValidationService,
     private ordersService: OrdersService,
     private webstoreservice: WebstoreService) {
-
+    
+    this.planComposition = this.webstoreservice.getPlanComposition();
     this.autentication = {};
     this.infoClient = {};
     this.scoringValid = {};
@@ -163,7 +165,6 @@ export class ValidationClientComponent implements OnInit {
    */
   onSubmit() {
     // obtencion plan vinculado a solicitud de compra
-    this.planComposition = this.webstoreservice.getPlanComposition();
     let flagPlan = this.planComposition?.planCompositionCode;
     let statusPlan = false;
     let phone: string = "";
@@ -192,25 +193,35 @@ export class ValidationClientComponent implements OnInit {
               this.infoClient = response;
               dataClient = this.infoClient["data"]["data"][0];
               console.log(dataClient);
+              let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
               if (this.infoClient["data"]["data"].length == 1) {
                 if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
                   //sessionStorage.setItem("isClient", true);
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
-                  const planService = this.armadoJsonScoring();
+                  let planService = this.armadoJsonScoring();
                   //console.log(planService);
-                  let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
+                  
+                  console.log(offerconsumptionformcode);
                   if(offerconsumptionformcode == "CCOPOS"){
                     this.scoringValidated(planService);
-                  }else{
-                    this.webstoreservice.saveStatusScoring("EXPRESS");
+                  } else {
+                    if (offerconsumptionformcode == "CCOPRE") {
+                      this.webstoreservice.saveStatusScoring("EXPRESS");  
+                    } else {
+                      this.webstoreservice.saveStatusScoring("NORMAL");
+                    }
+                    this.router.navigate(['/oferta/orden-compra']);
                   }
-                  this.router.navigate(['/oferta/orden-compra']);
                 } else {
                   //sessionStorage.setItem("isClient", "false");
+                  if (offerconsumptionformcode == "CCOPRE") {
+                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                  } else {
+                    this.webstoreservice.saveStatusScoring("NORMAL");
+                  }
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
-                  this.webstoreservice.saveStatusScoring("NORMAL");
                   //this.router.navigate(['/client/adminClient']);
                   this.router.navigate(['/oferta/orden-compra']);
                 }
@@ -237,7 +248,12 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-                this.webstoreservice.saveStatusScoring("NORMAL");
+                
+                if (offerconsumptionformcode == "CCOPRE") {
+                  this.webstoreservice.saveStatusScoring("EXPRESS");  
+                } else {
+                  this.webstoreservice.saveStatusScoring("NORMAL");
+                }
                 this.createPerson();
                 this.router.navigate(['/oferta/orden-compra']);
               }
@@ -257,7 +273,6 @@ export class ValidationClientComponent implements OnInit {
   }
 
   armadoJsonScoring() {
-    this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
     this.productTypeCode = [];
     console.log(this.fecha);
