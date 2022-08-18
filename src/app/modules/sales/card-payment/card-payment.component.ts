@@ -46,6 +46,7 @@ export class CardPaymentComponent implements OnInit {
     offertotaltariff: any;
     statusscoring: any;
     code: any;
+    paymentMethod = false;
 
     constructor(
         private webstoreService: WebstoreService,
@@ -76,7 +77,8 @@ export class CardPaymentComponent implements OnInit {
         this.code = this.webstoreService.getOfferConsuptioncode();
         console.log("******code OfferConsuptioncode")
         const automaticpaymentCheck = this.webstoreService.getDataInSession("automaticpayment");
-        console.log(this.code)
+        console.log(this.code);
+        const paymentMethod = this.webstoreService.getDataInSession("paymentMethod");
         // const webStorage = this.webstoreService.getOfferConsuptioncode();
         this.microFrontParamIn = {
             theme: "light-green",
@@ -96,6 +98,7 @@ export class CardPaymentComponent implements OnInit {
             payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
             user: this.person,
             amount: this.offertotaltariff,
+            paymentMethod: paymentMethod,// cardPayment = muestra el monto | uponDelivery = no mostrar el monto
             // webStorage: webStorage ? webStorage : null,
             token: token
             //OMEGA3
