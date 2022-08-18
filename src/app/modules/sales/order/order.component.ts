@@ -22,6 +22,7 @@ import { PlanComposition } from '@models/PlanComposition';
 import { Observable, switchAll } from 'rxjs';
 import { ViewportScroller } from "@angular/common";
 import { OrdersService } from '@app/services/orders.service';
+import { SessionStorage } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-order',
@@ -35,6 +36,7 @@ export class OrderComponent implements OnInit {
   planCompositionCode: any;
   planList: any;
   planComposition? : PlanComposition;
+  @SessionStorage("modules")
   modules : any;
   bre :any;
   orderTabs : string[]= [];
@@ -50,64 +52,80 @@ export class OrderComponent implements OnInit {
     private ordersService: OrdersService
   ) {
 
-    this.modules = {
-      checkCoverage: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'checkcoverage'
-      },
-      scoring: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'scoring'
-      },
-      adminClient: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'adminclient'
-      },
-      checkEmail: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'checkemail'
-      },
-      documents: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'documents'
-      },
-      movillist: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'movillist'
-      },
-      deliverymethod: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'deliverymethod'
-      },
-      almostdone: {
-        visible :false,
-        active: false,
-        enabled : true,
-        alias : 'almostdone'
 
-      }
- 
-    };
   }
 
   ngOnInit(): void {
     this.planCompositionCode=this.webstoreservice.getPlanCompositionCode();
     this.planComposition = this.webstoreservice.getPlanComposition();
+    this.planList = this.planComposition?.planList;
+    this.initModules()
     this.getToken();
+
+  }
+
+  initModules(){
+    let modules = this.webstoreservice.getDataInSession("modules");
+    if(modules){
+      this.modules= modules;
+
+    }else{
+
+      this.modules = {
+        checkCoverage: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'checkcoverage'
+        },
+        scoring: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'scoring'
+        },
+        adminClient: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'adminclient'
+        },
+        checkEmail: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'checkemail'
+        },
+        documents: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'documents'
+        },
+        movillist: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'movillist'
+        },
+        deliverymethod: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'deliverymethod'
+        },
+        almostdone: {
+          visible :false,
+          active: false,
+          enabled : true,
+          alias : 'almostdone'
+
+        }
+
+      };
+    }
+
+    this.modules=this.modules;
 
   }
 
@@ -126,7 +144,7 @@ export class OrderComponent implements OnInit {
   }
 
   initializeComponents(){
-    this.planList = this.planComposition?.planList;
+
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
     /***** habilitar cobertura Usando Business Rules***** */
@@ -233,7 +251,7 @@ export class OrderComponent implements OnInit {
       }
 
     break;
-    
+
     case 'movillist':
       if(this.modules.deliverymethod.enabled){
         this.modules.deliverymethod.visible=true;
@@ -246,10 +264,12 @@ export class OrderComponent implements OnInit {
         this.changeModule("deliverymethod");
       }
       break;
-    
+
      default:
       break;
    }
+
+   this.modules = this.modules;
 
 
   }
