@@ -36,12 +36,18 @@ export class DetailSaleComponent implements OnInit {
   code:any;
 
   conDescuento: any;
+  fecha: Date | undefined;
+  mes: number | undefined;
+  nombreMes: any;
 
   constructor(public webStorage: WebstoreService) { }
 
 
 
   ngOnInit(): void {
+    var  months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];    
+    this.fecha = new Date();
+    this.nombreMes=months[this.fecha.getMonth()+1];
     this.total = this.webStorage.getOfferTotaldetail();
     this.getProduct();
     this.scoring = this.webStorage.getScoring();
