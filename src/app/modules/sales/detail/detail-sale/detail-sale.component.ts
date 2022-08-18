@@ -51,7 +51,7 @@ export class DetailSaleComponent implements OnInit {
     else{
       this.checked = false;
     }
-    
+
 
   }
 
@@ -68,7 +68,7 @@ export class DetailSaleComponent implements OnInit {
 
 
     this.planList.forEach((element: any) => {
-      this.articulo = element.componentOffer;
+      //this.articulo = element.componentOffer;
       this.data1.push(element.componentOffer);
       console.log(element.componentOffer)
 
@@ -97,7 +97,7 @@ export class DetailSaleComponent implements OnInit {
 
 
   descuentoActivado(){
-    
+
     if(this.checked == true   )
     {
       console.log(this.checked);
@@ -110,13 +110,13 @@ export class DetailSaleComponent implements OnInit {
 
 
   comprar(){
- 
-    
-    
+
+
+
   }
 
 
-  
+
 
 
   onChange($event: MatSlideToggleChange) {
