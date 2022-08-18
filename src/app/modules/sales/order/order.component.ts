@@ -19,10 +19,11 @@ import { BusinessrulesService } from '@app/services/businessrules/businessrules.
 import { TokenService } from '@app/services/token.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanComposition } from '@models/PlanComposition';
-import { Observable, switchAll } from 'rxjs';
+import { forkJoin, Observable, switchAll } from 'rxjs';
 import { ViewportScroller } from "@angular/common";
 import { OrdersService } from '@app/services/orders.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { update } from 'lodash';
 
 @Component({
   selector: 'app-order',
@@ -102,7 +103,7 @@ export class OrderComponent implements OnInit {
         alias : 'almostdone'
 
       }
- 
+
     };
   }
 
@@ -252,7 +253,7 @@ export class OrderComponent implements OnInit {
       }
 
     break;
-    
+
     case 'movillist':
       if(this.modules.deliverymethod.enabled){
         this.modules.deliverymethod.visible=true;
@@ -265,7 +266,7 @@ export class OrderComponent implements OnInit {
         this.changeModule("deliverymethod");
       }
       break;
-    
+
      default:
       break;
    }
@@ -323,6 +324,7 @@ export class OrderComponent implements OnInit {
       next: response => {
         console.log(response);
         this.loadBussinesRules();
+        this.loadItemsPlan();
       },
       error : e =>{
         alert("Ocurrio un error en los servicios de creacion de la Order View, intente nuevamente por favor");
@@ -330,7 +332,116 @@ export class OrderComponent implements OnInit {
         console.log(e);
       }
     });
+       
   }
+
+  loadItemsPlan(){
+    const param = {
+      planCompositionCode: this.webstoreservice.getPlanCompositionCode(),
+      userId: this.autentication["data"]["userId"]
+    }
+    this.ordersService.getItemsPlan(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log(response);
+        this.webstoreservice.saveDataInSession('itemsPlan', response.data.data);
+        this.buildMandatoryItems(response.data.data);
+      });
+  }
+
+
+  buildMandatoryItems(itemsData: any){
+    let mandatoryItems = [];
+    for (let i = 0; i < itemsData.planList.length; i++) {
+      const plan = itemsData.planList[i];
+      for (let j = 0; j < plan.itemTypeList.length; j++) {
+        const itemType = plan.itemTypeList[j];
+        if(itemType.isMandatory === '1'){
+          const item = {
+            componentCategoryId: plan.componentCategoryId,
+            componentCode: plan.componentCode,
+            itemCode: itemType.itemList[0].itemCode,
+            itemDescription: itemType.itemList[0].itemDescription,
+            quantity: itemType.quantity,
+            itemType: itemType.itemType,
+            planCode: plan.planCode,
+            consumptionEntityType: plan.consumptionEntityType,
+            planCompositionCode: this.webstoreservice.getPlanCompositionCode(),
+            userId: this.autentication["data"]["userId"]
+          }
+          mandatoryItems.push(item);
+        }
+      }
+    }
+    console.log('mandatoryItemsPlan', mandatoryItems);
+    this.webstoreservice.saveDataInSession('mandatoryItemsPlan', mandatoryItems);
+    this.getValuesItems(mandatoryItems);
+  }
+
+  getDataItem(item: any): Promise<any>{
+    return new Promise((resolve) => {
+        this.ordersService.getItemDetail(item, this.autentication["data"]["token"]).subscribe(
+          response => {
+            console.log('getItemDetail', response);
+            let itemData = response.data.data;
+            itemData.consumptionEntityType = item.consumptionEntityType;
+            itemData.componentTradeName = item.consumptionEntityType;
+            itemData.componentCategoryId = item.componentCategoryId;
+            itemData.planCode = item.planCode;
+            itemData.componentCode = item.componentCode;
+            itemData.itemTypeCode = item.itemType;
+            itemData.quantity = item.quantity;
+            itemData.quantityItem = item.quantity;
+            itemData.isMandatory = '1';
+            itemData.isVisible = 1;
+            resolve(itemData);
+        });
+    });
+  }
+
+  getValuesItems(mandatoryItems: any[]){
+    let proms = [];
+    for (let i = 0; i < mandatoryItems.length; i++) {
+      const element = mandatoryItems[i];
+      let p = this.getDataItem(element);
+      proms.push(p);
+    }
+    forkJoin(proms).subscribe(responses => {
+       console.log('responses', responses);
+       this.registerOrderViewItems(responses, false);
+       this.webstoreservice.saveDataInSession('mandatoryItemsPlan', responses);
+    });
+  }
+
+  registerOrderViewItems(data: any, update: boolean){
+    const param = {
+      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+      "sequence": 0,
+      "userId": this.autentication["data"]["userId"],
+      "microFrontendId": "additional-items-setup-microfront-app",
+      "microFrontendData": JSON.stringify(data),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log('registerOrderView', response);
+        if(!update){
+          this.registerItemsSale();
+        }
+      });
+  }
+
+  registerItemsSale(){
+    const param = {
+      orderId: this.webstoreservice.getDataInSession('orderMainId')
+    }
+    this.ordersService.registerItemsSale(param, this.autentication["data"]["token"]).subscribe(
+      response => {
+        console.log('registerItemsSale', response);
+        this.registerOrderViewItems(response.data.data.itemsOrderList, true);
+        this.webstoreservice.saveDataInSession('mandatoryItemsPlan', response.data.data.itemsOrderList);
+      });
+  }
+
 
   submitOrder(){
 
