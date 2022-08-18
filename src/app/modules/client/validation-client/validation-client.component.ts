@@ -231,6 +231,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
+
                 if(offerconsumptionformcode == "CCOPOS"){
                   let planService = this.armadoJsonScoring();
                   this.scoringValidated(planService);
@@ -241,9 +242,7 @@ export class ValidationClientComponent implements OnInit {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
                 }
-
                 this.createPerson();
-                this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -302,11 +301,15 @@ export class ValidationClientComponent implements OnInit {
   }
 
   scoringValidated(planService: any) {
+    let client = this.webstoreservice.getClientInformation();
     this.scoringValidationService.getValidationClientScoring(planService, this.autentication["data"]["token"]).subscribe(
       response => {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
-        this.router.navigate(['/oferta/orden-compra']);
+        if (client.clientId > 0) {
+          console.log("ingreso si existe");
+          this.router.navigate(['/oferta/orden-compra']);
+        }
       },
       error => {
         console.log(error);
@@ -334,7 +337,9 @@ export class ValidationClientComponent implements OnInit {
   }
 
   createPerson(){
+    console.log("ingresa crear persona");
     const person = this.webstoreservice.getClientInformation();
+    console.log(person);
     const param = {
       createPerson: person,
       createPersonAdditionalData: [
