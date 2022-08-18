@@ -224,8 +224,9 @@ export class CheckCoverageComponent implements OnInit {
     console.log(event);
     this.addresses = event.detail.microfrontData;
     this.addresses.forEach((address: any) => {
-      this.addressSelected = address.selected;
-
+       if(address.selected){
+        this.addressSelected = true;
+       }
     });
   }
 
