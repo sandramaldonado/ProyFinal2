@@ -21,6 +21,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanListService } from '@app/services/plan-list.service';
 import { PlanComposition } from '@models/PlanComposition';
 import { OrdersService } from '@app/services/orders.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-offer',
@@ -45,10 +46,13 @@ export class OfferComponent implements OnInit {
     private router: Router,
     private planListService : PlanListService,
     private webstoreService : WebstoreService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
+
     this.webstoreService.clearWebStorePlanComposition();
     this.route.queryParams.subscribe(params => {
       this.planCompositionCode = params['code'];
@@ -70,7 +74,32 @@ export class OfferComponent implements OnInit {
   getPlansList() {
     var me = this;
     this.planListService.getPlanList(this.autentication["data"]["token"])
-    .subscribe(
+    .subscribe({
+        next: (response)=>{
+          this.planesList = response;
+        //console.log(this.planesList);
+        const planDataList = this.planesList["data"]["data"];
+
+        var plan = planDataList.filter(function(v:any){
+          return v.planCompositionCode=== me.planCompositionCode;
+        });
+        this.planComposition = plan[0];
+        this.consumptionFormCode = this.planComposition?.consumptionFormCode;
+        this.offerTariff = this.planComposition?.tariff;
+        this.showButton = true;
+        this.spinner.hide();
+        },
+        error: (e) => {
+          console.error(e);
+          this.spinner.hide();
+          alert("Ocurrio un error!! Por favor intente nuevamente...");
+        },
+        complete: () => {
+          console.log('complete')
+        }
+    });
+
+    /*
       response => {
         this.planesList = response;
         //console.log(this.planesList);
@@ -83,8 +112,10 @@ export class OfferComponent implements OnInit {
         this.consumptionFormCode = this.planComposition?.consumptionFormCode;
         this.offerTariff = this.planComposition?.tariff;
         this.showButton = true;
+        this.spinner.hide();
 
       });
+      */
 
   }
 
