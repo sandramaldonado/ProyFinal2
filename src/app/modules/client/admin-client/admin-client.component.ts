@@ -18,6 +18,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
 import { OrdersService } from '@app/services/orders.service';
+import { TokenService } from '@app/services/token.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
 import {LocalStorage, SessionStorage} from 'ngx-webstorage';
@@ -75,6 +76,7 @@ export class AdminClientComponent implements OnInit {
             private activatedRoute: ActivatedRoute,
             private clientService: ClientService,
             private ordersService: OrdersService,
+            private tokenService: TokenService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
     this.clientInfo = this.webstoreservice.getClientInformation();
@@ -94,6 +96,7 @@ export class AdminClientComponent implements OnInit {
     //this.clientInfo = this.webstoreservice.getClientInformation();
     //console.log(this.stateScorin);
     this.loadForm();
+    this.getToken();
   }
 
   /**
@@ -109,6 +112,18 @@ export class AdminClientComponent implements OnInit {
           });
   }
    */
+
+  getToken() {
+    this.tokenService.gettoken()
+      .subscribe(
+        response => {
+          this.webstoreservice.saveDataInSession('token', response.data?.token);
+          this.webstoreservice.saveDataInSession('userId', response.data?.userId);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
   loadForm() {
     console.log(this.clientInfo["clientId"]);
@@ -309,13 +324,16 @@ export class AdminClientComponent implements OnInit {
         "nit":client.nit,
         "email":client.email,
         "referencePhone":client.nroRef,
-        "address":{
-           "addressId":billAddressId,
-           "addressTypeCode":"BILL_ADDR"
-        },
         "payment":{
            "paymentTypeCode":"TFPEFE"
-        }
+        },
+        "address": {}
+     }
+     if(billAddressId!==0){
+        billing.address = {
+          "addressId":billAddressId,
+          "addressTypeCode":"BILL_ADDR"
+        };
      }
       const param = {
         "orderId": this.webstoreservice.getDataInSession('orderMainId'),

@@ -27,6 +27,7 @@ import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-validation-client',
@@ -84,6 +85,7 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
+    private spinner: NgxSpinnerService,
     private ordersService: OrdersService,
     private webstoreservice: WebstoreService) {
 
@@ -239,7 +241,7 @@ export class ValidationClientComponent implements OnInit {
                 this.webstoreservice.saveClientInformation(datosClient2);
                 this.webstoreservice.saveStatusScoring("NORMAL");
                 this.createPerson();
-                this.router.navigate(['/oferta/orden-compra']);
+                //this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -325,6 +327,7 @@ export class ValidationClientComponent implements OnInit {
   }
 
   createPerson(){
+    this.spinner.show();
     const person = this.webstoreservice.getClientInformation();
     const param = {
       createPerson: person,
@@ -343,6 +346,7 @@ export class ValidationClientComponent implements OnInit {
         person.personId = response.data.data.personId;
         this.webstoreservice.saveClientInformation(person);
         this.router.navigate(['/oferta/orden-compra']);
+        this.spinner.hide();
       });
   }
 
