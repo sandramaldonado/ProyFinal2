@@ -242,7 +242,8 @@ export class ValidationClientComponent implements OnInit {
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
-                  this.router.navigate(['/oferta/orden-compra']);
+                  this.createPerson();
+                  
                 }
               }
             },
