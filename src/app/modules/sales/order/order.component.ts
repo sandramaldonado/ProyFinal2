@@ -22,6 +22,7 @@ import { PlanComposition } from '@models/PlanComposition';
 import { Observable, switchAll } from 'rxjs';
 import { ViewportScroller } from "@angular/common";
 import { OrdersService } from '@app/services/orders.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-order',
@@ -47,7 +48,8 @@ export class OrderComponent implements OnInit {
     private breservices : BusinessrulesService,
     private tokenService : TokenService,
     private scroller: ViewportScroller,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private spinner: NgxSpinnerService
   ) {
 
     this.modules = {
@@ -105,8 +107,10 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.planCompositionCode=this.webstoreservice.getPlanCompositionCode();
     this.planComposition = this.webstoreservice.getPlanComposition();
+    this.planList = this.planComposition?.planList;
     this.getToken();
 
   }
@@ -126,7 +130,7 @@ export class OrderComponent implements OnInit {
   }
 
   initializeComponents(){
-    this.planList = this.planComposition?.planList;
+   
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
     /***** habilitar cobertura Usando Business Rules***** */
