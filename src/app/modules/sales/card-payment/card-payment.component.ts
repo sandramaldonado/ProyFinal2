@@ -37,11 +37,14 @@ export class CardPaymentComponent implements OnInit {
         floatLabel: 'always',
         backgroundgreend: 'backgroundgreend',
         p15: 'padding15',
-        aCenter: 'align-items-center'
+        aCenter: 'align-items-center',
+        txtEnd: 'text-end'
     }
     fullNames: string | undefined;
     fullLastNames: string | undefined;
     offertotaltariff: any;
+    statusscoring: any;
+    code:any;
 
     constructor(
         private webstoreService: WebstoreService,
@@ -62,7 +65,16 @@ export class CardPaymentComponent implements OnInit {
         console.log(this.offertotaltariff)
         this.fullNames = this.getNames();
         this.fullLastNames = this.getLastNames();
-
+        this.statusscoring = this.webstoreService.getDataInSession('statusscoring');
+        console.log("******statusscoring")
+        console.log(this.statusscoring)
+        const descRecurring = this.getRecurring(this.statusscoring);
+        console.log("*******descRecurring")
+        console.log(descRecurring)
+        this.code = this.webstoreService.getOfferConsuptioncode();
+        console.log("******code OfferConsuptioncode")
+        console.log(this.code)
+        // const webStorage = this.webstoreService.getOfferConsuptioncode();
         this.microFrontParamIn = {
             theme: "light-green",
             orderType: "SALES",
@@ -74,18 +86,37 @@ export class CardPaymentComponent implements OnInit {
             termsOfService: { mode: "required", url: urlTerms }, // mode: required | option
             currency: "BOB",
             cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
-            recurring: "required", // required | option
+            recurring:{ mode: descRecurring, show: this.visible() }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
             payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
             user: this.person,
             amount: this.offertotaltariff,
+            // webStorage: webStorage ? webStorage : null,
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
             //si es contra entrega no mostrar el monto
         }
+    }
+
+    visible(){
+        console.log(this.code);
+        let show = false;
+        if (this.code == "CCOPOS"){    
+            show = true;
+        }
+        return show;
+      }
+
+    getRecurring(recurring: string) {
+        // required | option | preselected
+        var desc = 'optional';
+        if(recurring == 'NORMAL'){
+            desc = 'required'
+        }
+        return desc;
     }
 
     getNames() {
@@ -118,7 +149,7 @@ export class CardPaymentComponent implements OnInit {
             const plancompositioncode = this.webstoreService.getDataInSession('plancompositioncode');
             const data = {
                 orderNumber: ordermainid,
-                saleType: "EXPRESS",// CABLEADO
+                saleType: this.statusscoring,
                 processType: "PTFSALE",// CABLEADO
                 planCodeList: [plancompositioncode],// CABLEADO
                 rawData: "",// CABLEADO

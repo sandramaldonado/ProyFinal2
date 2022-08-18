@@ -23,8 +23,8 @@ export class ApiService {
   }
 
   handleErrorConnection(err: any): any {
-    console.log(err);
-    throw new Error(err ? err : 'Method not implemented.');
+    console.log(err.error.message);
+    throw new Error(err && err.error ? err.error.message : 'Method not implemented.');
   }
 
   private getOptions(
