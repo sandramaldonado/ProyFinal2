@@ -6,6 +6,7 @@ import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
 import {ThemePalette} from '@angular/material/core';
 import {MatSlideToggleModule,MatSlideToggleChange} from '@angular/material/slide-toggle';
+import { StringNullableChain } from 'lodash';
 
 @Component({
   selector: 'app-detail-sale',
@@ -36,12 +37,21 @@ export class DetailSaleComponent implements OnInit {
   code:any;
 
   conDescuento: any;
+  date: any;
+  month: any;
+  nameMonth: any;
 
   constructor(public webStorage: WebstoreService) { }
 
 
 
   ngOnInit(): void {
+    this.date = new Date();
+    this.month = (this.date.getMonth()+1);
+    
+    const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    console.log("mes" + meses[this.month]);
+    this.nameMonth = meses[this.month];
     this.total = this.webStorage.getOfferTotaldetail();
     this.getProduct();
     this.scoring = this.webStorage.getScoring();
@@ -51,6 +61,8 @@ export class DetailSaleComponent implements OnInit {
     else{
       this.checked = false;
     }
+
+    
     
 
   }
