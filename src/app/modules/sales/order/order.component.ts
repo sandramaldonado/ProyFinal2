@@ -256,6 +256,7 @@ export class OrderComponent implements OnInit {
 
   createOrder(){
     const client = this.webstoreservice.getClientInformation();
+    
     const param = {
       "orderType": "PTFSALE",
       "orderTypeName": "VENTAS",
