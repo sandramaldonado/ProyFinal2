@@ -27,6 +27,7 @@ import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-validation-client',
@@ -85,6 +86,7 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
+    private spinner: NgxSpinnerService,
     private ordersService: OrdersService,
     private webstoreservice: WebstoreService) {
     
@@ -231,7 +233,6 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-
                 if(offerconsumptionformcode == "CCOPOS"){
                   let planService = this.armadoJsonScoring();
                   this.scoringValidated(planService);
@@ -242,7 +243,9 @@ export class ValidationClientComponent implements OnInit {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
                 }
+
                 this.createPerson();
+                this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -301,15 +304,11 @@ export class ValidationClientComponent implements OnInit {
   }
 
   scoringValidated(planService: any) {
-    let client = this.webstoreservice.getClientInformation();
     this.scoringValidationService.getValidationClientScoring(planService, this.autentication["data"]["token"]).subscribe(
       response => {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
-        if (client.clientId > 0) {
-          console.log("ingreso si existe");
-          this.router.navigate(['/oferta/orden-compra']);
-        }
+        this.router.navigate(['/oferta/orden-compra']);
       },
       error => {
         console.log(error);
@@ -337,9 +336,7 @@ export class ValidationClientComponent implements OnInit {
   }
 
   createPerson(){
-    console.log("ingresa crear persona");
     const person = this.webstoreservice.getClientInformation();
-    console.log(person);
     const param = {
       createPerson: person,
       createPersonAdditionalData: [
@@ -357,6 +354,7 @@ export class ValidationClientComponent implements OnInit {
         person.personId = response.data.data.personId;
         this.webstoreservice.saveClientInformation(person);
         this.router.navigate(['/oferta/orden-compra']);
+        this.spinner.hide();
       });
   }
 

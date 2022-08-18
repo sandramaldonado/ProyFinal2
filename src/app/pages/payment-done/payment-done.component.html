@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row pb-5 ">
+    <section class="section-header col-12 py-3">
+      <div class=" ">
+        <img src="assets/images/logo-viva.png" alt="" style="width:200px; height:auto" class="pb-2">
+      </div>
+    </section>
+    <section class="section-body col-12 py-3">
+      <img mat-card-image src="../../../assets/images/successPay.svg" class="rounded mx-auto d-block">
+      <br>
+      <div class=" d-flex flex-column justify-content-around align-items-center">
+        <h3 class="text-center">Tu compra fue ejecutada exitosamente</h3>
+      </div>
+      <div class="row">
+        <label class="text-center">
+          Revisa tu correo electronico para ver tus facturas y detalles de la compra.
+          <br><br>
+          <b class="fontbold">Nro de orden {{orderId}}</b>
+          <br><br>
+        </label>
+        <br>
+        <br>
+        <p class="text-center">
+          El número de orden te servirá para hacer consultas o reclamos en Atención al cliente.
+        </p>
+        <br>
+        <a href="">Verifica el estado de tu pedido</a>
+        <br>
+
+      </div>
+      <div class=" d-flex flex-column justify-content-around align-items-center">
+        <div>
+          <app-button [content]="'Aceptar'" (click)="onClick()"></app-button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

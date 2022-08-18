@@ -18,6 +18,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '@app/services/client.service';
 import { OrdersService } from '@app/services/orders.service';
+import { TokenService } from '@app/services/token.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
 import {LocalStorage, SessionStorage} from 'ngx-webstorage';
@@ -75,6 +76,7 @@ export class AdminClientComponent implements OnInit {
             private activatedRoute: ActivatedRoute,
             private clientService: ClientService,
             private ordersService: OrdersService,
+            private tokenService: TokenService,
             private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
     this.clientInfo = this.webstoreservice.getClientInformation();
@@ -84,7 +86,7 @@ export class AdminClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     //this.webstoreservice.saveToken();
     //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
     //console.log(this.subscriberId);
@@ -94,6 +96,7 @@ export class AdminClientComponent implements OnInit {
     //this.clientInfo = this.webstoreservice.getClientInformation();
     //console.log(this.stateScorin);
     this.loadForm();
+    this.getToken();
   }
 
   /**
@@ -110,6 +113,18 @@ export class AdminClientComponent implements OnInit {
   }
    */
 
+  getToken() {
+    this.tokenService.gettoken()
+      .subscribe(
+        response => {
+          this.webstoreservice.saveDataInSession('token', response.data?.token);
+          this.webstoreservice.saveDataInSession('userId', response.data?.userId);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   loadForm() {
     console.log(this.clientInfo["clientId"]);
     if (this.clientInfo["clientId"] > 0) {
@@ -121,7 +136,7 @@ export class AdminClientComponent implements OnInit {
       this.stateSelect = true;
       this.stateClient = false;
     }
-    
+
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];
@@ -234,7 +249,7 @@ export class AdminClientComponent implements OnInit {
     'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
     'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
    */
-  
+
 
 
     get firstName() {
@@ -293,11 +308,15 @@ export class AdminClientComponent implements OnInit {
       const client = this.webstoreservice.getClientInformation();
       const addressData = this.webstoreservice.getDataInSession('addressData');
       let billAddress: any;
-      addressData.forEach((element: any) => {
-        if(element.selected){
-          billAddress = element;
-        }
-      });
+      let billAddressId = 0;
+      if(addressData){
+        addressData.forEach((element: any) => {
+          if(element.selected){
+            billAddress = element;
+          }
+        });
+        billAddressId= billAddress.addressId;
+      }
 
       let billing = {
         "observations":"",
@@ -305,13 +324,16 @@ export class AdminClientComponent implements OnInit {
         "nit":client.nit,
         "email":client.email,
         "referencePhone":client.nroRef,
-        "address":{
-           "addressId":billAddress.addressId,
-           "addressTypeCode":"BILL_ADDR"
-        },
         "payment":{
            "paymentTypeCode":"TFPEFE"
-        }
+        },
+        "address": {}
+     }
+     if(billAddressId!==0){
+        billing.address = {
+          "addressId":billAddressId,
+          "addressTypeCode":"BILL_ADDR"
+        };
      }
       const param = {
         "orderId": this.webstoreservice.getDataInSession('orderMainId'),

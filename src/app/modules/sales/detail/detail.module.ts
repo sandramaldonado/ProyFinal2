@@ -5,6 +5,7 @@ import { DetailRoutingModule } from './detail-routing.module';
 import { DetailComponent } from './detail.component';
 import { DetailSaleModule }from '../detail/detail-sale/detail-sale.module';
 import { CardPaymentModule } from '@modules/sales/card-payment/card-payment.module';
+import { PaymentMethodModule } from '../payment-method/payment-method.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CardPaymentModule } from '@modules/sales/card-payment/card-payment.modu
     DetailRoutingModule,
     HeaderModule,
     DetailSaleModule,
-    CardPaymentModule
+    CardPaymentModule,
+    PaymentMethodModule
   ]
 })
 export class DetailModule { }

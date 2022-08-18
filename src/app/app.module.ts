@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 //import { ClientModule } from './pages/client/client.module';
@@ -44,7 +45,8 @@ import { AuthInterceptor } from "@app/interceptors/auth-interceptor";
     NgxWebstorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    NgxSpinnerModule
   ],
   providers: [
    //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

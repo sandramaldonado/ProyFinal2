@@ -1,12 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '@app/services/product.service';
 import { Product } from '@models/Product';
 import { SaleDetail } from '@models/SaleDetail';
 import {WebstoreService} from '../../../../core/services/webstore/webstore.service'
 import {ThemePalette} from '@angular/material/core';
-import {MatSlideToggleModule,MatSlideToggleChange,MatSlideToggle} from '@angular/material/slide-toggle';
-
+import {MatSlideToggleModule,MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-detail-sale',
@@ -16,14 +15,15 @@ import {MatSlideToggleModule,MatSlideToggleChange,MatSlideToggle} from '@angular
 export class DetailSaleComponent implements OnInit {
   color: ThemePalette = 'accent';
   checked = true ;
-  disabled = false;
+  @Input() disabled = false;
   DetailForm = new FormGroup({
     'DetailForm': new FormControl('', [Validators.required]),
   });
   @Output() nextCheckEmailStep = new EventEmitter<any>();
-  isChecked=false;
+  isChecked:any;
   product :any;
   producto:any;
+  porcentaje:any;
   precio:any;
   total :any;
   currency: any;
@@ -35,15 +35,21 @@ export class DetailSaleComponent implements OnInit {
   scoring:any
   descuento:any;
   code:any;
-  listOfOptions = [
-    {value:"cardPayment",design:"credit_card",style:"background-color: #5C349D; color: white; border: 1px solid #5C349D; border-radius:16px;",name:"Tarjeta débito/credito",id:"1",checked:true},
-    {value:"uponDelivery",design:"local_atm",style:"background-color:#5C339D; color: white; border: 1px solid #5C339D; border-radius:16px;",name:"Pago a contra entrega",id:"2",checked:false}
-    ];
+
+  conDescuento: any;
+  fecha: Date | undefined;
+  mes: number | undefined;
+  nombreMes: any;
+
   constructor(public webStorage: WebstoreService) { }
 
 
 
   ngOnInit(): void {
+    this.porcentaje = 10;
+    var  months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];    
+    this.fecha = new Date();
+    this.nombreMes=months[this.fecha.getMonth()+1];
     this.total = this.webStorage.getOfferTotaldetail();
     this.getProduct();
     this.scoring = this.webStorage.getScoring();
@@ -60,34 +66,34 @@ export class DetailSaleComponent implements OnInit {
   getProduct (){
 
     this.product = this.webStorage.getPlanComposition();
-    console.log('aqui:'+ JSON.stringify(this.product));
     this.producto = this.product["groupTradeName"];
-    console.log(this.producto);
     this.precio = this.product["tariff"];
     this.currency= this.product["currencyCode"];
-    this.planList = this.product["planList"];
-    this.articulo = this.planList["categoryData"];
+    //this.planList = this.product["planList"];
+   // this.articulo = this.planList["categoryData"];
 
-
-    this.planList.forEach((element: any) => {
+    /* this.planList.forEach((element: any) => {
       this.articulo = element.componentOffer;
+=======
+    this.planList.forEach((element: any) => {
+      //this.articulo = element.componentOffer;
+>>>>>>> develop
       this.data1.push(element.componentOffer);
       console.log(element.componentOffer)
 
 
-    });
+    }); */
 
-    this.articulo.forEach((data:any)=>{
+   /*  this.articulo.forEach((data:any)=>{
       this.data2.push(data.tariff);
     })
-
+ */
 
   }
 
   Visible(){
     this.code = this.webStorage.getOfferConsuptioncode();
     console.log(this.code);
-    console.log("a ver")
     if (this.code == "CCOPOS"){
 
       return true;
@@ -104,7 +110,6 @@ export class DetailSaleComponent implements OnInit {
     if(this.checked == true   )
     {
       console.log(this.checked);
-      console.log("asdf")
       return true;
     }
     else{
@@ -112,31 +117,26 @@ export class DetailSaleComponent implements OnInit {
     }
   }
 
-  automaticPayment(){
 
-    if(this.isChecked)
-    {
-      this.webStorage.saveAutomaticPayment(true);
-      console.log("a ver")
-    }
-    else{
-      this.webStorage.saveAutomaticPayment(false);
-    }
-  }
-    
-    
   comprar(){
 
+
+
   }
+
+
+
+
 
   onChange($event: MatSlideToggleChange) {
     console.log($event);
     console.log("queso:" + this.isChecked);
+    this.discount(this.porcentaje);
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
-  radioChange($event : any){
 
+  discount(porcentaje:any){
+    this.conDescuento =  ((this.precio * porcentaje)/100);
   }
-    
-    
+
 }

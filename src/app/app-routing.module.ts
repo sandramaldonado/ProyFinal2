@@ -85,8 +85,10 @@ const routes : Routes = [
     path: 'payment',
     loadChildren: () => import('./modules/sales/card-payment/card-payment.module').then( m => m.CardPaymentModule)
   },
-
-
+  {
+    path: 'payment-done',
+    loadChildren: () => import('./pages/payment-done/payment-done.module').then( m => m.PaymentDoneModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)

@@ -31,8 +31,16 @@
     </div>
     <div class="col-12 col-md-7">
       <app-detail-sale id={{modules.detailSale.alias}}
-                          *ngIf="modules.detailSale.visible">
+                      [disabled]="!modules.detailSale.enabled"
+                      *ngIf="modules.detailSale.visible">
       </app-detail-sale>
+
+      <app-payment-method
+        [id]="modules.paymentMethod.alias"
+        *ngIf="modules.paymentMethod.visible"
+        (nextPaymentMethodStep)="changeModule(modules.paymentMethod.alias)">
+      </app-payment-method>
+
       <app-card-payment [id]="modules.payment.alias"
                         *ngIf="modules.payment.visible">
         </app-card-payment>
