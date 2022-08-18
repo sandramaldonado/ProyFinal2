@@ -58,27 +58,25 @@ export class DetailSaleComponent implements OnInit {
   getProduct (){
 
     this.product = this.webStorage.getPlanComposition();
-    console.log('aqui:'+ JSON.stringify(this.product));
     this.producto = this.product["groupTradeName"];
-    console.log(this.producto);
     this.precio = this.product["tariff"];
     this.currency= this.product["currencyCode"];
-    this.planList = this.product["planList"];
-    this.articulo = this.planList["categoryData"];
+    //this.planList = this.product["planList"];
+   // this.articulo = this.planList["categoryData"];
 
 
-    this.planList.forEach((element: any) => {
+    /* this.planList.forEach((element: any) => {
       this.articulo = element.componentOffer;
       this.data1.push(element.componentOffer);
       console.log(element.componentOffer)
 
 
-    });
+    }); */
 
-    this.articulo.forEach((data:any)=>{
+   /*  this.articulo.forEach((data:any)=>{
       this.data2.push(data.tariff);
     })
-
+ */
 
   }
 
