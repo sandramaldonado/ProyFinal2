@@ -120,11 +120,19 @@ export class OrderComponent implements OnInit {
       /**BRE Goes Here */
 
      this.breservices.coverageEvaluation(this.autentication["data"]["token"])
-      .subscribe(response =>{
-      this.coverageData=response;
-      this.scoringStatus = this.webstoreservice.getStatusScoring();
-      this.initializeComponents();
-    })
+      .subscribe({
+        next: response =>{
+                this.coverageData=response;
+                this.scoringStatus = this.webstoreservice.getStatusScoring();
+                this.initializeComponents();
+                this.spinner.hide();
+              },
+        error : e =>{
+          alert ("Ocurrion un error en los servicios de necesidad de evaluacion cobertura, Intenta nuevamente por favor");
+          this.spinner.hide();
+          console.log(e);
+        }
+      })
 
 
   }
@@ -155,12 +163,19 @@ export class OrderComponent implements OnInit {
 
   getToken() {
     this.tokenService.gettoken()
-      .subscribe(response =>{
-        this.autentication = response;
-        //this.loadBussinesRules();
-        this.webstoreservice.saveDataInSession('userId', response.data?.userId);
-        this.createOrder();
-      });
+      .subscribe({
+        next:response =>{
+              this.autentication = response;
+              //this.loadBussinesRules();
+              this.webstoreservice.saveDataInSession('userId', response.data?.userId);
+              this.createOrder();
+            },
+        error : error =>{
+          alert("Ocurrio un problema en los servicios de Autentificacion, Intente nuevamente por favor");
+          this.spinner.hide();
+          console.log(error);
+        }
+    });
   }
 
 
@@ -277,13 +292,20 @@ export class OrderComponent implements OnInit {
       "userFullName": "landing",
       "userRoleCode": "ROL_ASESOR_3"
     }
-    this.ordersService.createOrder(param, this.autentication["data"]["token"]).subscribe(
-      response => {
+    this.ordersService.createOrder(param, this.autentication["data"]["token"])
+    .subscribe({
+      next: response => {
         console.log(response);
         this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
         this.registerCommercialOffer(response.data.data.orderMainId);
         this.loadBussinesRules();
-      });
+      },
+      error : e =>{
+        alert("Ocurrion un error en los servicios de creacion de orden, Intenta nuevamente por favor");
+        this.spinner.hide()
+        console.log(e);
+      }
+    });
   }
 
   registerCommercialOffer(orderId: any){
@@ -296,11 +318,18 @@ export class OrderComponent implements OnInit {
       "microFrontendData": JSON.stringify(plan),
       "statusCode": "INI"
     }
-    this.ordersService.registerOrderView(param, this.autentication["data"]["token"]).subscribe(
-      response => {
+    this.ordersService.registerOrderView(param, this.autentication["data"]["token"])
+    .subscribe({
+      next: response => {
         console.log(response);
         this.loadBussinesRules();
-      });
+      },
+      error : e =>{
+        alert("Ocurrio un error en los servicios de creacion de la Order View, intente nuevamente por favor");
+        this.spinner.hide();
+        console.log(e);
+      }
+    });
   }
 
   submitOrder(){
