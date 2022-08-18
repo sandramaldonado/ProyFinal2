@@ -23,6 +23,7 @@ export class DetailSaleComponent implements OnInit {
   isChecked:any;
   product :any;
   producto:any;
+  porcentaje:any;
   precio:any;
   total :any;
   currency: any;
@@ -45,6 +46,7 @@ export class DetailSaleComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.porcentaje = 10;
     var  months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];    
     this.fecha = new Date();
     this.nombreMes=months[this.fecha.getMonth()+1];
@@ -129,12 +131,12 @@ export class DetailSaleComponent implements OnInit {
   onChange($event: MatSlideToggleChange) {
     console.log($event);
     console.log("queso:" + this.isChecked);
-    this.discount();
+    this.discount(this.porcentaje);
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
 
-  discount(){
-    this.conDescuento =  ((this.precio * 10)/100);
+  discount(porcentaje:any){
+    this.conDescuento =  ((this.precio * porcentaje)/100);
   }
 
 }
