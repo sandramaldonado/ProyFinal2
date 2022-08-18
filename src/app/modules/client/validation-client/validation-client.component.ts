@@ -205,14 +205,14 @@ export class ValidationClientComponent implements OnInit {
                   }else{
                     this.webstoreservice.saveStatusScoring("EXPRESS");
                   }
-                 
+                  this.router.navigate(['/oferta/orden-compra']);
                 } else {
                   //sessionStorage.setItem("isClient", "false");
                   this.submitted = true;
                   this.webstoreservice.saveClientInformation(dataClient);
                   this.webstoreservice.saveStatusScoring("NORMAL");
-                  this.router.navigate(['/client/adminClient']);
-                  //this.router.navigate(['/oferta/orden-compra']);
+                  //this.router.navigate(['/client/adminClient']);
+                  this.router.navigate(['/oferta/orden-compra']);
                 }
               } else {
                 this.submitted = true;
@@ -239,7 +239,7 @@ export class ValidationClientComponent implements OnInit {
                 this.webstoreservice.saveClientInformation(datosClient2);
                 this.webstoreservice.saveStatusScoring("NORMAL");
                 this.createPerson();
-                //this.router.navigate(['/oferta/orden-compra']);
+                this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
