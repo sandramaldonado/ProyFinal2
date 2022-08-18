@@ -1,15 +1,15 @@
-.pFont {
+::ng-deep .pFont {
     font-family: 'Roboto';
     color: #8C8C8D;
 }
 
-.backgroundGreen {
+::ng-deep .backgroundgreend {
     background: #DFF39F;
     border-radius: 15px;
     padding: 15px;
 }
 
-.padding15 {
+::ng-deep .padding15 {
     padding: 15px;
 }
 
@@ -39,12 +39,12 @@ input {
     cursor: pointer;
 }
 
-.tamañodiv {
+::ng-deep .tamañodiv {
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.matError {
+::ng-deep .matError {
     text-align:right; 
     margin-top: -7px;
 }
