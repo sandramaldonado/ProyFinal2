@@ -192,37 +192,20 @@ export class ValidationClientComponent implements OnInit {
             response => {
               this.infoClient = response;
               dataClient = this.infoClient["data"]["data"][0];
+              this.webstoreservice.saveClientInformation(dataClient);
               console.log(dataClient);
               let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
               if (this.infoClient["data"]["data"].length == 1) {
-                if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
-                  //sessionStorage.setItem("isClient", true);
-                  this.submitted = true;
-                  this.webstoreservice.saveClientInformation(dataClient);
+                this.submitted = true;
+                if(offerconsumptionformcode == "CCOPOS"){
                   let planService = this.armadoJsonScoring();
-                  //console.log(planService);
-                  
-                  console.log(offerconsumptionformcode);
-                  if(offerconsumptionformcode == "CCOPOS"){
-                    this.scoringValidated(planService);
-                  } else {
-                    if (offerconsumptionformcode == "CCOPRE") {
-                      this.webstoreservice.saveStatusScoring("EXPRESS");  
-                    } else {
-                      this.webstoreservice.saveStatusScoring("NORMAL");
-                    }
-                    this.router.navigate(['/oferta/orden-compra']);
-                  }
+                  this.scoringValidated(planService);
                 } else {
-                  //sessionStorage.setItem("isClient", "false");
                   if (offerconsumptionformcode == "CCOPRE") {
                     this.webstoreservice.saveStatusScoring("EXPRESS");  
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
-                  this.submitted = true;
-                  this.webstoreservice.saveClientInformation(dataClient);
-                  //this.router.navigate(['/client/adminClient']);
                   this.router.navigate(['/oferta/orden-compra']);
                 }
               } else {
@@ -237,7 +220,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["documentType"] = "CI";
                 datosClient2["documentTypeDesc"] = null;
                 datosClient2["email"] = null;
-                datosClient2["fullName"] = name1 + " " + lastname1;
+                datosClient2["fullName"] = lastname1 + " " + name1;
                 datosClient2["gender"] = null;
                 datosClient2["lastName1"] = lastname1;
                 datosClient2["lastName2"] = null;
@@ -248,12 +231,17 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-
-                if (offerconsumptionformcode == "CCOPRE") {
-                  this.webstoreservice.saveStatusScoring("EXPRESS");  
+                if(offerconsumptionformcode == "CCOPOS"){
+                  let planService = this.armadoJsonScoring();
+                  this.scoringValidated(planService);
                 } else {
-                  this.webstoreservice.saveStatusScoring("NORMAL");
+                  if (offerconsumptionformcode == "CCOPRE") {
+                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                  } else {
+                    this.webstoreservice.saveStatusScoring("NORMAL");
+                  }
                 }
+
                 this.createPerson();
                 this.router.navigate(['/oferta/orden-compra']);
               }
