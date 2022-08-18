@@ -64,3 +64,7 @@ input {
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     color: rgba(0,0,0,.6) !important;
 }
+
+::ng-deep .mat-slide-toggle.mat-disabled {
+    opacity: 1 !important;
+}
