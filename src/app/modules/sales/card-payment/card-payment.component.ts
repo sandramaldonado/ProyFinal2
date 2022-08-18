@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { SalesService } from "@app/services/sales/sales.service";
 import { WebstoreService } from "@app/services/webstore/webstore.service";
 import { environment } from "@env";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     selector: 'app-card-payment',
@@ -13,7 +14,7 @@ import { environment } from "@env";
 export class CardPaymentComponent implements OnInit {
 
     title = "Configura tu tarjeta de crédito o débito";
-    message = "Introduce tu tarjeta de débito o crédito para que puedas pagar tus servicios VIVA cada mes.";
+    message = "Introduce tu tarjeta de débito o crédito, si activas tus pagos automáticos podrás pagar tus servicios VIVA cada mes.";
     person: any;
 
     microFrontKeys = {
@@ -49,7 +50,8 @@ export class CardPaymentComponent implements OnInit {
     constructor(
         private webstoreService: WebstoreService,
         private salesService: SalesService,
-        private router: Router
+        private router: Router,
+        private spinner: NgxSpinnerService
     ) { }
 
     ngOnInit(): void {
@@ -97,7 +99,12 @@ export class CardPaymentComponent implements OnInit {
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
-            //si es contra entrega no mostrar el monto
+
+            // Bloquear el switch cuando llega pago automatico de pantalla anterior
+            // si es prepago ocultar pago automatico
+            //si es contra entrega y prepago no mostrar el monto y el radio button
+            // aumentar spinner en pantalla de pago
+            // Se es pago a contra entrega y es prepago solo debe mostrarse el aceptar terminos y condiciones
         }
     }
 
@@ -146,6 +153,7 @@ export class CardPaymentComponent implements OnInit {
 
     dataPayMent(event: any): void {
         if (event) {
+            this.spinner.show();                
             console.log(event)
             const offernumberofentities = this.webstoreService.getDataInSession('offernumberofentities');
             const ordermainid = this.webstoreService.getDataInSession('ordermainid');
@@ -168,6 +176,7 @@ export class CardPaymentComponent implements OnInit {
             console.log(data);
             this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res: any) => {
                 console.log(res)
+                this.spinner.hide();                
                 this.router.navigate(['/payment-done']);
             });
         }
