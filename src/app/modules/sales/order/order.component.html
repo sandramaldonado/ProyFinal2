@@ -11,9 +11,9 @@
               <div *ngFor="let item of planComposition?.planList" class="row w-100 border-top pt-2">
 
                   <div class="col-1 text-end">
-                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
-                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
-                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
 
                   </div>
                   <div class="col-11">
@@ -55,12 +55,22 @@
                       (nextDocumentStep)="changeModule(modules.documents.alias)">
       </app-documents>
 
-      <app-movil-list  id={{modules.movilList.alias}}
-                      *ngIf="modules.movilList.visible"
-                      (nextMovilListStep)="changeModule(modules.movilList.alias)">
+      <app-movil-list  id={{modules.movillist.alias}}
+                      *ngIf="modules.movillist.visible"
+                      (nextMovilListStep)="changeModule(modules.movillist.alias)">
       </app-movil-list>
 
 
+      <app-delivery-method id={{modules.deliverymethod.alias}}
+                          *ngIf="modules.deliverymethod.visible"
+                          (nextDeliveryMethodStep)="changeModule(modules.deliverymethod.alias)">
+      </app-delivery-method>
+
+      <app-almost-done
+                        [id]="modules.almostdone.alias"
+                        *ngIf="modules.almostdone.visible">
+
+      </app-almost-done>
     </div>
   </div>
 </div>

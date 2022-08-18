@@ -61,6 +61,14 @@ export class WebstoreService {
     return this.sessionStorageService.retrieve("clientInformation")
   }
 
+  saveDeliveryStoreMethod (storeInfo : any) : void{
+    this.sessionStorageService.store ("storeInfo", storeInfo);
+  }
+
+  getDeliveryStoreMethod (){
+    return this.sessionStorageService.retrieve("storeInfo")
+  }
+
   saveSelfie (photo : any): void{
     this.sessionStorageService.store("photoFace",photo);
   }
@@ -125,7 +133,20 @@ export class WebstoreService {
     return this.sessionStorageService.retrieve(key);
   }
 
+  getScoring (): any{
+    return this.sessionStorageService.retrieve("scoring");
+  }
+  getOfferConsuptioncode(){
+    return this.sessionStorageService.retrieve("offerconsumptionformcode");
+  }
 
+  getOfferTotaldetail(){
+    return this.sessionStorageService.retrieve("offertotaltariff");
+  }
+  saveAutomaticPayment (automaticPayment : any): void{
+    this.sessionStorageService.store("automaticPayment",automaticPayment);
+    
+  }
 
 
 }

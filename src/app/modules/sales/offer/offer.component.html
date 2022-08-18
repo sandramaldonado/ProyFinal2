@@ -14,9 +14,9 @@
             <div *ngFor="let item of planComposition?.planList" class="row w-100 border-top pt-2">
 
                 <div class="col-1 text-end">
-                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
-                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
-                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType == 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
+                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
+                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
+                  <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
 
                 </div>
                 <div class="col-11">

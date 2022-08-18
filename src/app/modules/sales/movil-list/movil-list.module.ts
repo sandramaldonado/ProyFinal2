@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from '@shared/shared.module';
 import { LazyElementsModule } from '@angular-extensions/elements';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [MovilListComponent],
@@ -24,7 +24,8 @@ import { LazyElementsModule } from '@angular-extensions/elements';
     MatButtonModule,
     MatRadioModule,
     SharedModule,
-    LazyElementsModule
+    LazyElementsModule,
+    NgxSpinnerModule
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
   exports : [MovilListComponent]

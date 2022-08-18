@@ -15,16 +15,20 @@ const routes : Routes = [
     loadChildren : () => import ('./modules/sales/offer/offer.module').then (m => m.OfferModule)
   },
   {
+    path : 'scoring',
+    loadChildren : () => import ('./modules/sales/scoring/result/result-scoring.module').then (m => m.ResultScoringModule)
+  },
+  {
     path : 'oferta/orden-compra',
     loadChildren : () => import ('./modules/sales/order/order.module').then (m => m.OrderModule)
   },
   {
     path : 'almost-done',
-    loadChildren : () => import ('../app/shared/components/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
+    loadChildren : () => import ('../app/modules/sales/almost-done/almost-done.module').then (m => m.AlmostDoneModule)
   },
   {
     path : 'detalle-compra',
-    loadChildren : () => import ('./modules/sales/detail/detail-sale/detail-sale.module').then (m => m.DetailSaleModule)
+    loadChildren : () => import ('./modules/sales/detail/detail.module').then (m => m.DetailModule)
   },
   {
     path : 'client',
@@ -55,10 +59,6 @@ const routes : Routes = [
     loadChildren: () => import('./pages/captcha/captcha.module').then( m => m.CaptchaModule)
   },
   {
-    path: 'validacion',
-    loadChildren: () => import('./pages/validation/validation.module').then( m => m.ValidationModule)
-  },
-  {
     path: 'cobertura',
     loadChildren: () => import('./modules/sales/check-coverage/check-coverage.module').then( m => m.CheckCoverageModule)
   },
@@ -81,8 +81,14 @@ const routes : Routes = [
   { path : 'producto/detalle/:id',
     loadChildren : () => import ('./modules/product/item-detail/item-detail.module').then (m => m.ItemDetailModule)
   },
-
-
+  {
+    path: 'payment',
+    loadChildren: () => import('./modules/sales/card-payment/card-payment.module').then( m => m.CardPaymentModule)
+  },
+  {
+    path: 'payment-done',
+    loadChildren: () => import('./pages/payment-done/payment-done.module').then( m => m.PaymentDoneModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./layout/under-construction/under-construction.module').then( m => m.UnderConstructionModule)

@@ -38,7 +38,9 @@ export const environment = {
   sessionHub: vars.sessionHub,
   urlVasMicrofront: vars.urlVasMicrofront,
   urlDashboardMicrofront: vars.urlDashboardMicrofront,
-  applicationId: 2
+  urlCardPayMicrofrontApp: vars.urlCardPayMicrofrontApp,
+  urlMgd: vars.urlMgd,
+  applicationId: 0
 
 };
 

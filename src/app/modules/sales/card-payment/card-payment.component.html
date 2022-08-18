@@ -1,0 +1,34 @@
+<div class="container">
+<div class="row pb-3">
+    <section class="section-body col-12 py-3">
+        <h3>{{title}}</h3>
+        <p class="pFont">{{message}}</p>
+        <mat-card>
+            <!-- <ax-lazy-element *axLazyElementDynamic="microFrontKeys.id,
+                            url: 'http://localhost:4297/main.js';"
+                            paramIn={{toSendString(microFrontParamIn)}}
+                            paramClass={{toSendString(paramClass)}}>
+            </ax-lazy-element> -->
+            <!-- 
+TC1: Movil Standalone http://10.45.56.62:4200/oferta?code=PMBAEP -> no hay monto cuando no selecciono el pago automatico
+TC2: LTE Standalone http://10.45.56.62:4200/oferta?code=LTEPREO3 -> no tiene monto y tampoco tiene la opcion de pago automatico
+TC3: Triple play http://10.45.56.62:4200/oferta?code=TIPBATVF no hay monto cuando no selecciono el pago automatico
+
+DUO:
+http://10.45.56.62:4200/oferta?code=DIP30TVF no sale el monto
+http://10.45.56.62:4200/oferta?code=DIPRTVE
+
+
+
+
+--> 
+        </mat-card>
+        <card-pay-microfront-app *axLazyElement="microFrontKeys.url"
+                                paramIn={{toSendString(microFrontParamIn)}}
+                                paramClass={{toSendString(paramClass)}}
+                                (dataPayMent)="dataPayMent($event)">
+        </card-pay-microfront-app>
+    </section>
+
+</div>
+</div>

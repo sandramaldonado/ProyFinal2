@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="d-none d-md-block col-5 bg bg-light bg-gradient  border py-5 px-5 my-1">
+      <div class="sticky-top ">
+        <section class="section-body col-12 py-3">
+            <div class=" d-flex flex-column justify-content-around align-items-center">
+              <h3>{{planComposition?.groupTradeName }}</h3>
+
+
+              <div *ngFor="let item of planComposition?.planList" class="row w-100 border-top pt-2">
+
+                  <div class="col-1 text-end">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'MOVIL'" src="assets/images/iconos/movil.png" alt="" style="width: 20px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'IFIXED'" src="assets/images/iconos/wifi.png" alt="" style="width: 25px; height: auto;">
+                    <img *ngIf="item.componentTradeName && item?.consumptionEntityType === 'TV'" src="assets/images/iconos/tv.png" alt="" style="width: 25px; height: auto;">
+
+                  </div>
+                  <div class="col-11">
+
+                    <p class="component-title mb-0 fw-bold">{{item?.consumptionEntityType}}</p>
+                    <p >{{item?.componentOffer}}</p>
+                  </div>
+              </div>
+
+
+            </div>
+        </section>
+      </div>
+
+    </div>
+    <div class="col-12 col-md-7">
+      <app-detail-sale id={{modules.detailSale.alias}}
+                      [disabled]="!modules.detailSale.enabled"
+                      *ngIf="modules.detailSale.visible">
+      </app-detail-sale>
+
+      <app-payment-method
+        [id]="modules.paymentMethod.alias"
+        *ngIf="modules.paymentMethod.visible"
+        (nextPaymentMethodStep)="changeModule(modules.paymentMethod.alias)">
+      </app-payment-method>
+
+      <app-card-payment [id]="modules.payment.alias"
+                        *ngIf="modules.payment.visible">
+        </app-card-payment>
+
+    </div>
+  </div>
+</div>
+
+

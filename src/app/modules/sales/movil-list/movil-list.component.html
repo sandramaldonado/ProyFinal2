@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="movilState;">
     <div class="row pb-3">
         <section class="section-body col-12 py-3">
             <h3>{{title}}</h3>
@@ -6,11 +6,8 @@
             <mat-card>
                 <mat-card-content>
                     <form style="background-color:white" class="form" novalidate id="validationForm" >
-                        <div *ngIf="movilState == true; then trueMovil;"></div>
-                        <ng-template #trueMovil>
-                            <div class="row" style="color:black">
-                                <h4 style="color:black"><b>MOVIL</b></h4>
-                                <p>Elije un N&uacute;mero</p>
+                        <div>
+                            <div class="row">
                                 <div *ngFor="let line of linesList" class="col-6 col-md-6 col-sm-6">
                                     <div [class]="line.description" [style]="line.style" role="alert">
                                         <mat-radio-button name="movil" [value]="line.value" [checked]="line.checked" (change)="radioChange($event)">
@@ -18,13 +15,32 @@
                                         </mat-radio-button>
                                     </div>
                                 </div>
-                                <div *ngIf="limitLine == 5" class="col-6 col-md-6 col-sm-6">
+                                <div *ngIf="limitLine === 5" class="col-6 col-md-6 col-sm-6">
                                     <div class="alert alert-light divOption" style="text-align:center;" role="alert">
                                         <a href="javascript: void(0);" class="linkMore" (click)="clickme()"> Mas opciones..</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                       
+                        <!--
+                         <ng-template #FALSEMOVIL>
+                            <div class="row" *ngIf="internetState">
+                                <div class="container">
+                                    <h4>Internet</h4>
+                                    <p style="color: #848484">Se asigno de manera directa la linea {{wanLine}}</p>
+                                </div>
+                                
+                            </div>
+                            <div class="row" *ngIf="entertainmentState">
+                                <div class="container">
+                                    <h4>Entretenimiento - TV</h4>
+                                    <p style="color: #848484">Se asigno de manera directa la linea {{tvLine}}</p>
+                                </div>
+                            </div>
                         </ng-template>
+                        -->
+                           
                         <!--<button mat-raised-button color="primary" class="w-100"  [disabled]="validationForm.invalid">Continuar</button>-->
                         <div class="text-center">
                             <app-button [content]="'Continuar'"  (click)="next()"></app-button>
@@ -35,3 +51,11 @@
         </section>
     </div>
 </div>
+
+<ngx-spinner
+  bdColor = "rgba(51, 51, 51, 0.8)"
+  size = "large"
+  color = "#D6F084"
+  [fullScreen]="false"
+  type = "ball-8bits">
+</ngx-spinner>

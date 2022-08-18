@@ -34,27 +34,27 @@
                         <div *ngIf="markerPositions.length > 0" class="coverage-result">
                           <div *ngIf="hasCoverage" class="coverage-status-ok p-2">
                             <div class="row">
-                                <div class="d-flex flex-row justify-content-between align-items-start">
-                                    <img src="assets/images/iconos/atention-green.png" alt="" class="mx-2 align-self-center">
+                                <div class="d-flex flex-row justify-content-start align-items-center">
+                                    <img src="assets/images/iconos/atention-green.png" alt="" class="m-2 ">
                                     <div>
-                                        <span class="fw-bold">Cobertura Alta</span>
-                                        <p class="my-0">El servicio tiene una cobertura excelente en la zona.</p>
+                                        <span class="fw-bold">Con Cobertura</span>
+                                        <p class="my-0">El servicio tiene cobertura en la zona.</p>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                           </div>
                           <div *ngIf="!hasCoverage" class="coverage-status-nok p-2">
                             <div class="row">
-                                <div class="d-flex flex-row">
-                                    <img src="assets/images/iconos/atention-red.png" alt="" class="mx-2 align-self-center">
+                                <div class="d-flex flex-row justify-content-start align-items-center">
+                                    <img src="assets/images/iconos/atention-red.png" alt="" class="m-2">
                                     <div>
-                                        <span class="fw-bold">Cobertura Baja</span>
+                                        <span class="fw-bold">Sin Cobertura</span>
                                         <p class="my-0">El servicio no tiene cobertura en la zona.</p>
                                     </div>
                                 </div>
-                               
+
                             </div>
                           </div>
                       </div>

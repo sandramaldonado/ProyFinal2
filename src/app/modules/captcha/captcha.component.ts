@@ -1,3 +1,18 @@
+/**
+ *
+ * Landing Master Sales: captcha component
+ *
+ * Nuevatel PCS de Bolivia S.A. (c) 2022
+ *
+ * El Contenido de este archivo esta clasificado como:
+ *
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ *
+ * @author Nuevatel PCS
+ *
+ * @version 1.0.0 Date 01/08/2022
+ *
+ */
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CaptchaService } from '@services/captcha.service';
 
@@ -7,7 +22,7 @@ import { CaptchaService } from '@services/captcha.service';
   styleUrls: ['./captcha.component.scss']
 })
 export class CaptchaComponent implements OnChanges {
-  @Input("config") config: any = {};
+  @Input() config: any = {};
   @Output() captchaCode = new EventEmitter();
   captch_input: any = null;
   code: any = null;

@@ -1,0 +1,45 @@
+.unchecked {
+  background-color: #AC99CE;
+  border: 2px solid rgb(92, 51, 157);
+  border-radius: 16px;
+  color: white;
+}
+
+.checked {
+  background-color: #5C349D;
+  color: white;
+  border: 1px solid #5C349D;
+  border-radius:16px;
+}
+
+::ng-deep .checked .mat-radio-outer-circle {
+  background-color: white !important;
+  border-color: white !important;
+  border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep .unchecked .mat-radio-outer-circle {
+  background-color: white !important;
+  border-color: white !important;
+  border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep .checked .mat-radio-inner-circle {
+  background-color: #5C339D !important;
+  border-color: white !important;
+  border-radius: 8px 8px 8px 8px;
+}
+
+::ng-deep .unchecked .mat-radio-inner-circle {
+  background-color: #5C339D !important;
+  border-color: white !important;
+  border-radius: 8px 8px 8px 8px;
+}
+
+.custom-radio{
+  font-family: MUSEO500-REGULAR;
+}
+
+.sp-20{
+  height: 20px;
+}
