@@ -75,6 +75,7 @@ export class CardPaymentComponent implements OnInit {
         console.log(descRecurring)
         this.code = this.webstoreService.getOfferConsuptioncode();
         console.log("******code OfferConsuptioncode")
+        const automaticpaymentCheck = this.webstoreService.getDataInSession("automaticpayment");
         console.log(this.code)
         // const webStorage = this.webstoreService.getOfferConsuptioncode();
         this.microFrontParamIn = {
@@ -88,7 +89,7 @@ export class CardPaymentComponent implements OnInit {
             termsOfService: { mode: "required", url: urlTerms }, // mode: required | option
             currency: "BOB",
             cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
-            recurring: { mode: descRecurring }, // required | option | preselected
+            recurring: { mode: descRecurring, show: this.visible(), checked: automaticpaymentCheck }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
@@ -108,14 +109,14 @@ export class CardPaymentComponent implements OnInit {
         }
     }
 
-    // visible(){
-    //     console.log(this.code);
-    //     let show = false;
-    //     if (this.code == "CCOPOS"){    
-    //         show = true;
-    //     }
-    //     return show;
-    //   }
+    visible(){
+        console.log(this.code);
+        let show = false;
+        if (this.code == "CCOPOS"){    
+            show = true;
+        }
+        return show;
+    }
 
     getRecurring(recurring: string) {
         // required | optional | preselected
