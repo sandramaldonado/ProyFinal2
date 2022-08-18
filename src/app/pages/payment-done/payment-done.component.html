@@ -6,18 +6,17 @@
       </div>
     </section>
     <section class="section-body col-12 py-3">
-      <div class="col-3 mx-auto">
-        <img mat-card-image src="../../../assets/images/successPay.svg" class="img-fluid text-center">
-      </div>
+      <img mat-card-image src="../../../assets/images/successPay.svg" class="rounded mx-auto d-block">
       <br>
       <div class=" d-flex flex-column justify-content-around align-items-center">
-        <h3>Tu compra fue ejecutada exitosamente</h3>
+        <h3 class="text-center">Tu compra fue ejecutada exitosamente</h3>
       </div>
-      <div class="align-items-center">
+      <div class="row">
         <label class="text-center">
-          Revisa tu correo electronico para ver tus facturas y detalles de la compra. <br>
-          <br>
-          <b>Nro de orden {{orderId}}</b>
+          Revisa tu correo electronico para ver tus facturas y detalles de la compra.
+          <br><br>
+          <b class="fontbold">Nro de orden {{orderId}}</b>
+          <br><br>
         </label>
         <br>
         <br>
@@ -33,7 +32,6 @@
         <div>
           <app-button [content]="'Aceptar'" (click)="onClick()"></app-button>
         </div>
-
       </div>
     </section>
   </div>
