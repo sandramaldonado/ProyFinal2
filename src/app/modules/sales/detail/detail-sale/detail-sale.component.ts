@@ -134,7 +134,7 @@ export class DetailSaleComponent implements OnInit {
   }
 
   discount(){
-    this.conDescuento =  ((this.total * 10)/100);
+    this.conDescuento =  ((this.precio * 10)/100);
   }
 
 }
