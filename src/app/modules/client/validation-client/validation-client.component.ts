@@ -242,10 +242,8 @@ export class ValidationClientComponent implements OnInit {
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
+                  this.router.navigate(['/oferta/orden-compra']);
                 }
-
-                this.createPerson();
-                this.router.navigate(['/oferta/orden-compra']);
               }
             },
             error => {
@@ -266,7 +264,7 @@ export class ValidationClientComponent implements OnInit {
     this.planList = this.planComposition?.planList;
     this.productTypeCode = [];
     console.log(this.fecha);
-    const client = this.webstoreservice.getClientInformation();
+    let client = this.webstoreservice.getClientInformation();
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
@@ -308,7 +306,13 @@ export class ValidationClientComponent implements OnInit {
       response => {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
-        this.router.navigate(['/oferta/orden-compra']);
+        let client = this.webstoreservice.getClientInformation();
+        if (client.clientId > 0) {
+          this.router.navigate(['/oferta/orden-compra']);  
+        } else {
+          this.createPerson();
+        }
+        
       },
       error => {
         console.log(error);
