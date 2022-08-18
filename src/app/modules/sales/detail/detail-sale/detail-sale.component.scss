@@ -1,6 +1,6 @@
 .mat-card{
     padding: 1px !important;
-  
+
     color: #7B7B7B;
     display: block;
     background: rgba(217, 217, 217, 0.15);
@@ -10,6 +10,11 @@
   #matservicios{
     display: block;
     padding: 20px !important;
+  }
+
+  #servicios{
+    background: rgba(217, 217, 217, 0.15);
+    border-radius: 10px;
   }
 
   #title{
@@ -25,12 +30,12 @@
    top: 2%;
   }
 
-  #servicios{
-  font-size: 16px;
+  .subtitle{
+  font-size: 1.2rem;
   color: #5C349D;
   font-family: 'MUSEO700-REGULAR';
   font-style: normal;
-font-weight: 600;
+  font-weight: 600;
 }
 
 
@@ -47,18 +52,18 @@ color: #676767;
 #productname{
   width: 261px;
   height: 16px;
-  
+
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  
+
   color: #333333;
-  
+
   float: left;
   /* Inside auto layout */
-  
+
   flex: none;
   order: 0;
   flex-grow: 1;
@@ -114,7 +119,7 @@ color: #676767;
   display: block;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -199,7 +204,7 @@ color: #939393;
   border-radius: 25px;
 }
 #totalnumero{
-  
+
   width: 46px;
 height: 21px;
 
@@ -264,10 +269,9 @@ color: #676767;
 #num{
 
   font-family: 'MUSEO700-REGULAR';
-font-style: normal;
 font-weight: 600;
-font-size: 24px;
-line-height: 29px;
+font-size: 1.5rem;
+//line-height: 29px;
 /* identical to box height */
 
 
@@ -279,7 +283,7 @@ color: #5C349D;
 #aviso{
   background: rgba(255, 168, 83, 0.5);
 border-radius: 10px;
-padding: 20px !important;
+//padding: 20px !important;
 }
 
 #pago{
