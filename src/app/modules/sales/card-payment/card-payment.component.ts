@@ -44,7 +44,7 @@ export class CardPaymentComponent implements OnInit {
     fullLastNames: string | undefined;
     offertotaltariff: any;
     statusscoring: any;
-    code:any;
+    code: any;
 
     constructor(
         private webstoreService: WebstoreService,
@@ -86,7 +86,7 @@ export class CardPaymentComponent implements OnInit {
             termsOfService: { mode: "required", url: urlTerms }, // mode: required | option
             currency: "BOB",
             cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
-            recurring:{ mode: descRecurring, show: this.visible() }, // required | option | preselected
+            recurring: { mode: descRecurring }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
@@ -101,20 +101,23 @@ export class CardPaymentComponent implements OnInit {
         }
     }
 
-    visible(){
-        console.log(this.code);
-        let show = false;
-        if (this.code == "CCOPOS"){    
-            show = true;
-        }
-        return show;
-      }
+    // visible(){
+    //     console.log(this.code);
+    //     let show = false;
+    //     if (this.code == "CCOPOS"){    
+    //         show = true;
+    //     }
+    //     return show;
+    //   }
 
     getRecurring(recurring: string) {
-        // required | option | preselected
-        var desc = 'optional';
-        if(recurring == 'NORMAL'){
-            desc = 'required'
+        // required | optional | preselected
+        var desc = 'preselected';
+        if (recurring == 'NORMAL') {
+            desc = 'required';
+        }
+        if (this.code == "CCOPOS" && recurring == 'EXPRESS') {
+            desc = 'optional';
         }
         return desc;
     }
@@ -140,7 +143,7 @@ export class CardPaymentComponent implements OnInit {
     toSendString(data: any) {
         return JSON.stringify(data);
     }
-    
+
     dataPayMent(event: any): void {
         if (event) {
             console.log(event)
