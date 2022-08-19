@@ -32,6 +32,20 @@ export class CoverageService {
 
   }
 
+  checkCoverage (data : any, token : string): Observable<any> {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+
+    const httpOptions = {
+      headers: headers
+    };
+
+    return this.httpClient.post<any>(`${environment.CheckCoverageApiUrl}`, JSON.stringify(data), httpOptions);
+
+  }
+
   saveCoverageData (data : any){
     this.webstoreservice.saveDataInSession("coverage", data)
   }
