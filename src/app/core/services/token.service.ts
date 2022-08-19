@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TokenService {
   //urToken = "https://omega.devnt.ssidevops.com/auth/login";
-  urToken : string = `${environment.SSIAuthApiUrl}`;
+  urToken : string = `${environment.endPoint}/auth/login`;
 
   constructor(private httpClient: HttpClient) { }
   httpOptions = {
@@ -20,18 +20,18 @@ export class TokenService {
 
   gettoken(): Observable<Autenticar> {
     /*
-    username: "landing", 
+    username: "landing",
 password: "3X4E+U7d1m1XprRamjfaRg=="
      */
-    return this.httpClient.post<Autenticar>(`${this.urToken}`, 
+    return this.httpClient.post<Autenticar>(`${this.urToken}`,
             JSON.stringify({
               "username": "landing",
               "password": "3X4E+U7d1m1XprRamjfaRg=="
-          }), 
+          }),
             this.httpOptions).pipe(
             retry(1), catchError(this.handleError));
   }
-  
+
   // Handle API errors
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

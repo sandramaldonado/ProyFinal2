@@ -12,15 +12,15 @@ export class ClientService {
   headers: any;
   httpOptions: any;
   //apiUrl = "https://omega.devnt.ssidevops.com/crm360/client/person/search";
-  apiUrl : string = `${environment.ClientSearchApiUrl}`;
+  apiUrl : string = `${environment.endPoint}/crm360/client/person/search`;
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders();
     this.httpOptions = {};
   }
-  
+
   /**
    * Metodo de consulta de existencia de cliente por numero telefonico
    */
@@ -69,5 +69,5 @@ export class ClientService {
   };
 
 
-  
+
 }
