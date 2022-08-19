@@ -1,3 +1,13 @@
+/**
+ * Componente administración de líneas Moviles, Web y/o TV Box
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232 
+*/
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';

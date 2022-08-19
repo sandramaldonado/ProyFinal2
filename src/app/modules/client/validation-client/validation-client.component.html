@@ -9,10 +9,10 @@
                 <mat-card-content>
                     <form [formGroup]="validationForm" style="background-color:white;" (ngSubmit)="onSubmit()" novalidate id="validationForm">
                         <app-big-input-text controlName="name" readonly="false" [submitted]="submitted" identifier="name"
-                        message="Ingresa tu Primer Nombre" description="Nombre"></app-big-input-text>
+                        message="Ingresa tu Primer Nombre" description="Primer Nombre"></app-big-input-text>
                         <mat-error *ngIf="name?.invalid && name?.touched">Por favor ingresa datos v&aacute;lidos</mat-error>
                         <app-big-input-text controlName="lastname" readonly="false" [submitted]="submitted" identifier="lastname"
-                            message="Ingresa tu Primer Apellido" description="Apellido"></app-big-input-text>
+                            message="Ingresa tu Primer Apellido" description="Primer Apellido"></app-big-input-text>
                         <mat-error *ngIf="lastname?.invalid && lastname?.touched" >Por favor ingresa datos v&aacute;lidos</mat-error>
                         <div class="d-flex flex-row align-items-start justify-content-between">
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6">

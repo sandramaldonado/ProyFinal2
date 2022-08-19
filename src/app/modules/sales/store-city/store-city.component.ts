@@ -1,3 +1,13 @@
+/**
+ * Componente despliegue y seleccion de tienda  de entrega
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232 
+*/
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
