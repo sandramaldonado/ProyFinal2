@@ -59,7 +59,7 @@ export class CardPaymentComponent implements OnInit {
         const orderId = this.webstoreService.getDataInSession('orderMainId');
         this.person = this.webstoreService.getClientInformation();
         const urlTerms = 'https://www.viva.com.bo/';
-
+        console.group();
         console.log('*****TOKEN');
         const token = this.webstoreService.getDataInSession('token');
         console.log(token);
@@ -71,35 +71,39 @@ export class CardPaymentComponent implements OnInit {
         this.statusscoring = this.webstoreService.getDataInSession('statusscoring');
         console.log("******statusscoring")
         console.log(this.statusscoring)
-        const descRecurring = this.getRecurring(this.statusscoring);
-        console.log("*******descRecurring")
-        console.log(descRecurring)
+
         this.code = this.webstoreService.getOfferConsuptioncode();
+        const descRecurring = this.getRecurring(this.statusscoring);
+        console.log('descRecurring ',descRecurring)
+
+        console.log('offerconsumptionformcode ',this.code);
         console.log("******code OfferConsuptioncode")
         const automaticpaymentCheck = this.webstoreService.getDataInSession("automaticpayment");
-        console.log(this.code);
         const paymentMethod = this.webstoreService.getDataInSession("paymentMethod");
+        if(paymentMethod === "uponDelivery") {
+            this.offertotaltariff = 0;
+        } 
         // const webStorage = this.webstoreService.getOfferConsuptioncode();
+        // CONTROLAR ATRIBUTOS OBLIGATORIOS
         this.microFrontParamIn = {
-            theme: "light-green",
+            // theme: "light-green",
             orderType: "SALES",
             orderId: orderId ? orderId : null,
-            channel: "LANDING",// LANDING | OMEGA3
+            system: "LANDING",// LANDING | OMEGA3
             entityType: "partyId",//cableado
             entityId: this.person && this.person.personId ? this.person.personId : null,//cableado,
             language: "es",
-            termsOfService: { mode: "required", url: urlTerms }, // mode: required | option
-            currency: "BOB",
+            termsOfService: { mode: "required", url: urlTerms }, // mode: hide |required | option == permite pasar y no es obligatorio
+            currency: { code: 'BOB', description: 'Bs' },
             cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
-            recurring: { mode: descRecurring, show: this.visible(), checked: automaticpaymentCheck }, // required | option | preselected
+            recurring: { mode: descRecurring, value: automaticpaymentCheck ? automaticpaymentCheck : false }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
-            payAmountMode: "required", // optional/required > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
-            user: this.person,
+            payAmountMode: 'hide', // optional/NULL / hide > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
             amount: this.offertotaltariff,
-            paymentMethod: paymentMethod,// cardPayment = muestra el monto | uponDelivery = no mostrar el monto
-            // webStorage: webStorage ? webStorage : null,
+            email: this.person.email,
+            nroRef: this.person.nroRef,
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
@@ -107,28 +111,44 @@ export class CardPaymentComponent implements OnInit {
             // Bloquear el switch cuando llega pago automatico de pantalla anterior
             // si es prepago ocultar pago automatico
             //si es contra entrega y prepago no mostrar el monto y el radio button
-            // aumentar spinner en pantalla de pago
-            // Se es pago a contra entrega y es prepago solo debe mostrarse el aceptar terminos y condiciones
         }
+        console.log(this.microFrontParamIn)
+        console.groupEnd()
     }
 
-    visible(){
-        console.log(this.code);
-        let show = false;
-        if (this.code == "CCOPOS"){    
-            show = true;
-        }
-        return show;
-    }
+    // visible(){
+    //     console.log(this.code);
+    //     let show = false;
+    //     if (this.code == "CCOPOS"){    
+    //         show = true;
+    //     }
+    //     return show;
+    // }
+/**
+ * Si el flujo es normal -> 
+                el check de pagos recurrentes es obligatorio= disabled
+
+ * si el flujo es express y la pantalla anterior habilito pago recurrente -> 
+                el check de pagos recurrentes es obligatorio (Preselected)
+
+ * si el flujo es express y la pantalla anterior no habilito el pago recurrente -> 
+                el check de pagos recurrentes seria Opcional 
+    ¿en que dato de la sesion tenemos el el tipo de flujo Express o Normal?
+    R.- statusscoring 
+ */
 
     getRecurring(recurring: string) {
-        // required | optional | preselected
+        // required | optional | preselected | hide
+        console.log('code ',this.code)
         var desc = 'preselected';
-        if (recurring == 'NORMAL') {
+        if (recurring == 'NORMAL') { // DIP30TVF
             desc = 'required';
         }
-        if (this.code == "CCOPOS" && recurring == 'EXPRESS') {
+        if (this.code == "CCOPOS" && recurring == 'EXPRESS') { // TIPBATVF: CCOPOS Y EXPRESS / NO HAY MONTO
             desc = 'optional';
+        }
+        if(this.code == "CCOPRE") { // LTEPREO3
+            desc = 'hide';
         }
         return desc;
     }
@@ -185,4 +205,30 @@ export class CardPaymentComponent implements OnInit {
             });
         }
     }
-}
+
+    /*contentTermAndConditions: 'row backgroundgreend align-items-center',
+        sectionCheckBoxTermAndConditions: 'col-1',
+        colorCheckBoxTermAndConditions: 'primary',
+        divLabel: 'col-11',
+        refLink: '',
+        alertTermContent: 'row',
+        alertTermBody:'col-12',
+        contentAmount: 'row align-items-center',
+        bodyAmount:'col-12',
+        contentAmountCheck: 'row align-items-center',
+        bodyAmountCheck:'col-12',
+        cardNumberContent:'row',
+        matFormField: 'tamañodiv form-field col-12',
+        txtMatLabel: 'hasEvents',
+        cardNumberErrorLabel: 'matError text-danger',
+        contentSecond:'row',
+        contentSecondVence:'col-6',
+        contentSecondMatFormLabel: 'tamañodiv form-field col-12',
+        matFloatLabel: 'always',
+        contentTooglePay:'row padding15',
+        bodyTooglePay: 'col-12',
+        matSlideToggleColor:'primary',
+        contentButton: 'text-center',
+        buttomClass: 'custom-button',
+        coloreButtonSubmit:'primary'*/
+}        

@@ -6,7 +6,7 @@
  * @author Victor Antonio Zurita Borja
  * @version 1.0.0
  * @date 2022-08-01
- * @since 1.8.0_232 
+ * @since 1.8.0_232
 */
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -205,7 +205,9 @@ export class AdminClientComponent implements OnInit {
     this.loadInfoClien(datosClient);
     console.log(datosClient);
     this.visited = true;
-    this.registerClient();
+
+    //this.registerClient();
+    this.getAdditionalData();
     this.registerBillingInfo();
 
     this.nextAdminClientStep.emit(true);
@@ -213,7 +215,7 @@ export class AdminClientComponent implements OnInit {
 
   /**
    * Instanciar datos validados en formulario y trasmisiona session Storage
-  */  
+  */
   loadInfoClien(datosClient: any) {
     this.webstoreservice.saveClientInformation(datosClient);
   }
@@ -281,9 +283,24 @@ export class AdminClientComponent implements OnInit {
     return this.validationForm.get('nit');
   }
 
+    getAdditionalData(){
+      let person = this.webstoreservice.getClientInformation();
+      this.ordersService.getPersonAdditionalData(person.personId, this.webstoreservice.getDataInSession('token')).subscribe(
+        response => {
+          console.log(response);
+          person.additionalDataList = response.data.data.map((element: any)=>{
+            element.entityId = element.personId;
+            element.entityDataId = element.personDataId;
+            return element;
+          });
+          this.webstoreservice.saveClientInformation(person);
+          this.registerClient();
+        });
+    }
+
   /**
    * Registrar prospecto de cliente en O2
-  */  
+  */
   registerClient() {
     const client = this.webstoreservice.getClientInformation();
     const param = {
@@ -300,50 +317,48 @@ export class AdminClientComponent implements OnInit {
       });
   }
 
-  /**
-   * Registrar datos Billing (Cliente, Dir, Facturacion, etc)
-  */  
-  registerBillingInfo() {
-    const client = this.webstoreservice.getClientInformation();
-    const addressData = this.webstoreservice.getDataInSession('addressData');
-    let billAddress: any;
-    let billAddressId = 0;
-    if (addressData) {
-      addressData.forEach((element: any) => {
-        if (element.selected) {
-          billAddress = element;
-        }
-      });
-      billAddressId = billAddress.addressId;
+    registerBillingInfo(){
+      const client = this.webstoreservice.getClientInformation();
+      const addressData = this.webstoreservice.getDataInSession('addressData');
+      let billAddress: any;
+      let billAddressId = 0;
+      if(addressData){
+        addressData.forEach((element: any) => {
+          if(element.selected){
+            billAddress = element;
+          }
+        });
+        billAddressId= billAddress.addressId;
+      }
+
+      let billing = {
+        "observations":"",
+        "invoiceLabel":client.rSocial,
+        "nit":client.nit,
+        "email":client.email,
+        "referencePhone":client.nroRef,
+        "payment":{
+           "paymentTypeCode":"TFPEFE"
+        },
+        "address": {}
+     }
+     if(billAddressId!==0){
+        billing.address = {
+          "addressId":billAddressId,
+          "addressTypeCode":"BILL_ADDR"
+        };
+     }
+      const param = {
+        "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+        "sequence": 3,
+        "userId": this.webstoreservice.getDataInSession('userId'),
+        "microFrontendId": "billing-info-microfront-app",
+        "microFrontendData": JSON.stringify(billing),
+        "statusCode": "INI"
+      }
+      this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+        response => {
+          console.log(response);
+        });
     }
-    let billing = {
-      "observations": "",
-      "invoiceLabel": client.rSocial,
-      "nit": client.nit,
-      "email": client.email,
-      "referencePhone": client.nroRef,
-      "payment": {
-        "paymentTypeCode": "TFPEFE"
-      },
-      "address": {}
-    }
-    if (billAddressId !== 0) {
-      billing.address = {
-        "addressId": billAddressId,
-        "addressTypeCode": "BILL_ADDR"
-      };
-    }
-    const param = {
-      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
-      "sequence": 3,
-      "userId": this.webstoreservice.getDataInSession('userId'),
-      "microFrontendId": "billing-info-microfront-app",
-      "microFrontendData": JSON.stringify(billing),
-      "statusCode": "INI"
-    }
-    this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
-      response => {
-        console.log(response);
-      });
-  }
 }
