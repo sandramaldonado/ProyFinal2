@@ -61,4 +61,52 @@ export class OrdersService {
         map(res => res));
   }
 
+  getItemsPlan(param: any, token: any): Observable<any> {
+    var headers = {
+      'Authorization': 'Bearer ' + token
+    };
+    const httpOptions = {
+      headers: headers
+    };
+    return this.http.post<any>(this.endPoint + '/product/items', param, httpOptions)
+      .pipe(
+        map(res => res));
+  }
+
+  getItemDetail(param: any, token: any): Observable<any> {
+    var headers = {
+      'Authorization': 'Bearer ' + token
+    };
+    const httpOptions = {
+      headers: headers
+    };
+    return this.http.post<any>(this.endPoint + '/product/item', param, httpOptions)
+      .pipe(
+        map(res => res));
+  }
+
+  registerItemsSale(param: any, token: any): Observable<any> {
+    var headers = {
+      'Authorization': 'Bearer ' + token
+    };
+    const httpOptions = {
+      headers: headers
+    };
+    return this.http.post<any>(this.endPoint + '/order/saleItem/register', param, httpOptions)
+      .pipe(
+        map(res => res));
+  }
+
+  getPersonAdditionalData(personId: any, token: any): Observable<any> {
+    var headers = {
+      'Authorization': 'Bearer ' + token
+    };
+    const httpOptions = {
+      headers: headers
+    };
+    return this.http.get<any>(this.endPoint + '/crm360/client/persondata/search/'+ personId, httpOptions)
+      .pipe(
+        map(res => res));
+  }
+
 }

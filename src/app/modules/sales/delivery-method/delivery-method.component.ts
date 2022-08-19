@@ -1,3 +1,13 @@
+/**
+ * Componente administración Metodo de entrega
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232 
+*/
 import { ViewportScroller } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -24,6 +34,9 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
   });
   @Output() nextDeliveryMethodStep = new EventEmitter<any>();
 
+  /**
+   * Metodo constructor de clase delivery
+  */
   constructor(private webstoreService: WebstoreService,
             private ordersService: OrdersService) {
     this.methods = {
@@ -37,19 +50,32 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
       }
     };
   }
+
+  /**
+   * Metodo OnChannge instanciada para evitar problemas de error
+  */
   ngOnChanges(changes: SimpleChanges): void {
     alert("Existió un error en ejecución");
   }
 
+  /**
+   * Metodo Iniciar Pagina de modulo
+  */
   ngOnInit(): void {
     this.changeOptions("storesInfo");
   }
 
+  /**
+   * Metodo de limpieza de objetos Store y opcion delivery
+  */
   resetDivs() {
     this.methods.storesInfo.active = false;
     this.methods.deliveriesInfo.active = false;
   }
 
+  /**
+   * Metodo ejecución de habilitacion de radiobutton elegido
+  */
   changeOptions(elegido: any) {
     this.resetDivs();
     this.methods[elegido].active = true;
@@ -68,6 +94,9 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Metodo de cambio de rediobutton
+  */
   radioChange(event: MatRadioChange) {
     if (event.source.value === 'storesInfo') {
         console.log(event.source.value);
@@ -78,11 +107,18 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Metodo de ejecución de registro de datos de entrega
+   * Ademas paso a siguiente modelo
+  */
   next(){
     this.nextDeliveryMethodStep.emit(true);
     this.registerDeliveryType();
   }
 
+  /**
+   * Metodo de registro de datos de proceso en plataforma
+  */
   registerDeliveryType(){
     const data ={
       "deliveryTypeId":"authorizedPointTypeId",

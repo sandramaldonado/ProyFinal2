@@ -246,7 +246,7 @@ export class DocumentsComponent implements OnInit {
         }
       ]
     }
-    console.log(JSON.stringify(param));
+    // console.log(JSON.stringify(param));
     this.ordersService.uploadDocuments(param, this.webstoreService.getDataInSession('token')).subscribe(
       response => {
         console.log(response);

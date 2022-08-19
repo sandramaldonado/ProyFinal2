@@ -11,6 +11,8 @@ import { WebstoreService } from '@app/services/webstore/webstore.service';
 export class AlmostDoneComponent implements OnInit {
   stateLocation: Boolean = false;
   locationInfo: any;
+  product: any;
+  producto: any;
   constructor(private router:Router, private webstoreService: WebstoreService) {
     this.locationInfo = this.webstoreService.getDeliveryStoreMethod();
     console.log(this.locationInfo);
@@ -20,6 +22,8 @@ export class AlmostDoneComponent implements OnInit {
     this.stateLocation = this.locationInfo?.state;
     console.log(this.stateLocation);
     console.log("need implementation?");
+    this.product = this.webstoreService.getPlanComposition();
+    this.producto = this.product["groupTradeName"];
   }
 
   detalle(){
