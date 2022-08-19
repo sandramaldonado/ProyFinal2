@@ -225,7 +225,6 @@ export class ValidationClientComponent implements OnInit {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
                   this.createPerson();
-                  
                 }
               }
             },
@@ -296,7 +295,7 @@ export class ValidationClientComponent implements OnInit {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
         let client = this.webstoreservice.getClientInformation();
-        if (client.clientId > 0) {
+        if (client.clientId > 0 || client.personId > 0) {
           this.spinner.hide();
           this.router.navigate(['/oferta/orden-compra']);  
         } else {
@@ -359,6 +358,9 @@ export class ValidationClientComponent implements OnInit {
       ],
       userId: this.autentication["data"]["userId"]
     }
+    console.log("Antes")
+    console.log(param);
+    console.log("Fin Antes")
     this.ordersService.createPerson(param, this.autentication["data"]["token"]).subscribe(
       response => {
         console.log(response);
