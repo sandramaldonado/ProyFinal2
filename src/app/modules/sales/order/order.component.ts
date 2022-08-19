@@ -19,11 +19,11 @@ import { BusinessrulesService } from '@app/services/businessrules/businessrules.
 import { TokenService } from '@app/services/token.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlanComposition } from '@models/PlanComposition';
-import { forkJoin, Observable, switchAll } from 'rxjs';
+import { forkJoin,Observable, switchAll } from 'rxjs';
 import { ViewportScroller } from "@angular/common";
 import { OrdersService } from '@app/services/orders.service';
 import { NgxSpinnerService } from "ngx-spinner";
-import { update } from 'lodash';
+import { entries, entriesIn, update } from 'lodash';
 
 @Component({
   selector: 'app-order',
@@ -126,7 +126,7 @@ export class OrderComponent implements OnInit {
                 this.coverageData=response;
                 this.scoringStatus = this.webstoreservice.getStatusScoring();
                 this.initializeComponents();
-                this.spinner.hide();
+                //this.spinner.hide();
               },
         error : e =>{
           alert ("Ocurrion un error en los servicios de necesidad de evaluacion cobertura, Intenta nuevamente por favor");
@@ -139,7 +139,7 @@ export class OrderComponent implements OnInit {
   }
 
   initializeComponents(){
-   
+
     /***COBERTURA (es el primer modulo sera visible por defecto)*****/
 
     /***** habilitar cobertura Usando Business Rules***** */
@@ -171,10 +171,10 @@ export class OrderComponent implements OnInit {
               this.webstoreservice.saveDataInSession('userId', response.data?.userId);
               this.createOrder();
             },
-        error : error =>{
+        error : e =>{
           alert("Ocurrio un problema en los servicios de Autentificacion, Intente nuevamente por favor");
           this.spinner.hide();
-          console.log(error);
+          console.log(e);
         }
     });
   }
@@ -276,6 +276,7 @@ export class OrderComponent implements OnInit {
 
   createOrder(){
     const client = this.webstoreservice.getClientInformation();
+
     const param = {
       "orderType": "PTFSALE",
       "orderTypeName": "VENTAS",
@@ -299,7 +300,7 @@ export class OrderComponent implements OnInit {
         console.log(response);
         this.webstoreservice.saveDataInSession('orderMainId', response.data.data.orderMainId);
         this.registerCommercialOffer(response.data.data.orderMainId);
-        this.loadBussinesRules();
+        //this.loadBussinesRules();
       },
       error : e =>{
         alert("Ocurrion un error en los servicios de creacion de orden, Intenta nuevamente por favor");
@@ -332,7 +333,7 @@ export class OrderComponent implements OnInit {
         console.log(e);
       }
     });
-       
+
   }
 
   loadItemsPlan(){
@@ -340,14 +341,20 @@ export class OrderComponent implements OnInit {
       planCompositionCode: this.webstoreservice.getPlanCompositionCode(),
       userId: this.autentication["data"]["userId"]
     }
-    this.ordersService.getItemsPlan(param, this.autentication["data"]["token"]).subscribe(
-      response => {
+    this.ordersService.getItemsPlan(param, this.autentication["data"]["token"])
+    .subscribe({
+      next: response => {
         console.log(response);
         this.webstoreservice.saveDataInSession('itemsPlan', response.data.data);
         this.buildMandatoryItems(response.data.data);
-      });
+      },
+      error: e =>{
+        alert("Ocurrio un error en los servicios recoleccion de items para el plan, intente nuevamente por favor");
+        this.spinner.hide();
+        console.log(e);
+      }
+      })
   }
-
 
   buildMandatoryItems(itemsData: any){
     let mandatoryItems = [];
@@ -405,11 +412,20 @@ export class OrderComponent implements OnInit {
       let p = this.getDataItem(element);
       proms.push(p);
     }
-    forkJoin(proms).subscribe(responses => {
-       console.log('responses', responses);
-       this.registerOrderViewItems(responses, false);
-       this.webstoreservice.saveDataInSession('mandatoryItemsPlan', responses);
-    });
+    forkJoin(proms)
+      .subscribe({
+        next: responses => {
+          console.log('responses', responses);
+          this.registerOrderViewItems(responses, false);
+          this.webstoreservice.saveDataInSession('mandatoryItemsPlan', responses);
+        },
+        error: e=>{
+          alert("Ocurrio un error en los servicios forkJoins, intente nuevamente por favor");
+          this.spinner.hide();
+          console.log(e);
+
+        }
+      });
   }
 
   registerOrderViewItems(data: any, update: boolean){
@@ -421,24 +437,40 @@ export class OrderComponent implements OnInit {
       "microFrontendData": JSON.stringify(data),
       "statusCode": "INI"
     }
-    this.ordersService.registerOrderView(param, this.autentication["data"]["token"]).subscribe(
-      response => {
+    this.ordersService.registerOrderView(param, this.autentication["data"]["token"])
+    .subscribe({
+      next:response => {
         console.log('registerOrderView', response);
         if(!update){
           this.registerItemsSale();
+        }else{
+          this.spinner.hide();
         }
-      });
+      },
+      error: e=>{
+        alert("Ocurrio un error en los servicios de registro de order view, intente nuevamente por favor");
+        this.spinner.hide();
+        console.log(e);
+      }
+    })
   }
 
   registerItemsSale(){
     const param = {
       orderId: this.webstoreservice.getDataInSession('orderMainId')
     }
-    this.ordersService.registerItemsSale(param, this.autentication["data"]["token"]).subscribe(
-      response => {
-        console.log('registerItemsSale', response);
-        this.registerOrderViewItems(response.data.data.itemsOrderList, true);
-        this.webstoreservice.saveDataInSession('mandatoryItemsPlan', response.data.data.itemsOrderList);
+    this.ordersService.registerItemsSale(param, this.autentication["data"]["token"])
+    .subscribe({
+      next: response => {
+          console.log('registerItemsSale', response);
+          this.registerOrderViewItems(response.data.data.itemsOrderList, true);
+          this.webstoreservice.saveDataInSession('mandatoryItemsPlan', response.data.data.itemsOrderList);
+      },
+      error: e=>{
+        alert("Ocurrio un error en los servicios de registro de items para la venta, intente nuevamente por favor");
+        this.spinner.hide();
+        console.log(e);
+      }
       });
   }
 
