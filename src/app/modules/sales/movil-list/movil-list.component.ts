@@ -1,3 +1,13 @@
+/**
+ * Componente administración de líneas Moviles, Web y/o TV Box
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
+ * INFORMACION DE CONFIDENCIALIDAD ALTA
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232 
+*/
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
@@ -13,6 +23,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./movil-list.component.scss']
 })
 export class MovilListComponent implements OnInit {
+  // variables titulo y parrafo de cabecera de submodulo
+  title = "Elige tu Número";
+  message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
+  // asignacion de variables de sistema
+  visited: boolean = false;
   key: any;
   planComposition: any;
   listagroup: any;
@@ -33,13 +48,11 @@ export class MovilListComponent implements OnInit {
   userId: any;
   limitLine = 5;
   movilCounter = 0;
-
   @Output() nextMovilListStep = new EventEmitter<any>();
-
-  title = "Elige tu Número";
-  message = "Te damos algunas opciones de líneas telefónicas para que puedas tener tu nuevo plan con un número telefónico que te agrade.";
-  visited: boolean = false;
-
+  /**
+   * Metodo constructor de ubmodulo 
+   * Instancia Clases de enrutado, servicios storage, servicios de registro y otros
+  */
   constructor(private movilListService: MovilListService,
     private webstoreService: WebstoreService,
     private ordersService: OrdersService,
@@ -50,17 +63,20 @@ export class MovilListComponent implements OnInit {
     this.userId = this.webstoreService.getDataInSession('userId');
   }
 
+  /**
+   * Metodo inicio de submodulo Moviles
+  */
   ngOnInit(): void {
-    /** spinner starts on init */
+    // spinner starts on init
     this.spinner.show();
-
-
     this.armadoJsonScoring();
     this.searchList();
 
   }
 
-
+  /**
+   * Metodo armado de request obtener posibles lineas movil, internet y tv
+  */
   armadoJsonScoring() {
     this.planComposition = this.webstoreService.getPlanComposition();
     this.planList = this.planComposition?.planList;
@@ -78,6 +94,9 @@ export class MovilListComponent implements OnInit {
 
   }
 
+  /**
+   * Metodo ejecución de Api Rest de obtención de lineas
+  */
   searchList() {
     let linesMovil = "";
     let linesInternet = "";
@@ -136,6 +155,10 @@ export class MovilListComponent implements OnInit {
       });
   }
 
+  /**
+   * Metodo de ejecucion armado de lineas elegidas y/o segmentadas
+   * Ademas de ejecucion de salto al siguiente segmento de oferta de sistema
+  */
   next() {
     let dataMovil = {};
     let dataWan = {};
@@ -164,6 +187,10 @@ export class MovilListComponent implements OnInit {
     this.nextMovilListStep.emit(true);
   }
 
+  /**
+   * Metodo de proceso de cambio de radiobuttons.
+   * Repinta los objetos segun seleccion
+  */
   radioChange(event: MatRadioChange) {
     var line = event.source.value;
     const linesMovil = this.numberList["data"]["data"]["movil"];
@@ -179,6 +206,9 @@ export class MovilListComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo de incremento de oferta de de lineas moviles de 5 a 10
+  */
   clickme() {
     this.limitLine = 10;
     this.linesList = [];
@@ -198,6 +228,9 @@ export class MovilListComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo Registro de Lineas elegidas y traspaso de proceso a CRM 360
+  */
   registerAactivation(numbers: any){
     console.log(numbers);
     if(!numbers) return;
@@ -209,12 +242,9 @@ export class MovilListComponent implements OnInit {
         if(element.selected){
           instAddress = element;
         }
-
         instAddressId= instAddress?.addressId;
       });
     }
-
-
     let microfrontData: any[] = [];
 
     if(numbers.movil && numbers.movil.length>0){
@@ -239,7 +269,6 @@ export class MovilListComponent implements OnInit {
         "serviceIdentifier":numbers.tv[0]
      });
     }
-
      const param = {
       "orderId": this.webstoreService.getDataInSession('orderMainId'),
       "sequence": 5,
@@ -248,11 +277,9 @@ export class MovilListComponent implements OnInit {
       "microFrontendData": JSON.stringify(microfrontData),
       "statusCode": "INI"
     }
-
     this.ordersService.registerOrderView(param, this.webstoreService.getDataInSession('token')).subscribe(
       response => {
         console.log(response);
-
       });
   }
 
