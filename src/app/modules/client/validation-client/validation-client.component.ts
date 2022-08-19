@@ -90,7 +90,7 @@ export class ValidationClientComponent implements OnInit {
     private webstoreservice: WebstoreService,
     private spinner: NgxSpinnerService
     ) {
-    
+
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.autentication = {};
     this.infoClient = {};
@@ -206,7 +206,7 @@ export class ValidationClientComponent implements OnInit {
                   this.scoringValidated(planService);
                 } else {
                   if (offerconsumptionformcode == "CCOPRE") {
-                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                    this.webstoreservice.saveStatusScoring("EXPRESS");
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
@@ -233,6 +233,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["nit"] = null;
                 datosClient2["personId"] = null;
                 datosClient2["personTypeCode"] = "NATURAL";
+
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
                 if(offerconsumptionformcode == "CCOPOS"){
@@ -240,12 +241,12 @@ export class ValidationClientComponent implements OnInit {
                   this.scoringValidated(planService);
                 } else {
                   if (offerconsumptionformcode == "CCOPRE") {
-                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                    this.webstoreservice.saveStatusScoring("EXPRESS");
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
                   this.createPerson();
-                  
+
                 }
               }
             },
@@ -271,7 +272,7 @@ export class ValidationClientComponent implements OnInit {
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
-    
+
     let clientExiste = {};
     if (client.clientId > 0) {
       clientExiste = {"clientId": client.clientId};
@@ -312,11 +313,11 @@ export class ValidationClientComponent implements OnInit {
         let client = this.webstoreservice.getClientInformation();
         if (client.clientId > 0) {
           this.spinner.hide();
-          this.router.navigate(['/oferta/orden-compra']);  
+          this.router.navigate(['/oferta/orden-compra']);
         } else {
           this.createPerson();
         }
-        
+
       },
       error => {
         console.log(error);

@@ -226,7 +226,8 @@ export class AdminClientComponent implements OnInit {
 
     this.visited = true;
 
-    this.registerClient();
+    //this.registerClient();
+    this.getAdditionalData();
     this.registerBillingInfo();
 
     this.nextAdminClientStep.emit(true);
@@ -286,6 +287,21 @@ export class AdminClientComponent implements OnInit {
 
     get nit() {
       return this.validationForm.get('nit');
+    }
+
+    getAdditionalData(){
+      let person = this.webstoreservice.getClientInformation();
+      this.ordersService.getPersonAdditionalData(person.personId, this.webstoreservice.getDataInSession('token')).subscribe(
+        response => {
+          console.log(response);
+          person.additionalDataList = response.data.data.map((element: any)=>{
+            element.entityId = element.personId;
+            element.entityDataId = element.personDataId;
+            return element;
+          });
+          this.webstoreservice.saveClientInformation(person);
+          this.registerClient();
+        });
     }
 
     registerClient(){
