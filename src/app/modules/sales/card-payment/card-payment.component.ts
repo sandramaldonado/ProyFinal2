@@ -71,13 +71,18 @@ export class CardPaymentComponent implements OnInit {
         this.statusscoring = this.webstoreService.getDataInSession('statusscoring');
         console.log("******statusscoring")
         console.log(this.statusscoring)
+
+        this.code = this.webstoreService.getOfferConsuptioncode();
         const descRecurring = this.getRecurring(this.statusscoring);
         console.log('descRecurring ',descRecurring)
-        this.code = this.webstoreService.getOfferConsuptioncode();
+
+        console.log('offerconsumptionformcode ',this.code);
         console.log("******code OfferConsuptioncode")
         const automaticpaymentCheck = this.webstoreService.getDataInSession("automaticpayment");
-        console.log(this.code);
         const paymentMethod = this.webstoreService.getDataInSession("paymentMethod");
+        if(paymentMethod === "uponDelivery") {
+            this.offertotaltariff = 0;
+        } 
         // const webStorage = this.webstoreService.getOfferConsuptioncode();
         // CONTROLAR ATRIBUTOS OBLIGATORIOS
         this.microFrontParamIn = {
@@ -91,20 +96,13 @@ export class CardPaymentComponent implements OnInit {
             termsOfService: { mode: "required", url: urlTerms }, // mode: hide |required | option == permite pasar y no es obligatorio
             currency: { code: 'BOB', description: 'Bs' },
             cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
-            recurring: { mode: descRecurring, value: automaticpaymentCheck }, // required | option | preselected
+            recurring: { mode: descRecurring, value: automaticpaymentCheck ? automaticpaymentCheck : false }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
             payAmountMode: 'hide', // optional/NULL / hide > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
             user: this.person,
             amount: this.offertotaltariff,
-
-            //OJOJOJJOJO
-            //quitar
-            paymentMethod: paymentMethod,// cardPayment = muestra el monto | uponDelivery = no mostrar el monto
-            // si es contra entrega colocar 0 en el padre
-            
-            // webStorage: webStorage ? webStorage : null,
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
@@ -112,8 +110,6 @@ export class CardPaymentComponent implements OnInit {
             // Bloquear el switch cuando llega pago automatico de pantalla anterior
             // si es prepago ocultar pago automatico
             //si es contra entrega y prepago no mostrar el monto y el radio button
-            // aumentar spinner en pantalla de pago
-            // Se es pago a contra entrega y es prepago solo debe mostrarse el aceptar terminos y condiciones
         }
         console.log(this.microFrontParamIn)
         console.groupEnd()
@@ -142,14 +138,15 @@ export class CardPaymentComponent implements OnInit {
 
     getRecurring(recurring: string) {
         // required | optional | preselected | hide
+        console.log('code ',this.code)
         var desc = 'preselected';
         if (recurring == 'NORMAL') {
             desc = 'required';
         }
-        if (this.code == "CCOPOS" && recurring == 'EXPRESS') {
+        if (this.code == "CCOPOS" && recurring == 'EXPRESS') { // TIPBATVF: CCOPOS Y EXPRESS
             desc = 'optional';
         }
-        if(this.code == "CCOPRE") {
+        if(this.code == "CCOPRE") { // LTEPREO3
             desc = 'hide';
         }
         return desc;
