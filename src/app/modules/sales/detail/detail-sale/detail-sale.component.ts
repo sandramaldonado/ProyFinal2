@@ -93,7 +93,7 @@ export class DetailSaleComponent implements OnInit {
 
   Visible(){
     this.code = this.webStorage.getOfferConsuptioncode();
-    console.log(this.code);
+    // console.log(this.code);
     if (this.code == "CCOPOS"){
 
       return true;
@@ -129,8 +129,8 @@ export class DetailSaleComponent implements OnInit {
 
 
   onChange($event: MatSlideToggleChange) {
-    console.log($event);
-    console.log("queso:" + this.isChecked);
+    // console.log($event);
+    // console.log("queso:" + this.isChecked);
     this.discount(this.porcentaje);
     this.webStorage.saveAutomaticPayment(this.isChecked);
   }
