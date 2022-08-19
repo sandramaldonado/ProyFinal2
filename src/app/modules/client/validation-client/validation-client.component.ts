@@ -1,18 +1,13 @@
 /**
- *
- * Landing Master Sales: validation client component
- *
- * Nuevatel PCS de Bolivia S.A. (c) 2022
- *
- * El Contenido de este archivo esta clasificado como:
- *
+ * Componente Validacion de existencia Cliente en O2 y/o O3
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
  * INFORMACION DE CONFIDENCIALIDAD ALTA
- *
- * @author Nuevatel PCS
- *
- * @version 1.0.0 Date 01/08/2022
- *
- */
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232
+*/
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,6 +22,7 @@ import { ClientService } from 'src/app/core/services/client.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-validation-client',
@@ -79,6 +75,10 @@ export class ValidationClientComponent implements OnInit {
     }
   };
 
+  /**
+   * Metodo constructor de clase
+   * Instancia Clases de enrutado, servicios storage, servicios de registro y otros
+  */
   constructor(private clientService: ClientService,
     private tokenService: TokenService,
     private router: Router,
@@ -86,8 +86,10 @@ export class ValidationClientComponent implements OnInit {
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
     private ordersService: OrdersService,
-    private webstoreservice: WebstoreService) {
-    
+    private webstoreservice: WebstoreService,
+    private spinner: NgxSpinnerService
+    ) {
+
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.autentication = {};
     this.infoClient = {};
@@ -96,6 +98,9 @@ export class ValidationClientComponent implements OnInit {
     this.validationCaptcha();
   }
 
+  /**
+   * Metodo de inicio de modelo obtiene tokenizacion y definir formato de fecha actual
+  */
   ngOnInit(): void {
     this.getToken();
     this.setDate();
@@ -119,26 +124,6 @@ export class ValidationClientComponent implements OnInit {
    * Metodo de obtencion de fecha en formato dd-mm-yyyy
    */
   setDate() {
-
-    /*
-    let date: Date = new Date();
-    let anio = date.getFullYear();
-    let dia = date.getDate();
-    let mes = date.getMonth();
-    var dia2 = "";
-    var mes2 = "";
-    if (dia.toString.length == 1) {
-      dia2 = "0" + dia.toString();
-    } else {
-      dia2 = dia.toString();
-    }
-    if (mes.toString.length == 1) {
-      mes2 = "0" + mes.toString();
-    } else {
-      mes2 = mes.toString();
-    }
-    */
-
     let actualDate = moment().format('DD-MM-YYYY').toString();
     //console.log(actualDate);
     this.fecha = actualDate;
@@ -164,6 +149,7 @@ export class ValidationClientComponent implements OnInit {
    * Metodo de ejecucion desde interface tras validacion de campos
    */
   onSubmit() {
+    this.spinner.show();
     // obtencion plan vinculado a solicitud de compra
     let flagPlan = this.planComposition?.planCompositionCode;
     let statusPlan = false;
@@ -202,7 +188,7 @@ export class ValidationClientComponent implements OnInit {
                   this.scoringValidated(planService);
                 } else {
                   if (offerconsumptionformcode == "CCOPRE") {
-                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                    this.webstoreservice.saveStatusScoring("EXPRESS");
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
@@ -210,7 +196,6 @@ export class ValidationClientComponent implements OnInit {
                 }
               } else {
                 this.submitted = true;
-                //sessionStorage.setItem("isClient", "false");
                 var datosClient2:any = {};
                 datosClient2["birthday"] = null;
                 datosClient2["clientId"] = null;
@@ -229,20 +214,21 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["nit"] = null;
                 datosClient2["personId"] = null;
                 datosClient2["personTypeCode"] = "NATURAL";
+
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-
                 if(offerconsumptionformcode == "CCOPOS"){
                   let planService = this.armadoJsonScoring();
                   this.scoringValidated(planService);
                 } else {
                   if (offerconsumptionformcode == "CCOPRE") {
-                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                    this.webstoreservice.saveStatusScoring("EXPRESS");
                   } else {
                     this.webstoreservice.saveStatusScoring("NORMAL");
                   }
+                  this.createPerson();
+
                 }
-                this.createPerson();
               }
             },
             error => {
@@ -259,15 +245,18 @@ export class ValidationClientComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo de armado de objeto request Scoring
+   */
   armadoJsonScoring() {
     this.planList = this.planComposition?.planList;
     this.productTypeCode = [];
     console.log(this.fecha);
-    const client = this.webstoreservice.getClientInformation();
+    let client = this.webstoreservice.getClientInformation();
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
-    
+
     let clientExiste = {};
     if (client.clientId > 0) {
       clientExiste = {"clientId": client.clientId};
@@ -300,46 +289,68 @@ export class ValidationClientComponent implements OnInit {
     return this.armadoScoring;
   }
 
+  /**
+   * Metodo de ejecucion apiRest Scoring
+   */
   scoringValidated(planService: any) {
-    let client = this.webstoreservice.getClientInformation();
     this.scoringValidationService.getValidationClientScoring(planService, this.autentication["data"]["token"]).subscribe(
       response => {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
+        let client = this.webstoreservice.getClientInformation();
         if (client.clientId > 0) {
-          console.log("ingreso si existe");
+          this.spinner.hide();
           this.router.navigate(['/oferta/orden-compra']);
+        } else {
+          this.createPerson();
         }
+
       },
       error => {
         console.log(error);
       });
   }
 
+  /**
+   * Obtencion de datos CI
+  */
   get dni() {
     return this.validationForm.get('dni');
   }
 
+  /**
+   * Obtencion de datos Número de Celular
+  */
   get subscriberId() {
     return this.validationForm.get('subscriberId');
   }
 
+  /**
+   * Obtencion de datos Primer Nombre
+  */
   get name() {
     return this.validationForm.get('name');
   }
 
+  /**
+   * Obtencion de datos Primer Apellido
+  */
   get lastname() {
     return this.validationForm.get('lastname');
   }
 
+  /**
+   * Obtencion de datos captcha
+  */
   get captcha_status() {
     return this.validationForm.get('captcha_status');
   }
 
+  /**
+   * Metodo de registro de prospecto de cliente en O2 y O3
+  */
   createPerson(){
-    console.log("ingresa crear persona");
     const person = this.webstoreservice.getClientInformation();
-    console.log(person);
     const param = {
       createPerson: person,
       createPersonAdditionalData: [
@@ -356,8 +367,8 @@ export class ValidationClientComponent implements OnInit {
         console.log(response);
         person.personId = response.data.data.personId;
         this.webstoreservice.saveClientInformation(person);
+        this.spinner.hide();
         this.router.navigate(['/oferta/orden-compra']);
       });
   }
-
 }

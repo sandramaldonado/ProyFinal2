@@ -18,6 +18,7 @@ export class PaymentDoneComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("functions can't be empty");
   }
 
   /*getToken() {
