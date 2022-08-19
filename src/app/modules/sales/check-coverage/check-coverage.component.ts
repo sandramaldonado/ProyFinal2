@@ -5,6 +5,8 @@ import { WebstoreService } from "@services/webstore/webstore.service";
 import { CoverageService } from '@app/services/coverage/coverage.service';
 import { response } from 'express';
 import { OrdersService } from '@app/services/orders.service';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-check-coverage',
@@ -106,7 +108,8 @@ export class CheckCoverageComponent implements OnInit {
   constructor(
     private webstoreService : WebstoreService,
     private coverageService : CoverageService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {

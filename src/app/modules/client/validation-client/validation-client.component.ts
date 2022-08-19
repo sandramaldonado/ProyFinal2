@@ -41,6 +41,7 @@ export class ValidationClientComponent implements OnInit {
   scoringValid: any;
   planList: any;
   productTypeCode: any;
+  flagPREPOST = '';
 
   // definir valores de evaluacion numeros y alfa numericos
   dniClientPattern = /^[A-Za-z0-9]+$/;
@@ -85,10 +86,12 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
-    private spinner: NgxSpinnerService,
     private ordersService: OrdersService,
-    private webstoreservice: WebstoreService) {
-
+    private webstoreservice: WebstoreService,
+    private spinner: NgxSpinnerService
+    ) {
+    
+    this.planComposition = this.webstoreservice.getPlanComposition();
     this.autentication = {};
     this.infoClient = {};
     this.scoringValid = {};
@@ -164,8 +167,8 @@ export class ValidationClientComponent implements OnInit {
    * Metodo de ejecucion desde interface tras validacion de campos
    */
   onSubmit() {
+    this.spinner.show();
     // obtencion plan vinculado a solicitud de compra
-    this.planComposition = this.webstoreservice.getPlanComposition();
     let flagPlan = this.planComposition?.planCompositionCode;
     let statusPlan = false;
     let phone: string = "";
@@ -193,27 +196,20 @@ export class ValidationClientComponent implements OnInit {
             response => {
               this.infoClient = response;
               dataClient = this.infoClient["data"]["data"][0];
+              this.webstoreservice.saveClientInformation(dataClient);
               console.log(dataClient);
+              let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
               if (this.infoClient["data"]["data"].length == 1) {
-                if (this.infoClient["data"]["data"]["0"]["clientId"] != "null" || this.infoClient["data"]["data"]["0"]["clientId"] != "NULL") {
-                  //sessionStorage.setItem("isClient", true);
-                  this.submitted = true;
-                  this.webstoreservice.saveClientInformation(dataClient);
-                  const planService = this.armadoJsonScoring();
-                  //console.log(planService);
-                  let offerconsumptionformcode = this.webstoreservice.getDataInSession("offerconsumptionformcode");
-                  if(offerconsumptionformcode == "CCOPOS"){
-                    this.scoringValidated(planService);
-                  }else{
-                    this.webstoreservice.saveStatusScoring("EXPRESS");
-                  }
-                  this.router.navigate(['/oferta/orden-compra']);
+                this.submitted = true;
+                if(offerconsumptionformcode == "CCOPOS"){
+                  let planService = this.armadoJsonScoring();
+                  this.scoringValidated(planService);
                 } else {
-                  //sessionStorage.setItem("isClient", "false");
-                  this.submitted = true;
-                  this.webstoreservice.saveClientInformation(dataClient);
-                  this.webstoreservice.saveStatusScoring("NORMAL");
-                  //this.router.navigate(['/client/adminClient']);
+                  if (offerconsumptionformcode == "CCOPRE") {
+                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                  } else {
+                    this.webstoreservice.saveStatusScoring("NORMAL");
+                  }
                   this.router.navigate(['/oferta/orden-compra']);
                 }
               } else {
@@ -228,7 +224,7 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["documentType"] = "CI";
                 datosClient2["documentTypeDesc"] = null;
                 datosClient2["email"] = null;
-                datosClient2["fullName"] = null;
+                datosClient2["fullName"] = lastname1 + " " + name1;
                 datosClient2["gender"] = null;
                 datosClient2["lastName1"] = lastname1;
                 datosClient2["lastName2"] = null;
@@ -239,9 +235,18 @@ export class ValidationClientComponent implements OnInit {
                 datosClient2["personTypeCode"] = "NATURAL";
                 console.log(datosClient2);
                 this.webstoreservice.saveClientInformation(datosClient2);
-                this.webstoreservice.saveStatusScoring("NORMAL");
-                this.createPerson();
-                //this.router.navigate(['/oferta/orden-compra']);
+                if(offerconsumptionformcode == "CCOPOS"){
+                  let planService = this.armadoJsonScoring();
+                  this.scoringValidated(planService);
+                } else {
+                  if (offerconsumptionformcode == "CCOPRE") {
+                    this.webstoreservice.saveStatusScoring("EXPRESS");  
+                  } else {
+                    this.webstoreservice.saveStatusScoring("NORMAL");
+                  }
+                  this.createPerson();
+                  
+                }
               }
             },
             error => {
@@ -259,21 +264,26 @@ export class ValidationClientComponent implements OnInit {
   }
 
   armadoJsonScoring() {
-    this.planComposition = this.webstoreservice.getPlanComposition();
     this.planList = this.planComposition?.planList;
     this.productTypeCode = [];
     console.log(this.fecha);
-    const client = this.webstoreservice.getClientInformation();
+    let client = this.webstoreservice.getClientInformation();
     for (let index = 0; index < this.planList.length; index++) {
       this.productTypeCode.push(this.planList[index]["consumptionEntityType"]);
     }
+    
+    let clientExiste = {};
+    if (client.clientId > 0) {
+      clientExiste = {"clientId": client.clientId};
+    } else {
+      clientExiste = {"clientId": null,
+                      "documentNumber": client.documentNumber,
+                      "documentTypeCode": client.documentType,
+                      "fullname": client.fullName
+                    };
+    }
     this.armadoScoring = JSON.stringify({
-      "client": {
-        "clientId": client.clientId, //this.infoClient["data"]["data"]["0"]["clientId"],
-        "documentNumber": client.clientId?null:client.documentNumber,
-        "documentTypeCode": client.clientId?null:client.documentType,
-        "fullname": client.clientId?null:client.fullName
-      },
+      "client": clientExiste,
       "commercialOffer": {
         "groupPlan": this.planComposition?.planCompositionCode,
         "productTypeCode": this.productTypeCode
@@ -299,7 +309,14 @@ export class ValidationClientComponent implements OnInit {
       response => {
         this.scoringValid = response;
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
-        this.router.navigate(['/oferta/orden-compra']);
+        let client = this.webstoreservice.getClientInformation();
+        if (client.clientId > 0) {
+          this.spinner.hide();
+          this.router.navigate(['/oferta/orden-compra']);  
+        } else {
+          this.createPerson();
+        }
+        
       },
       error => {
         console.log(error);
@@ -327,7 +344,6 @@ export class ValidationClientComponent implements OnInit {
   }
 
   createPerson(){
-    this.spinner.show();
     const person = this.webstoreservice.getClientInformation();
     const param = {
       createPerson: person,
@@ -345,8 +361,8 @@ export class ValidationClientComponent implements OnInit {
         console.log(response);
         person.personId = response.data.data.personId;
         this.webstoreservice.saveClientInformation(person);
-        this.router.navigate(['/oferta/orden-compra']);
         this.spinner.hide();
+        this.router.navigate(['/oferta/orden-compra']);
       });
   }
 
