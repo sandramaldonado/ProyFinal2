@@ -83,34 +83,26 @@ export class CardPaymentComponent implements OnInit {
         if(paymentMethod === "uponDelivery") {
             this.offertotaltariff = 0;
         } 
-        // const webStorage = this.webstoreService.getOfferConsuptioncode();
-        // CONTROLAR ATRIBUTOS OBLIGATORIOS
         this.microFrontParamIn = {
             // theme: "light-green",
             orderType: "SALES",
             orderId: orderId ? orderId : null,
-            system: "LANDING",// LANDING | OMEGA3
+            system: "LANDING",
             entityType: "partyId",//cableado
-            entityId: this.person && this.person.personId ? this.person.personId : null,//cableado,
+            entityId: this.person && this.person.personId ? this.person.personId : null,
             language: "es",
             termsOfService: { mode: "required", url: urlTerms }, // mode: hide |required | option == permite pasar y no es obligatorio
             currency: { code: 'BOB', description: 'Bs' },
-            cart: [{ sellerId: 'NT', sellerDesc: 'Viva' }],
+            cart: null,//[{ sellerId: 'NT', sellerDesc: 'Viva' }],
             recurring: { mode: descRecurring, value: automaticpaymentCheck ? automaticpaymentCheck : false }, // required | option | preselected
             fullNames: this.fullNames,
             fullLastNames: this.fullLastNames,
             uniqueId: null,
-            payAmountMode: 'hide', // optional/NULL / hide > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
+            payAmountMode: 'hide',
             amount: this.offertotaltariff,
             email: this.person.email,
             nroRef: this.person.nroRef,
             token: token
-            //OMEGA3
-            //payAmountMode: optional/required 
-
-            // Bloquear el switch cuando llega pago automatico de pantalla anterior
-            // si es prepago ocultar pago automatico
-            //si es contra entrega y prepago no mostrar el monto y el radio button
         }
         console.log(this.microFrontParamIn)
         console.groupEnd()
