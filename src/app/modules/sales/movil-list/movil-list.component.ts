@@ -44,7 +44,7 @@ export class MovilListComponent implements OnInit {
     private webstoreService: WebstoreService,
     private ordersService: OrdersService,
     private formBuilder: FormBuilder,
-    private spinnerService: NgxSpinnerService) {
+    private spinner: NgxSpinnerService) {
     this.key = sessionStorage.getItem("key");
     this.orderId = this.webstoreService.getDataInSession('orderMainId');
     this.userId = this.webstoreService.getDataInSession('userId');
@@ -52,12 +52,7 @@ export class MovilListComponent implements OnInit {
 
   ngOnInit(): void {
     /** spinner starts on init */
-    this.spinnerService.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinnerService.hide();
-    }, 10000);
+    this.spinner.show();
 
 
     this.armadoJsonScoring();
@@ -91,6 +86,7 @@ export class MovilListComponent implements OnInit {
     this.movilListService.getMovilList(this.planService, this.key).subscribe(
       response => {
         this.numberList = response;
+        this.spinner.hide();
         console.log(this.numberList);
         if (this.numberList["data"]["data"]["movil"] != null) {
           linesMovil = this.numberList["data"]["data"]["movil"];
