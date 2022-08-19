@@ -86,9 +86,10 @@ export class ValidationClientComponent implements OnInit {
     public dialog: MatDialog,
     private captchService: CaptchaService,
     private scoringValidationService: ScoringValidationService,
-    private spinner: NgxSpinnerService,
     private ordersService: OrdersService,
-    private webstoreservice: WebstoreService) {
+    private webstoreservice: WebstoreService,
+    private spinner: NgxSpinnerService
+    ) {
     
     this.planComposition = this.webstoreservice.getPlanComposition();
     this.autentication = {};
@@ -166,6 +167,7 @@ export class ValidationClientComponent implements OnInit {
    * Metodo de ejecucion desde interface tras validacion de campos
    */
   onSubmit() {
+    this.spinner.show();
     // obtencion plan vinculado a solicitud de compra
     let flagPlan = this.planComposition?.planCompositionCode;
     let statusPlan = false;
@@ -309,6 +311,7 @@ export class ValidationClientComponent implements OnInit {
         this.webstoreservice.saveStatusScoring(this.scoringValid["data"]["flowType"]);
         let client = this.webstoreservice.getClientInformation();
         if (client.clientId > 0) {
+          this.spinner.hide();
           this.router.navigate(['/oferta/orden-compra']);  
         } else {
           this.createPerson();
@@ -358,8 +361,8 @@ export class ValidationClientComponent implements OnInit {
         console.log(response);
         person.personId = response.data.data.personId;
         this.webstoreservice.saveClientInformation(person);
-        this.router.navigate(['/oferta/orden-compra']);
         this.spinner.hide();
+        this.router.navigate(['/oferta/orden-compra']);
       });
   }
 
