@@ -15,6 +15,7 @@ export const environment = {
   SSITokenPassword : '3X4E+U7d1m1XprRamjfaRg==',
   SSIAuthApiUrl         : 'https://omega.devnt.ssidevops.com/auth/login',
 
+  CheckCoverageApiUrl : 'https://omega.devnt.ssidevops.com/order/address/customerSite',
   EmailApiUrl           : 'http://10.45.56.62:3800/api/mastersales/sendEmail',
   ClientValidationUrl   : 'http://localhost:3000/client',
   ScoringApiUrl         : 'https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation',
