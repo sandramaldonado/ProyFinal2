@@ -1,18 +1,13 @@
 /**
- *
- * Landing Master Sales: Admin Client Component
- *
- * Nuevatel PCS de Bolivia S.A. (c) 2022
- *
- * El Contenido de este archivo esta clasificado como:
- *
+ * Componente administración de información de Cliente
+ * NuevaTel PCS de Bolivia S.A. (c) 2022
+ * El contenido de este archivo esta clasificado como:
  * INFORMACION DE CONFIDENCIALIDAD ALTA
- *
- * @author Nuevatel PCS
- *
- * @version 1.0.0 Date 01/08/2022
- *
- */
+ * @author Victor Antonio Zurita Borja
+ * @version 1.0.0
+ * @date 2022-08-01
+ * @since 1.8.0_232
+*/
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +16,7 @@ import { OrdersService } from '@app/services/orders.service';
 import { TokenService } from '@app/services/token.service';
 import { WebstoreService } from '@app/services/webstore/webstore.service';
 import { DocumentType } from '@models/DocumentType';
-import {LocalStorage, SessionStorage} from 'ngx-webstorage';
+import { LocalStorage, SessionStorage } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-admin-client',
@@ -29,19 +24,20 @@ import {LocalStorage, SessionStorage} from 'ngx-webstorage';
   styleUrls: ['./admin-client.component.scss']
 })
 export class AdminClientComponent implements OnInit {
-  subscriberId: any;
   key: any;
   title = "Tus datos de registro";
   message = "Llena o revisa los datos del siguiente formulario, cuando termines presiona en Continuar.";
-  // definicion de tipos Dock
-  tipoDoc: DocumentType[] = [{value: 'CI', description: 'CI'}, {value: 'NIT', description: 'NIT'}, {value: 'LIBRETA', description: 'LIB. MILITAR'}];
-  expedido: DocumentType[] = [{value: 'CBEN', description: 'Beni'}, {value: 'CCBA', description: 'Cochabamba'}, {value: 'CLPZ', description: 'La Paz'}, {value: 'CORU', description: 'Oruro'}, {value: 'CPAN', description: 'Pando'}, {value: 'CPOT', description: 'Potosi'}, {value: 'CSCR', description: 'Sucre'}, {value: 'CSCZ', description: 'Santa Cruz'}, {value: 'CTRJ', description: 'Tarija'}];
+  // definicion de tipos Documentos y ciudad
+  tipoDoc: DocumentType[] = [{ value: 'CI', description: 'CI' }, { value: 'NIT', description: 'NIT' }, { value: 'LIBRETA', description: 'LIB. MILITAR' }];
+  expedido: DocumentType[] = [{ value: 'CBEN', description: 'Beni' }, { value: 'CCBA', description: 'Cochabamba' }, { value: 'CLPZ', description: 'La Paz' }, { value: 'CORU', description: 'Oruro' }, { value: 'CPAN', description: 'Pando' }, { value: 'CPOT', description: 'Potosi' }, { value: 'CSCR', description: 'Sucre' }, { value: 'CSCZ', description: 'Santa Cruz' }, { value: 'CTRJ', description: 'Tarija' }];
   // definir valores de evaluacion numeros y alfa numericos
   dniClientPattern = /^[A-Za-z0-9]+$/;
   nameClient = /^[A-Za-z]+$/;
   surNameClient = /^[A-Za-z\s]+$/;
   mobilNumPattern = /^[0-9]+$/;
   emailtext = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+  // declaracion de variables
+  subscriberId: any;
   panelOpenState = false;
   submitted: boolean = false;
   clientInfo: any;
@@ -49,6 +45,7 @@ export class AdminClientComponent implements OnInit {
   stateScorin: String = "";
   stateClient: Boolean = false;
   stateSelect: Boolean = false;
+  // Formulario definido para validación
   validationForm = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
     'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
@@ -63,56 +60,40 @@ export class AdminClientComponent implements OnInit {
     'nit': new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern(this.mobilNumPattern)])
   });
   infoClient: any;
-  visited : boolean = false;
+  visited: boolean = false;
 
   @Output() nextAdminClientStep = new EventEmitter<any>();
   @LocalStorage()
-	public boundAttribute : any ="Texto Inicial";
+  public boundAttribute: any = "Texto Inicial";
 
   @LocalStorage()
-  public boundLastName : any;
-
+  public boundLastName: any;
+  /**
+   * Metodo constructor de clase
+   * Instancia Clases de enrutado, servicios storage, servicios de registro y otros
+  */
   constructor(private router: Router,
-            private activatedRoute: ActivatedRoute,
-            private clientService: ClientService,
-            private ordersService: OrdersService,
-            private tokenService: TokenService,
-            private webstoreservice: WebstoreService) {
+    private activatedRoute: ActivatedRoute,
+    private clientService: ClientService,
+    private ordersService: OrdersService,
+    private tokenService: TokenService,
+    private webstoreservice: WebstoreService) {
     this.key = sessionStorage.getItem("key");
     this.clientInfo = this.webstoreservice.getClientInformation();
     this.stateScorin = this.webstoreservice.getStatusScoring();
-
-    //this.infoClientService.disparadorInfoClient.subscribe(data => {console.log(data); this.clientInfo.push(data);});
-  }
-
-  ngOnInit(): void {
-
-    //this.webstoreservice.saveToken();
-    //this.activatedRoute.params.subscribe(params => {console.log(params); this.subscriberId = params["phone"];});
-    //console.log(this.subscriberId);
-    //this.loadcontents();
-    //console.log(this.key);
-
-    //this.clientInfo = this.webstoreservice.getClientInformation();
-    //console.log(this.stateScorin);
-    this.loadForm();
-    this.getToken();
   }
 
   /**
-   loadcontents() {
-    this.clientService.getClientByMovil(this.subscriberId, this.key)
-        .subscribe(
-          response => {
-            this.infoClient = response;
-            this.loadForm();
-          },
-          error => {
-            console.log(error);
-          });
+   * Metodo de inicio de modelo, obtiene tokenizacion y cargado de formulario en pantalla
+  */
+  ngOnInit(): void {
+    this.getToken();
+    this.loadForm();
   }
-   */
 
+  /**
+   * Obtencion de token por medio de consulta a Servicios externos
+  */
   getToken() {
     this.tokenService.gettoken()
       .subscribe(
@@ -125,6 +106,9 @@ export class AdminClientComponent implements OnInit {
         });
   }
 
+  /**
+   * Se gestiona el cargado de datos instanciados de sesion lpara cliente localizado en plataforma 02 y/o O3
+  */
   loadForm() {
     console.log(this.clientInfo["clientId"]);
     if (this.clientInfo["clientId"] > 0) {
@@ -136,7 +120,6 @@ export class AdminClientComponent implements OnInit {
       this.stateSelect = true;
       this.stateClient = false;
     }
-
     const name1 = this.clientInfo["name"];
     const name2 = this.clientInfo["middleName"];
     const lastname1 = this.clientInfo["lastName1"];
@@ -147,7 +130,6 @@ export class AdminClientComponent implements OnInit {
     const email = this.clientInfo["email"];
     const rSocial = this.clientInfo["fullName"];
     const nroNit = this.clientInfo["nit"];
-
     this.validationForm.setValue(
       {
         firstName: name1,
@@ -160,19 +142,20 @@ export class AdminClientComponent implements OnInit {
         nroRef: null,
         email: email,
         razonS: rSocial,
-        nit:  nroNit
+        nit: nroNit
       },
       {
         emitEvent: true,
         onlySelf: true
       }
     );
-
-
-
   }
 
-  next (){
+  /**
+   * Ejecucion de rescate de informacion cliente.
+   * Ademas de consolidar y pasar a siguiente etapa de venta
+  */
+  next() {
     let name1 = this.validationForm.value.firstName!;
     let name2 = this.validationForm.value.secondName!;
     let lastname1 = this.validationForm.value.sureName!;
@@ -188,14 +171,14 @@ export class AdminClientComponent implements OnInit {
     let fullname = "";
     fullname = name1;
     if (name2 != "" || name2 != null) {
-      fullname += " "+name2;
+      fullname += " " + name2;
     }
     if (lastname1 != "" || lastname1 != null) {
-      fullname += " "+lastname1;
+      fullname += " " + lastname1;
     }
 
     if (lastname2 != "" || lastname2 != null) {
-      fullname += " "+lastname2;
+      fullname += " " + lastname2;
     }
     const datosClient = {
       "birthday": this.clientInfo["birthday"],
@@ -220,89 +203,119 @@ export class AdminClientComponent implements OnInit {
     };
 
     this.loadInfoClien(datosClient);
-    console.log("inica");
     console.log(datosClient);
-    console.log("finaliza");
-
     this.visited = true;
 
-    this.registerClient();
+    //this.registerClient();
+    this.getAdditionalData();
     this.registerBillingInfo();
 
     this.nextAdminClientStep.emit(true);
   }
 
+  /**
+   * Instanciar datos validados en formulario y trasmisiona session Storage
+  */
   loadInfoClien(datosClient: any) {
-    //sessionStorage.setItem("infoClientStorage", datosClient);
     this.webstoreservice.saveClientInformation(datosClient);
   }
 
-  onSubmit() {}
   /**
-   firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
-    'secondName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.nameClient)]),
-    'sureName': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.surNameClient)]),
-    'secondSurName': new FormControl(null, [Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.surNameClient)]),
-    'tipo': new FormControl(null, [Validators.required]),
-    'nroDoc': new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(10), Validators.pattern(this.dniClientPattern)]),
-    'expDoc': new FormControl(null, [Validators.required]),
-    'nroRef': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(this.mobilNumPattern)]),
-    'email': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(this.emailtext)])
-   */
+   * Obtencion de datos primer Nombre
+  */
+  get firstName() {
+    return this.validationForm.get('firstName');
+  }
 
+  /**
+   * Obtencion de datos Primer Apellido
+  */
+  get sureName() {
+    return this.validationForm.get('sureName');
+  }
 
+  /**
+   * Obtencion de datos Tipo de documento
+  */
+  get tipo() {
+    return this.validationForm.get('tipo');
+  }
 
-    get firstName() {
-      return this.validationForm.get('firstName');
-    }
+  /**
+   * Obtencion de datos Número de documento
+  */
+  get nroDoc() {
+    return this.validationForm.get('nroDoc');
+  }
 
-    get sureName() {
-      return this.validationForm.get('sureName');
-    }
+  /**
+   * Obtencion de datos Expedido de documento
+  */
+  get expDoc() {
+    return this.validationForm.get('expDoc');
+  }
 
-    get tipo() {
-      return this.validationForm.get('tipo');
-    }
+  /**
+   * Obtencion de datos Número de referencia
+  */
+  get nroRef() {
+    return this.validationForm.get('nroRef');
+  }
 
-    get nroDoc() {
-      return this.validationForm.get('nroDoc');
-    }
+  /**
+   * Obtencion de datos correo eletrónico
+  */
+  get email() {
+    return this.validationForm.get('email');
+  }
 
-    get expDoc() {
-      return this.validationForm.get('expDoc');
-    }
+  /**
+   * Obtencion de datos Razon social (Facturacion)
+  */
+  get razonS() {
+    return this.validationForm.get('razonS');
+  }
 
-    get nroRef() {
-      return this.validationForm.get('nroRef');
-    }
+  /**
+   * Obtencion de datos NIT (Facturacion)
+  */
+  get nit() {
+    return this.validationForm.get('nit');
+  }
 
-    get email() {
-      return this.validationForm.get('email');
-    }
-
-    get razonS() {
-      return this.validationForm.get('razonS');
-    }
-
-    get nit() {
-      return this.validationForm.get('nit');
-    }
-
-    registerClient(){
-      const client = this.webstoreservice.getClientInformation();
-      const param = {
-        "orderId": this.webstoreservice.getDataInSession('orderMainId'),
-        "sequence": 2,
-        "userId": this.webstoreservice.getDataInSession('userId'),
-        "microFrontendId": "person-microfront-app",
-        "microFrontendData": JSON.stringify(client),
-        "statusCode": "INI"
-      }
-      this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+    getAdditionalData(){
+      let person = this.webstoreservice.getClientInformation();
+      this.ordersService.getPersonAdditionalData(person.personId, this.webstoreservice.getDataInSession('token')).subscribe(
         response => {
           console.log(response);
+          person.additionalDataList = response.data.data.map((element: any)=>{
+            element.entityId = element.personId;
+            element.entityDataId = element.personDataId;
+            return element;
+          });
+          this.webstoreservice.saveClientInformation(person);
+          this.registerClient();
         });
     }
+
+  /**
+   * Registrar prospecto de cliente en O2
+  */
+  registerClient() {
+    const client = this.webstoreservice.getClientInformation();
+    const param = {
+      "orderId": this.webstoreservice.getDataInSession('orderMainId'),
+      "sequence": 2,
+      "userId": this.webstoreservice.getDataInSession('userId'),
+      "microFrontendId": "person-microfront-app",
+      "microFrontendData": JSON.stringify(client),
+      "statusCode": "INI"
+    }
+    this.ordersService.registerOrderView(param, this.webstoreservice.getDataInSession('token')).subscribe(
+      response => {
+        console.log(response);
+      });
+  }
 
     registerBillingInfo(){
       const client = this.webstoreservice.getClientInformation();

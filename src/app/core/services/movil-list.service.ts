@@ -11,11 +11,11 @@ export class MovilListService {
   headers: any;
   httpOptions: any;
   //apiUrl = "https://omega.devnt.ssidevops.com/sales/find/phone/numbers";
-  apiUrl : string = `${environment.MovilNumberListApiUrl}`;
+  apiUrl : string = `${environment.endPoint}/sales/find/phone/numbers`;
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders();
     this.httpOptions = {};
   }

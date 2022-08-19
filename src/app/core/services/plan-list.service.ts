@@ -11,12 +11,12 @@ export class PlanListService {
   headers: any;
   httpOptions: any;
   //apiUrl = "https://omega.devnt.ssidevops.com/product/plans";
-  apiUrl : string = `${environment.CatalogProductApiUrl}`;
+  apiUrl : string = `${environment.endPoint}/product/plans`;
 
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders();
     this.httpOptions = {};
   }

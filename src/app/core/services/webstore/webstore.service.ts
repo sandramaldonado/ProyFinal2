@@ -15,7 +15,7 @@ export class WebstoreService {
   httpPostOptions = cts.httpPostOptions;
   httpGetOptions = cts.httpGetOptions;
   token : any;
-  apiUrl : string = `${environment.SSIAuthApiUrl}`;
+  apiUrl : string = `${environment.endPoint}/auth/login`;
 
   constructor(
     private sessionStorageService : SessionStorageService,
@@ -26,7 +26,7 @@ export class WebstoreService {
 
  saveToken() : void{
 
-  const token = this.httpClient.post<Autenticar>(`${environment.SSIAuthApiUrl}`,
+  const token = this.httpClient.post<Autenticar>(this.apiUrl,
   JSON.stringify({"username":environment.SSITokenUsername,"password": environment.SSITokenPassword}),  this.httpPostOptions)
 
   .subscribe(
@@ -145,7 +145,7 @@ export class WebstoreService {
   }
   saveAutomaticPayment (automaticPayment : any): void{
     this.sessionStorageService.store("automaticPayment",automaticPayment);
-    
+
   }
 
 
