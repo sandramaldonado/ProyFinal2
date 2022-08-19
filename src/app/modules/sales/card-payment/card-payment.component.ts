@@ -101,8 +101,9 @@ export class CardPaymentComponent implements OnInit {
             fullLastNames: this.fullLastNames,
             uniqueId: null,
             payAmountMode: 'hide', // optional/NULL / hide > CUANDO EL CHANEL ES OMEGA 3 Y EL PAY AMOUNT ES REQUIRED SE REALIZARA EL ENVIO DE MONTO DE LO CONTRARIO ENVIAR 0 
-            user: this.person,
             amount: this.offertotaltariff,
+            email: this.person.email,
+            nroRef: this.person.nroRef,
             token: token
             //OMEGA3
             //payAmountMode: optional/required 
@@ -140,10 +141,10 @@ export class CardPaymentComponent implements OnInit {
         // required | optional | preselected | hide
         console.log('code ',this.code)
         var desc = 'preselected';
-        if (recurring == 'NORMAL') {
+        if (recurring == 'NORMAL') { // DIP30TVF
             desc = 'required';
         }
-        if (this.code == "CCOPOS" && recurring == 'EXPRESS') { // TIPBATVF: CCOPOS Y EXPRESS
+        if (this.code == "CCOPOS" && recurring == 'EXPRESS') { // TIPBATVF: CCOPOS Y EXPRESS / NO HAY MONTO
             desc = 'optional';
         }
         if(this.code == "CCOPRE") { // LTEPREO3
