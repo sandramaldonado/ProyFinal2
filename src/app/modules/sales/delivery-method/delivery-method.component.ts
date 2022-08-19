@@ -34,6 +34,9 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
   });
   @Output() nextDeliveryMethodStep = new EventEmitter<any>();
 
+  /**
+   * Metodo constructor de clase delivery
+  */
   constructor(private webstoreService: WebstoreService,
             private ordersService: OrdersService) {
     this.methods = {
@@ -47,19 +50,32 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
       }
     };
   }
+
+  /**
+   * Metodo OnChannge instanciada para evitar problemas de error
+  */
   ngOnChanges(changes: SimpleChanges): void {
     alert("Existió un error en ejecución");
   }
 
+  /**
+   * Metodo Iniciar Pagina de modulo
+  */
   ngOnInit(): void {
     this.changeOptions("storesInfo");
   }
 
+  /**
+   * Metodo de limpieza de objetos Store y opcion delivery
+  */
   resetDivs() {
     this.methods.storesInfo.active = false;
     this.methods.deliveriesInfo.active = false;
   }
 
+  /**
+   * Metodo ejecución de habilitacion de radiobutton elegido
+  */
   changeOptions(elegido: any) {
     this.resetDivs();
     this.methods[elegido].active = true;
@@ -78,6 +94,9 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Metodo de cambio de rediobutton
+  */
   radioChange(event: MatRadioChange) {
     if (event.source.value === 'storesInfo') {
         console.log(event.source.value);
@@ -88,11 +107,18 @@ export class DeliveryMethodComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Metodo de ejecución de registro de datos de entrega
+   * Ademas paso a siguiente modelo
+  */
   next(){
     this.nextDeliveryMethodStep.emit(true);
     this.registerDeliveryType();
   }
 
+  /**
+   * Metodo de registro de datos de proceso en plataforma
+  */
   registerDeliveryType(){
     const data ={
       "deliveryTypeId":"authorizedPointTypeId",

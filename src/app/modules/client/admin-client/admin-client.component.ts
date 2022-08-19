@@ -81,8 +81,6 @@ export class AdminClientComponent implements OnInit {
     this.key = sessionStorage.getItem("key");
     this.clientInfo = this.webstoreservice.getClientInformation();
     this.stateScorin = this.webstoreservice.getStatusScoring();
-
-    //this.infoClientService.disparadorInfoClient.subscribe(data => {console.log(data); this.clientInfo.push(data);});
   }
 
   /**
@@ -205,12 +203,8 @@ export class AdminClientComponent implements OnInit {
     };
 
     this.loadInfoClien(datosClient);
-    console.log("inica");
     console.log(datosClient);
-    console.log("finaliza");
-
     this.visited = true;
-
     this.registerClient();
     this.registerBillingInfo();
 
@@ -287,7 +281,9 @@ export class AdminClientComponent implements OnInit {
     return this.validationForm.get('nit');
   }
 
-  
+  /**
+   * Registrar prospecto de cliente en O2
+  */  
   registerClient() {
     const client = this.webstoreservice.getClientInformation();
     const param = {
@@ -304,6 +300,9 @@ export class AdminClientComponent implements OnInit {
       });
   }
 
+  /**
+   * Registrar datos Billing (Cliente, Dir, Facturacion, etc)
+  */  
   registerBillingInfo() {
     const client = this.webstoreservice.getClientInformation();
     const addressData = this.webstoreservice.getDataInSession('addressData');
@@ -317,7 +316,6 @@ export class AdminClientComponent implements OnInit {
       });
       billAddressId = billAddress.addressId;
     }
-
     let billing = {
       "observations": "",
       "invoiceLabel": client.rSocial,

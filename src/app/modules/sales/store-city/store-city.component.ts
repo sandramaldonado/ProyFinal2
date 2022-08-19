@@ -19,9 +19,11 @@ import { DocumentType } from '@models/DocumentType';
   styleUrls: ['./store-city.component.scss']
 })
 export class StoreCityComponent implements OnInit {
+  // definicion de variable de sistema
   cityLocation: any= {};
   storeLocation: any= {};
   stateLocation: Boolean = false;
+  // creacion de listado de Ciudad y  Tiendas
   cityList: DocumentType[] = [{value: 'CBEN', description: 'Beni'},
                               {value: 'CCBA', description: 'Cochabamba'},
                               {value: 'CLPZ', description: 'La Paz'},
@@ -31,9 +33,6 @@ export class StoreCityComponent implements OnInit {
                               {value: 'CSCR', description: 'Sucre'},
                               {value: 'CSCZ', description: 'Santa Cruz'},
                               {value: 'CTRJ', description: 'Tarija'}];
-
-  storesList: DocumentType[] = [];
-
   storeGroup: any = [{"CCBA": [{value: "Tienda 1", description: "Tienda 1"}, {value: "Tienda 2", description: "Tienda 2"}],
                       "CLPZ": [{value: "Tienda 3", description: "Tienda 3"}, {value: "Tienda 4", description: "Tienda 4"}],
                       "CBEN": [{value: "Tienda 5", description: "Tienda 5"}, {value: "Tienda 6", description: "Tienda 6"}],
@@ -44,20 +43,32 @@ export class StoreCityComponent implements OnInit {
                       "CSCZ": [{value: "Tienda 15", description: "Tienda 15"}, {value: "Tienda 16", description: "Tienda 16"}],
                       "CTRJ": [{value: "Tienda 17", description: "Tienda 17"}, {value: "Tienda 18", description: "Tienda 18"}],
                     }];
+ storesList: DocumentType[] = [];
+  // creacion de formualrio de seleccion para validacion en plataforma
   validationForm = new FormGroup({
     'store': new FormControl(null, [Validators.required]),
     'city': new FormControl(null, [Validators.required])
   });
 
+  /**
+   * Metodo constructor de ubmodulo 
+   * Instancia Clases de enrutado, servicios storage, servicios de registro y otros
+  */
   constructor(private webstoreService: WebstoreService) { 
     
   }
 
+  /**
+   * Metodo inicio de entrega vacia
+  */
   ngOnInit(): void {
     this.webstoreService.saveDeliveryStoreMethod(JSON.stringify({}));
     console.log('init store-city');
   }
 
+  /**
+   * Metodo autopostback seleccion de ciudad, despliega listado de tiendas de la ciudad elegida
+  */
   someMethod(value: any){
     this.cityLocation = {};
     this.cityLocation = {"city": value,};
@@ -66,6 +77,9 @@ export class StoreCityComponent implements OnInit {
     this.storesList = this.storeGroup[0][value];
   }
 
+  /**
+   * Metodo autopostback seleccion de Tienda, despliega resto de informacion y boton siguiente
+  */
   someMethodStore(value: any){
     this.storeLocation = {};
     this.storeLocation = {"storage": value};
@@ -82,10 +96,16 @@ export class StoreCityComponent implements OnInit {
 
   }
 
+  /**
+   * Obtencion de datos Ciudad
+  */
   get city() {
     return this.validationForm.get('city');
   }
 
+  /**
+   * Obtencion de datos Tienda
+  */
   get store() {
     return this.validationForm.get('store');
   }
