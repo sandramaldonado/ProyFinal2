@@ -12,12 +12,12 @@ export class ScoringValidationService {
   headers: any;
   httpOptions: any;
   //apiUrl = "https://omega.devnt.ssidevops.com/rules/scoring/scoringEvaluation";
-  apiUrl : string = `${environment.ScoringApiUrl}`;
+  apiUrl : string = `${environment.endPoint}/rules/scoring/scoringEvaluation`;
 
   /**
    * constructor de instancia de clase httpClient y HttpHeaders
    */
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders();
     this.httpOptions = {};
   }
@@ -31,7 +31,7 @@ export class ScoringValidationService {
       'Authorization': 'Bearer ' + token
     };
 
-    
+
 
     const httpOptions = {
       headers: headers
@@ -39,9 +39,9 @@ export class ScoringValidationService {
 
     //const jsontext = JSON.stringify({"client":{"clientId": clientId},"commercialOffer": {"productTypeCode": ["MOVIL", "IFIXED"],"groupPlan": "TRIPLE_PLAY"},"saleOrder": {"planCode": "1","processTypeCode": "PTFSALE","channelCode": "CAASES","cityCode": "CBA","price": 400,"creationDate": "28-07-2022","serviceQuantity": "3","hasSubsidyOfEquipmentInSale": "SI"},"userId": 21});
     /**
-    
+
      */
-    
+
     return this.httpClient.post<ScoringValidation>(`${this.apiUrl}`, planService, httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }

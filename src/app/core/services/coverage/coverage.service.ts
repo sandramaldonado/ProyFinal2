@@ -42,7 +42,7 @@ export class CoverageService {
       headers: headers
     };
 
-    return this.httpClient.post<any>(`${environment.CheckCoverageApiUrl}`, JSON.stringify(data), httpOptions);
+    return this.httpClient.post<any>(`${environment.endPoint}/order/address/customerSite`, JSON.stringify(data), httpOptions);
 
   }
 

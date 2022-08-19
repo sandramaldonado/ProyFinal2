@@ -90,7 +90,7 @@ export class CheckCoverageComponent implements OnInit {
     microfrontId: 'address-microfront-app',
 }
 
-  microfrontUrl = 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';
+  // microfrontUrl = 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';
 
   public environment : any;
   public hasCoverage : boolean= false;
