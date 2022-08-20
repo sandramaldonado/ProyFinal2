@@ -38,6 +38,9 @@ export class OrdersService {
   }
 
   createPerson(param: any, token: any): Observable<any> {
+    console.log('datos crear');
+    console.log(param);
+    console.log('datos fin crear');
     var headers = {
       'Authorization': 'Bearer ' + token
     };
