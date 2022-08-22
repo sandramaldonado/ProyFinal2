@@ -16,9 +16,9 @@
     EmailApiUrl :  'http://localhost:3800/api/mastersales/sendEmail',
     ClientValidationUrl : 'http://localhost:3000/client',
 
-    endPoint: 'https://omega.devnt.ssidevops.com',
-    urlPersonInfoMicrofront: 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js',
-    urlCardPayMicrofrontApp: 'https://view360.devnt.ssidevops.com/card-pay-microfront-app/main.js',
-    urlMgd: 'https://view360.salamancasolutions.com/mgdv2/mgd'
+    endPoint: 'https://omega.sbnt.ssidevops.com',
+    urlPersonInfoMicrofront: 'https://view360.sbnt.ssidevops.com/person-info-microfront-app/main.js',
+    urlCardPayMicrofrontApp: 'https://view360.sbnt.ssidevops.com/card-pay-microfront-app/main.js',
+    urlMgd: 'https://mgd.sbnt.ssidevops.com/mgd/mgd'
   };
 }(this));
