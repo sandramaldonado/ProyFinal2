@@ -22,8 +22,8 @@ Package                         Version
 
 ## Comandos Docker 
 # crear imagen local : iniciar desde la carpeta de la landing donde se encuentra el Dockerfile
-- docker build -t landing-master-sales-frontend -f ./Dockerfile .
-- docker run -p 4200:80 landing-master-sales-frontend
+- docker build -t master-sales-frontend -f ./Dockerfile .
+- docker run -d -p 4200:80 master-sales-frontend
 
 ## ejecutar imagen desde terminal para usar la imagen en el registry de GitLab
 # Logearse al Registry de Gitlab
