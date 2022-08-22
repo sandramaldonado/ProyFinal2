@@ -68,6 +68,7 @@ export class MovilListComponent implements OnInit {
   */
   ngOnInit(): void {
     // spinner starts on init
+    console.log("Numero de Orden: "+ this.orderId);
     this.spinner.show();
     this.armadoJsonScoring();
     this.searchList();
@@ -79,6 +80,7 @@ export class MovilListComponent implements OnInit {
   */
   armadoJsonScoring() {
     this.planComposition = this.webstoreService.getPlanComposition();
+    let offerconsumptionformcode = this.webstoreService.getDataInSession("offerconsumptionformcode");
     this.planList = this.planComposition?.planList;
     console.log(this.planComposition);
     console.log(this.planList);
@@ -89,6 +91,7 @@ export class MovilListComponent implements OnInit {
     this.planService = JSON.stringify({
       "userCode": "14",
       "ceTypeCodeList": this.productTypeCode,
+      "consumptionTypeForm": offerconsumptionformcode,
       "processId": this.orderId
     });
 
