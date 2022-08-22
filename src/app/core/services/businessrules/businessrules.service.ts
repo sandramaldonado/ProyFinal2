@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class BusinessrulesService {
   //apiUrl : string = "https://omega.devnt.ssidevops.com/rules";
-  apiUrl : string = `${environment.BreApiUrl}`
+  apiUrl : string = `${environment.endPoint}/rules`
 
   constructor(
     private webstoreservice : WebstoreService,

@@ -90,7 +90,7 @@ export class CheckCoverageComponent implements OnInit {
     microfrontId: 'address-microfront-app',
 }
 
-  microfrontUrl = 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';
+  // microfrontUrl = 'https://view360.devnt.ssidevops.com/person-info-microfront-app/main.js';
 
   public environment : any;
   public hasCoverage : boolean= false;
@@ -155,12 +155,14 @@ export class CheckCoverageComponent implements OnInit {
       "verificationTAC": "47626",
       "maxVel": null,
       "formId": 534077243,
-      "processId": 46537322758
+      "processId": 46537322758,
+      "consumptionEntityType" : "IFIXED"
   }
   console.log(data)
 
-  this.coverageService.checkGISCovarge(data)
-  .subscribe(response =>{
+  this.coverageService.checkCoverage(data,this.webstoreService.getDataInSession('token'))
+  .subscribe(res =>{
+    let response = res.data.data.responseService;
     console.log(response);
     if(response.errorCode == 'OK' && response.hasCoverage=='OK'){
       this.hasCoverage=true;
