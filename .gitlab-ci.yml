@@ -10,6 +10,8 @@ variables:
   CONFIGMAP_NAME: "landing-sales-frontend"
   CONTAINER_NAME: "landing-sales-frontend"
   APP_NAMESPACE: "applications"
+  RELEASE_NAME: "landing-sales-frontend"
+  RELEASE_NAMESPACE: "omega3"
 
 Build Artifact:
   stage: build
@@ -21,8 +23,23 @@ Build Artifact:
     paths:
       - dist
   rules:
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == "test" || $CI_COMMIT_REF_NAME == "master"
+    - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME == "test"
     - if: $CI_COMMIT_REF_NAME =~ /^NT.*/ && $CI_PIPELINE_SOURCE == "web"
+
+Build Artifact Release:
+  stage: build
+  image: node:16.15.0-slim
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+  only:
+    - sandbox
+  tags:
+    - sandbox
 
 Sonarqube Check:
   stage: lint
@@ -43,6 +60,7 @@ Sonarqube Check:
     - develop
     - test
     - master
+    - sandbox
 
 Code Lint:
   stage: lint
@@ -54,6 +72,7 @@ Code Lint:
     - develop
     - test
     - master
+    - sandbox
   allow_failure: true
 
 Docker Build:
@@ -69,11 +88,64 @@ Docker Build:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${CI_REGISTRY_IMAGE}:develop"
       --destination "${CI_REGISTRY_IMAGE}:latest"
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME == "test"
+    - if: $CI_COMMIT_REF_NAME == "sandbox"
     - if: $CI_COMMIT_REF_NAME =~ /^NT.*/ && $CI_PIPELINE_SOURCE == "web"
+
+Docker Build Develop:
+  stage: delivery
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:develop"
+  only:
+    - develop
+
+Docker Build Test:
+  stage: delivery
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:test"
+  only:
+    - test
+  tags:
+    - test
+
+Docker Build Sandbox:
+  stage: delivery
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:sandbox"
+  only:
+    - sandbox
+  tags:
+    - sandbox
 
 Deployment Dev Environment:
   stage: deployment
@@ -84,3 +156,25 @@ Deployment Dev Environment:
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop"
     - if: $CI_COMMIT_REF_NAME =~ /^NT.*/ && $CI_PIPELINE_SOURCE == "web"
+
+Deployment Test Environment:
+  stage: deployment
+  image: bitnami/kubectl:1.22
+  script:
+   - echo $K8SCONFIG | base64 -d > $HOME/.kube/config
+   - kubectl set image "deployment/$DEPLOYMENT_NAME" $CONTAINER_NAME="${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - test
+  tags:
+    - test
+
+Deployment Sandbox Environment:
+  stage: deployment
+  image: bitnami/kubectl:1.22
+  script:
+   - echo $K8SCONFIG_OMEGA3 | base64 -d > $HOME/.kube/config
+   - kubectl -n $RELEASE_NAMESPACE set image "deployment/$RELEASE_NAME" $RELEASE_NAME="${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - sandbox
+  tags:
+    - sandbox
