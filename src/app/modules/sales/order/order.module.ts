@@ -12,6 +12,7 @@ import { HeaderModule } from "@layout/header/header.module";
 import { MovilListModule } from '@modules/sales/movil-list/movil-list.module';
 import { DeliveryMethodModule } from '@modules/sales/delivery-method/delivery-method.module';
 import { AlmostDoneModule } from '@modules/sales/almost-done/almost-done.module';
+import { OfferDetailModule } from '../offer-detail/offer-detail.module';
 
 
 
@@ -30,7 +31,8 @@ import { AlmostDoneModule } from '@modules/sales/almost-done/almost-done.module'
     HeaderModule,
     MovilListModule,
     DeliveryMethodModule,
-    AlmostDoneModule
+    AlmostDoneModule,
+    OfferDetailModule
   ]
 })
 export class OrderModule { }
