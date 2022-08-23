@@ -34,7 +34,7 @@ export class PlanListService {
                             "city": null,
                             "clientId": null,
                             "sourcePlan": null,
-                            "transactionType": "VENTA",
+                            "transactionType": "PTFSALE",
                             "userId": 21,
                             "workplace": null
                           });
