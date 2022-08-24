@@ -15,14 +15,14 @@ export class SalesService {
     return this.api.post('/workflow/sales/startOrder', data, { token }).pipe();
   }
 
-  startOrderNew(data: any, token: any): Observable<any> {
+  startOrderNew(token: any, data: any): Observable<any> {
     var headers = {
       'Authorization': 'Bearer ' + token
     };
     const httpOptions = {
       headers: headers
     };
-    return this.http.post<any>(environment.endPoint + '/workflow/sales/startOrder', httpOptions)
+    return this.http.post<any>(environment.endPoint + '/workflow/sales/startOrder', data, httpOptions)
       .pipe(
         map(res => res));
   }
