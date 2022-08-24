@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  env.js: |2-
+    (function (window) {
+      (window as any).__env  = {
+        production: true,
+        domain: '',
+        endPoint: 'https://omega.sbnt.ssidevops.com',
+        urlClientInfoMicrofront: 'https://view360.sbnt.ssidevops.com/client-info-microfront-app/main.js',
+        urlPersonInfoMicrofront: 'https://view360.sbnt.ssidevops.com/person-info-microfront-app/main.js',
+        urlOrderManagementMicrofrontApp: 'https://view360.sbnt.ssidevops.com/order-management-microfront-app/main.js',
+        urlCommonsMicrofront: 'https://view360.sbnt.ssidevops.com/commons-microfront-app/main.js',
+        sessionHub: 'https://session-hub-web.sbnt.ssidevops.com',
+        urlVasMicrofront: 'https://view360.sbnt.ssidevops.com/vas-microfront-app/main.js',
+        urlDashboardMicrofront: 'https://view360.sbnt.ssidevops.com/dashboard-microfront-app/main.js',
+        urlCardPayMicrofrontApp: 'https://view360.sbnt.ssidevops.com/card-pay-microfront-app/main.js',//http://localhost:4297/main.js',
+        urlMgd: 'https://mgd.sbnt.ssidevops.com/mgd'
+      };
+    }(this));
+kind: ConfigMap
+metadata:
+  labels:
+    app: landing-sales-frontend
+  name: landing-sales-frontend
+  namespace: omega3
