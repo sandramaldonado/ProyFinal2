@@ -39,7 +39,7 @@ export class ApiService {
     };
     // eslint-disable-next-line prefer-const
     httpOptions = {
-      headers: new HttpHeaders(),
+      headers: new HttpHeaders().set('encrypted','true'),
     };
     httpOptions.headers = httpOptions.headers.append('Accept', 'application/json');
     if (accessToken) {

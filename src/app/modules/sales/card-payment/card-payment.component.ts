@@ -171,25 +171,32 @@ export class CardPaymentComponent implements OnInit {
         if (event) {
             this.spinner.show();                
             console.log(event)
+            console.log(event.detail)
             const offernumberofentities = this.webstoreService.getDataInSession('offernumberofentities');
             const ordermainid = this.webstoreService.getDataInSession('ordermainid');
-            const plancompositioncode = this.webstoreService.getDataInSession('plancompositioncode');
+            var plancompositioncode = this.webstoreService.getDataInSession('plancompositioncode');
+            console.log('plancompositioncode, tiene que ser array');
+            if(!Array.isArray(plancompositioncode)) {
+                plancompositioncode = [plancompositioncode];
+            }
+            console.log(plancompositioncode);
             const data = {
                 orderNumber: ordermainid,
                 saleType: this.statusscoring,
                 processType: "PTFSALE",// CABLEADO
-                planCodeList: [plancompositioncode],// CABLEADO
+                planCodeList: plancompositioncode,
                 rawData: "",// CABLEADO
-                totalPrice: "0",// CABLEADO
-                totalItems: offernumberofentities,
+                totalPrice: 0,// CABLEADO
+                totalItems: Number(offernumberofentities),
                 deliveryMethod: "MANUAL",// CABLEADO
                 requiresCashbox: "0",// CABLEADO
                 requiresBonification: "0",// CABLEADO
                 requiresCustomerApproval: "0",// CABLEADO
                 requiresValidateCustomerData: "0",// CABLEADO
                 system: "LANDING"
-            }
+            };
             console.log(data);
+            console.log(JSON.stringify(data));
             this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res: any) => {
                 console.log(res)
                 this.spinner.hide();                
