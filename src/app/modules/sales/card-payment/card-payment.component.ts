@@ -82,7 +82,7 @@ export class CardPaymentComponent implements OnInit {
         const paymentMethod = this.webstoreService.getDataInSession("paymentMethod");
         if(paymentMethod === "uponDelivery") {
             this.offertotaltariff = 0;
-        } 
+        }
         this.microFrontParamIn = {
             // theme: "light-green",
             orderType: "SALES",
@@ -111,22 +111,22 @@ export class CardPaymentComponent implements OnInit {
     // visible(){
     //     console.log(this.code);
     //     let show = false;
-    //     if (this.code == "CCOPOS"){    
+    //     if (this.code == "CCOPOS"){
     //         show = true;
     //     }
     //     return show;
     // }
 /**
- * Si el flujo es normal -> 
+ * Si el flujo es normal ->
                 el check de pagos recurrentes es obligatorio= disabled
 
- * si el flujo es express y la pantalla anterior habilito pago recurrente -> 
+ * si el flujo es express y la pantalla anterior habilito pago recurrente ->
                 el check de pagos recurrentes es obligatorio (Preselected)
 
- * si el flujo es express y la pantalla anterior no habilito el pago recurrente -> 
-                el check de pagos recurrentes seria Opcional 
+ * si el flujo es express y la pantalla anterior no habilito el pago recurrente ->
+                el check de pagos recurrentes seria Opcional
     ¿en que dato de la sesion tenemos el el tipo de flujo Express o Normal?
-    R.- statusscoring 
+    R.- statusscoring
  */
 
     getRecurring(recurring: string) {
@@ -169,7 +169,7 @@ export class CardPaymentComponent implements OnInit {
 
     dataPayMent(event: any): void {
         if (event) {
-            this.spinner.show();                
+            this.spinner.show();
             console.log(event)
             const offernumberofentities = this.webstoreService.getDataInSession('offernumberofentities');
             const ordermainid = this.webstoreService.getDataInSession('ordermainid');
@@ -187,12 +187,14 @@ export class CardPaymentComponent implements OnInit {
                 requiresBonification: "0",// CABLEADO
                 requiresCustomerApproval: "0",// CABLEADO
                 requiresValidateCustomerData: "0",// CABLEADO
-                system: "LANDING"
+                system: "LANDING",
+                requiresRecurrentPayment: event.detail.data.recurringPayments?"1":"0",
+                approvalType: "CHECK" // CABLEADO
             }
             console.log(data);
-            this.salesService.startOrder(this.webstoreService.getDataInSession('token'), data).subscribe((res: any) => {
+            this.salesService.startOrderNew(this.webstoreService.getDataInSession('token'), data).subscribe((res: any) => {
                 console.log(res)
-                this.spinner.hide();                
+                this.spinner.hide();
                 this.router.navigate(['/payment-done']);
             });
         }
@@ -223,4 +225,4 @@ export class CardPaymentComponent implements OnInit {
         contentButton: 'text-center',
         buttomClass: 'custom-button',
         coloreButtonSubmit:'primary'*/
-}        
+}
